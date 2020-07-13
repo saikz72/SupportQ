@@ -89,9 +89,6 @@ Optional:
 ## Wireframes
 <img src="https://github.com/saikz72/SupportQ/blob/master/IMG_3799.jpg" width=600>
 
-### [BONUS] Digital Wireframes & Mockups
-
-### [BONUS] Interactive Prototype
 
 ## Schema 
 #### Models
