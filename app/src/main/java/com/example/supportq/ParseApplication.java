@@ -2,7 +2,9 @@ package com.example.supportq;
 
 import android.app.Application;
 
+import com.facebook.FacebookSdk;
 import com.parse.Parse;
+import com.parse.ParseFacebookUtils;
 
 public class ParseApplication extends Application {
     @Override
@@ -15,5 +17,8 @@ public class ParseApplication extends Application {
                 .applicationId("support-q") // should correspond to APP_ID env variable
                 .clientKey("final-fbu-project")  // set explicitly unless clientKey is explicitly configured on Parse server
                 .server("https://support-q.herokuapp.com/parse/").build());
+        //ParseFacebookUtils.initialize(this);
+        //FacebookSdk.sdkInitialize(getApplicationContext());
+
     }
 }

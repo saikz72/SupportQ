@@ -11,6 +11,8 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.supportq.R;
+import com.facebook.FacebookSdk;
+import com.facebook.LoggingBehavior;
 import com.parse.LogInCallback;
 import com.parse.ParseException;
 import com.parse.ParseUser;
@@ -24,7 +26,16 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //FacebookSdk.setIsDebugEnabled(true);
+        //FacebookSdk.addLoggingBehavior(LoggingBehavior.INCLUDE_ACCESS_TOKENS);
         setContentView(R.layout.activity_login);
+
+        //allows for persistence
+//        ParseUser currentUser = ParseUser.getCurrentUser();
+//        if(currentUser != null){
+//            goToMainActivity();
+//        }
+
         setViews();
         loginButtonListener();
     }
