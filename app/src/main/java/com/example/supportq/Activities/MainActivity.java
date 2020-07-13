@@ -48,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
                         fragment = new ProfileFragment();
                         Toast.makeText(MainActivity.this, "profile", Toast.LENGTH_SHORT).show();
                         break;
-                    case R.id.action_mail:
+                    case R.id.action_inbox:
                         //TODO: update fragment
                         fragment = new InboxFragment();
                         Toast.makeText(MainActivity.this, "mail", Toast.LENGTH_SHORT).show();

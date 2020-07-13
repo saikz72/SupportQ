@@ -12,9 +12,9 @@
         android:title="Compose"
         app:showAsAction="always" />
     <item
-        android:id="@+id/action_mail"
+        android:id="@+id/action_inbox"
         android:icon="@drawable/ic_baseline_mail_24"
-        android:title="Compose"
+        android:title="Inbox"
         app:showAsAction="always" />
     <item
         android:id="@+id/action_profile"

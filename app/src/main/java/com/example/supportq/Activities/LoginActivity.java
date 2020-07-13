@@ -32,10 +32,10 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         //allows for persistence
-//        ParseUser currentUser = ParseUser.getCurrentUser();
-//        if(currentUser != null){
-//            goToMainActivity();
-//        }
+        ParseUser currentUser = ParseUser.getCurrentUser();
+        if(currentUser != null){
+            goToMainActivity();
+        }
 
         setViews();
         loginButtonListener();
