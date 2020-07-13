@@ -1,8 +1,10 @@
-package com.example.supportq;
+package com.example.supportq.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import com.example.supportq.R;
 
 public class MainActivity extends AppCompatActivity {
 
