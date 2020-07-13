@@ -87,7 +87,7 @@ Optional:
    * => navigation to a detail screen on click
 
 ## Wireframes
-<img src="https://github.com/saikz72/SupportQ/blob/master/assets/wireframe2.jpg" width=600>
+<img src="https://github.com/saikz72/SupportQ/blob/master/IMG_3799.jpg" width=600>
 
 ### [BONUS] Digital Wireframes & Mockups
 
