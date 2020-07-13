@@ -16,12 +16,13 @@ import com.facebook.LoggingBehavior;
 import com.parse.LogInCallback;
 import com.parse.ParseException;
 import com.parse.ParseUser;
+import com.parse.SignUpCallback;
 
 public class LoginActivity extends AppCompatActivity {
     private EditText etPassword;
     private EditText etUsername;
     private Button btnLogin;
-
+    private Button btnSignUp;
     public static final String TAG = "LoginActivity";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,19 +32,21 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         //allows for persistence
-        ParseUser currentUser = ParseUser.getCurrentUser();
-        if(currentUser != null){
-            goToMainActivity();
-        }
+//        ParseUser currentUser = ParseUser.getCurrentUser();
+//        if(currentUser != null){
+//            goToMainActivity();
+//        }
 
         setViews();
         loginButtonListener();
+        SignUpButtonListener();
     }
 
     public void setViews(){
         etPassword = findViewById(R.id.etPassword);
         etUsername = findViewById(R.id.etUsername);
         btnLogin = findViewById(R.id.btnLogin);
+        btnSignUp = findViewById(R.id.btnSignUp);
     }
 
     public void loginButtonListener(){
@@ -53,6 +56,33 @@ public class LoginActivity extends AppCompatActivity {
                 String username = etUsername.getText().toString();
                 String password = etPassword.getText().toString();
                 loginUser(username, password);
+            }
+        });
+    }
+
+    public void SignUpButtonListener(){
+        btnSignUp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String username = etUsername.getText().toString();
+                String password = etPassword.getText().toString();
+                ParseUser user = new ParseUser();
+                user.setUsername(username);
+                user.setPassword(password);
+                signUpUser(user);
+            }
+        });
+    }
+
+    private void signUpUser(ParseUser user) {
+        user.signUpInBackground(new SignUpCallback() {
+            @Override
+            public void done(ParseException e) {
+                if(e != null){
+                    Toast.makeText(LoginActivity.this, "something went wrong", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                goToMainActivity();
             }
         });
     }
