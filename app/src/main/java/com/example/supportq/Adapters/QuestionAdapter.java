@@ -11,10 +11,12 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.supportq.Models.Question;
 import com.example.supportq.R;
+import com.parse.ParseUser;
 
 import java.util.List;
 
@@ -33,6 +35,26 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHo
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(context).inflate(R.layout.item_post, parent, false);
         final ViewHolder holder = new ViewHolder(view);
+
+        //listener for like button
+        holder.ivLike.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                int position = holder.getAdapterPosition();
+                Question question = allQuestions.get(position);
+                boolean isLiked = question.isLiked();
+                if (!isLiked) {
+                    question.likePost(ParseUser.getCurrentUser());
+                } else {
+                    question.unlikePost(ParseUser.getCurrentUser());
+                }
+                question.saveInBackground();
+                setButton(holder.ivLike, !isLiked,
+                        R.drawable.ufi_heart, R.drawable.ufi_heart_active, R.color.likedRed);
+                setLikeText(question, holder.tvLikeCount);
+
+            }
+        });
         return holder;
     }
 
@@ -72,34 +94,38 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHo
             card.setCardBackgroundColor(Color.parseColor("#E6E6E6"));
             card.setMaxCardElevation(0.0f);
             card.setRadius(5.0f);
-            likeButtonClicked();
             replyButtonClicked();
             String timeAgo = question.getRelativeTimeAgo(question.getDate().toString());
             tvTimeStamp.setText(timeAgo);
             String username = question.getUser().getUsername();
             tvUsername.setText(username);
-        }
-
-        public void likeButtonClicked() {
-            ivLike.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Log.d(TAG, " like tapped");
-                }
-            });
+            setButton(ivLike, question.isLiked(),
+                    R.drawable.ufi_heart, R.drawable.ufi_heart_active, R.color.likedRed);
+            setLikeText(question, tvLikeCount);
         }
 
         public void replyButtonClicked() {
             ivReply.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Log.d(TAG, "reply tapped");
+                    //TODO --> enable reply
                 }
             });
         }
 
     }
 
+    // sets the color of a button, depending on whether it is active
+    private void setButton(ImageView iv, boolean isActive, int strokeResId, int fillResId, int activeColor) {
+        iv.setImageResource(isActive ? fillResId : strokeResId);
+        iv.setColorFilter(ContextCompat.getColor(context, isActive ? activeColor : R.color.likedRed));
+    }
+
+    private void setLikeText(Question post, TextView view) {
+        int likeCount = post.getLikeCount();
+        if (likeCount == 1) view.setText(String.format("%d like", post.getLikeCount()));
+        else view.setText(String.format("%d likes", post.getLikeCount()));
+    }
 
     // Clean all elements of the recycler
     public void clear() {

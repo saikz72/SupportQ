@@ -13,8 +13,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-
-import com.bumptech.glide.Glide;
 import com.example.supportq.Activities.EditProfileActivity;
 import com.example.supportq.Activities.LoginActivity;
 import com.example.supportq.R;
@@ -47,7 +45,6 @@ public class ProfileFragment extends Fragment {
 
         // TODO -- redesign profile layout
         editProfileButtonClicked();
-
         logoutButtonClicked();
 
 

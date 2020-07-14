@@ -66,6 +66,7 @@ public class HomeFragment extends Fragment {
                     Toast.makeText(getContext(), "Issue with getting posts", Toast.LENGTH_SHORT).show();
                     return;
                 }
+                questionAdapter.clear();
                 questionAdapter.addAll(questions);
             }
         });

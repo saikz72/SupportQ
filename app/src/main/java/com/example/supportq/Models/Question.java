@@ -47,6 +47,7 @@ public class Question extends ParseObject {
         return this.getCreatedAt();
     }
 
+    //returns the relative time of question
     public String getRelativeTimeAgo(String rawJsonDate) {
         String twitterFormat = "EEE MMM dd HH:mm:ss ZZZZZ yyyy";
         SimpleDateFormat sf = new SimpleDateFormat(twitterFormat, Locale.ENGLISH);
@@ -62,6 +63,7 @@ public class Question extends ParseObject {
         }
         return relativeDate;
     }
+
     // Returns the array of users who liked this post.
     public JSONArray getLikes() {
         return getJSONArray(KEY_LIKES);
