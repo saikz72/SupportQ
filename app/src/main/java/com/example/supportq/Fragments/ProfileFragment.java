@@ -48,6 +48,8 @@ public class ProfileFragment extends Fragment {
         // TODO -- redesign profile layout
         editProfileButtonClicked();
 
+        logoutButtonClicked();
+
 
     }
 
