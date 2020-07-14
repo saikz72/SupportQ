@@ -13,8 +13,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import com.example.supportq.Adapters.PostAdapter;
-import com.example.supportq.Models.Post;
+import com.example.supportq.Adapters.QuestionAdapter;
+import com.example.supportq.Models.Question;
 import com.example.supportq.R;
 import com.parse.FindCallback;
 import com.parse.ParseException;
@@ -25,8 +25,8 @@ import java.util.List;
 
 public class HomeFragment extends Fragment {
     private RecyclerView rvPost;
-    private PostAdapter postAdapter;
-    private List<Post> allPost;
+    private QuestionAdapter questionAdapter;
+    private List<Question> allQuestions;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -44,11 +44,11 @@ public class HomeFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         rvPost = view.findViewById(R.id.rvPost);
 
-        allPost = new ArrayList<>();
-        postAdapter = new PostAdapter(allPost, getContext());
+        allQuestions = new ArrayList<>();
+        questionAdapter = new QuestionAdapter(allQuestions, getContext());
 
         //set the adapter to the rv
-        rvPost.setAdapter(postAdapter);
+        rvPost.setAdapter(questionAdapter);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         //set the layout manager on the recycler view
         rvPost.setLayoutManager(linearLayoutManager);
@@ -56,16 +56,17 @@ public class HomeFragment extends Fragment {
     }
 
     private void queryPost() {
-        ParseQuery<Post> query = ParseQuery.getQuery(Post.class);
-        query.include(Post.KEY_USER);
-        query.findInBackground(new FindCallback<Post>() {
+        ParseQuery<Question> query = ParseQuery.getQuery(Question.class);
+        query.addDescendingOrder(Question.KEY_CREATED_AT);  //TODO : update how the questions are ordered
+        query.include(Question.KEY_USER);
+        query.findInBackground(new FindCallback<Question>() {
             @Override
-            public void done(List<Post> posts, ParseException e) {
+            public void done(List<Question> questions, ParseException e) {
                 if (e != null) {
                     Toast.makeText(getContext(), "Issue with getting posts", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                postAdapter.addAll(posts);
+                questionAdapter.addAll(questions);
             }
         });
     }

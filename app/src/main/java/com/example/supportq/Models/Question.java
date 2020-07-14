@@ -5,23 +5,24 @@ import com.parse.ParseFile;
 import com.parse.ParseObject;
 import com.parse.ParseUser;
 
-@ParseClassName("Post")
-public class Post extends ParseObject {
+@ParseClassName("Question")
+public class Question extends ParseObject {
     public static final String KEY_DESCRIPTION = "description";
     public static final String KEY_USER = "user";
     public static final String KEY_IMAGE =  "image";
+    public static final String KEY_CREATED_AT = "createdAt";
 
-    //sets the description of the post
+    //sets the description of the question
     public void setDescription(String description){
         put(KEY_DESCRIPTION, description);
     }
 
-    //gets the description of the post
+    //gets the description of the question
     public String getDescription(){
         return getString(KEY_DESCRIPTION);
     }
 
-    //sets the user of the post
+    //sets the user of the question
     public void setUser(ParseUser user){
         put(KEY_USER, user);
     }
@@ -30,13 +31,6 @@ public class Post extends ParseObject {
         return getParseUser(KEY_USER);
     }
 
-    //gets the image of the post
-    public ParseFile getImage(){
-        return getParseFile(KEY_IMAGE);
-    }
+    
 
-    //sets the image of the post
-    public  void setImage(ParseFile image){
-        put(KEY_IMAGE, image);
-    }
 }

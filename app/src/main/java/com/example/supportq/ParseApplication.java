@@ -2,10 +2,8 @@ package com.example.supportq;
 
 import android.app.Application;
 
-import com.example.supportq.Models.Post;
-import com.facebook.FacebookSdk;
+import com.example.supportq.Models.Question;
 import com.parse.Parse;
-import com.parse.ParseFacebookUtils;
 import com.parse.ParseObject;
 
 public class ParseApplication extends Application {
@@ -14,7 +12,7 @@ public class ParseApplication extends Application {
         super.onCreate();
 
         //Register your parse models
-        ParseObject.registerSubclass(Post.class);
+        ParseObject.registerSubclass(Question.class);
 
         // set applicationId, and server server based on the values in the Heroku settings.
         // clientKey is not needed unless explicitly configured

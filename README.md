@@ -12,7 +12,7 @@ Inspired by the codepath in-class support queue (hence the name), this app lets 
 ### App Evaluation
 - **Category:** Education 
 - **Mobile:** This app would provide mobile first experience and it would work exactly as expected in a website too. 
-- **Story:** An app that allows student enrolled in a particular course to post, answer and discuss about course related material.  
+- **Story:** An app that allows student enrolled in a particular course to question, answer and discuss about course related material.
 - **Market:** Every student enroll in the course will be able to enjoy the full content that the app has to offer. 
 - **Habit:** User can make the best of the app by posting any question related to the course at any time. When their concerns are address, they will recieve a push notificaion to check out the response in the app.  
 - **Scope:** The app would start out by allowing students registered in the same course only to interact but could potentialy be expanded to allow any course to be in the app so that students will get to have all their courses in the app. 
@@ -25,8 +25,8 @@ Inspired by the codepath in-class support queue (hence the name), this app lets 
 
 * user can create or log into account
 * persistence after a user logs in
-* user can post and delete their question/concern
-* user can tap on a post and be redirect to a detailed screen
+* user can question and delete their question/concern
+* user can tap on a question and be redirect to a detailed screen
 * user can answer/address a question/concern
 * user can view a feed of questions/concerns
 * user can edit there profile picture by using the camera/gallery to take a picture
@@ -78,9 +78,9 @@ Optional:
 * Registration screen
    * => Home feed
 * Create a question/concern 
-   * => Returns to home feed after user posts a question/concern
+   * => Returns to home feed after user questions a question/concern
 * Stream Screen 
-   * => navigation to a detail screen on click of a post
+   * => navigation to a detail screen on click of a question
 * Profile screen
    * => toggles settings
 * Notification screen
@@ -97,13 +97,13 @@ Post
 
 |   property    |      type       |                  description                   |
 |:-------------:|:---------------:|:----------------------------------------------:|
-|   objectid    |     String      |  unique id for the user post (default field)   |
+|   objectid    |     String      |  unique id for the user question (default field)   |
 |    author     | Pointer to User |                  image author                  |
-|     image     |      File       |        image that user posts(optional)         |
-|  likesCount   |     Number      |          number of likes for the post          |
-| commentsCount |     Number      |          number of comments for the post                                      |
-|   createdAt   |      Date       |   date when post is created (default field)    |
-|approved      |       Boolean   |     post has been approved by TA or Professor |
+|     image     |      File       |        image that user questions(optional)         |
+|  likesCount   |     Number      |          number of likes for the question          |
+| commentsCount |     Number      |          number of comments for the question                                      |
+|   createdAt   |      Date       |   date when question is created (default field)    |
+|approved      |       Boolean   |     question has been approved by TA or Professor |
 
 
 User
@@ -122,22 +122,22 @@ Comments
 |    author     | Pointer to User |                  image author                  |
 |   createdAt   |      Date       |   date when comment is created (default field)    |
 |  updatedAt      |       Date   |     date when comment was updated (default field) |
-|approved      |       Boolean   |     post has been approved by TA or Professor |
+|approved      |       Boolean   |     question has been approved by TA or Professor |
 
 
 ### Networking
 #### List of network request by screen
 * Home Feed Screen
-    (Read/GET) Query all posts where user is author
-    (Create/POST) Create a new like on a post
+    (Read/GET) Query all questions where user is author
+    (Create/POST) Create a new like on a question
     (Delete) Delete existing like
-    (Create/POST) Create a new comment on a post
+    (Create/POST) Create a new comment on a question
     (Delete) Delete existing comment
     
 * Create Post Screen
-    (Create/POST) Create a new post object
+    (Create/POST) Create a new question object
     
 * Profile Screen
     (Read/GET) Query logged in user object
     (Update/PUT) Update user profile image
-    (Delete) Delete an existing post
+    (Delete) Delete an existing question

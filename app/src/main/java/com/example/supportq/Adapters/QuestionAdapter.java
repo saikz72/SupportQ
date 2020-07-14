@@ -1,7 +1,6 @@
 package com.example.supportq.Adapters;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,17 +9,17 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.supportq.Models.Post;
+import com.example.supportq.Models.Question;
 import com.example.supportq.R;
 
 import java.util.List;
 
-public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
-    private List<Post> allPosts;
+public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHolder> {
+    private List<Question> allQuestions;
     private Context context;
 
-    public PostAdapter(List<Post> allPosts, Context context) {
-        this.allPosts = allPosts;
+    public QuestionAdapter(List<Question> allQuestions, Context context) {
+        this.allQuestions = allQuestions;
         this.context = context;
     }
 
@@ -34,13 +33,13 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        Post post = allPosts.get(position);
-        holder.bind(post);
+        Question question = allQuestions.get(position);
+        holder.bind(question);
     }
 
     @Override
     public int getItemCount() {
-        return allPosts.size();
+        return allQuestions.size();
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
@@ -48,21 +47,22 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             tvDescription = itemView.findViewById(R.id.tvDescription);
+            //tvDescription.setVisibility(View.GONE);
         }
 
-        public void bind(Post post) {
-            tvDescription.setText(post.getDescription());
+        public void bind(Question question) {
+            tvDescription.setText(question.getDescription());
         }
     }
     // Clean all elements of the recycler
     public void clear() {
-        allPosts.clear();
+        allQuestions.clear();
         notifyDataSetChanged();
     }
 
     // Add a list of post -- change to type used
-    public void addAll(List<Post> list) {
-        allPosts.addAll(list);
+    public void addAll(List<Question> list) {
+        allQuestions.addAll(list);
         notifyDataSetChanged();
     }
 }
