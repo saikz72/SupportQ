@@ -46,6 +46,7 @@ public class ProfileFragment extends Fragment {
         btnLogOut = view.findViewById(R.id.btnLogOut);
 
         // TODO -- redesign profile layout
+        editProfileButtonClicked();
 
 
     }
