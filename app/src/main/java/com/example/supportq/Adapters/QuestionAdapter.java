@@ -19,6 +19,7 @@ import com.example.supportq.R;
 import java.util.List;
 
 public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHolder> {
+    private static final String TAG = "QuestionAdapter";
     private List<Question> allQuestions;
     private Context context;
 
@@ -50,11 +51,20 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHo
         private TextView tvDescription;
         private CardView card;
         private ImageView ivLike;
+        private TextView tvTimeStamp;
+        private TextView tvLikeCount;
+        private ImageView ivReply;
+        private TextView tvUsername;
+
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             tvDescription = itemView.findViewById(R.id.tvDescription);
             card = itemView.findViewById(R.id.card);
             ivLike = itemView.findViewById(R.id.ivLike);
+            ivReply = itemView.findViewById(R.id.ivReply);
+            tvTimeStamp = itemView.findViewById(R.id.tvTimeStamp);
+            tvLikeCount = itemView.findViewById(R.id.tvLikeCount);
+            tvUsername = itemView.findViewById(R.id.tvUsername);
         }
 
         public void bind(Question question) {
@@ -62,13 +72,35 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHo
             card.setCardBackgroundColor(Color.parseColor("#E6E6E6"));
             card.setMaxCardElevation(0.0f);
             card.setRadius(5.0f);
+            likeButtonClicked();
+            replyButtonClicked();
+            String timeAgo = question.getRelativeTimeAgo(question.getDate().toString());
+            tvTimeStamp.setText(timeAgo);
+            String username = question.getUser().getUsername();
+            tvUsername.setText(username);
+        }
+
+        public void likeButtonClicked() {
             ivLike.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    Log.d(TAG, " like tapped");
                 }
             });
         }
+
+        public void replyButtonClicked() {
+            ivReply.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Log.d(TAG, "reply tapped");
+                }
+            });
+        }
+
     }
+
+
     // Clean all elements of the recycler
     public void clear() {
         allQuestions.clear();
