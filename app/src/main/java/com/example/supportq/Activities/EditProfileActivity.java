@@ -21,6 +21,7 @@ import android.widget.Toast;
 
 import com.example.supportq.R;
 import com.parse.ParseFacebookUtils;
+import com.parse.ParseFile;
 import com.parse.ParseUser;
 
 import java.io.File;
@@ -35,15 +36,18 @@ public class EditProfileActivity extends AppCompatActivity {
     File photoFile;
     public static final String photoFileName = "photo.jpg";
     public static final int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 100;
+    ParseUser currentUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_profile);
+        currentUser = ParseUser.getCurrentUser();
 
         setViews();
         bindViews();
         takePhotoButtonClicked();
+        submitButtonClicked();
     }
 
     public void setViews() {
@@ -59,6 +63,7 @@ public class EditProfileActivity extends AppCompatActivity {
 
     }
 
+    //capture image
     public void takePhotoButtonClicked() {
         btnCaptureImage.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -98,7 +103,6 @@ public class EditProfileActivity extends AppCompatActivity {
 
         // Return the file target for the photo based on filename
         File file = new File(mediaStorageDir.getPath() + File.separator + photoFileName);
-
         return file;
     }
 
@@ -116,5 +120,34 @@ public class EditProfileActivity extends AppCompatActivity {
                 Toast.makeText(this, "No Picture was taken!", Toast.LENGTH_SHORT).show();
             }
         }
+    }
+
+    public void saveImage(ParseUser currentUser, File profilePicture) {
+        //TODO --> user can choose not to change profile image
+        //breaks if profile picutre is not taken
+        if (profilePicture != null || ivProfilePicture.getDrawable() != null) {
+            ParseFile parseFile = new ParseFile(profilePicture);
+            currentUser.put("profilePicture", parseFile);
+        }else{
+            Toast.makeText(this, "There is no image", Toast.LENGTH_SHORT).show();
+            return;
+        }
+    }
+
+    public void submitButtonClicked() {
+        btnSubmit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String username = etUsername.getText().toString();
+                if (username.equals("")) {
+                    Toast.makeText(EditProfileActivity.this, "Username cannot be empty", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                currentUser.put("username", etUsername.getText().toString());
+                saveImage(currentUser, photoFile);
+                currentUser.saveInBackground();
+                finish();
+            }
+        });
     }
 }
