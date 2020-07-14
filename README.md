@@ -8,7 +8,7 @@
 
 ## Overview
 ### Description
-Inspired by the codepath in-class support queue (hence the name), this app lets students enrolled in a particular course to create a supportive learning environment. Students get to ask, answer and discussion anything course-related to ferment their understaning of the course material. Teachers and TA's of the course will be able to answer students questions or concerns, approve another students response to a particular question, and provide extra resources. 
+Inspired by the codepath in-class support queue (hence the name), this app lets students enrolled in a particular course to create a supportive learning environment. Students get to ask, answer and discuss anything course-related to ferment their understaning of the course material. Teachers and TA's of the course will be able to answer students questions, approve another students response to a particular question, and provide extra resources if needed. 
 ### App Evaluation
 - **Category:** Education 
 - **Mobile:** This app would provide mobile first experience and it would work exactly as expected in a website too. 
@@ -23,24 +23,27 @@ Inspired by the codepath in-class support queue (hence the name), this app lets 
 
 **Required Must-have Stories**
 
-* user can create or log into account
-* persistence after a user logs in
-* user can post and delete their question/concern
-* user can tap on a post and be redirect to a detailed screen
-* user can answer/address a question/concern
-* user can view a feed of questions/concerns
+* user can create or log into an account
+* user can post and delete their question
+* user can tap on a question and be redirect to a detailed screen
+* user can answer a question
+* user can view a feed of questions
 * user can edit there profile picture by using the camera/gallery to take a picture
+* current user is persisted on app restart
 
 **Optional Nice-to-have Stories**
 
-* user gets notified when a question/concern is answered/addressed
-* user can see a log of discussion they favorited
-* user can pull to refresh home feed
-* user gets notified when someone respond to their questions/concerns and when an announcement is made.
-* user gets notified to a question/concern they upted to follow when they have responses
+* user gets notified when their question is answered
+* pull to refresh home feed
 * user can tap on a notification and be redirected to a detail screen
 * user can turn off notification on the profile screen
 * user can search through the feed for a specific question/concern
+* Integration of facebook sdk
+* User can load more posts once he or she reaches the bottom of the feed using endless scrolling.
+* user can search through feed and inbox for a specific post
+* Show the username and creation time for each post
+* User can like a post 
+
 
 ### 2. Screen Archetypes
 
@@ -68,17 +71,14 @@ Inspired by the codepath in-class support queue (hence the name), this app lets 
 * Create question
 * Notification
 
-Optional:
-* FAQ
-
 **Flow Navigation** (Screen to Screen)
 
 * Login screen
    * => Home feed
 * Registration screen
    * => Home feed
-* Create a question/concern 
-   * => Returns to home feed after user posts a question/concern
+* Create a question 
+   * => Returns to home feed after user posts a question
 * Stream Screen 
    * => navigation to a detail screen on click of a post
 * Profile screen
@@ -93,17 +93,15 @@ Optional:
 ## Schema 
 #### Models
 
-Post
+Question
 
 |   property    |      type       |                  description                   |
 |:-------------:|:---------------:|:----------------------------------------------:|
 |   objectid    |     String      |  unique id for the user post (default field)   |
 |    author     | Pointer to User |                  image author                  |
-|     image     |      File       |        image that user posts(optional)         |
 |  likesCount   |     Number      |          number of likes for the post          |
-| commentsCount |     Number      |          number of comments for the post                                      |
+| replyCount |     Number      |          number of replies for the post                                      |
 |   createdAt   |      Date       |   date when post is created (default field)    |
-|approved      |       Boolean   |     post has been approved by TA or Professor |
 
 
 User
@@ -112,17 +110,17 @@ User
 |   objectid    |     String      |  unique id for the user (default field)   |
 |    username     | String |                  name of the user                 |
 |     image     |      File       |        image that user          |
-|  email      |       String   |     email address of the user |
+|    email      |       String   |     email address of the user |
+|    password      |       String   |     password of the user |
 
-
-Comments
+Reply
 |   property    |      type       |                  description                   |
 |:-------------:|:---------------:|:----------------------------------------------:|
 |   objectid    |     String      |  unique id for the comment (default field)   |
 |    author     | Pointer to User |                  image author                  |
 |   createdAt   |      Date       |   date when comment is created (default field)    |
 |  updatedAt      |       Date   |     date when comment was updated (default field) |
-|approved      |       Boolean   |     post has been approved by TA or Professor |
+|approved      |       Boolean   |     post has been approved by Instructor |
 
 
 ### Networking
