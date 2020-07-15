@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -49,7 +50,7 @@ public class RegistrationActivity extends AppCompatActivity {
 
     private void registerUser() {
         String username = etUsername.getText().toString();
-        if(username.equals("")){
+        if (username.equals("")) {
             Toast.makeText(this, "Username cannot be empty", Toast.LENGTH_SHORT).show();
             return;
         }
@@ -57,16 +58,17 @@ public class RegistrationActivity extends AppCompatActivity {
     }
 
     private void validateUserName(final String username) {
-        ParseQuery<ParseUser> query =  ParseUser.getQuery();
+        ParseQuery<ParseUser> query = ParseUser.getQuery();
         query.whereEqualTo("username", username);
         query.findInBackground(new FindCallback<ParseUser>() {
             @Override
             public void done(List<ParseUser> objects, ParseException e) {
-                if(e != null) {
+                if (e != null) {
                     Toast.makeText(RegistrationActivity.this, "register error", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-                finishRegistration(ParseUser.getCurrentUser(), username);
+                } else if (objects.size() != 0) {
+                    Toast.makeText(RegistrationActivity.this, "username is taken", Toast.LENGTH_SHORT).show();
+                } else
+                    finishRegistration(ParseUser.getCurrentUser(), username);
             }
         });
     }
@@ -78,7 +80,7 @@ public class RegistrationActivity extends AppCompatActivity {
         currentUser.saveInBackground(new SaveCallback() {
             @Override
             public void done(ParseException e) {
-                if(e != null) {
+                if (e != null) {
                     Toast.makeText(RegistrationActivity.this, "finish error", Toast.LENGTH_SHORT).show();
                     return;
                 }
@@ -88,6 +90,7 @@ public class RegistrationActivity extends AppCompatActivity {
             }
         });
     }
+
     //gets user's full name and profile picture from Facebook
     private void getFacebookInformation() {
         GraphRequest request = GraphRequest.newMeRequest(AccessToken.getCurrentAccessToken(),
@@ -95,8 +98,8 @@ public class RegistrationActivity extends AppCompatActivity {
                     @Override
                     public void onCompleted(JSONObject object, GraphResponse response) {
                         try {
-                            fullName  = object.getString("name");
-                            profilePicId  = (object.getString("id"));
+                            fullName = object.getString("name");
+                            profilePicId = (object.getString("id"));
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#9ba1c4">
+    android:background="#d6cfcf">
 
     <EditText
         android:id="@+id/etUsername"
@@ -39,7 +39,7 @@
         android:layout_marginTop="112dp"
         android:text="Sign up"
         android:textColor="#f9fafc"
-        android:background="#2f3035"
+        android:background="#445F9E"
         android:textAllCaps="false"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

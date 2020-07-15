@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.supportq.R;
@@ -18,8 +17,6 @@ import com.parse.ParseUser;
 
 
 public class LoginActivity extends AppCompatActivity {
-    private EditText etPassword;
-    private EditText etUsername;
     private Button btnLogin;
     private Button btnSignUp;
     public static final String TAG = "LoginActivity";
@@ -41,8 +38,6 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void setViews() {
-        etPassword = findViewById(R.id.etPassword);
-        etUsername = findViewById(R.id.etUsername);
         btnLogin = findViewById(R.id.btnLogin);
         btnSignUp = findViewById(R.id.btnSignUp);
     }
@@ -60,6 +55,7 @@ public class LoginActivity extends AppCompatActivity {
                             Toast.makeText(LoginActivity.this, "something went wrong", Toast.LENGTH_SHORT).show();
                             btnLogin.setVisibility(View.INVISIBLE);
                         } else if (user == null) {
+                            Toast.makeText(LoginActivity.this, "user cancelled facebook login", Toast.LENGTH_SHORT).show();
                             btnLogin.setVisibility(View.VISIBLE);
                         }
                         logUser(user);

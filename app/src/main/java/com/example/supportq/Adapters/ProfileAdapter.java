@@ -2,7 +2,6 @@ package com.example.supportq.Adapters;
 
 import android.content.Context;
 import android.graphics.Color;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -133,14 +132,12 @@ public class ProfileAdapter extends RecyclerView.Adapter<ProfileAdapter.ViewHold
 
         public void bind(Question question) throws ParseException {
             String username = question.getUser().fetch().getUsername();
-            Log.d("h", "bind: "+ username);
             tvDescription.setText(question.getDescription());
             card.setCardBackgroundColor(Color.parseColor("#E6E6E6"));
             card.setMaxCardElevation(0.0f);
             card.setRadius(5.0f);
             deleteButtonClicked(question);
             String timeAgo = question.getRelativeTimeAgo(question.getDate().toString());
-            Log.d("df", "bind: "+ timeAgo);
 
             tvTimeStamp.setText(timeAgo);
             tvUsername.setText(username);

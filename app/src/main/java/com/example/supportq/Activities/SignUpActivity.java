@@ -54,7 +54,7 @@ public class SignUpActivity extends AppCompatActivity {
             @Override
             public void done(ParseException e) {
                 if (e != null) {
-                    Toast.makeText(SignUpActivity.this, "something went wrong!!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(SignUpActivity.this, "User name has already been taken, try another one!", Toast.LENGTH_SHORT).show();
                     return;
                 }
                 goMainActivity();

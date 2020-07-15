@@ -27,7 +27,7 @@
         android:layout_marginStart="48dp"
         android:layout_marginTop="108dp"
         android:layout_marginEnd="48dp"
-        android:background="#2f3035"
+        android:background="#445F9E"
         android:text="@string/register"
         android:textAllCaps="false"
         android:textColor="#f9fafc"

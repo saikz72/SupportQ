@@ -25,7 +25,6 @@ import com.example.supportq.Models.User;
 import com.example.supportq.R;
 import com.parse.FindCallback;
 import com.parse.ParseException;
-import com.parse.ParseFile;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
 
@@ -71,7 +70,7 @@ public class ProfileFragment extends Fragment {
 
         String uri = "http://graph.facebook.com/" + profilePictureId + "/picture?type=large";
         //Glide.with(getContext()).load(uri).into(ivProfilePicture);
-        ivProfilePicture.setImageURI(Uri.parse("http://graph.facebook.com/" + profilePictureId + "/picture?type=large"));
+        ivProfilePicture.setImageURI(Uri.parse(uri));
         // TODO -- redesign profile layout
         editProfileButtonClicked();
         logoutButtonClicked();
