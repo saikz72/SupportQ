@@ -19,6 +19,7 @@ import android.widget.Toast;
 
 import com.example.supportq.Activities.EditProfileActivity;
 import com.example.supportq.Activities.LoginActivity;
+import com.example.supportq.Adapters.ProfileAdapter;
 import com.example.supportq.Adapters.QuestionAdapter;
 import com.example.supportq.Models.Question;
 import com.example.supportq.R;
@@ -35,7 +36,7 @@ public class ProfileFragment extends Fragment {
     private TextView tvUsername;
     private Button btnEditProfile;
     private Button btnLogOut;
-    private QuestionAdapter questionAdapter;
+    private ProfileAdapter profileAdapter;
     private List<Question> allQuestions;
     private RecyclerView rvQuestion;
 
@@ -57,10 +58,10 @@ public class ProfileFragment extends Fragment {
         rvQuestion = view.findViewById(R.id.rvQuestions);
 
         allQuestions = new ArrayList<>();
-        questionAdapter = new QuestionAdapter(allQuestions, getContext());
+        profileAdapter = new ProfileAdapter(allQuestions, getContext());
 
         //set the adapter to the rv
-        rvQuestion.setAdapter(questionAdapter);
+        rvQuestion.setAdapter(profileAdapter);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         //set the layout manager on the recycler view
         rvQuestion.setLayoutManager(linearLayoutManager);
@@ -113,8 +114,8 @@ public class ProfileFragment extends Fragment {
                     Toast.makeText(getContext(), "Issue with getting posts", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                questionAdapter.clear();
-                questionAdapter.addAll(questions);
+                profileAdapter.clear();
+                profileAdapter.addAll(questions);
             }
         });
     }
