@@ -24,7 +24,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class HomeFragment extends Fragment {
-    private RecyclerView rvPost;
+    private RecyclerView rvQuestion;
     private QuestionAdapter questionAdapter;
     private List<Question> allQuestions;
 
@@ -42,23 +42,22 @@ public class HomeFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        rvPost = view.findViewById(R.id.rvPost);
+        rvQuestion = view.findViewById(R.id.rvQuestions);
 
         allQuestions = new ArrayList<>();
         questionAdapter = new QuestionAdapter(allQuestions, getContext());
 
         //set the adapter to the rv
-        rvPost.setAdapter(questionAdapter);
+        rvQuestion.setAdapter(questionAdapter);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         //set the layout manager on the recycler view
-        rvPost.setLayoutManager(linearLayoutManager);
+        rvQuestion.setLayoutManager(linearLayoutManager);
         queryPost();
     }
 
     private void queryPost() {
         ParseQuery<Question> query = ParseQuery.getQuery(Question.class);
         query.addDescendingOrder(Question.KEY_CREATED_AT);  //TODO : update how the questions are ordered
-        query.include(Question.KEY_USER);
         query.findInBackground(new FindCallback<Question>() {
             @Override
             public void done(List<Question> questions, ParseException e) {

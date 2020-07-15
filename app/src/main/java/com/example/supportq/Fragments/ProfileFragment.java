@@ -20,7 +20,6 @@ import android.widget.Toast;
 import com.example.supportq.Activities.EditProfileActivity;
 import com.example.supportq.Activities.LoginActivity;
 import com.example.supportq.Adapters.ProfileAdapter;
-import com.example.supportq.Adapters.QuestionAdapter;
 import com.example.supportq.Models.Question;
 import com.example.supportq.R;
 import com.parse.FindCallback;

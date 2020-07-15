@@ -74,6 +74,40 @@ public class ProfileAdapter extends RecyclerView.Adapter<ProfileAdapter.ViewHold
         return allQuestions.size();
     }
 
+    // sets the color of a button, depending on whether it is active
+    private void setButton(ImageView iv, boolean isActive, int strokeResId, int fillResId, int activeColor) {
+        iv.setImageResource(isActive ? fillResId : strokeResId);
+        iv.setColorFilter(ContextCompat.getColor(context, isActive ? activeColor : R.color.likedRed));
+    }
+
+    private void setLikeText(Question post, TextView view) {
+        int likeCount = post.getLikeCount();
+        if (likeCount == 1) view.setText(String.format("%d like", post.getLikeCount()));
+        else view.setText(String.format("%d likes", post.getLikeCount()));
+    }
+
+    // Clean all elements of the recycler
+    public void clear() {
+        allQuestions.clear();
+        notifyDataSetChanged();
+    }
+
+    // Add a list of post -- change to type used
+    public void addAll(List<Question> list) {
+        allQuestions.addAll(list);
+        notifyDataSetChanged();
+    }
+
+    // Removes question at this position
+    public void removeAt(Question question, int position) throws ParseException {
+        allQuestions.remove(position);
+        notifyItemRemoved(position);
+        question.delete();
+        question.saveInBackground();
+        //notifyItemRangeChanged(position, allQuestions.size());
+    }
+
+
     class ViewHolder extends RecyclerView.ViewHolder {
         private TextView tvDescription;
         private CardView card;
@@ -103,6 +137,7 @@ public class ProfileAdapter extends RecyclerView.Adapter<ProfileAdapter.ViewHold
             card.setMaxCardElevation(0.0f);
             card.setRadius(5.0f);
             replyButtonClicked();
+            deleteButtonClicked(question);
             String timeAgo = question.getRelativeTimeAgo(question.getDate().toString());
             tvTimeStamp.setText(timeAgo);
             tvUsername.setText(username);
@@ -111,6 +146,7 @@ public class ProfileAdapter extends RecyclerView.Adapter<ProfileAdapter.ViewHold
             setLikeText(question, tvLikeCount);
         }
 
+        //listener for reply button
         public void replyButtonClicked() {
             ivReply.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -120,29 +156,22 @@ public class ProfileAdapter extends RecyclerView.Adapter<ProfileAdapter.ViewHold
             });
         }
 
+        //listener for delete button
+        public void deleteButtonClicked(final Question question) {
+            ivDelete.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    int position = getAdapterPosition();
+                    try {
+                        removeAt(question, position);
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
+                }
+            });
+        }
+
     }
 
-    // sets the color of a button, depending on whether it is active
-    private void setButton(ImageView iv, boolean isActive, int strokeResId, int fillResId, int activeColor) {
-        iv.setImageResource(isActive ? fillResId : strokeResId);
-        iv.setColorFilter(ContextCompat.getColor(context, isActive ? activeColor : R.color.likedRed));
-    }
 
-    private void setLikeText(Question post, TextView view) {
-        int likeCount = post.getLikeCount();
-        if (likeCount == 1) view.setText(String.format("%d like", post.getLikeCount()));
-        else view.setText(String.format("%d likes", post.getLikeCount()));
-    }
-
-    // Clean all elements of the recycler
-    public void clear() {
-        allQuestions.clear();
-        notifyDataSetChanged();
-    }
-
-    // Add a list of post -- change to type used
-    public void addAll(List<Question> list) {
-        allQuestions.addAll(list);
-        notifyDataSetChanged();
-    }
 }

@@ -2,7 +2,6 @@ package com.example.supportq.Adapters;
 
 import android.content.Context;
 import android.graphics.Color;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,6 +21,8 @@ import com.parse.ParseUser;
 import java.util.List;
 
 public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHolder> {
+
+
     private static final String TAG = "QuestionAdapter";
     private List<Question> allQuestions;
     private Context context;
@@ -74,52 +75,6 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHo
         return allQuestions.size();
     }
 
-    class ViewHolder extends RecyclerView.ViewHolder {
-        private TextView tvDescription;
-        private CardView card;
-        private ImageView ivLike;
-        private TextView tvTimeStamp;
-        private TextView tvLikeCount;
-        private ImageView ivReply;
-        private TextView tvUsername;
-
-        public ViewHolder(@NonNull View itemView) {
-            super(itemView);
-            tvDescription = itemView.findViewById(R.id.tvDescription);
-            card = itemView.findViewById(R.id.card);
-            ivLike = itemView.findViewById(R.id.ivLike);
-            ivReply = itemView.findViewById(R.id.ivReply);
-            tvTimeStamp = itemView.findViewById(R.id.tvTimeStamp);
-            tvLikeCount = itemView.findViewById(R.id.tvLikeCount);
-            tvUsername = itemView.findViewById(R.id.tvUsername);
-        }
-
-        public void bind(Question question) throws ParseException {
-            String username = question.getUser().fetch().getUsername();
-            tvDescription.setText(question.getDescription());
-            card.setCardBackgroundColor(Color.parseColor("#E6E6E6"));
-            card.setMaxCardElevation(0.0f);
-            card.setRadius(5.0f);
-            replyButtonClicked();
-            String timeAgo = question.getRelativeTimeAgo(question.getDate().toString());
-            tvTimeStamp.setText(timeAgo);
-            tvUsername.setText(username);
-            setButton(ivLike, question.isLiked(),
-                    R.drawable.ufi_heart, R.drawable.ufi_heart_active, R.color.likedRed);
-            setLikeText(question, tvLikeCount);
-        }
-
-        public void replyButtonClicked() {
-            ivReply.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    //TODO --> enable reply
-                }
-            });
-        }
-
-    }
-
     // sets the color of a button, depending on whether it is active
     private void setButton(ImageView iv, boolean isActive, int strokeResId, int fillResId, int activeColor) {
         iv.setImageResource(isActive ? fillResId : strokeResId);
@@ -143,4 +98,55 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHo
         allQuestions.addAll(list);
         notifyDataSetChanged();
     }
+
+    class ViewHolder extends RecyclerView.ViewHolder {
+        private TextView tvDescription;
+        private CardView card;
+        private ImageView ivLike;
+        private TextView tvTimeStamp;
+        private TextView tvLikeCount;
+        private ImageView ivReply;
+        private TextView tvUsername;
+        private ImageView ivDelete;
+
+        public ViewHolder(@NonNull View itemView) {
+            super(itemView);
+            tvDescription = itemView.findViewById(R.id.tvDescription);
+            card = itemView.findViewById(R.id.card);
+            ivLike = itemView.findViewById(R.id.ivLike);
+            ivReply = itemView.findViewById(R.id.ivReply);
+            tvTimeStamp = itemView.findViewById(R.id.tvTimeStamp);
+            tvLikeCount = itemView.findViewById(R.id.tvLikeCount);
+            tvUsername = itemView.findViewById(R.id.tvUsername);
+            ivDelete = itemView.findViewById(R.id.ivDelete);
+        }
+
+        public void bind(Question question) throws ParseException {
+            String username = question.getUser().fetch().getUsername();
+            tvDescription.setText(question.getDescription());
+            card.setCardBackgroundColor(Color.parseColor("#E6E6E6"));
+            card.setMaxCardElevation(0.0f);
+            card.setRadius(5.0f);
+            replyButtonClicked();
+            String timeAgo = question.getRelativeTimeAgo(question.getDate().toString());
+            tvTimeStamp.setText(timeAgo);
+            tvUsername.setText(username);
+            ivDelete.setVisibility(View.GONE);      //remove delete key on home feed
+            setButton(ivLike, question.isLiked(),
+                    R.drawable.ufi_heart, R.drawable.ufi_heart_active, R.color.likedRed);
+            setLikeText(question, tvLikeCount);
+        }
+
+        public void replyButtonClicked() {
+            ivReply.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    //TODO --> enable reply
+                }
+            });
+        }
+
+    }
+
+
 }
