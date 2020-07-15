@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.supportq.Models.Question;
 import com.example.supportq.R;
+import com.parse.ParseException;
 import com.parse.ParseUser;
 
 import java.util.List;
@@ -61,7 +62,11 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHo
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Question question = allQuestions.get(position);
-        holder.bind(question);
+        try {
+            holder.bind(question);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -89,7 +94,8 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHo
             tvUsername = itemView.findViewById(R.id.tvUsername);
         }
 
-        public void bind(Question question) {
+        public void bind(Question question) throws ParseException {
+            String username = question.getUser().fetch().getUsername();
             tvDescription.setText(question.getDescription());
             card.setCardBackgroundColor(Color.parseColor("#E6E6E6"));
             card.setMaxCardElevation(0.0f);
@@ -97,7 +103,6 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHo
             replyButtonClicked();
             String timeAgo = question.getRelativeTimeAgo(question.getDate().toString());
             tvTimeStamp.setText(timeAgo);
-            String username = question.getUser().getUsername();
             tvUsername.setText(username);
             setButton(ivLike, question.isLiked(),
                     R.drawable.ufi_heart, R.drawable.ufi_heart_active, R.color.likedRed);

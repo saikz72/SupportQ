@@ -68,6 +68,7 @@ public class Question extends ParseObject {
     public JSONArray getLikes() {
         return getJSONArray(KEY_LIKES);
     }
+
     // Returns the number of likes on this post.
     public int getLikeCount() {
         if (getLikes() != null) {
