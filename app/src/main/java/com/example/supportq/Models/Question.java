@@ -3,7 +3,6 @@ package com.example.supportq.Models;
 import android.text.format.DateUtils;
 
 import com.parse.ParseClassName;
-import com.parse.ParseFile;
 import com.parse.ParseObject;
 import com.parse.ParseUser;
 

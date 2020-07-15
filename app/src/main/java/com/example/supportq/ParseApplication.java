@@ -4,6 +4,7 @@ import android.app.Application;
 
 import com.example.supportq.Models.Question;
 import com.parse.Parse;
+import com.parse.ParseFacebookUtils;
 import com.parse.ParseObject;
 
 public class ParseApplication extends Application {
@@ -22,8 +23,7 @@ public class ParseApplication extends Application {
                 .clientKey("final-fbu-project")  // set explicitly unless clientKey is explicitly configured on Parse server
                 .server("https://support-q.herokuapp.com/parse/").build());
         //TODO --> facebook sdk
-        //ParseFacebookUtils.initialize(this);
-        //FacebookSdk.sdkInitialize(getApplicationContext());
+        ParseFacebookUtils.initialize(this);
 
     }
 }

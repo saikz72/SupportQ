@@ -1,6 +1,7 @@
 package com.example.supportq.Fragments;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -8,7 +9,6 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,9 +21,11 @@ import com.example.supportq.Activities.EditProfileActivity;
 import com.example.supportq.Activities.LoginActivity;
 import com.example.supportq.Adapters.ProfileAdapter;
 import com.example.supportq.Models.Question;
+import com.example.supportq.Models.User;
 import com.example.supportq.R;
 import com.parse.FindCallback;
 import com.parse.ParseException;
+import com.parse.ParseFile;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
 
@@ -38,6 +40,8 @@ public class ProfileFragment extends Fragment {
     private ProfileAdapter profileAdapter;
     private List<Question> allQuestions;
     private RecyclerView rvQuestion;
+    private String profilePictureId;
+
 
     public ProfileFragment() {
         // Required empty public constructor
@@ -47,6 +51,7 @@ public class ProfileFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+        profilePictureId = User.getProfilePicture(ParseUser.getCurrentUser());
         return inflater.inflate(R.layout.fragment_profile, container, false);
     }
 
@@ -54,16 +59,19 @@ public class ProfileFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         setViews(view);
-        rvQuestion = view.findViewById(R.id.rvQuestions);
 
         allQuestions = new ArrayList<>();
         profileAdapter = new ProfileAdapter(allQuestions, getContext());
-
         //set the adapter to the rv
         rvQuestion.setAdapter(profileAdapter);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         //set the layout manager on the recycler view
         rvQuestion.setLayoutManager(linearLayoutManager);
+        tvUsername.setText(ParseUser.getCurrentUser().getUsername());
+
+        String uri = "http://graph.facebook.com/" + profilePictureId + "/picture?type=large";
+        //Glide.with(getContext()).load(uri).into(ivProfilePicture);
+        ivProfilePicture.setImageURI(Uri.parse("http://graph.facebook.com/" + profilePictureId + "/picture?type=large"));
         // TODO -- redesign profile layout
         editProfileButtonClicked();
         logoutButtonClicked();
@@ -72,6 +80,7 @@ public class ProfileFragment extends Fragment {
     }
 
     public void setViews(View view) {
+        rvQuestion = view.findViewById(R.id.rvQuestions);
         ivProfilePicture = view.findViewById(R.id.ivProfilePicture);
         tvUsername = view.findViewById(R.id.tvUsername);
         btnEditProfile = view.findViewById(R.id.btnEditProfile);
@@ -102,6 +111,7 @@ public class ProfileFragment extends Fragment {
             }
         });
     }
+
     private void queryPost() {
         ParseQuery<Question> query = ParseQuery.getQuery(Question.class);
         query.addDescendingOrder(Question.KEY_CREATED_AT);  //TODO : update how the questions are ordered
