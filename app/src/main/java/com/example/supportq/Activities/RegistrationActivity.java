@@ -30,7 +30,6 @@ public class RegistrationActivity extends AppCompatActivity {
     private EditText etUsername;
     private Button btnRegister;
     private String fullName;
-    private String profilePicId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,7 +75,6 @@ public class RegistrationActivity extends AppCompatActivity {
     private void finishRegistration(ParseUser currentUser, String username) {
         currentUser.setUsername(username);
         User.setFullName(fullName, currentUser);
-        User.setProfilePicture(profilePicId, currentUser);
         currentUser.saveInBackground(new SaveCallback() {
             @Override
             public void done(ParseException e) {
@@ -99,7 +97,6 @@ public class RegistrationActivity extends AppCompatActivity {
                     public void onCompleted(JSONObject object, GraphResponse response) {
                         try {
                             fullName = object.getString("name");
-                            profilePicId = (object.getString("id"));
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }

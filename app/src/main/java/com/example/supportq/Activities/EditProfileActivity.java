@@ -4,6 +4,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.FileProvider;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -76,10 +77,7 @@ public class EditProfileActivity extends AppCompatActivity {
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         // Create a File reference for future access
         photoFile = getPhotoFileUri(photoFileName);
-
         // wrap File object into a content provider
-        // required for API >= 24
-        // See https://guides.codepath.com/android/Sharing-Content-with-Intents#sharing-files-with-api-24-or-higher
         Uri fileProvider = FileProvider.getUriForFile(EditProfileActivity.this, "com.codepath.fileprovider.supportq", photoFile);
         intent.putExtra(MediaStore.EXTRA_OUTPUT, fileProvider);
 
@@ -96,7 +94,7 @@ public class EditProfileActivity extends AppCompatActivity {
 
         // Create the storage directory if it does not exist
         if (!mediaStorageDir.exists() && !mediaStorageDir.mkdirs()) {
-            Log.d(TAG, "failed to create directory");
+            Toast.makeText(this, "failed to create directory", Toast.LENGTH_SHORT).show();
         }
 
         // Return the file target for the photo based on filename
@@ -120,18 +118,6 @@ public class EditProfileActivity extends AppCompatActivity {
         }
     }
 
-    public void saveImage(ParseUser currentUser, File profilePicture) {
-        //TODO --> user can choose not to change profile image
-        //breaks if profile picutre is not taken
-        if (profilePicture != null || ivProfilePicture.getDrawable() != null) {
-            ParseFile parseFile = new ParseFile(profilePicture);
-            currentUser.put("profilePicture", parseFile);
-        }else{
-            Toast.makeText(this, "There is no image", Toast.LENGTH_SHORT).show();
-            return;
-        }
-    }
-
     public void submitButtonClicked() {
         btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -141,11 +127,23 @@ public class EditProfileActivity extends AppCompatActivity {
                     Toast.makeText(EditProfileActivity.this, "Username cannot be empty", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                currentUser.put("username", etUsername.getText().toString());
-                saveImage(currentUser, photoFile);
-                currentUser.saveInBackground();
-                finish();
+                saveChanges(currentUser, photoFile, username);
             }
         });
+    }
+
+    public void saveChanges(ParseUser currentUser, File pic, String username) {
+        //TODO --> user can choose not to change profile image
+        //breaks if profile picutre is not taken
+        currentUser.put("username", username);
+        if(pic == null){
+            Log.d(TAG, "saveChanges: ddd");
+            finish();
+            return;
+        }
+        ParseFile parseFile = new ParseFile(pic);
+        currentUser.put("profilePicture", parseFile);
+        currentUser.saveInBackground();
+        finish();
     }
 }

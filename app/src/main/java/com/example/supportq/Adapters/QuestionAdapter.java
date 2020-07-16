@@ -2,6 +2,7 @@ package com.example.supportq.Adapters;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,10 +23,9 @@ import java.util.List;
 
 public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHolder> {
 
-
-    private static final String TAG = "QuestionAdapter";
     private List<Question> allQuestions;
     private Context context;
+    public static final String TAG = "QuestionAdapter";
 
     public QuestionAdapter(List<Question> allQuestions, Context context) {
         this.allQuestions = allQuestions;
@@ -66,7 +66,7 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHo
         try {
             holder.bind(question);
         } catch (ParseException e) {
-            e.printStackTrace();
+            Log.e(TAG, " error", e);
         }
     }
 
@@ -127,13 +127,10 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHo
             card.setCardBackgroundColor(Color.parseColor("#E6E6E6"));
             card.setMaxCardElevation(0.0f);
             card.setRadius(5.0f);
-            replyButtonClicked();
-            String timeAgo = question.getCreatedTimeAgo();
-            tvTimeStamp.setText(timeAgo);
+          //TODO --> TIME STAMP
             tvUsername.setText(username);
             ivDelete.setVisibility(View.GONE);      //remove delete key on home feed
-            setButton(ivLike, question.isLiked(),
-                    R.drawable.ufi_heart, R.drawable.ufi_heart_active, R.color.likedRed);
+            setButton(ivLike, question.isLiked(),R.drawable.ufi_heart, R.drawable.ufi_heart_active, R.color.likedRed);
             setLikeText(question, tvLikeCount);
         }
 

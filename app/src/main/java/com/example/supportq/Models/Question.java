@@ -9,8 +9,6 @@ import com.parse.ParseUser;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.parceler.Parcel;
-
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -21,7 +19,6 @@ import java.util.Locale;
 public class Question extends ParseObject {
     public static final String KEY_DESCRIPTION = "description";
     public static final String KEY_USER = "user";
-    public static final String KEY_IMAGE = "image";
     public static final String KEY_CREATED_AT = "createdAt";
     public static final String KEY_LIKES = "likes";
 
@@ -47,6 +44,7 @@ public class Question extends ParseObject {
     public Date getDate() {
         return this.getCreatedAt();
     }
+
 
     // getRelativeTimeAgo("Mon Apr 01 21:16:23 +0000 2014");
     public String getRelativeTimeAgo(long dateMillis) {

@@ -2,6 +2,7 @@ package com.example.supportq.Adapters;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,9 +23,9 @@ import java.util.List;
 
 public class ProfileAdapter extends RecyclerView.Adapter<ProfileAdapter.ViewHolder> {
 
-
     private List<Question> allQuestions;
     private Context context;
+    public static final String TAG = "ProfileAdapter";
 
     public ProfileAdapter(List<Question> allQuestions, Context context) {
         this.allQuestions = allQuestions;
@@ -65,7 +66,7 @@ public class ProfileAdapter extends RecyclerView.Adapter<ProfileAdapter.ViewHold
         try {
             holder.bind(question);
         } catch (ParseException e) {
-            e.printStackTrace();
+            Log.e(TAG, " error", e);
         }
     }
 
@@ -104,7 +105,6 @@ public class ProfileAdapter extends RecyclerView.Adapter<ProfileAdapter.ViewHold
         notifyItemRemoved(position);
         question.delete();
         question.saveInBackground();
-        //notifyItemRangeChanged(position, allQuestions.size());
     }
 
 
@@ -138,7 +138,6 @@ public class ProfileAdapter extends RecyclerView.Adapter<ProfileAdapter.ViewHold
             card.setRadius(5.0f);
             deleteButtonClicked(question);
             String timeAgo = question.getCreatedTimeAgo();
-
             tvTimeStamp.setText(timeAgo);
             tvUsername.setText(username);
             setButton(ivLike, question.isLiked(),

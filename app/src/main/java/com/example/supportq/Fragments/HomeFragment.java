@@ -10,7 +10,6 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,6 +23,8 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseQuery;
+
+import org.parceler.Parcels;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -51,13 +52,6 @@ public class HomeFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         rvQuestion = view.findViewById(R.id.rvQuestions);
         floatingActionButton = view.findViewById(R.id.floating_action_button);
-        floatingActionButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getContext(), ComposeActivity.class);
-                startActivityForResult(intent, REQUEST_CODE);
-            }
-        });
 
         allQuestions = new ArrayList<>();
         questionAdapter = new QuestionAdapter(allQuestions, getContext());
@@ -67,16 +61,27 @@ public class HomeFragment extends Fragment {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         //set the layout manager on the recycler view
         rvQuestion.setLayoutManager(linearLayoutManager);
+        floatingActionButtonClicked();
         queryPost();
     }
 
+    public void floatingActionButtonClicked(){
+        floatingActionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getContext(), ComposeActivity.class);
+                startActivityForResult(intent, REQUEST_CODE);
+            }
+        });
+    }
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == REQUEST_CODE && resultCode == Activity.RESULT_OK) {
-                Question question = data.getParcelableExtra("compose");
-                allQuestions.add(0, question);
-                questionAdapter.notifyItemInserted(0);
-                rvQuestion.scrollToPosition(0);
+            Question question = Parcels.unwrap(data.getParcelableExtra("compose"));
+            allQuestions.add( question);
+            questionAdapter.notifyItemInserted(0);
+            rvQuestion.scrollToPosition(0);
         }
     }
 
