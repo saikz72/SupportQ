@@ -7,7 +7,7 @@
     tools:context=".Activities.RegistrationActivity">
     <EditText
         android:id="@+id/etUsername"
-        android:layout_width="0dp"
+        android:layout_width="@dimen/compose_username_height"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:layout_marginTop="96dp"
@@ -21,8 +21,8 @@
 
     <Button
         android:id="@+id/btnRegister"
-        android:layout_width="235dp"
-        android:layout_height="47dp"
+        android:layout_width="@dimen/register_button_width"
+        android:layout_height="@dimen/register_button_height"
         android:layout_gravity="start"
         android:layout_marginStart="48dp"
         android:layout_marginTop="108dp"

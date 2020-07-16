@@ -69,6 +69,8 @@ public class ProfileFragment extends Fragment {
         tvUsername.setText(ParseUser.getCurrentUser().getUsername());
 
 
+
+
         try {
             profilePicture = ParseUser.getCurrentUser().fetch().getParseFile(("profilePicture"));
         } catch (ParseException e) {
@@ -89,7 +91,6 @@ public class ProfileFragment extends Fragment {
         tvUsername = view.findViewById(R.id.tvUsername);
         btnEditProfile = view.findViewById(R.id.btnEditProfile);
         btnLogOut = view.findViewById(R.id.btnLogOut);
-
     }
 
     //edit profile

@@ -9,8 +9,8 @@
 
     <ImageView
         android:id="@+id/ivProfilePicture"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:layout_width="@dimen/profile_image_width"
+        android:layout_height="@dimen/profile_image_height"
         android:layout_marginStart="32dp"
         android:layout_marginTop="36dp"
         android:src="@mipmap/ic_launcher"
@@ -58,12 +58,13 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvQuestions"
-        android:layout_width="413dp"
-        android:layout_height="529dp"
+        android:layout_width="@dimen/profile_recycler_width"
+        android:layout_height="@dimen/profile_recycler_heigt"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnEditProfile"
         app:layout_constraintVertical_bias="0.0" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

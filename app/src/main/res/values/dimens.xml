@@ -2,7 +2,50 @@
     <!-- Default screen margins, per the Android Design guidelines. -->
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
-    <dimen name="profile_width">100dp</dimen>
-    <dimen name="profile_height">100dp</dimen>
+
+
+    <!-- fragment_home dimensions.-->
+    <dimen name="button_layout_margin">16dp</dimen>
+
+    <!--fragment_profile dimensions.-->
+    <dimen name="profile_image_height">100dp</dimen>
+    <dimen name="profile_image_width">100dp</dimen>
+    <dimen name="profile_recycler_width">411dp</dimen>
+    <dimen name="profile_recycler_height">501dp</dimen>
+
+    <!--compose_activity dimensions.-->
+    <dimen name="compose_button_submit">37dp</dimen>
+
+    <!--edit_profile dimensions.-->
+    <dimen name="edit_username_width">175dp</dimen>
+    <dimen name="edit_username_height">39dp</dimen>
+
+    <!-- main_activity dimensions.-->
+    <dimen name="main_framelayout_height">672dp</dimen>
+
+    <!--login_activity dimensions.-->
+    <dimen name="login_button_height">35dp</dimen>
+    <dimen name="login_button_width">325dp</dimen>
+
+    <!--registration_activity dimensions.-->
+    <dimen name="compose_username_height">0dp</dimen>
+    <dimen name="register_button_width">235dp</dimen>
+    <dimen name="register_button_height">47dp</dimen>
+
+    <!--sign_up_activity dimensions.-->
+    <dimen name="sign_up_button_width">169dp</dimen>
+    <dimen name="sign_up_button_height">41dp</dimen>
+
+    <!--item_post dimensions.-->
+    <dimen name="item_description_height">45dp</dimen>
+    <dimen name="item_description_width">374dp</dimen>
+    <dimen name="item_like_height">27dp</dimen>
+    <dimen name="item_like_width">23dp</dimen>
+    <dimen name="item_timestamp_height">17dp</dimen>
+    <dimen name="item_comment_height">27dp</dimen>
+    <dimen name="item_comment_width">24dp</dimen>
+    <dimen name="item_delete_width">27dp</dimen>
+    <dimen name="item_delete_height">29dp</dimen>
+
 
 </resources>

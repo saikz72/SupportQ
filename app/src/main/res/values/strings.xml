@@ -13,4 +13,6 @@
     <string name="prompt_email">"Username: "</string>
     <string name="post_question">Submit</string>
     <string name="question_hint">What\'s your question?</string>
+    <string name="password_hint">Password:</string>
+    <string name="sign_up">Sign up</string>
 </resources>
