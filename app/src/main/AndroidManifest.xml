@@ -15,7 +15,7 @@
         android:theme="@style/AppTheme">
         <activity android:name=".Activities.ComposeActivity" />
         <activity android:name=".Activities.RegistrationActivity" />
-        <activity android:name=".Activities.SignUpActivity" /> <!-- make sure within the application tag, otherwise app will crash with XmlResourceParser errors -->
+        <activity android:name=".Activities.SignUpActivity" />
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="com.codepath.fileprovider.supportq"

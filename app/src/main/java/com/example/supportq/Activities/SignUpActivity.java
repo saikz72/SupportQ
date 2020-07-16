@@ -1,5 +1,4 @@
 package com.example.supportq.Activities;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -59,7 +58,6 @@ public class SignUpActivity extends AppCompatActivity {
                 goMainActivity();
             }
         });
-
     }
 
     public void goMainActivity() {
