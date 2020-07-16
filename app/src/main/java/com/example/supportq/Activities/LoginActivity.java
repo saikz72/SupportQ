@@ -66,6 +66,9 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void logUser(ParseUser user) {
+        if(user == null){
+            return;
+        }
         if (user.isNew()) {
             Intent intent = new Intent(LoginActivity.this, RegistrationActivity.class);
             startActivity(intent);
