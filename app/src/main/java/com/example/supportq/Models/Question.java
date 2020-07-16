@@ -9,6 +9,7 @@ import com.parse.ParseUser;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.parceler.Parcel;
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
