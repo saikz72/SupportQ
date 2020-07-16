@@ -26,6 +26,10 @@
     <!--login_activity dimensions.-->
     <dimen name="login_button_height">35dp</dimen>
     <dimen name="login_button_width">325dp</dimen>
+    <dimen name="sign_in_width">77dp</dimen>
+    <dimen name="sign_in_height">32dp</dimen>
+    <dimen name="login_image_width">150dp</dimen>
+    <dimen name="login_image_height">150dp</dimen>
 
     <!--registration_activity dimensions.-->
     <dimen name="compose_username_height">0dp</dimen>
