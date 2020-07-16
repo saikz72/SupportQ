@@ -128,7 +128,7 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHo
             card.setMaxCardElevation(0.0f);
             card.setRadius(5.0f);
             replyButtonClicked();
-            String timeAgo = question.getRelativeTimeAgo(question.getDate().toString());
+            String timeAgo = question.getCreatedTimeAgo();
             tvTimeStamp.setText(timeAgo);
             tvUsername.setText(username);
             ivDelete.setVisibility(View.GONE);      //remove delete key on home feed

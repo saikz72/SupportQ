@@ -6,10 +6,9 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:id="@+id/card"
-    card_view:cardBackgroundColor="#E6E6E6"
     card_view:cardCornerRadius="8dp"
     card_view:cardElevation="8dp"
-    android:foreground="?android:attr/selectableItemBackground"
+    android:layout_margin="10dp"
     >
 
     <androidx.constraintlayout.widget.ConstraintLayout

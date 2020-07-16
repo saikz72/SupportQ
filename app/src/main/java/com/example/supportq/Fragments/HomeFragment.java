@@ -1,5 +1,7 @@
 package com.example.supportq.Fragments;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -8,14 +10,17 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.example.supportq.Activities.ComposeActivity;
 import com.example.supportq.Adapters.QuestionAdapter;
 import com.example.supportq.Models.Question;
 import com.example.supportq.R;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseQuery;
@@ -27,6 +32,8 @@ public class HomeFragment extends Fragment {
     private RecyclerView rvQuestion;
     private QuestionAdapter questionAdapter;
     private List<Question> allQuestions;
+    private FloatingActionButton floatingActionButton;
+    public final int REQUEST_CODE = 10;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -43,6 +50,14 @@ public class HomeFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         rvQuestion = view.findViewById(R.id.rvQuestions);
+        floatingActionButton = view.findViewById(R.id.floating_action_button);
+        floatingActionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getContext(), ComposeActivity.class);
+                startActivityForResult(intent, REQUEST_CODE);
+            }
+        });
 
         allQuestions = new ArrayList<>();
         questionAdapter = new QuestionAdapter(allQuestions, getContext());
@@ -53,6 +68,16 @@ public class HomeFragment extends Fragment {
         //set the layout manager on the recycler view
         rvQuestion.setLayoutManager(linearLayoutManager);
         queryPost();
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        if (requestCode == REQUEST_CODE && resultCode == Activity.RESULT_OK) {
+                Question question = data.getParcelableExtra("compose");
+                allQuestions.add(0, question);
+                questionAdapter.notifyItemInserted(0);
+                rvQuestion.scrollToPosition(0);
+        }
     }
 
     private void queryPost() {

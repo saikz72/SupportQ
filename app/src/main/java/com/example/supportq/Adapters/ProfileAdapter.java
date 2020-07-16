@@ -137,7 +137,7 @@ public class ProfileAdapter extends RecyclerView.Adapter<ProfileAdapter.ViewHold
             card.setMaxCardElevation(0.0f);
             card.setRadius(5.0f);
             deleteButtonClicked(question);
-            String timeAgo = question.getRelativeTimeAgo(question.getDate().toString());
+            String timeAgo = question.getCreatedTimeAgo();
 
             tvTimeStamp.setText(timeAgo);
             tvUsername.setText(username);

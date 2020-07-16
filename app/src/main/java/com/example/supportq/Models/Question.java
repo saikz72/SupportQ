@@ -8,6 +8,7 @@ import com.parse.ParseUser;
 
 import org.json.JSONArray;
 import org.json.JSONException;
+import org.parceler.Parcel;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -16,6 +17,7 @@ import java.util.Date;
 import java.util.Locale;
 
 @ParseClassName("Question")
+@Parcel(analyze = Question.class)
 public class Question extends ParseObject {
     public static final String KEY_DESCRIPTION = "description";
     public static final String KEY_USER = "user";
@@ -46,21 +48,20 @@ public class Question extends ParseObject {
         return this.getCreatedAt();
     }
 
-    //returns the relative time of question
-    public String getRelativeTimeAgo(String rawJsonDate) {
-        String twitterFormat = "EEE MMM dd HH:mm:ss ZZZZZ yyyy";
-        SimpleDateFormat sf = new SimpleDateFormat(twitterFormat, Locale.ENGLISH);
+    // getRelativeTimeAgo("Mon Apr 01 21:16:23 +0000 2014");
+    public String getRelativeTimeAgo(long dateMillis) {
+        SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.ENGLISH);
         sf.setLenient(true);
 
         String relativeDate = "";
-        try {
-            long dateMillis = sf.parse(rawJsonDate).getTime();
-            relativeDate = DateUtils.getRelativeTimeSpanString(dateMillis,
-                    System.currentTimeMillis(), DateUtils.SECOND_IN_MILLIS).toString();
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
+        relativeDate = DateUtils.getRelativeTimeSpanString(dateMillis,
+                System.currentTimeMillis(), DateUtils.SECOND_IN_MILLIS).toString();
+
         return relativeDate;
+    }
+
+    public String getCreatedTimeAgo() {
+        return getRelativeTimeAgo(this.getCreatedAt().getTime());
     }
 
     // Returns the array of users who liked this post.
