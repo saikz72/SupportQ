@@ -16,7 +16,6 @@ public class Reply extends ParseObject {
     public static final String KEY_QUESTION_ID = "questionID";
     public static final String KEY_CREATED_AT = "createdAt";
 
-
     public void setUser(ParseUser user){
         put(KEY_USER, user);
     }

@@ -37,7 +37,6 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHo
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(context).inflate(R.layout.item_post, parent, false);
         final ViewHolder holder = new ViewHolder(view);
-
         //listener for like button
         holder.ivLike.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -99,7 +98,7 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHo
         notifyDataSetChanged();
     }
 
-    class ViewHolder extends RecyclerView.ViewHolder {
+    protected class ViewHolder extends RecyclerView.ViewHolder {
         private TextView tvDescription;
         private CardView card;
         private ImageView ivLike;

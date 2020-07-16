@@ -42,7 +42,6 @@ public class ProfileFragment extends Fragment {
     private RecyclerView rvQuestion;
     ParseFile profilePicture;
 
-
     public ProfileFragment() {
         // Required empty public constructor
     }
@@ -58,7 +57,6 @@ public class ProfileFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         setViews(view);
-
         allQuestions = new ArrayList<>();
         profileAdapter = new ProfileAdapter(allQuestions, getContext());
         //set the adapter to the rv
@@ -67,10 +65,6 @@ public class ProfileFragment extends Fragment {
         //set the layout manager on the recycler view
         rvQuestion.setLayoutManager(linearLayoutManager);
         tvUsername.setText(ParseUser.getCurrentUser().getUsername());
-
-
-
-
         try {
             profilePicture = ParseUser.getCurrentUser().fetch().getParseFile(("profilePicture"));
         } catch (ParseException e) {
@@ -82,7 +76,6 @@ public class ProfileFragment extends Fragment {
         editProfileButtonClicked();
         logoutButtonClicked();
         queryPost();
-
     }
 
     public void setViews(View view) {

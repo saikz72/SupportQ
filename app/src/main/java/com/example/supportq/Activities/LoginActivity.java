@@ -25,13 +25,11 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
         //allows for persistence
         ParseUser currentUser = ParseUser.getCurrentUser();
         if (currentUser != null) {
             goToMainActivity();
         }
-
         setViews();
         loginButtonListener();
         SignUpButtonListener();

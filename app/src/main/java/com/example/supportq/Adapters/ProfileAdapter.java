@@ -37,7 +37,6 @@ public class ProfileAdapter extends RecyclerView.Adapter<ProfileAdapter.ViewHold
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(context).inflate(R.layout.item_post, parent, false);
         final ViewHolder holder = new ViewHolder(view);
-
         //listener for like button
         holder.ivLike.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -107,8 +106,7 @@ public class ProfileAdapter extends RecyclerView.Adapter<ProfileAdapter.ViewHold
         question.saveInBackground();
     }
 
-
-    class ViewHolder extends RecyclerView.ViewHolder {
+    protected class ViewHolder extends RecyclerView.ViewHolder {
         private TextView tvDescription;
         private CardView card;
         private ImageView ivLike;
@@ -133,7 +131,7 @@ public class ProfileAdapter extends RecyclerView.Adapter<ProfileAdapter.ViewHold
         public void bind(Question question) throws ParseException {
             String username = question.getUser().fetch().getUsername();
             tvDescription.setText(question.getDescription());
-            card.setCardBackgroundColor(Color.parseColor("#E6E6E6"));
+            card.setCardBackgroundColor(Color.parseColor("#E6E6E6"));   //TODO --> change color to look nicer
             card.setMaxCardElevation(0.0f);
             card.setRadius(5.0f);
             deleteButtonClicked(question);
@@ -171,6 +169,4 @@ public class ProfileAdapter extends RecyclerView.Adapter<ProfileAdapter.ViewHold
         }
 
     }
-
-
 }

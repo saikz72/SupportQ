@@ -47,5 +47,7 @@
     <dimen name="item_delete_width">27dp</dimen>
     <dimen name="item_delete_height">29dp</dimen>
 
+    <!--question_details_activity -->
+
 
 </resources>

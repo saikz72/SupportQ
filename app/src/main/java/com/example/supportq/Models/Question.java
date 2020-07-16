@@ -46,7 +46,6 @@ public class Question extends ParseObject {
         return this.getCreatedAt();
     }
 
-
     // getRelativeTimeAgo("Mon Apr 01 21:16:23 +0000 2014");
     public String getRelativeTimeAgo(long dateMillis) {
         SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.ENGLISH);

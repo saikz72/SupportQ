@@ -52,10 +52,8 @@ public class HomeFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         rvQuestion = view.findViewById(R.id.rvQuestions);
         floatingActionButton = view.findViewById(R.id.floating_action_button);
-
         allQuestions = new ArrayList<>();
         questionAdapter = new QuestionAdapter(allQuestions, getContext());
-
         //set the adapter to the rv
         rvQuestion.setAdapter(questionAdapter);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());

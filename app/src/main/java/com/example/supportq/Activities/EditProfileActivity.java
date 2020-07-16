@@ -4,7 +4,6 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.FileProvider;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -42,7 +41,6 @@ public class EditProfileActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_profile);
         currentUser = ParseUser.getCurrentUser();
-
         setViews();
         bindViews();
         takePhotoButtonClicked();
@@ -59,7 +57,6 @@ public class EditProfileActivity extends AppCompatActivity {
     public void bindViews() {
         ParseUser currentUser = ParseUser.getCurrentUser();
         etUsername.setText(currentUser.getUsername());      //user's current name;
-
     }
 
     //capture image
@@ -109,8 +106,6 @@ public class EditProfileActivity extends AppCompatActivity {
             if (resultCode == RESULT_OK) {
                 // by this point we have the camera photo on disk
                 Bitmap takenImage = BitmapFactory.decodeFile(photoFile.getAbsolutePath());
-                // RESIZE BITMAP, see section below
-                // Load the taken image into a preview
                 ivProfilePicture.setImageBitmap(takenImage);
             } else { // Result was a failure
                 Toast.makeText(this, "No Picture was taken!", Toast.LENGTH_SHORT).show();
@@ -136,7 +131,7 @@ public class EditProfileActivity extends AppCompatActivity {
         //TODO --> user can choose not to change profile image
         //breaks if profile picutre is not taken
         currentUser.put("username", username);
-        if(pic == null){
+        if (pic == null) {
             Log.d(TAG, "saveChanges: ddd");
             finish();
             return;

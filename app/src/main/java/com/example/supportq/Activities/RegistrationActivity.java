@@ -38,7 +38,6 @@ public class RegistrationActivity extends AppCompatActivity {
         getFacebookInformation();
         etUsername = findViewById(R.id.etUsername);
         btnRegister = findViewById(R.id.btnRegister);
-
         btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

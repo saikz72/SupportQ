@@ -13,11 +13,9 @@ import com.example.supportq.R;
 //TODO
 public class InboxFragment extends Fragment {
 
-
     public InboxFragment() {
         // Required empty public constructor
     }
-
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

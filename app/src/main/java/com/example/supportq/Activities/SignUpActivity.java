@@ -1,6 +1,5 @@
 package com.example.supportq.Activities;
 
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -26,7 +25,6 @@ public class SignUpActivity extends AppCompatActivity {
         setContentView(R.layout.activity_sign_up);
         setViews();
         signUpButtonClicked();
-
     }
 
     public void setViews(){
@@ -34,6 +32,7 @@ public class SignUpActivity extends AppCompatActivity {
         etUsername = findViewById(R.id.etUsername);
         btnSignUp = findViewById(R.id.btnSignUp);
     }
+
     //listerner for sign up button
     public void signUpButtonClicked() {
         btnSignUp.setOnClickListener(new View.OnClickListener() {
@@ -58,7 +57,6 @@ public class SignUpActivity extends AppCompatActivity {
                     return;
                 }
                 goMainActivity();
-                Toast.makeText(SignUpActivity.this, "Sign-up Success!!", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -67,6 +65,6 @@ public class SignUpActivity extends AppCompatActivity {
     public void goMainActivity() {
         Intent intent = new Intent(SignUpActivity.this, MainActivity.class);
         startActivity(intent);
-        finish(); //makes sure that the user is kept logged in
+        finish();
     }
 }

@@ -30,16 +30,14 @@ public class ComposeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_compose);
-
         btnCompose = findViewById(R.id.btnCompose);
         tvComposeCount = findViewById(R.id.tvComposeCount);
         etCompose = findViewById(R.id.etCompose);
-
         submitButtonClicked();
         textCountListener();
     }
 
-    public void textCountListener(){
+    public void textCountListener() {
         //listener to display the character count left as user types in new tweet
         etCompose.addTextChangedListener(new TextWatcher() {
             @Override
@@ -60,14 +58,15 @@ public class ComposeActivity extends AppCompatActivity {
             }
         });
     }
-    public void submitButtonClicked(){
+
+    public void submitButtonClicked() {
         btnCompose.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 String description = etCompose.getText().toString();
                 //check that question is not empty
                 if (description.isEmpty()) {
-                    Toast.makeText(ComposeActivity.this,  "Description cannot be empty", Toast.LENGTH_LONG).show();
+                    Toast.makeText(ComposeActivity.this, "Description cannot be empty", Toast.LENGTH_LONG).show();
                     return;
                 }
                 ParseUser currentUser = ParseUser.getCurrentUser();
@@ -81,14 +80,14 @@ public class ComposeActivity extends AppCompatActivity {
     }
 
     private Question saveQuestion(String description, ParseUser currentUser) {
-        Question question =  new Question();
+        Question question = new Question();
         question.setDescription(description);
         question.setUser(currentUser);
         question.saveInBackground(new SaveCallback() {
             @Override
             public void done(ParseException e) {
                 //check if save succesfully
-                if(e != null){
+                if (e != null) {
                     Toast.makeText(ComposeActivity.this, "Error while saving!", Toast.LENGTH_LONG).show();
                     return;
                 }
