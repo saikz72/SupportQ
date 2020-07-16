@@ -2,7 +2,6 @@ package com.example.supportq.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -11,15 +10,21 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.example.supportq.R;
+import com.google.android.material.textfield.TextInputLayout;
 import com.parse.LogInCallback;
 import com.parse.ParseException;
 import com.parse.ParseFacebookUtils;
 import com.parse.ParseUser;
 
+import timber.log.Timber;
+
 
 public class LoginActivity extends AppCompatActivity {
     private Button btnLogin;
     private Button btnSignUp;
+    private Button btnSignIn;
+    private TextInputLayout username_input_text;
+    private TextInputLayout password_input_text;
     public static final String TAG = "LoginActivity";
 
     @Override
@@ -34,11 +39,39 @@ public class LoginActivity extends AppCompatActivity {
         setViews();
         loginButtonListener();
         SignUpButtonListener();
+        signInButtonClicked();
     }
 
     public void setViews() {
         btnLogin = findViewById(R.id.btnLogin);
         btnSignUp = findViewById(R.id.btnSignUp);
+        btnSignIn = findViewById(R.id.btnSignIn);
+        username_input_text = findViewById(R.id.username_text_input);
+        password_input_text = findViewById(R.id.password_text_input);
+    }
+
+    //listener for user sign in with existing credentials
+    public void signInButtonClicked(){
+        btnSignIn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String username = username_input_text.getEditText().getText().toString();
+                String password = password_input_text.getEditText().getText().toString();
+                signInExistingUser(username, password);
+            }
+        });
+    }
+
+    private void signInExistingUser(final String username, String password) {
+        ParseUser.logInInBackground(username, password, new LogInCallback() {
+            @Override
+            public void done(ParseUser user, ParseException e) {
+                if(e != null){
+                    return;
+                }
+                goToMainActivity();
+            }
+        });
     }
 
     public void loginButtonListener() {
