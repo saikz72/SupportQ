@@ -4,12 +4,12 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
 import com.example.supportq.R;
+import com.example.supportq.Validator;
 import com.google.android.material.textfield.TextInputLayout;
 import com.parse.LogInCallback;
 import com.parse.ParseException;
@@ -48,23 +48,25 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     //listener for user sign in with existing credentials
-    public void signInButtonClicked(){
+    public void signInButtonClicked() {
         btnSignIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 String username = username_input_text.getEditText().getText().toString();
                 String password = password_input_text.getEditText().getText().toString();
-                signInExistingUser(username, password);
+                if (Validator.validateUser(password_input_text, username_input_text, password, username))
+                    signInExistingUser(username, password);
             }
         });
     }
 
-    private void signInExistingUser(final String username, String password) {
+    private void signInExistingUser(final String username, final String password) {
         ParseUser.logInInBackground(username, password, new LogInCallback() {
             @Override
             public void done(ParseUser user, ParseException e) {
-                if(e != null){
-                    password_input_text.setError("F");
+                if (e != null) {
+                    username_input_text.setError("incorrect username");
+                    password_input_text.setError("incorrect password");
                     return;
                 }
                 goToMainActivity();
@@ -80,11 +82,10 @@ public class LoginActivity extends AppCompatActivity {
                     @Override
                     public void done(ParseUser user, ParseException e) {
                         if (e != null) {
-                            Log.e(TAG, "done: ", e);
                             Toast.makeText(LoginActivity.this, "something went wrong", Toast.LENGTH_SHORT).show();
                             btnLogin.setVisibility(View.INVISIBLE);
                         } else if (user == null) {
-                            Toast.makeText(LoginActivity.this, "user cancelled facebook login", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(LoginActivity.this, "cancelled facebook login", Toast.LENGTH_SHORT).show();
                             btnLogin.setVisibility(View.VISIBLE);
                         }
                         logUser(user);
@@ -95,7 +96,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void logUser(ParseUser user) {
-        if(user == null){
+        if (user == null) {
             return;
         }
         if (user.isNew()) {
@@ -107,6 +108,7 @@ public class LoginActivity extends AppCompatActivity {
         }
         finish();
     }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
