@@ -16,9 +16,6 @@ import com.parse.ParseException;
 import com.parse.ParseFacebookUtils;
 import com.parse.ParseUser;
 
-import timber.log.Timber;
-
-
 public class LoginActivity extends AppCompatActivity {
     private Button btnLogin;
     private Button btnSignUp;
@@ -67,6 +64,7 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void done(ParseUser user, ParseException e) {
                 if(e != null){
+                    password_input_text.setError("F");
                     return;
                 }
                 goToMainActivity();

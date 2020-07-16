@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">SupportQ</string>
-    <string name="password">password</string>
-    <string name="username">username</string>
+    <string name="Password">password</string>
+    <string name="Username">Username</string>
     <string name="facebook_app_id">875574549619706</string>
     <string name="fb_login_protocol_scheme">fb875574549619706</string>
     <!-- TODO: Remove or change this placeholder text -->
