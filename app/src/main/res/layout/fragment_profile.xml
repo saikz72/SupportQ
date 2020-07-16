@@ -59,7 +59,7 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvQuestions"
         android:layout_width="@dimen/profile_recycler_width"
-        android:layout_height="@dimen/profile_recycler_heigt"
+        android:layout_height="@dimen/profile_recycler_height"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
