@@ -23,26 +23,26 @@ Inspired by the codepath in-class support queue (hence the name), this app lets 
 
 **Required Must-have Stories**
 
-* user can create or log into an account
-* user can post and delete their question
-* user can tap on a question and be redirect to a detailed screen
-* user can answer a question
-* user can view a feed of questions
-* user can edit there profile picture by using the camera/gallery to take a picture
-* current user is persisted on app restart
+- [ ] user can create or log into an account
+- [ ] user can post and delete their question
+- [ ] user can tap on a question and be redirect to a detailed screen
+- [ ] user can answer a question
+- [ ] user can view a feed of questions
+- [ ] user can edit there profile picture by using the camera/gallery to take a picture
+- [ ] current user is persisted on app restart
 
 **Optional Nice-to-have Stories**
 
-* user gets notified when their question is answered
-* pull to refresh home feed
-* user can tap on a notification and be redirected to a detail screen
-* user can turn off notification on the profile screen
-* user can search through the feed for a specific question/concern
-* Integration of facebook sdk
-* User can load more posts once he or she reaches the bottom of the feed using endless scrolling.
-* user can search through feed and inbox for a specific post
-* Show the username and creation time for each post
-* User can like a post
+- [ ] user gets notified when their question is answered
+- [ ] pull to refresh home feed
+- [ ] user can tap on a notification and be redirected to a detail screen
+- [ ] user can turn off notification on the profile screen
+- [ ] user can search through the feed for a specific question/concern
+- [ ] Integration of facebook sdk
+- [ ] User can load more posts once he or she reaches the bottom of the feed using endless scrolling.
+- [ ] user can search through feed and inbox for a specific post
+- [ ] Show the username and creation time for each post
+- [ ] User can like a post
 
 
 ### 2. Screen Archetypes
