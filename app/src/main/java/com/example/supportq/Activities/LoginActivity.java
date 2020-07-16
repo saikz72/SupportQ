@@ -44,7 +44,6 @@ public class LoginActivity extends AppCompatActivity {
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                btnLogin.setVisibility(View.INVISIBLE);
                 ParseFacebookUtils.logInWithReadPermissionsInBackground(LoginActivity.this, null, new LogInCallback() {
                     @Override
                     public void done(ParseUser user, ParseException e) {
