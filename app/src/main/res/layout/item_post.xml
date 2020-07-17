@@ -5,9 +5,10 @@
     android:id="@+id/card"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="10dp"
+    android:layout_margin="5dp"
     card_view:cardCornerRadius="8dp"
     card_view:cardElevation="8dp"
+    android:background="@color/colorAccent"
     app:cardBackgroundColor="@color/compose_backgroung_color">
 
     <androidx.constraintlayout.widget.ConstraintLayout
