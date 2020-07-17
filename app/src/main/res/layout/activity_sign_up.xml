@@ -5,15 +5,22 @@
     android:layout_height="match_parent"
     android:background="@color/login_background_color"
     android:orientation="vertical"
-    android:paddingTop="200dp"
+    android:paddingTop="100dp"
     android:paddingHorizontal="10dp">
-
+    <ImageView
+        android:id="@+id/logo_image"
+        android:layout_width="@dimen/login_image_width"
+        android:layout_height="@dimen/login_image_height"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="50dp"
+        android:src="@drawable/logo" />
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/etUsername"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/Username"
+        app:startIconDrawable="@drawable/ic_baseline_person_24"
         app:errorEnabled="true">
 
         <com.google.android.material.textfield.TextInputEditText
@@ -25,6 +32,7 @@
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/etPassword"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        app:startIconDrawable="@drawable/ic_baseline_vpn_key_24"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/Password"
@@ -42,7 +50,7 @@
         android:layout_gravity="center_horizontal"
         android:layout_width="@dimen/sign_up_button_width"
         android:layout_height="@dimen/sign_up_button_height"
-        android:background="@color/login_button_color"
+        android:background="@drawable/custom_button"
         android:text="@string/sign_up"
         android:textAllCaps="false"
         android:layout_marginTop="10dp"

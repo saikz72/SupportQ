@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.supportq.Models.User;
@@ -14,6 +13,7 @@ import com.example.supportq.R;
 import com.facebook.AccessToken;
 import com.facebook.GraphRequest;
 import com.facebook.GraphResponse;
+import com.google.android.material.textfield.TextInputLayout;
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseQuery;
@@ -26,7 +26,7 @@ import org.json.JSONObject;
 import java.util.List;
 
 public class RegistrationActivity extends AppCompatActivity {
-    private EditText etUsername;
+    private TextInputLayout etUsername;
     private Button btnRegister;
     private String fullName;
 
@@ -46,7 +46,7 @@ public class RegistrationActivity extends AppCompatActivity {
     }
 
     private void registerUser() {
-        String username = etUsername.getText().toString();
+        String username = etUsername.getEditText().getText().toString();
         if (username.equals("")) {
             Toast.makeText(this, "Username cannot be empty", Toast.LENGTH_SHORT).show();
             return;

@@ -1,38 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Activities.RegistrationActivity">
-    <EditText
-        android:id="@+id/etUsername"
-        android:layout_width="@dimen/compose_username_height"
+    android:background="@color/login_background_color"
+    android:orientation="vertical"
+    tools:context=".Activities.RegistrationActivity"
+    android:padding="10dp">
+    <TextView
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="96dp"
-        android:layout_marginEnd="24dp"
-        android:hint="@string/prompt_email"
-        android:inputType="textEmailAddress"
-        android:selectAllOnFocus="true"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:textAllCaps="false"
+        android:textAlignment="center"
+        android:text="@string/set_up_username"
+        android:textSize="20dp"
+        android:fontFamily="sans-serif-condensed"
+        android:layout_marginTop="200dp"
+        android:layout_marginBottom="40dp"/>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/etUsername"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/Username"
+        app:errorEnabled="true"
+        app:startIconDrawable="@drawable/ic_baseline_person_24">
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="text" />
+    </com.google.android.material.textfield.TextInputLayout>
 
     <Button
         android:id="@+id/btnRegister"
         android:layout_width="@dimen/register_button_width"
         android:layout_height="@dimen/register_button_height"
-        android:layout_gravity="start"
-        android:layout_marginStart="48dp"
-        android:layout_marginTop="108dp"
-        android:layout_marginEnd="48dp"
-        android:background="#445F9E"
         android:text="@string/register"
+        android:layout_gravity="center_horizontal"
         android:textAllCaps="false"
         android:textColor="#f9fafc"
+        android:background="@drawable/custom_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/etUsername" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>
