@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.example.supportq.Activities.ComposeActivity;
@@ -34,6 +35,7 @@ public class HomeFragment extends Fragment {
     private QuestionAdapter questionAdapter;
     private List<Question> allQuestions;
     private FloatingActionButton floatingActionButton;
+    ProgressBar progressBar;
     public final int REQUEST_CODE = 10;
 
     public HomeFragment() {
@@ -52,6 +54,7 @@ public class HomeFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         rvQuestion = view.findViewById(R.id.rvQuestions);
         floatingActionButton = view.findViewById(R.id.floating_action_button);
+        progressBar = view.findViewById(R.id.pbLoading);
         allQuestions = new ArrayList<>();
         questionAdapter = new QuestionAdapter(allQuestions, getContext());
         //set the adapter to the rv
@@ -84,6 +87,7 @@ public class HomeFragment extends Fragment {
     }
 
     private void queryPost() {
+        progressBar.setVisibility(ProgressBar.VISIBLE);
         ParseQuery<Question> query = ParseQuery.getQuery(Question.class);
         query.addDescendingOrder(Question.KEY_CREATED_AT);  //TODO : update how the questions are ordered
         query.findInBackground(new FindCallback<Question>() {
@@ -95,6 +99,7 @@ public class HomeFragment extends Fragment {
                 }
                 questionAdapter.clear();
                 questionAdapter.addAll(questions);
+                progressBar.setVisibility(ProgressBar.GONE);
             }
         });
     }

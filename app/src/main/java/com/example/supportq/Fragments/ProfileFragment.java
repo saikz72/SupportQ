@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -37,6 +38,7 @@ public class ProfileFragment extends Fragment {
     private TextView tvUsername;
     private Button btnEditProfile;
     private Button btnLogOut;
+    private ProgressBar progressBar;
     private ProfileAdapter profileAdapter;
     private List<Question> allQuestions;
     private RecyclerView rvQuestion;
@@ -85,6 +87,7 @@ public class ProfileFragment extends Fragment {
         tvUsername = view.findViewById(R.id.tvUsername);
         btnEditProfile = view.findViewById(R.id.btnEditProfile);
         btnLogOut = view.findViewById(R.id.btnLogOut);
+        progressBar = view.findViewById(R.id.pbLoading);
     }
 
     //edit profile
@@ -112,6 +115,7 @@ public class ProfileFragment extends Fragment {
     }
 
     private void queryPost() {
+        progressBar.setVisibility(View.VISIBLE);
         ParseQuery<Question> query = ParseQuery.getQuery(Question.class);
         query.addDescendingOrder(Question.KEY_CREATED_AT);  //TODO : update how the questions are ordered
         query.whereEqualTo(Question.KEY_USER, ParseUser.getCurrentUser());
@@ -124,6 +128,7 @@ public class ProfileFragment extends Fragment {
                 }
                 profileAdapter.clear();
                 profileAdapter.addAll(questions);
+                progressBar.setVisibility(View.GONE);
             }
         });
     }
