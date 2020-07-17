@@ -20,7 +20,6 @@ import org.parceler.Parcels;
 public class ComposeActivity extends AppCompatActivity {
     private Button btnCompose;
     private EditText etCompose;
-    public static final int MAX_QUESTION_LENGTH = 2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,18 +36,30 @@ public class ComposeActivity extends AppCompatActivity {
             public void onClick(View view) {
                 String description = etCompose.getText().toString();
                 //check that question is not empty
-                if (description.isEmpty()) {
-                    Toast.makeText(ComposeActivity.this, "Description cannot be empty", Toast.LENGTH_LONG).show();
-                    return;
+                if (validatePost(description)) {
+                    ParseUser currentUser = ParseUser.getCurrentUser();
+                    Question question = saveQuestion(description, currentUser);
+                    Intent intent = new Intent();
+                    intent.putExtra("compose", Parcels.wrap(question));
+                    setResult(RESULT_OK, intent);
+                    finish();
                 }
-                ParseUser currentUser = ParseUser.getCurrentUser();
-                Question question = saveQuestion(description, currentUser);
-                Intent intent = new Intent();
-                intent.putExtra("compose", Parcels.wrap(question));
-                setResult(RESULT_OK, intent);
-                finish();
             }
         });
+    }
+
+    private boolean validatePost(String description) {
+        if (description.isEmpty()) {
+            etCompose.setError("question cannot be empty");
+            etCompose.setBackgroundResource(R.drawable.error_background);
+            return false;
+        }
+        if (description.length() < 5){
+            etCompose.setError("question is too short");
+            etCompose.setBackgroundResource(R.drawable.error_background);
+            return false;
+        }
+        return true;
     }
 
     private Question saveQuestion(String description, ParseUser currentUser) {
