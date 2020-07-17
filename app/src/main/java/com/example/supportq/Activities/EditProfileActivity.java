@@ -11,13 +11,13 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.supportq.R;
+import com.example.supportq.Validator;
 import com.google.android.material.textfield.TextInputLayout;
 import com.parse.ParseFile;
 import com.parse.ParseUser;
@@ -77,7 +77,6 @@ public class EditProfileActivity extends AppCompatActivity {
         // wrap File object into a content provider
         Uri fileProvider = FileProvider.getUriForFile(EditProfileActivity.this, "com.codepath.fileprovider.supportq", photoFile);
         intent.putExtra(MediaStore.EXTRA_OUTPUT, fileProvider);
-
         // If you call startActivityForResult() using an intent that no app can handle, your app will crash.
         // So as long as the result is not null, it's safe to use the intent.
         if (intent.resolveActivity(getPackageManager()) != null) {
@@ -88,12 +87,10 @@ public class EditProfileActivity extends AppCompatActivity {
 
     private File getPhotoFileUri(String photoFileName) {
         File mediaStorageDir = new File(getExternalFilesDir(Environment.DIRECTORY_PICTURES), TAG);
-
         // Create the storage directory if it does not exist
         if (!mediaStorageDir.exists() && !mediaStorageDir.mkdirs()) {
             Toast.makeText(this, "failed to create directory", Toast.LENGTH_SHORT).show();
         }
-
         // Return the file target for the photo based on filename
         File file = new File(mediaStorageDir.getPath() + File.separator + photoFileName);
         return file;
@@ -118,27 +115,30 @@ public class EditProfileActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 String username = etUsername.getEditText().getText().toString();
-                if (username.equals("")) {
-                    Toast.makeText(EditProfileActivity.this, "Username cannot be empty", Toast.LENGTH_SHORT).show();
-                    return;
+                if (isUsernameChangeValid(username)){
+                    saveChanges(currentUser, photoFile, username);
                 }
-                saveChanges(currentUser, photoFile, username);
             }
         });
     }
-
-    public void saveChanges(ParseUser currentUser, File pic, String username) {
-        //TODO --> user can choose not to change profile image
-        //breaks if profile picutre is not taken
-        currentUser.put("username", username);
-        if (pic == null) {
-            Log.d(TAG, "saveChanges: ddd");
-            finish();
-            return;
+        public boolean isUsernameChangeValid (String username){
+            if (!Validator.isUsernameLongEnough(username)) {
+                etUsername.setError("username needs to be at least 5 characters long");
+                return false;
+            }
+            return true;
         }
-        ParseFile parseFile = new ParseFile(pic);
-        currentUser.put("profilePicture", parseFile);
-        currentUser.saveInBackground();
-        finish();
+
+        public void saveChanges (ParseUser currentUser, File pic, String username){
+            //breaks if profile picutre is not taken
+            currentUser.put("username", username);
+            if (pic == null) {
+                finish();
+                return;
+            }
+            ParseFile parseFile = new ParseFile(pic);
+            currentUser.put("profilePicture", parseFile);
+            currentUser.saveInBackground();
+            finish();
+        }
     }
-}

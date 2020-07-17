@@ -10,7 +10,7 @@ public class Validator {
     }
 
     public static boolean isUsernameLongEnough(String name){
-        if(name.length() > 4)
+        if(name.length() > 5)
             return true;
         return false;
     }
