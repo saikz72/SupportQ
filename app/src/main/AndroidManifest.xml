@@ -13,9 +13,16 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Activities.ComposeActivity" />
-        <activity android:name=".Activities.RegistrationActivity" />
-        <activity android:name=".Activities.SignUpActivity" />
+        <activity
+            android:name=".Activities.ComposeActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activities.RegistrationActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activities.SignUpActivity"
+            android:screenOrientation="portrait" />
+
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="com.codepath.fileprovider.supportq"
@@ -26,9 +33,15 @@
                 android:resource="@xml/fileprovider" />
         </provider>
 
-        <activity android:name=".Activities.EditProfileActivity" />
-        <activity android:name=".Activities.MainActivity" />
-        <activity android:name=".Activities.LoginActivity">
+        <activity
+            android:name=".Activities.EditProfileActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activities.MainActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activities.LoginActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
