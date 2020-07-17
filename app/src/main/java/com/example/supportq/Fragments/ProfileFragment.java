@@ -65,6 +65,7 @@ public class ProfileFragment extends Fragment {
         //set the adapter to the rv
         rvQuestion.setAdapter(profileAdapter);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
+        rvQuestion.setHasFixedSize(true);
         //set the layout manager on the recycler view
         rvQuestion.setLayoutManager(linearLayoutManager);
         tvUsername.setText(ParseUser.getCurrentUser().getUsername());

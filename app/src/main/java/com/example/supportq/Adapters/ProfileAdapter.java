@@ -108,7 +108,6 @@ public class ProfileAdapter extends RecyclerView.Adapter<ProfileAdapter.ViewHold
 
     protected class ViewHolder extends RecyclerView.ViewHolder {
         private TextView tvDescription;
-        private CardView card;
         private ImageView ivLike;
         private TextView tvTimeStamp;
         private TextView tvLikeCount;
@@ -119,7 +118,6 @@ public class ProfileAdapter extends RecyclerView.Adapter<ProfileAdapter.ViewHold
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             tvDescription = itemView.findViewById(R.id.tvDescription);
-            card = itemView.findViewById(R.id.card);
             ivLike = itemView.findViewById(R.id.ivLike);
             ivReply = itemView.findViewById(R.id.ivReply);
             tvTimeStamp = itemView.findViewById(R.id.tvTimeStamp);
@@ -131,9 +129,6 @@ public class ProfileAdapter extends RecyclerView.Adapter<ProfileAdapter.ViewHold
         public void bind(Question question) throws ParseException {
             String username = question.getUser().fetch().getUsername();
             tvDescription.setText(question.getDescription());
-            card.setCardBackgroundColor(Color.parseColor("#E6E6E6"));   //TODO --> change color to look nicer
-            card.setMaxCardElevation(0.0f);
-            card.setRadius(5.0f);
             deleteButtonClicked(question);
             String timeAgo = question.getCreatedTimeAgo();
             tvTimeStamp.setText(timeAgo);

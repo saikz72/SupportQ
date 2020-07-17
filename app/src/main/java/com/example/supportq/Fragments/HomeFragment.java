@@ -62,6 +62,7 @@ public class HomeFragment extends Fragment {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         //set the layout manager on the recycler view
         rvQuestion.setLayoutManager(linearLayoutManager);
+        rvQuestion.setHasFixedSize(true);
         floatingActionButtonClicked();
         queryPost();
     }
@@ -90,6 +91,7 @@ public class HomeFragment extends Fragment {
         progressBar.setVisibility(ProgressBar.VISIBLE);
         ParseQuery<Question> query = ParseQuery.getQuery(Question.class);
         query.addDescendingOrder(Question.KEY_CREATED_AT);  //TODO : update how the questions are ordered
+        query.include(Question.KEY_USER);
         query.findInBackground(new FindCallback<Question>() {
             @Override
             public void done(List<Question> questions, ParseException e) {

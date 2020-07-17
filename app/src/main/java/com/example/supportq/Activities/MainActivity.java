@@ -17,6 +17,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 public class MainActivity extends AppCompatActivity {
     private BottomNavigationView bottomNavigationView;
     final FragmentManager fragmentManager = getSupportFragmentManager();
+    public final static int MAX_NUMBER_POST = 10;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

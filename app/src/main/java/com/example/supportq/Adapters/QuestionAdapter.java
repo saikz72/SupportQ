@@ -100,7 +100,6 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHo
 
     protected class ViewHolder extends RecyclerView.ViewHolder {
         private TextView tvDescription;
-        private CardView card;
         private ImageView ivLike;
         private TextView tvTimeStamp;
         private TextView tvLikeCount;
@@ -111,7 +110,6 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHo
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             tvDescription = itemView.findViewById(R.id.tvDescription);
-            card = itemView.findViewById(R.id.card);
             ivLike = itemView.findViewById(R.id.ivLike);
             ivReply = itemView.findViewById(R.id.ivReply);
             tvTimeStamp = itemView.findViewById(R.id.tvTimeStamp);
@@ -123,9 +121,6 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHo
         public void bind(Question question) throws ParseException {
             String username = question.getUser().fetch().getUsername();
             tvDescription.setText(question.getDescription());
-            card.setCardBackgroundColor(Color.parseColor("#E6E6E6"));
-            card.setMaxCardElevation(0.0f);
-            card.setRadius(5.0f);
           //TODO --> TIME STAMP
             tvUsername.setText(username);
             ivDelete.setVisibility(View.GONE);      //remove delete key on home feed
