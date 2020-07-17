@@ -77,7 +77,7 @@ public class HomeFragment extends Fragment {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == REQUEST_CODE && resultCode == Activity.RESULT_OK) {
             Question question = Parcels.unwrap(data.getParcelableExtra("compose"));
-            allQuestions.add( question);
+            allQuestions.add( 0, question);
             questionAdapter.notifyItemInserted(0);
             rvQuestion.scrollToPosition(0);
         }

@@ -22,41 +22,16 @@ import org.parceler.Parcels;
 
 public class ComposeActivity extends AppCompatActivity {
     private Button btnCompose;
-    private TextView tvComposeCount;
     private EditText etCompose;
-    public static final int MAX_QUESTION_LENGTH = 500;
+    public static final int MAX_QUESTION_LENGTH = 2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_compose);
         btnCompose = findViewById(R.id.btnCompose);
-        tvComposeCount = findViewById(R.id.tvComposeCount);
         etCompose = findViewById(R.id.etCompose);
         submitButtonClicked();
-        textCountListener();
-    }
-
-    public void textCountListener() {
-        //listener to display the character count left as user types in new tweet
-        etCompose.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                String text = etCompose.getText().toString();
-                int textCount = MAX_QUESTION_LENGTH - text.length();
-                tvComposeCount.setText(textCount + "/" + MAX_QUESTION_LENGTH);
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-            }
-        });
     }
 
     public void submitButtonClicked() {

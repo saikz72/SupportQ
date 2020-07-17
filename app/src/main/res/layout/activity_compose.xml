@@ -1,43 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/compose_backgroung_color"
+    android:paddingHorizontal="20dp"
+    android:paddingTop="100dp">
+
 
     <EditText
         android:id="@+id/etCompose"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginStart="7dp"
-        android:layout_marginTop="53dp"
-        android:layout_marginEnd="2dp"
+        android:background="@drawable/rounded_edit_text"
         android:ems="10"
-        android:gravity="start|top"
+        android:textAlignment="center"
         android:hint="@string/question_hint"
         android:inputType="textMultiLine"
-        android:minLines="5" />
+        android:minLines="5"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/btnCompose"
         android:layout_width="wrap_content"
         android:layout_height="@dimen/compose_button_submit"
-        android:layout_below="@+id/etCompose"
-        android:layout_alignParentEnd="true"
-        android:layout_marginTop="5dp"
-        android:layout_marginEnd="5dp"
-        android:background="@color/login_button_color"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/custom_button"
         android:text="@string/post_question"
-        android:textColor="@color/login_button_textcolor" />
+        android:textColor="@color/login_button_textcolor"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/etCompose" />
 
-    <TextView
-        android:id="@+id/tvComposeCount"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/etCompose"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="20dp"
-        android:layout_toStartOf="@+id/btnCompose"
-        android:text="0" />
-</RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

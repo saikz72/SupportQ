@@ -7,13 +7,14 @@
     android:layout_height="wrap_content"
     android:layout_margin="10dp"
     card_view:cardCornerRadius="8dp"
-    card_view:cardElevation="8dp">
+    card_view:cardElevation="8dp"
+    app:cardBackgroundColor="@color/compose_backgroung_color">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_margin="5dp"
-        android:background="@drawable/border">
+        android:background="@drawable/rounded_edit_text">
 
         <TextView
             android:id="@+id/tvDescription"

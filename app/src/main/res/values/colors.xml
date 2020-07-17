@@ -7,4 +7,5 @@
     <color name="login_button_textcolor">#FFFFFF</color>
     <color name="login_button_color">#445F9E</color>
     <color name="login_background_color">#eaad75</color>
+    <color name="compose_backgroung_color">#eaad75</color>
 </resources>
