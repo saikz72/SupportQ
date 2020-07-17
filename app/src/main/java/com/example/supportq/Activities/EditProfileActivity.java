@@ -14,11 +14,11 @@ import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.supportq.R;
+import com.google.android.material.textfield.TextInputLayout;
 import com.parse.ParseFile;
 import com.parse.ParseUser;
 
@@ -27,7 +27,7 @@ import java.io.File;
 public class EditProfileActivity extends AppCompatActivity {
     private Button btnSubmit;
     private Button btnCaptureImage;
-    private EditText etUsername;
+    private TextInputLayout etUsername;
     private ImageView ivProfilePicture;
 
     public static final String TAG = "EditProfileActivity";
@@ -56,7 +56,7 @@ public class EditProfileActivity extends AppCompatActivity {
 
     public void bindViews() {
         ParseUser currentUser = ParseUser.getCurrentUser();
-        etUsername.setText(currentUser.getUsername());      //user's current name;
+        etUsername.getEditText().setText(currentUser.getUsername());      //user's current name;
     }
 
     //capture image
@@ -117,7 +117,7 @@ public class EditProfileActivity extends AppCompatActivity {
         btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String username = etUsername.getText().toString();
+                String username = etUsername.getEditText().getText().toString();
                 if (username.equals("")) {
                     Toast.makeText(EditProfileActivity.this, "Username cannot be empty", Toast.LENGTH_SHORT).show();
                     return;
