@@ -15,14 +15,13 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
-
 import com.example.supportq.R;
 import com.example.supportq.Validator;
 import com.google.android.material.textfield.TextInputLayout;
 import com.parse.ParseFile;
 import com.parse.ParseUser;
-
 import java.io.File;
+
 
 public class EditProfileActivity extends AppCompatActivity {
     private Button btnSubmit;

@@ -23,7 +23,6 @@ public class LoginActivity extends AppCompatActivity {
     private Button btnSignIn;
     private TextInputLayout username_input_text;
     private TextInputLayout password_input_text;
-    public static final String TAG = "LoginActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,6 +62,7 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
+    //existing user
     private void signInExistingUser(final String username, final String password) {
         ParseUser.logInInBackground(username, password, new LogInCallback() {
             @Override

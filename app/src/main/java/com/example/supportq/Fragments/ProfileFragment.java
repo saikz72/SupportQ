@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -72,11 +73,10 @@ public class ProfileFragment extends Fragment {
         try {
             profilePicture = ParseUser.getCurrentUser().fetch().getParseFile(("profilePicture"));
         } catch (ParseException e) {
-            e.printStackTrace();
+            Log.e("TAG", " error", e);
         }
         if (profilePicture != null)
             Glide.with(getContext()).load(profilePicture.getUrl()).into(ivProfilePicture);
-        // TODO -- redesign profile layout
         editProfileButtonClicked();
         logoutButtonClicked();
         queryPost();
