@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.example.supportq.Models.ProgressIndicator;
 import com.example.supportq.R;
 import com.example.supportq.Validator;
 import com.google.android.material.textfield.TextInputLayout;
@@ -34,7 +35,7 @@ public class LoginActivity extends AppCompatActivity {
             goToMainActivity();
         }
         setViews();
-        loginButtonListener();
+        faceBookLogin();
         SignUpButtonListener();
         signInButtonClicked();
     }
@@ -54,8 +55,10 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View view) {
                 String username = username_input_text.getEditText().getText().toString();
                 String password = password_input_text.getEditText().getText().toString();
-                if (Validator.validateUser(password_input_text, username_input_text, password, username))
+                if (Validator.validateUser(password_input_text, username_input_text, password, username)){
+                    ProgressIndicator.showMessage(LoginActivity.this);
                     signInExistingUser(username, password);
+                }
             }
         });
     }
@@ -65,16 +68,18 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void done(ParseUser user, ParseException e) {
                 if (e != null) {
+                    ProgressIndicator.hideMessage(LoginActivity.this);
                     username_input_text.setError("incorrect username");
                     password_input_text.setError("incorrect password");
                     return;
                 }
                 goToMainActivity();
+                ProgressIndicator.hideMessage(LoginActivity.this);
             }
         });
     }
 
-    public void loginButtonListener() {
+    public void faceBookLogin() {
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

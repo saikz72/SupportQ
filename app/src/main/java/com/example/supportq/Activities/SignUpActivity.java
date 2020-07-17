@@ -8,6 +8,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.supportq.Models.ProgressIndicator;
 import com.example.supportq.R;
 import com.example.supportq.Validator;
 import com.google.android.material.textfield.TextInputLayout;
@@ -45,6 +46,7 @@ public class SignUpActivity extends AppCompatActivity {
                     ParseUser user = new ParseUser();
                     user.setPassword(password);
                     user.setUsername(username);
+                    ProgressIndicator.showMessage(SignUpActivity.this);
                     signUp(username, password, user);
                 }
             }
@@ -56,12 +58,14 @@ public class SignUpActivity extends AppCompatActivity {
             @Override
             public void done(ParseException e) {
                 if (e != null) {
+                    ProgressIndicator.hideMessage(SignUpActivity.this);
                     Toast.makeText(SignUpActivity.this, "Username already exist, choose a different username", Toast.LENGTH_SHORT).show();
                     return;
                 }
                 etPassword.setVisibility(View.INVISIBLE);
                 etUsername.setVisibility(View.INVISIBLE);
                 goMainActivity();
+                ProgressIndicator.hideMessage(SignUpActivity.this);
             }
         });
     }
