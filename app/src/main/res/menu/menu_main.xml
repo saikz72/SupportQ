@@ -1,0 +1,18 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/action_sort_like"
+        app:showAsAction="never"
+        android:title="likesort">
+    </item>
+    <item
+        android:id="@+id/action_sort_reply"
+        app:showAsAction="never"
+        android:title="replysort">
+    </item>
+    <item
+        android:id="@+id/action_sort_verify"
+        app:showAsAction="never"
+        android:title="verifysort">
+    </item>
+</menu>
