@@ -23,4 +23,5 @@
     <string name="favs">Favs</string>
     <string name="description">Question details</string>
     <string name="timeStamp">Relative timestamp</string>
+    <string name="fullname">Full Name</string>
 </resources>

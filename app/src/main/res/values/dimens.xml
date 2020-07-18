@@ -32,9 +32,8 @@
 
     <!--login_activity dimensions.-->
     <dimen name="login_button_height">35dp</dimen>
-    <dimen name="login_button_width">325dp</dimen>
-    <dimen name="sign_in_width">77dp</dimen>
-    <dimen name="sign_in_height">32dp</dimen>
+    <dimen name="sign_in_width">300dp</dimen>
+    <dimen name="sign_in_height">40dp</dimen>
     <dimen name="login_image_width">150dp</dimen>
     <dimen name="login_image_height">150dp</dimen>
 
@@ -44,8 +43,8 @@
     <dimen name="register_button_height">47dp</dimen>
 
     <!--sign_up_activity dimensions.-->
-    <dimen name="sign_up_button_width">169dp</dimen>
-    <dimen name="sign_up_button_height">41dp</dimen>
+    <dimen name="sign_up_button_width">300dp</dimen>
+    <dimen name="sign_up_button_height">40dp</dimen>
 
     <!--item_post dimensions.-->
     <dimen name="item_description_height">45dp</dimen>
