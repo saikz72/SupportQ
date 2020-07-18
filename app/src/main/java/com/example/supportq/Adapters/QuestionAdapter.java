@@ -131,9 +131,14 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHo
             if (profilePhoto != null)
                 Glide.with(context).load(profilePhoto.getUrl()).transform(new CircleCrop()).into(ivProfilePicture);
             tvUsername.setText(username);
-            ivDelete.setVisibility(View.GONE);      //remove delete key on home feed
             setButton(ivLike, question.isLiked(), R.drawable.ic_vector_heart_stroke, R.drawable.ic_vector_heart, R.color.likedRed);
             setLikeText(question, tvLikeCount);
+            if(question.getUser().getObjectId().equals(ParseUser.getCurrentUser().getObjectId())){
+                ivDelete.setVisibility(View.VISIBLE);
+                deleteButtonClicked(question);
+            }else{
+                ivDelete.setVisibility(View.INVISIBLE); //invisble to keep the space even
+            }
         }
 
         public void replyButtonClicked() {
@@ -145,7 +150,27 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHo
             });
         }
 
+        //listener for delete button
+        public void deleteButtonClicked(final Question question) {
+            ivDelete.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    int position = getAdapterPosition();
+                    try {
+                        removeAt(question, position);
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
+                }
+            });
+        }
     }
-
+    // Removes question at this position
+    public void removeAt(Question question, int position) throws ParseException {
+        allQuestions.remove(position);
+        notifyItemRemoved(position);
+        question.delete();
+        question.saveInBackground();
+    }
 
 }
