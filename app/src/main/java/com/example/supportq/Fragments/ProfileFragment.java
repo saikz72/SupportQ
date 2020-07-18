@@ -20,6 +20,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.bitmap.CircleCrop;
 import com.example.supportq.Activities.EditProfileActivity;
 import com.example.supportq.Activities.LoginActivity;
 import com.example.supportq.Adapters.ProfileAdapter;
@@ -76,7 +77,7 @@ public class ProfileFragment extends Fragment {
             Log.e("TAG", " error", e);
         }
         if (profilePicture != null)
-            Glide.with(getContext()).load(profilePicture.getUrl()).into(ivProfilePicture);
+            Glide.with(getContext()).load(profilePicture.getUrl()).transform(new CircleCrop()).into(ivProfilePicture);
         editProfileButtonClicked();
         logoutButtonClicked();
         queryPost();

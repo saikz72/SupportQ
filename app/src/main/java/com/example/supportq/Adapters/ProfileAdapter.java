@@ -14,9 +14,13 @@ import androidx.cardview.widget.CardView;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.bitmap.CircleCrop;
 import com.example.supportq.Models.Question;
+import com.example.supportq.Models.User;
 import com.example.supportq.R;
 import com.parse.ParseException;
+import com.parse.ParseFile;
 import com.parse.ParseUser;
 
 import java.util.List;
@@ -114,6 +118,8 @@ public class ProfileAdapter extends RecyclerView.Adapter<ProfileAdapter.ViewHold
         private ImageView ivReply;
         private TextView tvUsername;
         private ImageView ivDelete;
+        private ImageView ivProfilePicture;
+        private ImageView ivMedia;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -124,6 +130,8 @@ public class ProfileAdapter extends RecyclerView.Adapter<ProfileAdapter.ViewHold
             tvLikeCount = itemView.findViewById(R.id.tvLikeCount);
             tvUsername = itemView.findViewById(R.id.tvUsername);
             ivDelete = itemView.findViewById(R.id.ivDelete);
+            ivProfilePicture = itemView.findViewById(R.id.ivProfilePicture);
+            ivMedia = itemView.findViewById(R.id.ivMedia);
         }
 
         public void bind(Question question) throws ParseException {
@@ -133,6 +141,9 @@ public class ProfileAdapter extends RecyclerView.Adapter<ProfileAdapter.ViewHold
             String timeAgo = question.getCreatedTimeAgo();
             tvTimeStamp.setText(timeAgo);
             tvUsername.setText(username);
+            ParseFile profilePhoto = question.getUser().getParseFile(User.KEY_PROFILE_PICTURE);
+            if (profilePhoto != null)
+                Glide.with(context).load(profilePhoto.getUrl()).transform(new CircleCrop()).into(ivProfilePicture);
             setButton(ivLike, question.isLiked(),
                     R.drawable.ic_vector_heart_stroke, R.drawable.ic_vector_heart, R.color.likedRed);
             setLikeText(question, tvLikeCount);
