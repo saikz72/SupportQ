@@ -1,7 +1,6 @@
 package com.example.supportq.Adapters;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,10 +9,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.cardview.widget.CardView;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.example.supportq.Models.Question;
 import com.example.supportq.R;
 import com.parse.ParseException;
@@ -82,8 +79,8 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHo
 
     private void setLikeText(Question post, TextView view) {
         int likeCount = post.getLikeCount();
-        if (likeCount == 1) view.setText(String.format("%d like", post.getLikeCount()));
-        else view.setText(String.format("%d likes", post.getLikeCount()));
+        if (likeCount == 1) view.setText(String.format("%d", post.getLikeCount()));
+        else view.setText(String.format("%d", post.getLikeCount()));
     }
 
     // Clean all elements of the recycler
@@ -106,6 +103,7 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHo
         private ImageView ivReply;
         private TextView tvUsername;
         private ImageView ivDelete;
+        private ImageView ivMedia;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -116,15 +114,16 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHo
             tvLikeCount = itemView.findViewById(R.id.tvLikeCount);
             tvUsername = itemView.findViewById(R.id.tvUsername);
             ivDelete = itemView.findViewById(R.id.ivDelete);
+            ivMedia = itemView.findViewById(R.id.ivMedia);
         }
 
         public void bind(Question question) throws ParseException {
             String username = question.getUser().fetch().getUsername();
             tvDescription.setText(question.getDescription());
-          //TODO --> TIME STAMP
+            //TODO --> TIME STAMP
             tvUsername.setText(username);
             ivDelete.setVisibility(View.GONE);      //remove delete key on home feed
-            setButton(ivLike, question.isLiked(),R.drawable.ufi_heart, R.drawable.ufi_heart_active, R.color.likedRed);
+            setButton(ivLike, question.isLiked(), R.drawable.ufi_heart, R.drawable.ufi_heart_active, R.color.likedRed);
             setLikeText(question, tvLikeCount);
         }
 
