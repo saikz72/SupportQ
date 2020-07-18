@@ -77,13 +77,13 @@ public class ProfileAdapter extends RecyclerView.Adapter<ProfileAdapter.ViewHold
     // sets the color of a button, depending on whether it is active
     private void setButton(ImageView iv, boolean isActive, int strokeResId, int fillResId, int activeColor) {
         iv.setImageResource(isActive ? fillResId : strokeResId);
-        iv.setColorFilter(ContextCompat.getColor(context, isActive ? activeColor : R.color.likedRed));
+        iv.setColorFilter(ContextCompat.getColor(context, isActive ? activeColor : R.color.medium_gray));
     }
 
     private void setLikeText(Question post, TextView view) {
         int likeCount = post.getLikeCount();
-        if (likeCount == 1) view.setText(String.format("%d like", post.getLikeCount()));
-        else view.setText(String.format("%d likes", post.getLikeCount()));
+        if (likeCount == 1) view.setText(String.format("%d", post.getLikeCount()));
+        else view.setText(String.format("%d", post.getLikeCount()));
     }
 
     // Clean all elements of the recycler
@@ -134,7 +134,7 @@ public class ProfileAdapter extends RecyclerView.Adapter<ProfileAdapter.ViewHold
             tvTimeStamp.setText(timeAgo);
             tvUsername.setText(username);
             setButton(ivLike, question.isLiked(),
-                    R.drawable.ufi_heart, R.drawable.ufi_heart_active, R.color.likedRed);
+                    R.drawable.ic_vector_heart_stroke, R.drawable.ic_vector_heart, R.color.likedRed);
             setLikeText(question, tvLikeCount);
         }
 

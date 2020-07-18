@@ -20,4 +20,7 @@
     <string name="set_up_username">Set up your username</string>
     <string name="edit_profile_details">Edit profile</string>
     <string name="logout">Log out</string>
+    <string name="favs">Favs</string>
+    <string name="description">Question details</string>
+    <string name="timeStamp">Relative timestamp</string>
 </resources>

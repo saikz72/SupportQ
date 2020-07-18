@@ -74,7 +74,7 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHo
     // sets the color of a button, depending on whether it is active
     private void setButton(ImageView iv, boolean isActive, int strokeResId, int fillResId, int activeColor) {
         iv.setImageResource(isActive ? fillResId : strokeResId);
-        iv.setColorFilter(ContextCompat.getColor(context, isActive ? activeColor : R.color.likedRed));
+        iv.setColorFilter(ContextCompat.getColor(context, isActive ? activeColor : R.color.medium_gray));
     }
 
     private void setLikeText(Question post, TextView view) {
@@ -123,7 +123,7 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHo
             //TODO --> TIME STAMP
             tvUsername.setText(username);
             ivDelete.setVisibility(View.GONE);      //remove delete key on home feed
-            setButton(ivLike, question.isLiked(), R.drawable.ufi_heart, R.drawable.ufi_heart_active, R.color.likedRed);
+            setButton(ivLike, question.isLiked(), R.drawable.ic_vector_heart_stroke, R.drawable.ic_vector_heart, R.color.likedRed);
             setLikeText(question, tvLikeCount);
         }
 
