@@ -1,14 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="colorPrimary">#262626</color>
-    <color name="colorPrimaryDark">#C16CD8</color>
-    <color name="colorAccent">#C16CD8</color>
+    <color name="colorPrimaryDark">#16ad80</color>
+    <color name="colorAccent">#16ad80</color>
     <color name="likedRed">#f90707</color>
     <color name="login_button_textcolor">#FFFFFF</color>
     <color name="login_button_color">#445F9E</color>
     <color name="login_background_color">#FFFFFF</color>
     <color name="compose_backgroung_color">#eaad75</color>
-    <color name="toolbar_color">#C16CD8</color>
+    <color name="toolbar_color">#FFFFFF</color>
+    <color name="floating_buttor_color">#16ad80</color>
     <color name="medium_gray">#070707</color>
     <color name="description_color">#000000</color>
+    <color name="white_backgroud">#FFFFFF</color>
 </resources>

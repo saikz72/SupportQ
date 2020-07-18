@@ -70,7 +70,7 @@ public class ProfileFragment extends Fragment {
         rvQuestion.setHasFixedSize(true);
         //set the layout manager on the recycler view
         rvQuestion.setLayoutManager(linearLayoutManager);
-        tvUsername.setText(ParseUser.getCurrentUser().getUsername());
+        tvUsername.setText("@" + ParseUser.getCurrentUser().getUsername());
         try {
             profilePicture = ParseUser.getCurrentUser().fetch().getParseFile(("profilePicture"));
         } catch (ParseException e) {

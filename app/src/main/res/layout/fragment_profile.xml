@@ -12,9 +12,9 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         tools:context=".Fragments.ProfileFragment">
+
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
-            app:menu="@menu/profile_menu"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
@@ -25,6 +25,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            app:menu="@menu/profile_menu"
             app:titleTextColor="@android:color/white">
 
         </androidx.appcompat.widget.Toolbar>
@@ -51,7 +52,9 @@
             <Button
                 android:id="@+id/btnEditProfile"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="30dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="20dp"
                 android:background="@drawable/custom_button"
                 android:text="@string/edit_profile_details"
                 android:textAllCaps="false"
@@ -59,29 +62,37 @@
         </LinearLayout>
 
         <TextView
+            android:id="@+id/tvFullname"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:text="Full Name"
+            android:textColor="#000000"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textAlignment="center" />
+
+        <TextView
             android:id="@+id/tvUsername"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
-            android:textAlignment="center"
-            android:text="Username" />
-            <Button
-                android:id="@+id/btnLogOut"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="right"
-                android:layout_marginStart="230dp"
-                android:background="@drawable/custom_button"
-                android:text="@string/logout"
-                android:textAllCaps="false"
-                android:textColor="@color/login_button_textcolor" />
+            android:text="Username"
+            android:textColor="@color/description_color"
+            android:textAlignment="center" />
 
-        <ProgressBar
-            android:id="@+id/pbLoading"
+
+        <Button
+            android:id="@+id/btnLogOut"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:visibility="invisible" />
+            android:layout_height="30dp"
+            android:layout_marginEnd="20dp"
+            android:layout_gravity="right"
+            android:layout_marginStart="230dp"
+            android:background="@drawable/custom_button"
+            android:text="@string/logout"
+            android:textAllCaps="false"
+            android:textColor="@color/login_button_textcolor" />
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -97,6 +108,19 @@
                 app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintVertical_bias="0.0" />
+
+            <ProgressBar
+                android:id="@+id/pbLoading"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_gravity="center"
+                android:layout_marginStart="188dp"
+                android:layout_marginTop="1dp"
+                android:layout_marginEnd="175dp"
+                android:visibility="invisible" />
         </RelativeLayout>
     </LinearLayout>
 </ScrollView>
