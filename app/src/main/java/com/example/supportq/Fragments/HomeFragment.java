@@ -76,16 +76,6 @@ public class HomeFragment extends Fragment {
             }
         });
     }
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == REQUEST_CODE && resultCode == Activity.RESULT_OK) {
-            Question question = Parcels.unwrap(data.getParcelableExtra("compose"));
-            allQuestions.add( 0, question);
-            questionAdapter.notifyItemInserted(0);
-            rvQuestion.scrollToPosition(0);
-        }
-    }
 
     private void queryPost() {
         progressBar.setVisibility(ProgressBar.VISIBLE);

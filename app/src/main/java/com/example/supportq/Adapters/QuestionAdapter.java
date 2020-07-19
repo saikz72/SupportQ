@@ -138,6 +138,8 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHo
             if(mediaImage != null)
                 Glide.with(context).load(mediaImage.getUrl()).transform(new RoundedCornersTransformation(40, 10)).into(ivMedia);
             tvUsername.setText(username);
+            String timeAgo = question.getCreatedTimeAgo();
+            tvTimeStamp.setText(timeAgo);
             setButton(ivLike, question.isLiked(), R.drawable.ic_vector_heart_stroke, R.drawable.ic_vector_heart, R.color.likedRed);
             setLikeText(question, tvLikeCount);
             if(question.getUser().getObjectId().equals(ParseUser.getCurrentUser().getObjectId())){

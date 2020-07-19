@@ -25,6 +25,8 @@ import com.parse.ParseUser;
 
 import java.util.List;
 
+import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
+
 public class ProfileAdapter extends RecyclerView.Adapter<ProfileAdapter.ViewHolder> {
 
     private List<Question> allQuestions;
@@ -144,6 +146,9 @@ public class ProfileAdapter extends RecyclerView.Adapter<ProfileAdapter.ViewHold
             ParseFile profilePhoto = question.getUser().getParseFile(User.KEY_PROFILE_PICTURE);
             if (profilePhoto != null)
                 Glide.with(context).load(profilePhoto.getUrl()).transform(new CircleCrop()).into(ivProfilePicture);
+            ParseFile mediaImage = question.getImage();
+            if(mediaImage != null)
+                Glide.with(context).load(mediaImage.getUrl()).transform(new RoundedCornersTransformation(40, 10)).into(ivMedia);
             setButton(ivLike, question.isLiked(), R.drawable.ic_vector_heart_stroke, R.drawable.ic_vector_heart, R.color.likedRed);
             setLikeText(question, tvLikeCount);
         }

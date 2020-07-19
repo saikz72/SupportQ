@@ -17,6 +17,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.example.supportq.Models.ProgressIndicator;
 import com.example.supportq.Models.Question;
 import com.example.supportq.R;
 import com.parse.ParseException;
@@ -29,7 +30,7 @@ import org.parceler.Parcels;
 import java.io.File;
 
 public class ComposeActivity extends AppCompatActivity {
-    private static final String TAG = "ComposeActivity" ;
+    private static final String TAG = "ComposeActivity";
     public File photoFile;
     public static final String photoFileName = "photo.jpg";
     public static final int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 100;
@@ -54,21 +55,21 @@ public class ComposeActivity extends AppCompatActivity {
         btnCompose.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                ProgressIndicator.showMessage(ComposeActivity.this);
                 String description = etCompose.getText().toString();
                 //check that question is not empty
                 if (validatePost(description)) {
                     ParseUser currentUser = ParseUser.getCurrentUser();
-                    Question question = saveQuestion(description, currentUser, photoFile);
-                    Intent intent = new Intent();
-                    intent.putExtra("compose", Parcels.wrap(question));
-                    setResult(RESULT_OK, intent);
+                    saveQuestion(description, currentUser, photoFile);
+                    ProgressIndicator.hideMessage(ComposeActivity.this);
                     finish();
                 }
+                ProgressIndicator.hideMessage(ComposeActivity.this);
             }
         });
     }
 
-    private void cameraButtonClicked(){
+    private void cameraButtonClicked() {
         ivCamera.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -76,13 +77,14 @@ public class ComposeActivity extends AppCompatActivity {
             }
         });
     }
+
     private boolean validatePost(String description) {
         if (description.isEmpty()) {
             etCompose.setError("question cannot be empty");
             etCompose.setBackgroundResource(R.drawable.error_background);
             return false;
         }
-        if (description.length() < 5){
+        if (description.length() < 5) {
             etCompose.setError("question is too short");
             etCompose.setBackgroundResource(R.drawable.error_background);
             return false;
@@ -90,11 +92,12 @@ public class ComposeActivity extends AppCompatActivity {
         return true;
     }
 
-    private Question saveQuestion(String description, ParseUser currentUser, File photoFile) {
+    private void saveQuestion(String description, ParseUser currentUser, File photoFile) {
         Question question = new Question();
         question.setDescription(description);
         question.setUser(currentUser);
-        question.setImage(new ParseFile(photoFile));
+        if (photoFile != null)
+            question.setImage(new ParseFile(photoFile));
         question.saveInBackground(new SaveCallback() {
             @Override
             public void done(ParseException e) {
@@ -106,8 +109,8 @@ public class ComposeActivity extends AppCompatActivity {
                 etCompose.setText("");
             }
         });
-        return question;
     }
+
     private void launchCamera() {
         //create Intent to take a picture and return control to the calling application
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
