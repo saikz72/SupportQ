@@ -9,6 +9,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.supportq.Models.ProgressIndicator;
+import com.example.supportq.Models.User;
 import com.example.supportq.R;
 import com.example.supportq.Validator;
 import com.google.android.material.textfield.TextInputLayout;
@@ -19,6 +20,7 @@ import com.parse.SignUpCallback;
 public class SignUpActivity extends AppCompatActivity {
     TextInputLayout etPassword;
     TextInputLayout etUsername;
+    TextInputLayout etFullname;
     Button btnSignUp;
 
     @Override
@@ -33,6 +35,7 @@ public class SignUpActivity extends AppCompatActivity {
         etPassword = findViewById(R.id.etPassword);
         etUsername = findViewById(R.id.etUsername);
         btnSignUp = findViewById(R.id.btnSignUp);
+        etFullname = findViewById(R.id.etFullname);
     }
 
     //listerner for sign up button
@@ -42,10 +45,16 @@ public class SignUpActivity extends AppCompatActivity {
             public void onClick(View view) {
                 String username = etUsername.getEditText().getText().toString();
                 String password = etPassword.getEditText().getText().toString();
+                String fullName = etFullname.getEditText().getText().toString();
+                if(fullName.isEmpty() || fullName.length() < 4){
+                    etFullname.setError("Full name is too short");
+                    return;
+                }
                 if (Validator.validateUser(etPassword, etUsername, password,username)) {
                     ParseUser user = new ParseUser();
                     user.setPassword(password);
                     user.setUsername(username);
+                    User.setFullName(fullName, user);
                     ProgressIndicator.showMessage(SignUpActivity.this);
                     signUp(username, password, user);
                 }

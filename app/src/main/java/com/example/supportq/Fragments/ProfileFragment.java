@@ -25,6 +25,7 @@ import com.example.supportq.Activities.EditProfileActivity;
 import com.example.supportq.Activities.LoginActivity;
 import com.example.supportq.Adapters.ProfileAdapter;
 import com.example.supportq.Models.Question;
+import com.example.supportq.Models.User;
 import com.example.supportq.R;
 import com.parse.FindCallback;
 import com.parse.ParseException;
@@ -41,18 +42,19 @@ public class ProfileFragment extends Fragment {
     private Button btnEditProfile;
     private Button btnLogOut;
     private ProgressBar progressBar;
+    private TextView tvFullname;
     private ProfileAdapter profileAdapter;
     private List<Question> allQuestions;
     private RecyclerView rvQuestion;
-    ParseFile profilePicture;
+    private ParseFile profilePicture;
+    private ParseUser currentUser;
 
     public ProfileFragment() {
         // Required empty public constructor
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_profile, container, false);
     }
@@ -63,6 +65,7 @@ public class ProfileFragment extends Fragment {
 
         setViews(view);
         allQuestions = new ArrayList<>();
+        currentUser = ParseUser.getCurrentUser();
         profileAdapter = new ProfileAdapter(allQuestions, getContext());
         //set the adapter to the rv
         rvQuestion.setAdapter(profileAdapter);
@@ -70,7 +73,8 @@ public class ProfileFragment extends Fragment {
         rvQuestion.setHasFixedSize(true);
         //set the layout manager on the recycler view
         rvQuestion.setLayoutManager(linearLayoutManager);
-        tvUsername.setText("@" + ParseUser.getCurrentUser().getUsername());
+        tvUsername.setText("@" + User.getUserName(currentUser));
+        tvFullname.setText(User.getFullName(currentUser));
         try {
             profilePicture = ParseUser.getCurrentUser().fetch().getParseFile(("profilePicture"));
         } catch (ParseException e) {
@@ -90,6 +94,7 @@ public class ProfileFragment extends Fragment {
         btnEditProfile = view.findViewById(R.id.btnEditProfile);
         btnLogOut = view.findViewById(R.id.btnLogOut);
         progressBar = view.findViewById(R.id.pbLoading);
+        tvFullname = view.findViewById(R.id.tvFullname);
     }
 
     //edit profile
