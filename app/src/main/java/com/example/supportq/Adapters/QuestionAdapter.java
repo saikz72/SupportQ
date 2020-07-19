@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.CircleCrop;
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.example.supportq.Models.Question;
 import com.example.supportq.Models.User;
 import com.example.supportq.R;
@@ -22,6 +23,8 @@ import com.parse.ParseFile;
 import com.parse.ParseUser;
 
 import java.util.List;
+
+import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
 
 public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHolder> {
 
@@ -66,8 +69,9 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHo
         Question question = allQuestions.get(position);
         try {
             holder.bind(question);
-        } catch (ParseException e) {
-            Log.e(TAG, " error", e);
+        } catch (Exception e) {
+            Log.e(TAG, "error", e);
+            return;
         }
     }
 
@@ -124,12 +128,15 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHo
             ivProfilePicture = itemView.findViewById(R.id.ivProfilePicture);
         }
 
-        public void bind(Question question) throws ParseException {
-            String username = question.getUser().fetch().getUsername();
+        public void bind(Question question) throws Exception {
+            String username = question.getUser().getUsername();
             tvDescription.setText(question.getDescription());
             ParseFile profilePhoto = question.getUser().getParseFile(User.KEY_PROFILE_PICTURE);
             if (profilePhoto != null)
                 Glide.with(context).load(profilePhoto.getUrl()).transform(new CircleCrop()).into(ivProfilePicture);
+            ParseFile mediaImage = question.getImage();
+            if(mediaImage != null)
+                Glide.with(context).load(mediaImage.getUrl()).transform(new RoundedCornersTransformation(40, 10)).into(ivMedia);
             tvUsername.setText(username);
             setButton(ivLike, question.isLiked(), R.drawable.ic_vector_heart_stroke, R.drawable.ic_vector_heart, R.color.likedRed);
             setLikeText(question, tvLikeCount);

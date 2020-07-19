@@ -68,7 +68,7 @@ public class ProfileAdapter extends RecyclerView.Adapter<ProfileAdapter.ViewHold
         Question question = allQuestions.get(position);
         try {
             holder.bind(question);
-        } catch (ParseException e) {
+        } catch (Exception e) {
             Log.e(TAG, " error", e);
         }
     }
@@ -134,7 +134,7 @@ public class ProfileAdapter extends RecyclerView.Adapter<ProfileAdapter.ViewHold
             ivMedia = itemView.findViewById(R.id.ivMedia);
         }
 
-        public void bind(Question question) throws ParseException {
+        public void bind(Question question) throws Exception {
             String username = question.getUser().fetch().getUsername();
             tvDescription.setText(question.getDescription());
             deleteButtonClicked(question);
@@ -144,8 +144,7 @@ public class ProfileAdapter extends RecyclerView.Adapter<ProfileAdapter.ViewHold
             ParseFile profilePhoto = question.getUser().getParseFile(User.KEY_PROFILE_PICTURE);
             if (profilePhoto != null)
                 Glide.with(context).load(profilePhoto.getUrl()).transform(new CircleCrop()).into(ivProfilePicture);
-            setButton(ivLike, question.isLiked(),
-                    R.drawable.ic_vector_heart_stroke, R.drawable.ic_vector_heart, R.color.likedRed);
+            setButton(ivLike, question.isLiked(), R.drawable.ic_vector_heart_stroke, R.drawable.ic_vector_heart, R.color.likedRed);
             setLikeText(question, tvLikeCount);
         }
 

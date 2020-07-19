@@ -30,7 +30,7 @@ public class EditProfileActivity extends AppCompatActivity {
     private ImageView ivProfilePicture;
 
     public static final String TAG = "EditProfileActivity";
-    File photoFile;
+    public File photoFile;
     public static final String photoFileName = "photo.jpg";
     public static final int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 100;
     ParseUser currentUser;
@@ -68,7 +68,7 @@ public class EditProfileActivity extends AppCompatActivity {
         });
     }
 
-    private void launchCamera() {
+    public void launchCamera() {
         //create Intent to take a picture and return control to the calling application
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         // Create a File reference for future access

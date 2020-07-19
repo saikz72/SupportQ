@@ -3,6 +3,7 @@ package com.example.supportq.Models;
 import android.text.format.DateUtils;
 
 import com.parse.ParseClassName;
+import com.parse.ParseFile;
 import com.parse.ParseObject;
 import com.parse.ParseUser;
 
@@ -22,6 +23,7 @@ public class Question extends ParseObject {
     public static final String KEY_USER = "user";
     public static final String KEY_CREATED_AT = "createdAt";
     public static final String KEY_LIKES = "likes";
+    public static final String KEY_IMAGE = "image";     //image of a question
 
     //sets the description of the question
     public void setDescription(String description) {
@@ -38,12 +40,20 @@ public class Question extends ParseObject {
         put(KEY_USER, user);
     }
 
-    public ParseUser getUser() {
+    public ParseUser getUser() throws Exception{
         return getParseUser(KEY_USER);
     }
 
     public Date getDate() {
         return this.getCreatedAt();
+    }
+
+    public ParseFile getImage() {
+        return getParseFile(KEY_IMAGE);
+    }
+
+    public void setImage(ParseFile parseFile) {
+        put(KEY_IMAGE, parseFile);
     }
 
     // getRelativeTimeAgo("Mon Apr 01 21:16:23 +0000 2014");
