@@ -11,7 +11,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -70,7 +69,8 @@ public class EditProfileActivity extends AppCompatActivity {
         ParseUser currentUser = ParseUser.getCurrentUser();
         etUsername.getEditText().setText(currentUser.getUsername());      //user's current name;
         ParseFile profilePicture = ParseUser.getCurrentUser().fetch().getParseFile((User.KEY_PROFILE_PICTURE));
-        Glide.with(this).load(profilePicture.getUrl()).transform(new CircleCrop()).into(ivProfilePicture);   //user's current profile picture
+        if (profilePicture != null)
+            Glide.with(this).load(profilePicture.getUrl()).transform(new CircleCrop()).into(ivProfilePicture);   //user's current profile picture
     }
 
     //capture image
