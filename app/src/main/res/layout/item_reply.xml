@@ -40,7 +40,7 @@
         app:layout_constraintVertical_bias="0.015" />
 
     <TextView
-        android:id="@+id/tvDescription"
+        android:id="@+id/tvReply"
         android:layout_width="@dimen/home_description"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -82,7 +82,7 @@
         app:layout_constraintVertical_bias="0.0" />
 
     <ImageView
-        android:id="@+id/ivReply"
+        android:id="@+id/ivVerify"
         android:layout_width="@dimen/item_comment_width"
         android:layout_height="@dimen/item_comment_height"
         android:layout_marginTop="8dp"
@@ -119,7 +119,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/ivProfilePicture"
-        app:layout_constraintTop_toBottomOf="@+id/tvDescription"
+        app:layout_constraintTop_toBottomOf="@+id/tvReply"
         app:layout_constraintVertical_bias="0.0" />
 
     <ImageView
