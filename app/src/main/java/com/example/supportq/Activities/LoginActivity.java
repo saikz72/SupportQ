@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.supportq.Models.ProgressIndicator;
@@ -22,7 +21,7 @@ public class LoginActivity extends AppCompatActivity {
     public static final String INCORRECT_USERNAME = "incorrect username";
     public static final String INCORRECT_PASSWORD = "incorrect password";
     public static final String TOAST_ERROR_MESSAGE = "something went wrong";
-    private ImageView btnLogin;
+    private Button btnLogin;
     private Button btnSignUp;
     private Button btnSignIn;
     private TextInputLayout username_input_text;

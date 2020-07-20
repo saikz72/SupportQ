@@ -6,43 +6,67 @@
     android:layout_height="match_parent"
     android:background="@color/login_background_color"
     android:orientation="vertical"
-    tools:context=".Activities.RegistrationActivity"
-    android:padding="10dp">
+    tools:context=".Activities.RegistrationActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:background="@color/blue">
+
+        <ImageView
+            android:id="@+id/logo_image"
+            android:layout_width="@dimen/login_image_width"
+            android:layout_height="@dimen/login_image_height"
+            android:layout_centerInParent="true"
+            android:layout_marginBottom="50dp"
+            android:background="@drawable/shape_circle_image"
+            android:src="@drawable/logo" />
+    </RelativeLayout>
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textAllCaps="false"
-        android:textAlignment="center"
-        android:text="@string/set_up_username"
-        android:textSize="20dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginBottom="30dp"
         android:fontFamily="sans-serif-condensed"
-        android:layout_marginTop="200dp"
-        android:layout_marginBottom="40dp"/>
+        android:text="@string/set_up_username"
+        android:textAlignment="center"
+        android:textAllCaps="false"
+        android:textColor="@color/description_color"
+        android:textSize="20dp" />
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/etUsername"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/Username"
-        app:errorEnabled="true"
-        app:startIconDrawable="@drawable/ic_baseline_person_24">
-        <com.google.android.material.textfield.TextInputEditText
+        android:orientation="vertical"
+        android:padding="20dp">
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/etUsername"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:imeOptions="actionDone"
-            android:inputType="text" />
-    </com.google.android.material.textfield.TextInputLayout>
+            android:layout_height="59dp"
+            android:hint="@string/Username"
+            app:errorEnabled="true"
+            app:startIconDrawable="@drawable/ic_baseline_person_24">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:imeOptions="actionDone"
+                android:inputType="text" />
+        </com.google.android.material.textfield.TextInputLayout>
+    </LinearLayout>
 
     <Button
         android:id="@+id/btnRegister"
         android:layout_width="@dimen/register_button_width"
         android:layout_height="@dimen/register_button_height"
-        android:text="@string/register"
         android:layout_gravity="center_horizontal"
-        android:textAllCaps="false"
-        android:textColor="#f9fafc"
         android:background="@drawable/custom_button"
+        android:text="@string/register"
+        android:textAllCaps="false"
+        android:textColor="@color/login_button_textcolor"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/etUsername" />

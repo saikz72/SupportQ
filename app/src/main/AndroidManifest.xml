@@ -54,6 +54,9 @@
         <meta-data
             android:name="com.facebook.sdk.PERMISSIONS"
             android:value="email" />
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
 
         <activity
             android:name="com.facebook.FacebookActivity"

@@ -7,7 +7,6 @@
     android:fitsSystemWindows="true"
     tools:context=".Activities.MainActivity">
 
-
     <FrameLayout
         android:id="@+id/flContainer"
         android:layout_width="match_parent"
@@ -19,7 +18,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:background="@color/colorAccent"
+        android:background="@color/bottom_nav"
         app:itemTextColor="@color/selector"
         app:itemIconTint="@color/selector"
         app:menu="@menu/menu_bottom_navigation" />

@@ -3,9 +3,9 @@ package com.example.supportq.Models;
 import com.parse.ParseUser;
 
 public class User {
-    public static String KEY_USERNAME = "username";
-    public static String KEY_PROFILE_PICTURE_ID = "profilePictureId";
-    public static String KEY_FULL_NAME = "fullName";
+    public static final String KEY_USERNAME = "username";
+    public static final String KEY_PROFILE_PICTURE_ID = "profilePictureId";
+    public static final String KEY_FULL_NAME = "fullName";
     public static final String KEY_PROFILE_PICTURE = "profilePicture";
 
     // Returns the user's full name.

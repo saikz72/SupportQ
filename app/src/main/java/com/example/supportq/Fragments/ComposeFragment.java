@@ -24,6 +24,7 @@ public class ComposeFragment extends Fragment {
     public static final String QUESTION_EMPTY_ERROR = "question cannot be empty";
     public static final String QUESTION_LENGTH_ERROR = "question should be at least 5 characters long";
     public static final String SAVING_ERROR = "Error while trying to save question";
+    public static final String QUESTION_POSTED = "Your question has been posted successfully";
     private Button btnCompose;
     private EditText etCompose;
 
@@ -58,6 +59,7 @@ public class ComposeFragment extends Fragment {
                     ProgressIndicator.hideMessage(getContext());
                 }
                 ProgressIndicator.hideMessage(getContext());
+                Toast.makeText(getContext(), QUESTION_POSTED, Toast.LENGTH_SHORT).show();
             }
         });
     }
