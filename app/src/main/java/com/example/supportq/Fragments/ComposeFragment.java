@@ -6,6 +6,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -57,9 +58,9 @@ public class ComposeFragment extends Fragment {
                     ParseUser currentUser = ParseUser.getCurrentUser();
                     saveQuestion(description, currentUser);
                     ProgressIndicator.hideMessage(getContext());
+                    Toast.makeText(getContext(), QUESTION_POSTED, Toast.LENGTH_SHORT).show();
                 }
                 ProgressIndicator.hideMessage(getContext());
-                Toast.makeText(getContext(), QUESTION_POSTED, Toast.LENGTH_SHORT).show();
             }
         });
     }
