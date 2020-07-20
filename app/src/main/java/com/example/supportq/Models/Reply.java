@@ -15,29 +15,40 @@ public class Reply extends ParseObject {
     public static final String KEY_APPROVED = "isApproved";
     public static final String KEY_QUESTION_ID = "questionID";
     public static final String KEY_CREATED_AT = "createdAt";
+    public static final String KEY_REPLY_TEXT = "replyText";
 
-    public void setUser(ParseUser user){
+    public void setUser(ParseUser user) {
         put(KEY_USER, user);
     }
 
-    public ParseUser getUser(){
+    public ParseUser getUser() {
         return getParseUser(KEY_USER);
     }
 
-    public boolean getIsApproved(){
+    public boolean getIsApproved() {
         return getBoolean(KEY_APPROVED);
     }
 
-    public void setIsApproved(boolean isApproved){
+    public void setIsApproved(boolean isApproved) {
         put(KEY_APPROVED, isApproved);
     }
 
-    public void setQuestionId(Question questionId){
+    public void setQuestionId(Question questionId) {
         put(KEY_QUESTION_ID, questionId);
     }
-    public Question getQuestionId(){
+
+    public Question getQuestionId() {
         return (Question) getParseObject(KEY_QUESTION_ID);
     }
+
+    public void setReply(String reply){
+        put(KEY_REPLY_TEXT, reply);
+    }
+
+    public String getReply(){
+        return getString(KEY_REPLY_TEXT);
+    }
+
     public String getCreatedTimeAgo() {
         return getRelativeTimeAgo(this.getCreatedAt().getTime());
     }
