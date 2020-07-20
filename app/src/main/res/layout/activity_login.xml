@@ -45,7 +45,7 @@
             android:id="@+id/username_text_input"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
-            android:layout_height="59dp"
+            android:layout_height="80dp"
             android:hint="@string/Username"
             app:errorEnabled="true"
             app:startIconDrawable="@drawable/ic_baseline_person_24">
@@ -61,7 +61,7 @@
             android:id="@+id/password_text_input"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
-            android:layout_height="59dp"
+            android:layout_height="80dp"
             android:hint="@string/password_hint"
             app:errorEnabled="true"
             app:passwordToggleEnabled="true"

@@ -27,7 +27,6 @@ import com.parse.ParseQuery;
 import com.parse.ParseUser;
 
 import org.parceler.Parcels;
-import org.w3c.dom.Comment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -71,6 +70,7 @@ public class QuestionDetailsActivity extends AppCompatActivity {
         setLikeText(question, tvLikeCount);
         likeIconClicked();
         replyListener();
+        queryReply();
     }
 
     public void setViews() {

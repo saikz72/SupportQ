@@ -11,15 +11,19 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.bitmap.CircleCrop;
 import com.example.supportq.Models.User;
 import com.example.supportq.R;
 import com.example.supportq.Validator;
 import com.google.android.material.textfield.TextInputLayout;
+import com.parse.ParseException;
 import com.parse.ParseFile;
 import com.parse.ParseUser;
 
@@ -47,7 +51,10 @@ public class EditProfileActivity extends AppCompatActivity {
         setContentView(R.layout.activity_edit_profile);
         currentUser = ParseUser.getCurrentUser();
         setViews();
-        bindViews();
+        try {
+            bindViews();
+        } catch (ParseException e) {
+        }
         takePhotoButtonClicked();
         submitButtonClicked();
     }
@@ -59,9 +66,11 @@ public class EditProfileActivity extends AppCompatActivity {
         ivProfilePicture = findViewById(R.id.ivProfilePicture);
     }
 
-    public void bindViews() {
+    public void bindViews() throws ParseException {
         ParseUser currentUser = ParseUser.getCurrentUser();
         etUsername.getEditText().setText(currentUser.getUsername());      //user's current name;
+        ParseFile profilePicture = ParseUser.getCurrentUser().fetch().getParseFile((User.KEY_PROFILE_PICTURE));
+        Glide.with(this).load(profilePicture.getUrl()).transform(new CircleCrop()).into(ivProfilePicture);   //user's current profile picture
     }
 
     //capture image
