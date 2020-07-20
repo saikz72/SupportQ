@@ -26,13 +26,19 @@ import java.util.List;
 import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
 
 public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHolder> {
+    public interface OnClickListener {
+        void onItemClicked(int position);
+    }
+
     public static final String TAG = "QuestionAdapter";
     private List<Question> allQuestions;
     private Context context;
+    private OnClickListener onClickListener;
 
-    public QuestionAdapter(List<Question> allQuestions, Context context) {
+    public QuestionAdapter(List<Question> allQuestions, Context context, OnClickListener onClickListener) {
         this.allQuestions = allQuestions;
         this.context = context;
+        this.onClickListener = onClickListener;
     }
 
     @NonNull
@@ -102,6 +108,14 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHo
         notifyDataSetChanged();
     }
 
+    // Removes question at this position
+    public void removeAt(Question question, int position) throws ParseException {
+        allQuestions.remove(position);
+        notifyItemRemoved(position);
+        question.delete();
+        question.saveInBackground();
+    }
+
     protected class ViewHolder extends RecyclerView.ViewHolder {
         private TextView tvDescription;
         private ImageView ivLike;
@@ -133,26 +147,27 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHo
             if (profilePhoto != null)
                 Glide.with(context).load(profilePhoto.getUrl()).transform(new CircleCrop()).into(ivProfilePicture);
             ParseFile mediaImage = question.getImage();
-            if(mediaImage != null)
+            if (mediaImage != null)
                 Glide.with(context).load(mediaImage.getUrl()).transform(new RoundedCornersTransformation(ProfileAdapter.RADIUS, ProfileAdapter.MARGIN)).into(ivMedia);
             tvUsername.setText(username);
             String timeAgo = question.getCreatedTimeAgo();
             tvTimeStamp.setText(timeAgo);
             setButton(ivLike, question.isLiked(), R.drawable.ic_vector_heart_stroke, R.drawable.ic_vector_heart, R.color.likedRed);
             setLikeText(question, tvLikeCount);
-            if(question.getUser().getObjectId().equals(ParseUser.getCurrentUser().getObjectId())){
+            if (question.getUser().getObjectId().equals(ParseUser.getCurrentUser().getObjectId())) {
                 ivDelete.setVisibility(View.VISIBLE);
                 deleteButtonClicked(question);
-            }else{
+            } else {
                 ivDelete.setVisibility(View.INVISIBLE); //invisble to keep the space even
             }
+            replyButtonClicked();
         }
 
         public void replyButtonClicked() {
             ivReply.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    //TODO --> enable reply
+                    onClickListener.onItemClicked(getAdapterPosition());
                 }
             });
         }
@@ -171,13 +186,6 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHo
                 }
             });
         }
-    }
-    // Removes question at this position
-    public void removeAt(Question question, int position) throws ParseException {
-        allQuestions.remove(position);
-        notifyItemRemoved(position);
-        question.delete();
-        question.saveInBackground();
     }
 
 }
