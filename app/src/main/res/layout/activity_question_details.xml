@@ -2,9 +2,9 @@
 
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/login_background_color">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -42,9 +42,10 @@
 
         <ImageView
             android:id="@+id/ivReply"
-            android:layout_width="49dp"
-            android:layout_height="25dp"
+            android:layout_width="@dimen/details_im_width"
+            android:layout_height="@dimen/details_im_height"
             android:layout_marginTop="4dp"
+            android:scaleType="centerCrop"
             app:layout_constraintEnd_toStartOf="@+id/ivLike"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
@@ -64,15 +65,15 @@
             android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintHorizontal_bias="0.28"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/view2"
             app:layout_constraintVertical_bias="0.0" />
 
         <ImageView
             android:id="@+id/ivLike"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="@dimen/details_reply_width"
+            android:layout_height="@dimen/details_reply_heigth"
             android:layout_marginTop="8dp"
             app:layout_constraintEnd_toStartOf="@+id/ivDelete"
             app:layout_constraintStart_toEndOf="@+id/ivReply"
@@ -92,7 +93,7 @@
             android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintHorizontal_bias="0.463"
             app:layout_constraintStart_toEndOf="@+id/tvReplyCount"
             app:layout_constraintTop_toBottomOf="@+id/view2"
             app:layout_constraintVertical_bias="0.0" />
@@ -103,13 +104,14 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="76dp"
+            android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/view3"
             app:srcCompat="@drawable/ic_baseline_delete_24" />
 
         <ImageView
             android:id="@+id/ivMedia"
-            android:layout_width="380dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
@@ -125,16 +127,16 @@
 
         <ImageView
             android:id="@+id/ivProfilePicture"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
+            android:layout_width="@dimen/details_profile_width"
+            android:layout_height="@dimen/profile_image_height"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.0"
-            app:srcCompat="@android:color/black" />
+            app:layout_constraintVertical_bias="0.013"
+            app:srcCompat="@drawable/com_facebook_profile_picture_blank_portrait" />
 
         <TextView
             android:id="@+id/tvFullname"

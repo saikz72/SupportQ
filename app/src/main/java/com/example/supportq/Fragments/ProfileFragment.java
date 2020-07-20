@@ -62,7 +62,6 @@ public class ProfileFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
         setViews(view);
         allQuestions = new ArrayList<>();
         currentUser = ParseUser.getCurrentUser();

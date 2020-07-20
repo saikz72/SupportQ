@@ -3,7 +3,6 @@
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
 
-
     <!-- fragment_home dimensions.-->
     <dimen name="button_layout_margin">16dp</dimen>
     <dimen name="home_profile_width">50dp</dimen>
@@ -11,8 +10,6 @@
     <dimen name="home_description">0dp</dimen>
     <dimen name="home_media_width">330dp</dimen>
     <dimen name="home_media_height">30dp</dimen>
-
-
 
     <!--fragment_profile dimensions.-->
     <dimen name="profile_image_height">100dp</dimen>
@@ -58,6 +55,11 @@
     <dimen name="item_delete_height">29dp</dimen>
 
     <!--question_details_activity -->
-
+    <dimen name="details_im_width">28dp</dimen>
+    <dimen name="details_im_height">29dp</dimen>
+    <dimen name="details_reply_width">32dp</dimen>
+    <dimen name="details_reply_heigth">29dp</dimen>
+    <dimen name="details_profile_width">70dp</dimen>
+    <dimen name="details_profile_heigth">70dp</dimen>
 
 </resources>

@@ -14,7 +14,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".Activities.QuestionDetailsActivity"></activity>
+        <activity android:name=".Activities.QuestionDetailsActivity"
+            android:screenOrientation="portrait"></activity>
         <activity
             android:name=".Activities.RegistrationActivity"
             android:screenOrientation="portrait" />

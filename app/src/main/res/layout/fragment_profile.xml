@@ -27,7 +27,6 @@
             app:layout_constraintTop_toTopOf="parent"
             app:menu="@menu/profile_menu"
             app:titleTextColor="@android:color/white">
-
         </androidx.appcompat.widget.Toolbar>
 
         <LinearLayout
@@ -42,7 +41,8 @@
                 android:layout_gravity="left"
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="10dp"
-                android:src="@mipmap/ic_launcher" />
+                android:scaleType="centerCrop"
+                android:src="@drawable/com_facebook_profile_picture_blank_portrait" />
 
             <View
                 android:layout_width="0dp"
@@ -80,7 +80,6 @@
             android:text="Username"
             android:textColor="@color/description_color"
             android:textAlignment="center" />
-
 
         <Button
             android:id="@+id/btnLogOut"

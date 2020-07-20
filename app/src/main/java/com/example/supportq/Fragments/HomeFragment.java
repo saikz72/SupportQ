@@ -1,6 +1,5 @@
 package com.example.supportq.Fragments;
 
-import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -15,20 +14,14 @@ import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
-import com.example.supportq.Activities.QuestionDetailsActivity;
 import com.example.supportq.Adapters.QuestionAdapter;
 import com.example.supportq.Models.Question;
 import com.example.supportq.R;
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseQuery;
-
-import org.parceler.Parcels;
-
 import java.util.ArrayList;
 import java.util.List;
-
-import static android.app.Activity.RESULT_OK;
 
 public class HomeFragment extends Fragment {
     public static final String FETCHING_POST_ERROR = "Issue with getting posts";
@@ -53,18 +46,8 @@ public class HomeFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         rvQuestion = view.findViewById(R.id.rvQuestions);
         progressBar = view.findViewById(R.id.pbLoading);
-        //event when reply is clicked
-        QuestionAdapter.OnClickListener onClickListener = new QuestionAdapter.OnClickListener(){
-            @Override
-            public void onItemClicked(int position) {
-                Intent intent = new Intent(getContext(), QuestionDetailsActivity.class);
-                Question question = allQuestions.get(position);
-                intent.putExtra(HOME_FRAGMENT_KEY, Parcels.wrap(question));
-                startActivity(intent);
-            }
-        };
         allQuestions = new ArrayList<>();
-        questionAdapter = new QuestionAdapter(allQuestions, getContext(), onClickListener);
+        questionAdapter = new QuestionAdapter(allQuestions, getContext());
         //set the adapter to the rv
         rvQuestion.setAdapter(questionAdapter);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());

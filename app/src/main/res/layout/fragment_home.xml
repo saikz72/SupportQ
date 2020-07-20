@@ -23,7 +23,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:titleTextColor="@android:color/white">
-
     </androidx.appcompat.widget.Toolbar>
 
     <ProgressBar

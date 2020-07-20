@@ -1,6 +1,7 @@
 package com.example.supportq.Adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +15,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.CircleCrop;
+import com.example.supportq.Activities.QuestionDetailsActivity;
+import com.example.supportq.Fragments.HomeFragment;
 import com.example.supportq.Models.Question;
 import com.example.supportq.Models.User;
 import com.example.supportq.R;
@@ -21,24 +24,20 @@ import com.parse.ParseException;
 import com.parse.ParseFile;
 import com.parse.ParseUser;
 
+import org.parceler.Parcels;
+
 import java.util.List;
 
 import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
 
 public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHolder> {
-    public interface OnClickListener {
-        void onItemClicked(int position);
-    }
-
     public static final String TAG = "QuestionAdapter";
     private List<Question> allQuestions;
     private Context context;
-    private OnClickListener onClickListener;
 
-    public QuestionAdapter(List<Question> allQuestions, Context context, OnClickListener onClickListener) {
+    public QuestionAdapter(List<Question> allQuestions, Context context) {
         this.allQuestions = allQuestions;
         this.context = context;
-        this.onClickListener = onClickListener;
     }
 
     @NonNull
@@ -116,7 +115,7 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHo
         question.saveInBackground();
     }
 
-    protected class ViewHolder extends RecyclerView.ViewHolder {
+    protected class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private TextView tvDescription;
         private ImageView ivLike;
         private TextView tvTimeStamp;
@@ -138,6 +137,7 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHo
             ivDelete = itemView.findViewById(R.id.ivDelete);
             ivMedia = itemView.findViewById(R.id.ivMedia);
             ivProfilePicture = itemView.findViewById(R.id.ivProfilePicture);
+            itemView.setOnClickListener(this);
         }
 
         public void bind(Question question) throws Exception {
@@ -160,16 +160,6 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHo
             } else {
                 ivDelete.setVisibility(View.INVISIBLE); //invisble to keep the space even
             }
-            replyButtonClicked();
-        }
-
-        public void replyButtonClicked() {
-            ivReply.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    onClickListener.onItemClicked(getAdapterPosition());
-                }
-            });
         }
 
         //listener for delete button
@@ -186,6 +176,15 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHo
                 }
             });
         }
-    }
 
+        @Override
+        public void onClick(View view) {
+            Intent intent = new Intent(context, QuestionDetailsActivity.class);
+            if (getAdapterPosition() != RecyclerView.NO_POSITION) {
+                Question question = allQuestions.get(getAdapterPosition());
+                intent.putExtra(HomeFragment.HOME_FRAGMENT_KEY, Parcels.wrap(question));
+                context.startActivity(intent);
+            }
+        }
+    }
 }
