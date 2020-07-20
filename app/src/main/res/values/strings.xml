@@ -27,4 +27,5 @@
     <string name="facebook_sign_in">OR</string>
     <string name="create_account_prompt">Don\'t have an account?</string>
     <string name="reply">replies</string>
+    <string name="respond">Compose your reply</string>
 </resources>

@@ -2,22 +2,35 @@ package com.example.supportq.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.CircleCrop;
+import com.example.supportq.Adapters.ReplyAdapter;
 import com.example.supportq.Fragments.HomeFragment;
 import com.example.supportq.Models.Question;
+import com.example.supportq.Models.Reply;
 import com.example.supportq.Models.User;
 import com.example.supportq.R;
+import com.parse.FindCallback;
+import com.parse.ParseException;
 import com.parse.ParseFile;
+import com.parse.ParseQuery;
 import com.parse.ParseUser;
 
 import org.parceler.Parcels;
+import org.w3c.dom.Comment;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class QuestionDetailsActivity extends AppCompatActivity {
     private TextView tvUsername;
@@ -30,15 +43,25 @@ public class QuestionDetailsActivity extends AppCompatActivity {
     private ImageView ivLike;
     private ImageView ivDelete;
     private ImageView ivProfilePicture;
+    private EditText etReply;
+    private RecyclerView rvQuestions;
+    private ImageView ivSendReply;
+    private ReplyAdapter replyAdapter;
     private Question question;
-    ParseUser currentUser;
+    private ParseUser currentUser;
+    private List<Reply> allReplies;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_question_details);
-        currentUser = ParseUser.getCurrentUser();
         setViews();
+        currentUser = ParseUser.getCurrentUser();
+        allReplies = new ArrayList<>();
+        replyAdapter = new ReplyAdapter(allReplies, this);
+        rvQuestions.setAdapter(replyAdapter);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+        rvQuestions.setLayoutManager(linearLayoutManager);
         try {
             bind();
         } catch (Exception e) {
@@ -47,9 +70,11 @@ public class QuestionDetailsActivity extends AppCompatActivity {
                 R.drawable.ufi_heart, R.drawable.ufi_heart_active, R.color.likedRed);
         setLikeText(question, tvLikeCount);
         likeIconClicked();
+        replyListener();
     }
 
     public void setViews() {
+        rvQuestions =findViewById(R.id.rvQuestions);
         tvUsername = findViewById(R.id.tvUsername);
         tvDescription = findViewById(R.id.tvDescription);
         tvFullname = findViewById(R.id.tvFullname);
@@ -60,6 +85,41 @@ public class QuestionDetailsActivity extends AppCompatActivity {
         ivLike = findViewById(R.id.ivLike);
         ivProfilePicture = findViewById(R.id.ivProfilePicture);
         ivReply = findViewById(R.id.ivReply);
+        ivSendReply = findViewById(R.id.ivSendReply);
+        etReply = findViewById(R.id.etReply);
+    }
+
+    public void replyListener(){
+        ivSendReply.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Reply reply = new Reply();
+                reply.setReply(etReply.getText().toString());
+                reply.setUser(currentUser);
+                reply.setQuestionId(question);
+                //TODO --> APPROVE
+                reply.saveInBackground();
+                etReply.setText("");
+                queryReply();
+            }
+        });
+    }
+
+    private void queryReply() {
+        final ParseQuery<Reply> query = ParseQuery.getQuery(Reply.class);
+        query.addDescendingOrder(Reply.KEY_CREATED_AT); //TODO --> complex sorting algorithm
+        query.whereEqualTo(Reply.KEY_QUESTION_ID, question);
+        query.findInBackground(new FindCallback<Reply>() {
+            @Override
+            public void done(List<Reply> replies, ParseException e) {
+                if(e != null){
+                    Toast.makeText(QuestionDetailsActivity.this, LoginActivity.TOAST_ERROR_MESSAGE, Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                replyAdapter.clear();
+                replyAdapter.addAll(replies);
+            }
+        });
     }
 
     public void bind() throws Exception {

@@ -12,9 +12,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.CircleCrop;
+import com.example.supportq.Models.Question;
 import com.example.supportq.Models.Reply;
 import com.example.supportq.Models.User;
 import com.example.supportq.R;
+import com.parse.ParseException;
 import com.parse.ParseFile;
 
 import java.util.List;
@@ -46,6 +48,17 @@ public class ReplyAdapter extends RecyclerView.Adapter<ReplyAdapter.ViewHolder> 
     public int getItemCount() {
         return allReplies.size();
     }
+    // Clean all elements of the recycler
+    public void clear() {
+        allReplies.clear();
+        notifyDataSetChanged();
+    }
+
+    // Add a list of post -- change to type used
+    public void addAll(List<Reply> list) {
+        allReplies.addAll(list);
+        notifyDataSetChanged();
+    }
 
     class ViewHolder extends RecyclerView.ViewHolder {
         private TextView tvUsername;
@@ -67,7 +80,9 @@ public class ReplyAdapter extends RecyclerView.Adapter<ReplyAdapter.ViewHolder> 
 
         public void bind(Reply reply) {
             tvTimeStamp.setText(reply.getCreatedTimeAgo());
-            tvUsername.setText(reply.getUser().getUsername());
+            try {
+                tvUsername.setText(reply.getUser().fetchIfNeeded().getUsername());
+            } catch (ParseException e) { }
             tvReply.setText(reply.getReply());
             ParseFile profilePhoto = reply.getUser().getParseFile(User.KEY_PROFILE_PICTURE);
             if (profilePhoto != null)
