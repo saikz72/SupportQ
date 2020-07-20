@@ -41,6 +41,7 @@ public class LoginActivity extends AppCompatActivity {
         setViews();
         faceBookLogin();
         SignUpButtonListener();
+        signInButtonClicked();
     }
 
     public void setViews() {
@@ -49,19 +50,6 @@ public class LoginActivity extends AppCompatActivity {
         btnSignIn = findViewById(R.id.btnSignIn);
         username_input_text = findViewById(R.id.username_text_input);
         password_input_text = findViewById(R.id.password_text_input);
-    }
-
-    public void onEnterClicked(TextInputEditText textInputEditText) {
-        textInputEditText.setOnEditorActionListener(new TextInputEditText.OnEditorActionListener() {
-            @Override
-            public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
-                if (i == EditorInfo.IME_ACTION_DONE) {
-                    signInButtonClicked();
-                    return true;
-                }
-                return false;
-            }
-        });
     }
 
     //listener for user sign in with existing credentials
