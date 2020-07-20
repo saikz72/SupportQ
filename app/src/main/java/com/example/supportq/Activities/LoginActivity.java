@@ -4,14 +4,18 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.supportq.Models.ProgressIndicator;
 import com.example.supportq.R;
 import com.example.supportq.Validator;
+import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import com.parse.LogInCallback;
 import com.parse.ParseException;
@@ -37,7 +41,6 @@ public class LoginActivity extends AppCompatActivity {
         setViews();
         faceBookLogin();
         SignUpButtonListener();
-        signInButtonClicked();
     }
 
     public void setViews() {
@@ -48,6 +51,19 @@ public class LoginActivity extends AppCompatActivity {
         password_input_text = findViewById(R.id.password_text_input);
     }
 
+    public void onEnterClicked(TextInputEditText textInputEditText) {
+        textInputEditText.setOnEditorActionListener(new TextInputEditText.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
+                if (i == EditorInfo.IME_ACTION_DONE) {
+                    signInButtonClicked();
+                    return true;
+                }
+                return false;
+            }
+        });
+    }
+
     //listener for user sign in with existing credentials
     public void signInButtonClicked() {
         btnSignIn.setOnClickListener(new View.OnClickListener() {
@@ -55,7 +71,7 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View view) {
                 String username = username_input_text.getEditText().getText().toString();
                 String password = password_input_text.getEditText().getText().toString();
-                if (Validator.validateUser(password_input_text, username_input_text, password, username)){
+                if (Validator.validateUser(password_input_text, username_input_text, password, username)) {
                     ProgressIndicator.showMessage(LoginActivity.this);
                     signInExistingUser(username, password);
                 }

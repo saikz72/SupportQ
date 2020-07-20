@@ -24,4 +24,5 @@
     <string name="description">Question details</string>
     <string name="timeStamp">Relative timestamp</string>
     <string name="fullname">Full Name</string>
+    <string name="facebook_sign_in">Or sign in with</string>
 </resources>
