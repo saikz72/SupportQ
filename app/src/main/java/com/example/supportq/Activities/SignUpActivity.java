@@ -18,10 +18,10 @@ import com.parse.ParseUser;
 import com.parse.SignUpCallback;
 
 public class SignUpActivity extends AppCompatActivity {
-    TextInputLayout etPassword;
-    TextInputLayout etUsername;
-    TextInputLayout etFullname;
-    Button btnSignUp;
+    private TextInputLayout etPassword;
+    private TextInputLayout etUsername;
+    private TextInputLayout etFullname;
+    private Button btnSignUp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,7 +47,7 @@ public class SignUpActivity extends AppCompatActivity {
                 String password = etPassword.getEditText().getText().toString();
                 String fullName = etFullname.getEditText().getText().toString();
                 if(fullName.isEmpty() || fullName.length() < 4){
-                    etFullname.setError("Full name is too short");
+                    etFullname.setError(Validator.FULL_NAME_ERROR);
                     return;
                 }
                 if (Validator.validateUser(etPassword, etUsername, password,username)) {
@@ -68,7 +68,7 @@ public class SignUpActivity extends AppCompatActivity {
             public void done(ParseException e) {
                 if (e != null) {
                     ProgressIndicator.hideMessage(SignUpActivity.this);
-                    Toast.makeText(SignUpActivity.this, "Username already exist, choose a different username", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(SignUpActivity.this, RegistrationActivity.USERNAME_TAKEN, Toast.LENGTH_SHORT).show();
                     return;
                 }
                 etPassword.setVisibility(View.INVISIBLE);

@@ -76,7 +76,7 @@ public class ProfileFragment extends Fragment {
         tvUsername.setText("@" + User.getUserName(currentUser));
         tvFullname.setText(User.getFullName(currentUser));
         try {
-            profilePicture = ParseUser.getCurrentUser().fetch().getParseFile(("profilePicture"));
+            profilePicture = ParseUser.getCurrentUser().fetch().getParseFile((User.KEY_PROFILE_PICTURE));
         } catch (ParseException e) {
             Log.e("TAG", " error", e);
         }
@@ -130,7 +130,7 @@ public class ProfileFragment extends Fragment {
             @Override
             public void done(List<Question> questions, ParseException e) {
                 if (e != null) {
-                    Toast.makeText(getContext(), "Issue with getting posts", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), HomeFragment.FETCHING_POST_ERROR, Toast.LENGTH_SHORT).show();
                     return;
                 }
                 profileAdapter.clear();

@@ -14,7 +14,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.CircleCrop;
-import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.example.supportq.Models.Question;
 import com.example.supportq.Models.User;
 import com.example.supportq.R;
@@ -27,10 +26,9 @@ import java.util.List;
 import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
 
 public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHolder> {
-
+    public static final String TAG = "QuestionAdapter";
     private List<Question> allQuestions;
     private Context context;
-    public static final String TAG = "QuestionAdapter";
 
     public QuestionAdapter(List<Question> allQuestions, Context context) {
         this.allQuestions = allQuestions;
@@ -136,7 +134,7 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHo
                 Glide.with(context).load(profilePhoto.getUrl()).transform(new CircleCrop()).into(ivProfilePicture);
             ParseFile mediaImage = question.getImage();
             if(mediaImage != null)
-                Glide.with(context).load(mediaImage.getUrl()).transform(new RoundedCornersTransformation(40, 10)).into(ivMedia);
+                Glide.with(context).load(mediaImage.getUrl()).transform(new RoundedCornersTransformation(ProfileAdapter.RADIUS, ProfileAdapter.MARGIN)).into(ivMedia);
             tvUsername.setText(username);
             String timeAgo = question.getCreatedTimeAgo();
             tvTimeStamp.setText(timeAgo);

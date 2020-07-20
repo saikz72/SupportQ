@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.example.supportq.Fragments.ComposeFragment;
 import com.example.supportq.Fragments.HomeFragment;
 import com.example.supportq.Fragments.InboxFragment;
 import com.example.supportq.Fragments.ProfileFragment;
@@ -19,8 +20,8 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 public class MainActivity extends AppCompatActivity {
     public final static int MAX_NUMBER_POST = 10;
     private BottomNavigationView bottomNavigationView;
-    final FragmentManager fragmentManager = getSupportFragmentManager();
-    Toolbar toolbar;
+    public final FragmentManager fragmentManager = getSupportFragmentManager();
+    private Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,16 +34,16 @@ public class MainActivity extends AppCompatActivity {
                 Fragment fragment;
                 switch (item.getItemId()) {
                     case R.id.action_home:
-                        //TODO: update fragment
                         fragment = new HomeFragment();
                         break;
                     case R.id.action_profile:
-                        //TODO: update fragment
                         fragment = new ProfileFragment();
                         break;
                     case R.id.action_inbox:
-                        //TODO: update fragment
                         fragment = new InboxFragment();
+                        break;
+                    case R.id.action_compose:
+                        fragment = new ComposeFragment();
                         break;
                     default:
                         fragment = new HomeFragment();

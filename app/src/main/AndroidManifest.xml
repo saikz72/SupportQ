@@ -16,9 +16,6 @@
         android:usesCleartextTraffic="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".Activities.ComposeActivity"
-            android:screenOrientation="portrait" />
-        <activity
             android:name=".Activities.RegistrationActivity"
             android:screenOrientation="portrait" />
         <activity

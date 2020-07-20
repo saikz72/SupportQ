@@ -1,7 +1,6 @@
 package com.example.supportq.Adapters;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,7 +9,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.cardview.widget.CardView;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -28,10 +26,11 @@ import java.util.List;
 import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
 
 public class ProfileAdapter extends RecyclerView.Adapter<ProfileAdapter.ViewHolder> {
-
+    public static final String TAG = "ProfileAdapter";
+    public static final int RADIUS = 40;
+    public static final int MARGIN = 10;
     private List<Question> allQuestions;
     private Context context;
-    public static final String TAG = "ProfileAdapter";
 
     public ProfileAdapter(List<Question> allQuestions, Context context) {
         this.allQuestions = allQuestions;
@@ -147,8 +146,8 @@ public class ProfileAdapter extends RecyclerView.Adapter<ProfileAdapter.ViewHold
             if (profilePhoto != null)
                 Glide.with(context).load(profilePhoto.getUrl()).transform(new CircleCrop()).into(ivProfilePicture);
             ParseFile mediaImage = question.getImage();
-            if(mediaImage != null)
-                Glide.with(context).load(mediaImage.getUrl()).transform(new RoundedCornersTransformation(40, 10)).into(ivMedia);
+            if (mediaImage != null)
+                Glide.with(context).load(mediaImage.getUrl()).transform(new RoundedCornersTransformation(RADIUS, MARGIN)).into(ivMedia);
             setButton(ivLike, question.isLiked(), R.drawable.ic_vector_heart_stroke, R.drawable.ic_vector_heart, R.color.likedRed);
             setLikeText(question, tvLikeCount);
         }

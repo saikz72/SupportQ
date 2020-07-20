@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/login_background_color"
+    android:paddingHorizontal="20dp"
+    android:paddingTop="100dp">
+
+
+    <EditText
+        android:id="@+id/etCompose"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="64dp"
+        android:background="@drawable/rounded_edit_text"
+        android:ems="10"
+        android:imeOptions="actionDone"
+        android:hint="@string/question_hint"
+        android:inputType="textMultiLine"
+        android:minLines="5"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.6"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ivMedia" />
+
+    <Button
+        android:id="@+id/btnCompose"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/compose_button_submit"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/custom_button"
+        android:text="@string/post_question"
+        android:textColor="@color/login_button_textcolor"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/etCompose" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -4,18 +4,14 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.KeyEvent;
 import android.view.View;
-import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.supportq.Models.ProgressIndicator;
 import com.example.supportq.R;
 import com.example.supportq.Validator;
-import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import com.parse.LogInCallback;
 import com.parse.ParseException;
@@ -23,6 +19,9 @@ import com.parse.ParseFacebookUtils;
 import com.parse.ParseUser;
 
 public class LoginActivity extends AppCompatActivity {
+    public static final String INCORRECT_USERNAME = "incorrect username";
+    public static final String INCORRECT_PASSWORD = "incorrect password";
+    public static final String TOAST_ERROR_MESSAGE = "something went wrong";
     private ImageView btnLogin;
     private Button btnSignUp;
     private Button btnSignIn;
@@ -74,8 +73,8 @@ public class LoginActivity extends AppCompatActivity {
             public void done(ParseUser user, ParseException e) {
                 if (e != null) {
                     ProgressIndicator.hideMessage(LoginActivity.this);
-                    username_input_text.setError("incorrect username");
-                    password_input_text.setError("incorrect password");
+                    username_input_text.setError(INCORRECT_USERNAME);
+                    password_input_text.setError(INCORRECT_PASSWORD);
                     return;
                 }
                 goToMainActivity();
@@ -92,10 +91,9 @@ public class LoginActivity extends AppCompatActivity {
                     @Override
                     public void done(ParseUser user, ParseException e) {
                         if (e != null) {
-                            Toast.makeText(LoginActivity.this, "something went wrong", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(LoginActivity.this, TOAST_ERROR_MESSAGE, Toast.LENGTH_SHORT).show();
                             btnLogin.setVisibility(View.INVISIBLE);
                         } else if (user == null) {
-                            Toast.makeText(LoginActivity.this, "cancelled facebook login", Toast.LENGTH_SHORT).show();
                             btnLogin.setVisibility(View.VISIBLE);
                         }
                         logUser(user);

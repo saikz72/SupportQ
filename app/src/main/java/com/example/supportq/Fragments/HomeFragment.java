@@ -1,7 +1,5 @@
 package com.example.supportq.Fragments;
 
-import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -16,35 +14,29 @@ import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
-import com.example.supportq.Activities.ComposeActivity;
 import com.example.supportq.Adapters.QuestionAdapter;
 import com.example.supportq.Models.Question;
 import com.example.supportq.R;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseQuery;
-
-import org.parceler.Parcels;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class HomeFragment extends Fragment {
+    public static final String FETCHING_POST_ERROR = "Issue with getting posts";
     private RecyclerView rvQuestion;
     private QuestionAdapter questionAdapter;
     private List<Question> allQuestions;
-    private FloatingActionButton floatingActionButton;
-    ProgressBar progressBar;
-    public final int REQUEST_CODE = 10;
+    private ProgressBar progressBar;
 
     public HomeFragment() {
         // Required empty public constructor
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_home, container, false);
     }
@@ -53,7 +45,6 @@ public class HomeFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         rvQuestion = view.findViewById(R.id.rvQuestions);
-        floatingActionButton = view.findViewById(R.id.floating_action_button);
         progressBar = view.findViewById(R.id.pbLoading);
         allQuestions = new ArrayList<>();
         questionAdapter = new QuestionAdapter(allQuestions, getContext());
@@ -63,19 +54,9 @@ public class HomeFragment extends Fragment {
         //set the layout manager on the recycler view
         rvQuestion.setLayoutManager(linearLayoutManager);
         rvQuestion.setHasFixedSize(true);
-        floatingActionButtonClicked();
         queryPost();
     }
 
-    public void floatingActionButtonClicked(){
-        floatingActionButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getContext(), ComposeActivity.class);
-                startActivityForResult(intent, REQUEST_CODE);
-            }
-        });
-    }
 
     private void queryPost() {
         progressBar.setVisibility(ProgressBar.VISIBLE);
@@ -86,7 +67,7 @@ public class HomeFragment extends Fragment {
             @Override
             public void done(List<Question> questions, ParseException e) {
                 if (e != null) {
-                    Toast.makeText(getContext(), "Issue with getting posts", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), FETCHING_POST_ERROR, Toast.LENGTH_SHORT).show();
                     return;
                 }
                 questionAdapter.clear();
