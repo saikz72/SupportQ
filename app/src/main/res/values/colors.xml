@@ -16,4 +16,6 @@
     <color name="white_backgroud">#FFFFFF</color>
     <color name="blue">#4336D3</color>
     <color name="gray">#3e4449</color>
+    <color name="green">#289647</color>
+    <color name="verify_color">#4AE209</color>
 </resources>

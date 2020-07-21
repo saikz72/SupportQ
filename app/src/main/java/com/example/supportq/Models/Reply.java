@@ -41,11 +41,11 @@ public class Reply extends ParseObject {
         return (Question) getParseObject(KEY_QUESTION_ID);
     }
 
-    public void setReply(String reply){
+    public void setReply(String reply) {
         put(KEY_REPLY_TEXT, reply);
     }
 
-    public String getReply(){
+    public String getReply() {
         return getString(KEY_REPLY_TEXT);
     }
 

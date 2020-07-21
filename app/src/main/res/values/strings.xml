@@ -28,4 +28,5 @@
     <string name="create_account_prompt">Don\'t have an account?</string>
     <string name="reply">replies</string>
     <string name="respond">Compose your reply</string>
+    <string name="approved_message">The instructor approved this answer</string>
 </resources>
