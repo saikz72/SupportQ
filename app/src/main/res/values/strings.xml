@@ -29,4 +29,5 @@
     <string name="reply">replies</string>
     <string name="respond">Compose your reply</string>
     <string name="approved_message">The instructor approved this answer</string>
+    <string name="save">Save</string>
 </resources>

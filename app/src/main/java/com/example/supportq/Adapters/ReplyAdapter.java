@@ -40,18 +40,8 @@ public class ReplyAdapter extends RecyclerView.Adapter<ReplyAdapter.ViewHolder> 
         View view = LayoutInflater.from(context).inflate(R.layout.item_reply, parent, false);
         currentUser = ParseUser.getCurrentUser();
         final ReplyAdapter.ViewHolder holder = new ReplyAdapter.ViewHolder(view);
-        holder.ivVerify.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                int position = holder.getAdapterPosition();
-                Reply reply = allReplies.get(position);
-                if (currentUser.getObjectId().equals(INSTRUCTOR_ID) || currentUser.getObjectId().equals(TA_ID)) {
-                    reply.setIsApproved(!reply.getIsApproved());
-                    reply.saveInBackground();
-                    setVerificationButton(holder.ivVerify, reply.getIsApproved(), R.drawable.very_inactive, R.drawable.verify_activie, R.color.green);
-                }
-            }
-        });
+        holder.verifyReply();
+        holder.deleteResponse();
         return holder;
     }
 
@@ -84,6 +74,14 @@ public class ReplyAdapter extends RecyclerView.Adapter<ReplyAdapter.ViewHolder> 
         iv.setColorFilter(ContextCompat.getColor(context, isActive ? activeColor : R.color.medium_gray));
     }
 
+    // Removes reply at this position
+    public void removeAt(Reply reply, int position) throws ParseException {
+        allReplies.remove(position);
+        notifyItemRemoved(position);
+        reply.delete();
+        reply.saveInBackground();
+    }
+
     class ViewHolder extends RecyclerView.ViewHolder {
         private TextView tvUsername;
         private TextView tvTimeStamp;
@@ -105,21 +103,64 @@ public class ReplyAdapter extends RecyclerView.Adapter<ReplyAdapter.ViewHolder> 
         }
 
         public void bind(Reply reply) {
+            verificationStatus(reply);
+            deleteIconVisibility(reply);
+            setVerificationButton(ivVerify, reply.getIsApproved(), R.drawable.very_inactive, R.drawable.verify_activie, R.color.green);
             tvTimeStamp.setText(reply.getCreatedTimeAgo());
+            tvReply.setText(reply.getReply());
             try {
                 tvUsername.setText(reply.getUser().fetchIfNeeded().getUsername());
-            } catch (ParseException e) { }
-            tvReply.setText(reply.getReply());
+            } catch (ParseException e) {
+            }
             ParseFile profilePhoto = reply.getUser().getParseFile(User.KEY_PROFILE_PICTURE);
             if (profilePhoto != null)
                 Glide.with(context).load(profilePhoto.getUrl()).transform(new CircleCrop()).into(ivProfilePicture);
-            setVerificationButton(ivVerify, reply.getIsApproved(), R.drawable.very_inactive, R.drawable.verify_activie, R.color.green);
-            if (reply.getIsApproved()) {
+        }
+
+        //checks whether response is verified by instructor
+        public void verificationStatus(Reply reply) {
+            if (reply.getIsApproved())
                 tvApproveNote.setVisibility(View.VISIBLE);
-            }
-            if (reply.getUser().getObjectId().equals(currentUser.getObjectId())) {
+            else if(!reply.getIsApproved())
+                tvApproveNote.setVisibility(View.INVISIBLE);
+        }
+
+        //shows delete icon for current user's replies
+        public void deleteIconVisibility(Reply reply){
+            if (reply.getUser().getObjectId().equals(currentUser.getObjectId()))
                 ivDelete.setVisibility(View.VISIBLE);
-            }
+            else
+                ivDelete.setVisibility(View.INVISIBLE);
+        }
+
+        //method for approving a response by an instructor
+        public void verifyReply() {
+            ivVerify.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    int position = getAdapterPosition();
+                    Reply reply = allReplies.get(position);
+                    if (currentUser.getObjectId().equals(INSTRUCTOR_ID) || currentUser.getObjectId().equals(TA_ID)) {
+                        reply.setIsApproved(!reply.getIsApproved());
+                        reply.saveInBackground();
+                        setVerificationButton(ivVerify, reply.getIsApproved(), R.drawable.very_inactive, R.drawable.verify_activie, R.color.green);
+                    }
+                }
+            });
+        }
+
+        //method for deleting a response by a user
+        public void deleteResponse() {
+            ivDelete.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    int position = getAdapterPosition();
+                    try {
+                        removeAt(allReplies.get(position), position);
+                    } catch (ParseException e) {
+                    }
+                }
+            });
         }
     }
 }
