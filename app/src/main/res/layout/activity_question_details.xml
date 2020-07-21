@@ -4,7 +4,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    android:background="@color/login_background_color">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -225,20 +227,25 @@
             app:layout_constraintTop_toBottomOf="@+id/ivMedia"
             app:layout_constraintVertical_bias="0.0" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rvQuestions"
-            android:layout_width="415dp"
-            android:layout_height="359dp"
-            android:layout_marginTop="12dp"
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/etReply" />
+            app:layout_constraintTop_toBottomOf="@+id/etReply">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvQuestions"
+                android:layout_width="415dp"
+                android:layout_height="359dp"
+                android:layout_marginTop="12dp" />
+        </RelativeLayout>
 
         <ImageView
             android:id="@+id/ivSendReply"
             android:layout_width="34dp"
             android:layout_height="38dp"
-            android:layout_marginTop="28dp"
+            android:layout_marginTop="20dp"
             android:layout_marginEnd="16dp"
             android:src="@drawable/ufi_new_direct"
             app:layout_constraintBottom_toBottomOf="@+id/etReply"
@@ -250,7 +257,7 @@
             android:id="@+id/etReply"
             android:layout_width="334dp"
             android:layout_height="50dp"
-            android:layout_marginTop="12dp"
+            android:layout_marginTop="8dp"
             android:background="@drawable/rounded_edit_text"
             android:ems="10"
             android:hint="@string/respond"
@@ -259,10 +266,9 @@
             android:minLines="5"
             android:textAlignment="center"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintHorizontal_bias="0.207"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/view4" />
-
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

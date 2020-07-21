@@ -17,16 +17,22 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentEnd="true"
             android:background="@color/toolbar_color"
             android:minHeight="?attr/actionBarSize"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:menu="@menu/profile_menu"
             app:titleTextColor="@android:color/white">
+
+            <View
+                android:layout_width="160dp"
+                android:layout_height="20dp" />
+
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:contentDescription="@string/app_name"
+                android:scaleType="centerCrop"
+                android:src="@drawable/logo" />
         </androidx.appcompat.widget.Toolbar>
 
         <LinearLayout
@@ -67,27 +73,27 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
             android:text="Full Name"
+            android:textAlignment="center"
             android:textColor="#000000"
             android:textSize="18sp"
-            android:textStyle="bold"
-            android:textAlignment="center" />
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/tvUsername"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
-            android:text="Username"
-            android:textColor="@color/description_color"
-            android:textAlignment="center" />
+            android:text="@string/Username"
+            android:textAlignment="center"
+            android:textColor="@color/description_color" />
 
         <Button
             android:id="@+id/btnLogOut"
             android:layout_width="wrap_content"
             android:layout_height="30dp"
-            android:layout_marginEnd="20dp"
             android:layout_gravity="right"
             android:layout_marginStart="230dp"
+            android:layout_marginEnd="20dp"
             android:background="@drawable/custom_button"
             android:text="@string/logout"
             android:textAllCaps="false"
@@ -104,7 +110,6 @@
                 android:layout_height="wrap_content"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintVertical_bias="0.0" />
 
@@ -120,6 +125,7 @@
                 android:layout_marginTop="1dp"
                 android:layout_marginEnd="175dp"
                 android:visibility="invisible" />
+
         </RelativeLayout>
     </LinearLayout>
 </ScrollView>
