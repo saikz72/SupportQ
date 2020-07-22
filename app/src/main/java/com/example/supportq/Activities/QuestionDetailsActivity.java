@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.os.Bundle;
 import android.view.View;
@@ -42,6 +43,7 @@ public class QuestionDetailsActivity extends AppCompatActivity {
     private ImageView ivLike;
     private ImageView ivDelete;
     private ImageView ivProfilePicture;
+    private SwipeRefreshLayout swipeContainer;
     private EditText etReply;
     private RecyclerView rvQuestions;
     private ImageView ivSendReply;
@@ -71,6 +73,14 @@ public class QuestionDetailsActivity extends AppCompatActivity {
         likeIconClicked();
         replyListener();
         queryReply();
+        swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                queryReply();
+            }
+        });
+        // Configure the refreshing colors
+        swipeContainer.setColorSchemeResources(android.R.color.holo_blue_bright, android.R.color.holo_green_light, android.R.color.holo_orange_light, android.R.color.holo_red_light);
     }
 
     public void setViews() {
@@ -87,6 +97,7 @@ public class QuestionDetailsActivity extends AppCompatActivity {
         ivReply = findViewById(R.id.ivReply);
         ivSendReply = findViewById(R.id.ivSendReply);
         etReply = findViewById(R.id.etReply);
+        swipeContainer = findViewById(R.id.swipeContainer);
     }
 
     public void replyListener(){
@@ -120,6 +131,7 @@ public class QuestionDetailsActivity extends AppCompatActivity {
                 replyAdapter.clear();
                 replyAdapter.addAll(replies);
                 setReplyText(question, tvReplyCount);
+                swipeContainer.setRefreshing(false);
             }
         });
     }

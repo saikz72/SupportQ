@@ -91,8 +91,8 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHo
 
     private void setLikeText(Question post, TextView view) {
         int likeCount = post.getLikeCount();
-        if (likeCount == 1) view.setText(String.format("%d", post.getLikeCount()));
-        else view.setText(String.format("%d", post.getLikeCount()));
+        if (likeCount == 1) view.setText(String.format("%d like", post.getLikeCount()));
+        else view.setText(String.format("%d likes", post.getLikeCount()));
     }
     //sets the comment count on the post
     private void setReplyText(Question question, TextView view){
