@@ -91,7 +91,6 @@ public class LoginActivity extends AppCompatActivity {
                     public void done(ParseUser user, ParseException e) {
                         if (e != null) {
                             Toast.makeText(LoginActivity.this, TOAST_ERROR_MESSAGE, Toast.LENGTH_SHORT).show();
-                        } else if (user == null) {
                         }
                         logUser(user);
                     }
@@ -126,7 +125,6 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(LoginActivity.this, SignUpActivity.class);
                 startActivity(intent);
-                finish();
             }
         });
     }

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="10dp">
@@ -9,12 +10,12 @@
         android:id="@+id/tvLikeCount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="2dp"
+        android:layout_marginTop="4dp"
         android:text="@string/favs"
         android:textSize="12sp"
-        app:layout_constraintBottom_toBottomOf="@+id/ivLike"
-        app:layout_constraintStart_toEndOf="@+id/ivLike"
-        app:layout_constraintTop_toTopOf="@+id/ivLike" />
+        app:layout_constraintEnd_toEndOf="@+id/ivLike"
+        app:layout_constraintStart_toStartOf="@+id/ivLike"
+        app:layout_constraintTop_toBottomOf="@+id/ivLike" />
 
     <ImageView
         android:id="@+id/ivProfilePicture"
@@ -151,11 +152,12 @@
         android:id="@+id/tvReplyCount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="2dp"
+        android:layout_marginTop="4dp"
         android:text="@string/reply"
         android:textSize="12sp"
-        app:layout_constraintBottom_toBottomOf="@+id/ivReply"
-        app:layout_constraintStart_toEndOf="@+id/ivReply"
-        app:layout_constraintTop_toTopOf="@+id/ivReply" />
+        app:layout_constraintEnd_toEndOf="@+id/ivReply"
+        app:layout_constraintHorizontal_bias="0.3"
+        app:layout_constraintStart_toStartOf="@+id/ivReply"
+        app:layout_constraintTop_toBottomOf="@+id/ivReply" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
