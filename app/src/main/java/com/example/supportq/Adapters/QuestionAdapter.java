@@ -94,6 +94,14 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHo
         if (likeCount == 1) view.setText(String.format("%d", post.getLikeCount()));
         else view.setText(String.format("%d", post.getLikeCount()));
     }
+    //sets the comment count on the post
+    private void setReplyText(Question question, TextView view){
+        int replyCount = question.getRepliesCount();
+        if(replyCount == 1)
+            view.setText(String.format("%d reply", replyCount));
+        else
+            view.setText(String.format("%d replies", replyCount));
+    }
 
     // Clean all elements of the recycler
     public void clear() {
@@ -125,6 +133,7 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHo
         private ImageView ivDelete;
         private ImageView ivMedia;
         private ImageView ivProfilePicture;
+        private TextView tvReplyCount;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -137,6 +146,7 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHo
             ivDelete = itemView.findViewById(R.id.ivDelete);
             ivMedia = itemView.findViewById(R.id.ivMedia);
             ivProfilePicture = itemView.findViewById(R.id.ivProfilePicture);
+            tvReplyCount = itemView.findViewById(R.id.tvReplyCount);
             itemView.setOnClickListener(this);
         }
 
@@ -160,6 +170,7 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHo
             } else {
                 ivDelete.setVisibility(View.INVISIBLE); //invisble to keep the space even
             }
+            setReplyText(question, tvReplyCount);
         }
 
         //listener for delete button

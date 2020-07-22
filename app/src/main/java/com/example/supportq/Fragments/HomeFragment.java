@@ -7,6 +7,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -30,6 +31,7 @@ public class HomeFragment extends Fragment {
     private QuestionAdapter questionAdapter;
     private List<Question> allQuestions;
     private ProgressBar progressBar;
+    private SwipeRefreshLayout swipeContainer;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -46,6 +48,7 @@ public class HomeFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         rvQuestion = view.findViewById(R.id.rvQuestions);
         progressBar = view.findViewById(R.id.pbLoading);
+        swipeContainer = view.findViewById(R.id.swipeContainer);
         allQuestions = new ArrayList<>();
         questionAdapter = new QuestionAdapter(allQuestions, getContext());
         //set the adapter to the rv
@@ -55,10 +58,17 @@ public class HomeFragment extends Fragment {
         rvQuestion.setLayoutManager(linearLayoutManager);
         rvQuestion.setHasFixedSize(true);
         queryPost();
+        swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                queryPost();
+            }
+        });
+        // Configure the refreshing colors
+        swipeContainer.setColorSchemeResources(android.R.color.holo_blue_bright, android.R.color.holo_green_light, android.R.color.holo_orange_light, android.R.color.holo_red_light);
     }
 
     private void queryPost() {
-        progressBar.setVisibility(ProgressBar.VISIBLE);
         ParseQuery<Question> query = ParseQuery.getQuery(Question.class);
         query.addDescendingOrder(Question.KEY_CREATED_AT);  //TODO : update how the questions are ordered
         query.include(Question.KEY_USER);
@@ -69,9 +79,10 @@ public class HomeFragment extends Fragment {
                     Toast.makeText(getContext(), FETCHING_POST_ERROR, Toast.LENGTH_SHORT).show();
                     return;
                 }
+                progressBar.setVisibility(ProgressBar.GONE);
                 questionAdapter.clear();
                 questionAdapter.addAll(questions);
-                progressBar.setVisibility(ProgressBar.GONE);
+                swipeContainer.setRefreshing(false);
             }
         });
     }
