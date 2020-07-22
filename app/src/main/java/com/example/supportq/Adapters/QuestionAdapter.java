@@ -171,7 +171,6 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHo
                     try {
                         removeAt(question, position);
                     } catch (ParseException e) {
-                        e.printStackTrace();
                     }
                 }
             });

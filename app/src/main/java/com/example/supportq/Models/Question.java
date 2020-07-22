@@ -14,6 +14,7 @@ import org.parceler.Parcel;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
 @ParseClassName("Question")
@@ -24,6 +25,7 @@ public class Question extends ParseObject {
     public static final String KEY_CREATED_AT = "createdAt";
     public static final String KEY_LIKES = "likes";
     public static final String KEY_IMAGE = "image";     //image of a question
+    public static final String KEY_REPLIES = "replies";
 
     //sets the description of the question
     public void setDescription(String description) {
@@ -40,7 +42,7 @@ public class Question extends ParseObject {
         put(KEY_USER, user);
     }
 
-    public ParseUser getUser() throws Exception{
+    public ParseUser getUser() throws Exception {
         return getParseUser(KEY_USER);
     }
 
@@ -54,6 +56,26 @@ public class Question extends ParseObject {
 
     public void setImage(ParseFile parseFile) {
         put(KEY_IMAGE, parseFile);
+    }
+
+    public void setReplies(List<Reply> replies) {
+        put(KEY_REPLIES, replies);
+    }
+
+    public JSONArray getReplies() {
+        return getJSONArray(KEY_REPLIES);
+    }
+
+    //Returns the number of replies on this post
+    public int getRepliesCount() {
+        JSONArray jsonArray = getReplies();
+        if (jsonArray == null)
+            return 0;
+        int count = 0;
+        for (int i = 0; i < jsonArray.length(); i++) {
+            count++;
+        }
+        return count;
     }
 
     // getRelativeTimeAgo("Mon Apr 01 21:16:23 +0000 2014");

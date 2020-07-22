@@ -23,7 +23,7 @@ import com.parse.ParseUser;
 import java.util.List;
 
 public class ReplyAdapter extends RecyclerView.Adapter<ReplyAdapter.ViewHolder> {
-    public static final String INSTRUCTOR_ID = "70DSaTvf";
+    public static final String INSTRUCTOR_ID = "70yDSapTvf";
     public static final String TA_ID = "axB9wBpruP";
     private List<Reply> allReplies;
     private Context context;
@@ -119,8 +119,9 @@ public class ReplyAdapter extends RecyclerView.Adapter<ReplyAdapter.ViewHolder> 
 
         //checks whether response is verified by instructor
         public void verificationStatus(Reply reply) {
-            if (reply.getIsApproved())
-                tvApproveNote.setVisibility(View.VISIBLE);
+            if (reply.getIsApproved()){
+                tvApproveNote.setVisibility(View.VISIBLE); 
+            }
             else if(!reply.getIsApproved())
                 tvApproveNote.setVisibility(View.INVISIBLE);
         }

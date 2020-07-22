@@ -97,7 +97,6 @@ public class QuestionDetailsActivity extends AppCompatActivity {
                 reply.setReply(etReply.getText().toString());
                 reply.setUser(currentUser);
                 reply.setQuestionId(question);
-                //TODO --> APPROVE
                 reply.saveInBackground();
                 etReply.setText("");
                 queryReply();
@@ -116,8 +115,11 @@ public class QuestionDetailsActivity extends AppCompatActivity {
                     Toast.makeText(QuestionDetailsActivity.this, LoginActivity.TOAST_ERROR_MESSAGE, Toast.LENGTH_SHORT).show();
                     return;
                 }
+                question.setReplies(replies);
+                question.saveInBackground();
                 replyAdapter.clear();
                 replyAdapter.addAll(replies);
+                setReplyText(question, tvReplyCount);
             }
         });
     }
@@ -161,6 +163,15 @@ public class QuestionDetailsActivity extends AppCompatActivity {
         int likeCount = post.getLikeCount();
         if (likeCount == 1) view.setText(String.format("%d like", post.getLikeCount()));
         else view.setText(String.format("%d Likes", post.getLikeCount()));
+    }
+
+    //sets the comment count on the post
+    private void setReplyText(Question question, TextView view){
+        int replyCount = question.getRepliesCount();
+        if(replyCount == 1)
+            view.setText(String.format("%d reply", replyCount));
+        else
+            view.setText(String.format("%d replies", replyCount));
     }
 
 }
