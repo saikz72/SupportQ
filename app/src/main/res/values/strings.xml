@@ -30,4 +30,5 @@
     <string name="respond">Compose your reply</string>
     <string name="approved_message">The instructor approved this answer</string>
     <string name="save">Save</string>
+    <string name="name">Name</string>
 </resources>

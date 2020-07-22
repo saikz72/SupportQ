@@ -1,130 +1,74 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fillViewport="true"
-    android:background="@color/login_background_color">
+    android:background="@color/login_background_color"
+    android:fillViewport="true">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-        <View
-            android:id="@+id/view3"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:background="#626166"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvReplyCount"
-            app:layout_constraintVertical_bias="0.0" />
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
 
-        <View
-            android:id="@+id/view4"
-            android:layout_width="500dp"
-            android:layout_height="1dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="8dp"
-            android:background="#939299"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.504"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/ivReply"
-            app:layout_constraintVertical_bias="0.0" />
+            <ImageView
+                android:id="@+id/ivProfilePicture"
+                android:layout_width="@dimen/details_profile_width"
+                android:layout_height="@dimen/profile_image_height"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                app:srcCompat="@drawable/com_facebook_profile_picture_blank_portrait" />
 
-        <View
-            android:id="@+id/view2"
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:background="#939299"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvTimeStamp"
-            app:layout_constraintVertical_bias="0.0" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:orientation="vertical">
 
-        <ImageView
-            android:id="@+id/ivReply"
-            android:layout_width="@dimen/details_im_width"
-            android:layout_height="@dimen/details_im_height"
-            android:layout_marginTop="4dp"
-            android:scaleType="centerCrop"
-            app:layout_constraintEnd_toStartOf="@+id/ivLike"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/view3"
-            app:srcCompat="@drawable/ufi_comment" />
+                <TextView
+                    android:id="@+id/tvFullname"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:text="@string/name"
+                    android:textColor="@color/description_color"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tvUsername"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:text="Screen Name"
+                    android:textSize="18dp" />
+            </LinearLayout>
+        </LinearLayout>
 
         <TextView
-            android:id="@+id/tvReplyCount"
-            android:layout_width="wrap_content"
+            android:id="@+id/tvDescription"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="12dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="8dp"
-            android:text="replies"
+            android:autoLink="all"
+            android:linksClickable="true"
+            android:text="@string/description"
             android:textColor="#000000"
-            android:textSize="14sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.28"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/view2"
-            app:layout_constraintVertical_bias="0.0" />
-
-        <ImageView
-            android:id="@+id/ivLike"
-            android:layout_width="@dimen/details_reply_width"
-            android:layout_height="@dimen/details_reply_heigth"
-            android:layout_marginTop="8dp"
-            app:layout_constraintEnd_toStartOf="@+id/ivDelete"
-            app:layout_constraintStart_toEndOf="@+id/ivReply"
-            app:layout_constraintTop_toBottomOf="@+id/view3"
-            app:srcCompat="@drawable/ic_vector_heart_stroke" />
-
-        <TextView
-            android:id="@+id/tvLikeCount"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="12dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="8dp"
-            android:text="likes"
-            android:textColor="#000000"
-            android:textSize="14sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.463"
-            app:layout_constraintStart_toEndOf="@+id/tvReplyCount"
-            app:layout_constraintTop_toBottomOf="@+id/view2"
-            app:layout_constraintVertical_bias="0.0" />
-
-        <ImageView
-            android:id="@+id/ivDelete"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="76dp"
-            android:visibility="gone"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/view3"
-            app:srcCompat="@drawable/ic_baseline_delete_24" />
+            android:textColorLink="@color/blue"
+            android:textSize="22sp"
+            android:layout_marginHorizontal="10dp"/>
 
         <ImageView
             android:id="@+id/ivMedia"
@@ -134,82 +78,7 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
-            android:adjustViewBounds="true"
-            android:tint="#03FFFFFF"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvDescription"
-            app:layout_constraintVertical_bias="0.0" />
-
-        <ImageView
-            android:id="@+id/ivProfilePicture"
-            android:layout_width="@dimen/details_profile_width"
-            android:layout_height="@dimen/profile_image_height"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.013"
-            app:srcCompat="@drawable/com_facebook_profile_picture_blank_portrait" />
-
-        <TextView
-            android:id="@+id/tvFullname"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="8dp"
-            android:text="Name"
-            android:textColor="#000000"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toEndOf="@+id/ivProfilePicture"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.046" />
-
-        <TextView
-            android:id="@+id/tvUsername"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="8dp"
-            android:text="Screen Name"
-            android:textSize="18dp"
-            app:layout_constraintBottom_toTopOf="@+id/tvDescription"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toEndOf="@+id/ivProfilePicture"
-            app:layout_constraintTop_toBottomOf="@+id/tvFullname"
-            app:layout_constraintVertical_bias="0.0" />
-
-        <TextView
-            android:id="@+id/tvDescription"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="10dp"
-            android:layout_marginBottom="8dp"
-            android:autoLink="all"
-            android:linksClickable="true"
-            android:text="@string/description"
-            android:textColor="#000000"
-            android:textColorLink="@color/blue"
-            android:textSize="22sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/ivProfilePicture"
-            app:layout_constraintVertical_bias="0.01999998" />
+            android:tint="#03FFFFFF" />
 
         <TextView
             android:id="@+id/tvTimeStamp"
@@ -219,56 +88,133 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="10dp"
             android:layout_marginBottom="8dp"
-            android:text="@string/timeStamp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/ivMedia"
-            app:layout_constraintVertical_bias="0.0" />
+            android:text="@string/timeStamp" />
+
+        <View
+            android:id="@+id/view4"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="8dp"
+            android:background="#939299" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tvReplyCount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp"
+                android:text="replies"
+                android:textColor="#000000"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/tvLikeCount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp"
+                android:text="likes"
+                android:textColor="#000000"
+                android:textSize="14sp" />
+
+        </LinearLayout>
+
+        <View
+            android:id="@+id/view3"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:background="#626166" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/ivReply"
+                android:layout_width="@dimen/details_im_width"
+                android:layout_height="@dimen/details_im_height"
+                android:layout_marginStart="80dp"
+                android:layout_marginTop="6dp"
+                android:scaleType="centerCrop"
+                app:srcCompat="@drawable/ufi_comment" />
+
+            <ImageView
+                android:id="@+id/ivLike"
+                android:layout_width="@dimen/details_like_width"
+                android:layout_height="@dimen/details_like_height"
+                android:layout_marginStart="80dp"
+                android:layout_marginTop="8dp"
+                app:srcCompat="@drawable/ic_vector_heart_stroke" />
+
+            <ImageView
+                android:id="@+id/ivDelete"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="80dp"
+                android:layout_marginTop="8dp"
+                android:visibility="visible"
+                app:srcCompat="@drawable/ic_baseline_delete_24" />
+        </LinearLayout>
+
+        <View
+            android:id="@+id/view2"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:background="#939299" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/etReply"
+                android:layout_width="@dimen/details_reply_width"
+                android:layout_height="@dimen/details_reply_heigth"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/rounded_edit_text"
+                android:ems="10"
+                android:hint="@string/respond"
+                android:imeOptions="actionDone"
+                android:inputType="textMultiLine"
+                android:minLines="5"
+                android:textAlignment="center" />
+
+            <ImageView
+                android:id="@+id/ivSendReply"
+                android:layout_width="@dimen/details_send_reply_width"
+                android:layout_height="@dimen/details_send_reply_height"
+                android:layout_marginTop="15dp"
+                android:src="@drawable/ufi_new_direct" />
+        </LinearLayout>
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/etReply">
+            android:descendantFocusability="blocksDescendants">
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvQuestions"
-                android:layout_width="415dp"
-                android:layout_height="359dp"
-                android:layout_marginTop="12dp" />
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
         </RelativeLayout>
-
-        <ImageView
-            android:id="@+id/ivSendReply"
-            android:layout_width="34dp"
-            android:layout_height="38dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginEnd="16dp"
-            android:src="@drawable/ufi_new_direct"
-            app:layout_constraintBottom_toBottomOf="@+id/etReply"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/ivLike"
-            app:layout_constraintVertical_bias="0.0" />
-
-        <EditText
-            android:id="@+id/etReply"
-            android:layout_width="334dp"
-            android:layout_height="50dp"
-            android:layout_marginTop="8dp"
-            android:background="@drawable/rounded_edit_text"
-            android:ems="10"
-            android:hint="@string/respond"
-            android:imeOptions="actionDone"
-            android:inputType="textMultiLine"
-            android:minLines="5"
-            android:textAlignment="center"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.207"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/view4" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-</ScrollView>
+    </LinearLayout>
+</androidx.core.widget.NestedScrollView>

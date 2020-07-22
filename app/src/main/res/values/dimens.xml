@@ -57,9 +57,13 @@
     <!--question_details_activity -->
     <dimen name="details_im_width">28dp</dimen>
     <dimen name="details_im_height">29dp</dimen>
-    <dimen name="details_reply_width">32dp</dimen>
-    <dimen name="details_reply_heigth">29dp</dimen>
+    <dimen name="details_reply_width">334dp</dimen>
+    <dimen name="details_reply_heigth">50dp</dimen>
     <dimen name="details_profile_width">70dp</dimen>
     <dimen name="details_profile_heigth">70dp</dimen>
+    <dimen name="details_send_reply_width">34dp</dimen>
+    <dimen name="details_send_reply_height">38dp</dimen>
+    <dimen name="details_like_width">28dp</dimen>
+    <dimen name="details_like_height">28dp</dimen>
 
 </resources>
