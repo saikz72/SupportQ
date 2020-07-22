@@ -91,9 +91,7 @@ public class LoginActivity extends AppCompatActivity {
                     public void done(ParseUser user, ParseException e) {
                         if (e != null) {
                             Toast.makeText(LoginActivity.this, TOAST_ERROR_MESSAGE, Toast.LENGTH_SHORT).show();
-                            btnLogin.setVisibility(View.INVISIBLE);
                         } else if (user == null) {
-                            btnLogin.setVisibility(View.VISIBLE);
                         }
                         logUser(user);
                     }
