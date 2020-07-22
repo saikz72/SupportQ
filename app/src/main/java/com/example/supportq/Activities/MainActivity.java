@@ -20,7 +20,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 public class MainActivity extends AppCompatActivity {
     public final static int MAX_NUMBER_POST = 10;
     private BottomNavigationView bottomNavigationView;
-    public final FragmentManager fragmentManager = getSupportFragmentManager();
+    public   final FragmentManager fragmentManager = getSupportFragmentManager();
     private Toolbar toolbar;
 
     @Override
