@@ -103,7 +103,6 @@ Question
 | replyCount |     Number      |          number of replies for the post                                      |
 |   createdAt   |      Date       |   date when post is created (default field)    |
 
-
 User
 |   property    |      type       |                  description                   |
 |:-------------:|:---------------:|:----------------------------------------------:|
@@ -113,6 +112,7 @@ User
 |    email      |       String   |     email address of the user |
 |    password      |       String   |     password of the user |
 
+
 Reply
 |   property    |      type       |                  description                   |
 |:-------------:|:---------------:|:----------------------------------------------:|
@@ -121,7 +121,6 @@ Reply
 |   createdAt   |      Date       |   date when comment is created (default field)    |
 |  updatedAt      |       Date   |     date when comment was updated (default field) |
 |approved      |       Boolean   |     post has been approved by Instructor |
-
 
 ### Networking
 #### List of network request by screen
