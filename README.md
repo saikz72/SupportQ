@@ -36,7 +36,6 @@ Inspired by the codepath in-class support queue (hence the name), this app lets 
 - [ ] user gets notified when their question is answered
 - [ ] pull to refresh home feed
 - [ ] user can tap on a notification and be redirected to a detail screen
-- [ ] user can turn off notification on the profile screen
 - [ ] user can search through the feed for a specific question/concern
 - [ ] Integration of facebook sdk
 - [ ] User can load more posts once he or she reaches the bottom of the feed using endless scrolling.
