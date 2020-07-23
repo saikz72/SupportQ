@@ -1,5 +1,6 @@
 package com.example.supportq.Adapters;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
@@ -32,12 +33,15 @@ import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
 
 public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHolder> {
     public static final String TAG = "QuestionAdapter";
+    public static final int REQUEST_CODE = 200;
     private List<Question> allQuestions;
     private Context context;
+    private Activity activity;
 
-    public QuestionAdapter(List<Question> allQuestions, Context context) {
+    public QuestionAdapter(List<Question> allQuestions, Context context, Activity activity) {
         this.allQuestions = allQuestions;
         this.context = context;
+        this.activity = activity;
     }
 
     @NonNull
@@ -94,10 +98,11 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHo
         if (likeCount == 1) view.setText(String.format("%d like", post.getLikeCount()));
         else view.setText(String.format("%d likes", post.getLikeCount()));
     }
+
     //sets the comment count on the post
-    private void setReplyText(Question question, TextView view){
+    private void setReplyText(Question question, TextView view) {
         int replyCount = question.getRepliesCount();
-        if(replyCount == 1)
+        if (replyCount == 1)
             view.setText(String.format("%d reply", replyCount));
         else
             view.setText(String.format("%d replies", replyCount));
@@ -193,7 +198,7 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHo
             if (getAdapterPosition() != RecyclerView.NO_POSITION) {
                 Question question = allQuestions.get(getAdapterPosition());
                 intent.putExtra(HomeFragment.HOME_FRAGMENT_KEY, Parcels.wrap(question));
-                context.startActivity(intent);
+                activity.startActivityForResult(intent, REQUEST_CODE);
             }
         }
     }

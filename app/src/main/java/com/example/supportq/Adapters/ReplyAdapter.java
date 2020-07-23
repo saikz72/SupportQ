@@ -120,7 +120,8 @@ public class ReplyAdapter extends RecyclerView.Adapter<ReplyAdapter.ViewHolder> 
         //checks whether response is verified by instructor
         public void verificationStatus(Reply reply) {
             if (reply.getIsApproved()){
-                tvApproveNote.setVisibility(View.VISIBLE); 
+                tvApproveNote.setVisibility(View.VISIBLE);
+                //tvApproveNote.setText("random");
             }
             else if(!reply.getIsApproved())
                 tvApproveNote.setVisibility(View.INVISIBLE);
@@ -145,6 +146,7 @@ public class ReplyAdapter extends RecyclerView.Adapter<ReplyAdapter.ViewHolder> 
                         reply.setIsApproved(!reply.getIsApproved());
                         reply.saveInBackground();
                         setVerificationButton(ivVerify, reply.getIsApproved(), R.drawable.very_inactive, R.drawable.verify_activie, R.color.green);
+                        verificationStatus(reply);
                     }
                 }
             });

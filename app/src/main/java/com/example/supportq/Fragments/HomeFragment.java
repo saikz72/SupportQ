@@ -50,7 +50,7 @@ public class HomeFragment extends Fragment {
         progressBar = view.findViewById(R.id.pbLoading);
         swipeContainer = view.findViewById(R.id.swipeContainer);
         allQuestions = new ArrayList<>();
-        questionAdapter = new QuestionAdapter(allQuestions, getContext());
+        questionAdapter = new QuestionAdapter(allQuestions, getContext(), getActivity());
         //set the adapter to the rv
         rvQuestion.setAdapter(questionAdapter);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
