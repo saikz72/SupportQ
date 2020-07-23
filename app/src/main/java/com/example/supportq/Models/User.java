@@ -7,6 +7,7 @@ public class User {
     public static final String KEY_PROFILE_PICTURE_ID = "profilePictureId";
     public static final String KEY_FULL_NAME = "fullName";
     public static final String KEY_PROFILE_PICTURE = "profilePicture";
+    public static final String KEY_IS_INSTRUCTOR = "isInstructor";
 
     // Returns the user's full name.
     public static String getFullName(ParseUser user) {
@@ -34,4 +35,11 @@ public class User {
         user.put(KEY_USERNAME,userName);
     }
 
+    public static void setIsInstructor(ParseUser user){
+        user.put(KEY_IS_INSTRUCTOR, true);
+    }
+
+    public static boolean getIsInstructor(ParseUser user){
+        return user.getBoolean(KEY_IS_INSTRUCTOR);
+    }
 }

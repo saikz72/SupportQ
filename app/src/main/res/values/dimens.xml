@@ -50,8 +50,8 @@
     <dimen name="item_like_width">23dp</dimen>
     <dimen name="item_timestamp_height">17dp</dimen>
     <dimen name="item_comment_height">25dp</dimen>
-    <dimen name="item_comment_width">20dp</dimen>
-    <dimen name="item_delete_width">20dp</dimen>
+    <dimen name="item_comment_width">30dp</dimen>
+    <dimen name="item_delete_width">30dp</dimen>
     <dimen name="item_delete_height">29dp</dimen>
 
     <!--question_details_activity -->

@@ -26,6 +26,7 @@ public class LoginActivity extends AppCompatActivity {
     private Button btnLogin;
     private Button btnSignUp;
     private Button btnSignIn;
+    private Button btnInstructor;
     private TextInputLayout username_input_text;
     private TextInputLayout password_input_text;
 
@@ -40,20 +41,22 @@ public class LoginActivity extends AppCompatActivity {
         }
         setViews();
         faceBookLogin();
-        SignUpButtonListener();
+        signUpAsAStudent();
+        signUpAsAnInstructor();
         signInButtonClicked();
     }
 
-    public void setViews() {
+    private void setViews() {
         btnLogin = findViewById(R.id.btnLogin);
         btnSignUp = findViewById(R.id.btnSignUp);
         btnSignIn = findViewById(R.id.btnSignIn);
+        btnInstructor = findViewById(R.id.btnInstructor);
         username_input_text = findViewById(R.id.username_text_input);
         password_input_text = findViewById(R.id.password_text_input);
     }
 
     //listener for user sign in with existing credentials
-    public void signInButtonClicked() {
+    private void signInButtonClicked() {
         btnSignIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -74,13 +77,13 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     //error message to display on textInput
-    public void errorMessageOnEditText(String usernameError, String passwordError) {
+    private void errorMessageOnEditText(String usernameError, String passwordError) {
         username_input_text.setError(usernameError);
         password_input_text.setError(passwordError);
     }
 
     //message to send user when there is no internent
-    public void internetAvailable(ParseException e) {
+    private void internetAvailable(ParseException e) {
         //connection fail
         if (e.getCode() == e.CONNECTION_FAILED || e.getCode() == e.OTHER_CAUSE) {
             errorMessageOnEditText(null, null);
@@ -90,7 +93,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     //message to send user when the credentials are invalid
-    public void validateLoginCredentials(ParseException e) {
+    private void validateLoginCredentials(ParseException e) {
         //user doesn't exist
         if (e.getCode() == e.OBJECT_NOT_FOUND) {
             ProgressIndicator.hideMessage(LoginActivity.this);
@@ -114,7 +117,7 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
-    public void faceBookLogin() {
+    private void faceBookLogin() {
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -153,11 +156,21 @@ public class LoginActivity extends AppCompatActivity {
         ParseFacebookUtils.onActivityResult(requestCode, resultCode, data);
     }
 
-    public void SignUpButtonListener() {
+    private void signUpAsAStudent() {
         btnSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(LoginActivity.this, SignUpActivity.class);
+                startActivity(intent);
+            }
+        });
+    }
+
+    private void signUpAsAnInstructor() {
+        btnInstructor.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(LoginActivity.this, InstructorSignUpActivity.class);
                 startActivity(intent);
             }
         });
