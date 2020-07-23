@@ -115,13 +115,15 @@ public class ReplyAdapter extends RecyclerView.Adapter<ReplyAdapter.ViewHolder> 
             ParseFile profilePhoto = reply.getUser().getParseFile(User.KEY_PROFILE_PICTURE);
             if (profilePhoto != null)
                 Glide.with(context).load(profilePhoto.getUrl()).transform(new CircleCrop()).into(ivProfilePicture);
+            if(currentUser.getObjectId().equals(INSTRUCTOR_ID) || currentUser.getObjectId().equals(TA_ID))
+                ivVerify.setVisibility(View.VISIBLE);
         }
 
         //checks whether response is verified by instructor
         public void verificationStatus(Reply reply) {
             if (reply.getIsApproved()){
                 tvApproveNote.setVisibility(View.VISIBLE);
-                //tvApproveNote.setText("random");
+                ivVerify.setVisibility(View.VISIBLE);
             }
             else if(!reply.getIsApproved())
                 tvApproveNote.setVisibility(View.INVISIBLE);
