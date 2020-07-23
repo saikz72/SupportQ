@@ -61,7 +61,7 @@ public class InstructorSignUpActivity extends AppCompatActivity {
                     return;
                 }
                 etFullname.setError(null);
-                if (Validator.validateUser(etPassword, etUsername, password, username)) {
+                if (Validator.validateUser(InstructorSignUpActivity.this, etPassword, etUsername, password, username)) {
                     ParseUser user = new ParseUser();
                     user.setPassword(password);
                     user.setUsername(username);

@@ -58,7 +58,7 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View view) {
                 String username = username_input_text.getEditText().getText().toString();
                 String password = password_input_text.getEditText().getText().toString();
-                if (Validator.validateUser(password_input_text, username_input_text, password, username)) {
+                if (Validator.validateUser(LoginActivity.this, password_input_text, username_input_text, password, username)) {
                     if (InternetConnection.isNetworkConnected(LoginActivity.this)) {
                         ProgressIndicator.showMessage(LoginActivity.this);
                         signInExistingUser(username, password);
