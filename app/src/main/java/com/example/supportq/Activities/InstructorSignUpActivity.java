@@ -20,7 +20,6 @@ import com.parse.ParseUser;
 import com.parse.SignUpCallback;
 
 public class InstructorSignUpActivity extends AppCompatActivity {
-    public static final String SECRET_KEY_MESSAGE = "wrong secret key";
     private TextInputLayout etPassword;
     private TextInputLayout etUsername;
     private TextInputLayout etFullname;
@@ -53,12 +52,12 @@ public class InstructorSignUpActivity extends AppCompatActivity {
                 String fullName = etFullname.getEditText().getText().toString();
                 String secretToken = etToken.getEditText().getText().toString();
                 if(!secretToken.equals(BuildConfig.TOKEN)){
-                    etToken.setError(SECRET_KEY_MESSAGE);
+                    etToken.setError(getString(R.string.SECRET_KEY));
                     return;
                 }
                 etToken.setError(null);
                 if (fullName.isEmpty() || fullName.length() < 4) {
-                    etFullname.setError(Validator.FULL_NAME_ERROR);
+                    etFullname.setError(String.valueOf(R.string.FULL_NAME_ERROR));
                     return;
                 }
                 etFullname.setError(null);
@@ -73,7 +72,7 @@ public class InstructorSignUpActivity extends AppCompatActivity {
                         signUp(username, password, user);
                     } else {
                         errorMessageOnEditText(null, null, null);
-                        Toast.makeText(InstructorSignUpActivity.this, LoginActivity.NO_INTERNET_MESSAGE, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(InstructorSignUpActivity.this, getString(R.string.NO_INTERNET_MESSAGE), Toast.LENGTH_SHORT).show();
                         return;
                     }
                 }
@@ -94,7 +93,7 @@ public class InstructorSignUpActivity extends AppCompatActivity {
             public void done(ParseException e) {
                 if (e != null) {
                     ProgressIndicator.hideMessage(InstructorSignUpActivity.this);
-                    Toast.makeText(InstructorSignUpActivity.this, RegistrationActivity.USERNAME_TAKEN, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(InstructorSignUpActivity.this, getString(R.string.USERNAME_TAKEN), Toast.LENGTH_SHORT).show();
                     return;
                 }
                 goMainActivity();

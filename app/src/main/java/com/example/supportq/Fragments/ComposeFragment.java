@@ -21,10 +21,6 @@ import com.parse.ParseUser;
 import com.parse.SaveCallback;
 
 public class ComposeFragment extends Fragment {
-    public static final String QUESTION_EMPTY_ERROR = "question cannot be empty";
-    public static final String QUESTION_LENGTH_ERROR = "question should be at least 5 characters long";
-    public static final String SAVING_ERROR = "Error while trying to save question";
-    public static final String QUESTION_POSTED = "Your question has been posted successfully";
     private Button btnCompose;
     private EditText etCompose;
 
@@ -57,7 +53,7 @@ public class ComposeFragment extends Fragment {
                     ParseUser currentUser = ParseUser.getCurrentUser();
                     saveQuestion(description, currentUser);
                     ProgressIndicator.hideMessage(getContext());
-                    Toast.makeText(getContext(), QUESTION_POSTED, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), getString(R.string.QUESTION_POSTED_TOAST), Toast.LENGTH_SHORT).show();
                 }
                 ProgressIndicator.hideMessage(getContext());
             }
@@ -66,12 +62,12 @@ public class ComposeFragment extends Fragment {
 
     private boolean validatePost(String description) {
         if (description.isEmpty()) {
-            etCompose.setError(QUESTION_EMPTY_ERROR);
+            etCompose.setError(getString(R.string.QUESTION_EMPTY_ERROR));
             etCompose.setBackgroundResource(R.drawable.error_background);
             return false;
         }
         if (description.length() < 5) {
-            etCompose.setError(QUESTION_LENGTH_ERROR);
+            etCompose.setError(getString(R.string.QUESTION_LENGTH_ERROR));
             etCompose.setBackgroundResource(R.drawable.error_background);
             return false;
         }
@@ -87,7 +83,7 @@ public class ComposeFragment extends Fragment {
             public void done(ParseException e) {
                 //check if save succesfully
                 if (e != null) {
-                    Toast.makeText(getContext(), SAVING_ERROR, Toast.LENGTH_LONG).show();
+                    Toast.makeText(getContext(), getString(R.string.SAVING_ERROR), Toast.LENGTH_LONG).show();
                     return;
                 }
                 etCompose.setText("");

@@ -66,4 +66,7 @@
     <dimen name="details_like_width">28dp</dimen>
     <dimen name="details_like_height">28dp</dimen>
 
+    <!--profileAdatper-->
+    <dimen name="RADIUS">40dp</dimen>
+    <dimen name="MARGIN">10dp</dimen>
 </resources>

@@ -17,7 +17,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.CircleCrop;
 import com.example.supportq.Activities.QuestionDetailsActivity;
-import com.example.supportq.Fragments.HomeFragment;
 import com.example.supportq.Models.Question;
 import com.example.supportq.Models.User;
 import com.example.supportq.R;
@@ -95,17 +94,21 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHo
 
     private void setLikeText(Question post, TextView view) {
         int likeCount = post.getLikeCount();
-        if (likeCount == 1) view.setText(String.format("%d like", post.getLikeCount()));
-        else view.setText(String.format("%d likes", post.getLikeCount()));
+        if (likeCount == 1) {
+            view.setText(String.format("%d like", likeCount));
+        } else {
+            view.setText(String.format("%d likes", likeCount));
+        }
     }
 
     //sets the comment count on the post
     private void setReplyText(Question question, TextView view) {
         int replyCount = question.getRepliesCount();
-        if (replyCount == 1)
+        if (replyCount == 1) {
             view.setText(String.format("%d reply", replyCount));
-        else
+        } else {
             view.setText(String.format("%d replies", replyCount));
+        }
     }
 
     // Clean all elements of the recycler
@@ -163,7 +166,7 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHo
                 Glide.with(context).load(profilePhoto.getUrl()).transform(new CircleCrop()).into(ivProfilePicture);
             ParseFile mediaImage = question.getImage();
             if (mediaImage != null)
-                Glide.with(context).load(mediaImage.getUrl()).transform(new RoundedCornersTransformation(ProfileAdapter.RADIUS, ProfileAdapter.MARGIN)).into(ivMedia);
+                Glide.with(context).load(mediaImage.getUrl()).transform(new RoundedCornersTransformation(R.dimen.RADIUS, R.dimen.MARGIN)).into(ivMedia);
             tvUsername.setText(username);
             String timeAgo = question.getCreatedTimeAgo();
             tvTimeStamp.setText(timeAgo);
@@ -187,6 +190,7 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHo
                     try {
                         removeAt(question, position);
                     } catch (ParseException e) {
+                        Log.e(TAG, "onClick: ", e);
                     }
                 }
             });
@@ -197,7 +201,7 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHo
             Intent intent = new Intent(context, QuestionDetailsActivity.class);
             if (getAdapterPosition() != RecyclerView.NO_POSITION) {
                 Question question = allQuestions.get(getAdapterPosition());
-                intent.putExtra(HomeFragment.HOME_FRAGMENT_KEY, Parcels.wrap(question));
+                intent.putExtra(String.valueOf(R.string.HOME_FRAGMENT_KEY), Parcels.wrap(question));
                 activity.startActivityForResult(intent, REQUEST_CODE);
             }
         }

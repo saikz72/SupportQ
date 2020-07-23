@@ -25,8 +25,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class HomeFragment extends Fragment {
-    public static final String FETCHING_POST_ERROR = "Issue with getting posts";
-    public static final String HOME_FRAGMENT_KEY = "HomeFragment";
     private RecyclerView rvQuestion;
     private QuestionAdapter questionAdapter;
     private List<Question> allQuestions;
@@ -76,7 +74,7 @@ public class HomeFragment extends Fragment {
             @Override
             public void done(List<Question> questions, ParseException e) {
                 if (e != null) {
-                    Toast.makeText(getContext(), FETCHING_POST_ERROR, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), getString(R.string.FETCHING_POST_ERROR), Toast.LENGTH_SHORT).show();
                     return;
                 }
                 progressBar.setVisibility(ProgressBar.GONE);

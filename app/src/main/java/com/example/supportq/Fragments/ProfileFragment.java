@@ -129,7 +129,7 @@ public class ProfileFragment extends Fragment {
             @Override
             public void done(List<Question> questions, ParseException e) {
                 if (e != null) {
-                    Toast.makeText(getContext(), HomeFragment.FETCHING_POST_ERROR, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), getString(R.string.FETCHING_POST_ERROR), Toast.LENGTH_SHORT).show();
                     return;
                 }
                 profileAdapter.clear();

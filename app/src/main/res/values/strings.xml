@@ -30,8 +30,52 @@
     <string name="respond">Compose your reply</string>
     <string name="approved_message">The instructor approved this answer</string>
     <string name="save">Save</string>
-    <string name="name">Name</string>
     <string name="instructor_login">Instructor</string>
     <string name="register_prompt">Register as a</string>
     <string name="key">Secret Key</string>
+
+    <!--EditProfileActivity -->
+    <string name="PHOTO_FILENAME">photo.jpg</string>
+    <string name="AUTHORITY">com.codepath.fileprovider.supportq</string>
+    <string name="PICTURE_NOT_TAKEN">Picture not taken</string>
+    <string name="FAILED_TO_CREATE_DIR">Failed to create directory</string>
+
+    <!--InstructorSignUpActivity-->
+    <string name="SECRET_KEY">wrong secret key</string>
+
+    <!--LoginActivity-->
+    <string name="INCORRECT_USERNAME">incorrect username</string>
+    <string name="INCORRECT_PASSWORD">incorrect password</string>
+    <string name="TOAST_ERROR_MESSAGE">something went wrong</string>
+    <string name="NO_INTERNET_MESSAGE">No Internet Connection</string>
+
+    <!--RegistrationActivity -->
+    <string name="REGISTRATION_ERROR">Registration error</string>
+    <string name="USERNAME_TAKEN">Username is already taken</string>
+    <string name="name">name</string>
+
+    <!--ComposeFragment -->
+    <string name="QUESTION_EMPTY_ERROR">question cannot be empty"</string>
+    <string name="QUESTION_LENGTH_ERROR">question should be at least 5 characters long</string>
+    <string name="SAVING_ERROR">Error while trying to save question</string>
+    <string name="QUESTION_POSTED_TOAST">Your question has been posted successfully</string>
+
+    <!--HomeFragment -->
+    <string name="FETCHING_POST_ERROR">Issue with getting posts</string>
+    <string name="HOME_FRAGMENT_KEY">HomeFragment</string>
+
+    <!--ProgressIndicator -->
+    <string name="Loading">Loading....</string>
+    <string name="Wait">Please wait</string>
+
+    <!--Question -->
+    <string name="KEY_DESCRIPTION">description</string>
+
+    <!--Validator-->
+    <string name="PASSWORD_EMPTY_ERROR">password cannot be empty</string>
+    <string name="PASSWORD_LENGTH_ERROR">password should be more than 5 characters</string>
+    <string name="USERNAME_EMPTY_ERROR">username cannot be empty</string>
+    <string name="USERNAME_LENGTH_ERROR">username should be more than 5 characters</string>
+    <string name="FULL_NAME_ERROR">full name should be more than 5 characters</string>
+
 </resources>

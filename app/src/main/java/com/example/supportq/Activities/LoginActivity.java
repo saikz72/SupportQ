@@ -19,10 +19,6 @@ import com.parse.ParseFacebookUtils;
 import com.parse.ParseUser;
 
 public class LoginActivity extends AppCompatActivity {
-    public static final String INCORRECT_USERNAME = "incorrect username";
-    public static final String INCORRECT_PASSWORD = "incorrect password";
-    public static final String TOAST_ERROR_MESSAGE = "something went wrong";
-    public static final String NO_INTERNET_MESSAGE = "No Internet Connection";
     private Button btnLogin;
     private Button btnSignUp;
     private Button btnSignIn;
@@ -68,7 +64,7 @@ public class LoginActivity extends AppCompatActivity {
                         signInExistingUser(username, password);
                     } else {
                         errorMessageOnEditText(null, null);
-                        Toast.makeText(LoginActivity.this, NO_INTERNET_MESSAGE, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(LoginActivity.this, getString(R.string.NO_INTERNET_MESSAGE), Toast.LENGTH_SHORT).show();
                         return;
                     }
                 }
@@ -87,7 +83,7 @@ public class LoginActivity extends AppCompatActivity {
         //connection fail
         if (e.getCode() == e.CONNECTION_FAILED || e.getCode() == e.OTHER_CAUSE) {
             errorMessageOnEditText(null, null);
-            Toast.makeText(LoginActivity.this, NO_INTERNET_MESSAGE, Toast.LENGTH_SHORT).show();
+            Toast.makeText(LoginActivity.this, getString(R.string.NO_INTERNET_MESSAGE), Toast.LENGTH_SHORT).show();
             ProgressIndicator.hideMessage(LoginActivity.this);
         }
     }
@@ -97,7 +93,7 @@ public class LoginActivity extends AppCompatActivity {
         //user doesn't exist
         if (e.getCode() == e.OBJECT_NOT_FOUND) {
             ProgressIndicator.hideMessage(LoginActivity.this);
-            errorMessageOnEditText(INCORRECT_USERNAME, INCORRECT_PASSWORD);
+            errorMessageOnEditText(getString(R.string.INCORRECT_USERNAME), getString(R.string.INCORRECT_PASSWORD));
         }
     }
 

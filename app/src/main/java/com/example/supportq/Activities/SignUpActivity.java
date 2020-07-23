@@ -48,7 +48,7 @@ public class SignUpActivity extends AppCompatActivity {
                 String password = etPassword.getEditText().getText().toString();
                 String fullName = etFullname.getEditText().getText().toString();
                 if (fullName.isEmpty() || fullName.length() < 4) {
-                    etFullname.setError(Validator.FULL_NAME_ERROR);
+                    etFullname.setError(getString(R.string.FULL_NAME_ERROR));
                     return;
                 }
                 etFullname.setError(null);
@@ -62,7 +62,7 @@ public class SignUpActivity extends AppCompatActivity {
                         signUp(username, password, user);
                     } else {
                         errorMessageOnEditText(null, null, null);
-                        Toast.makeText(SignUpActivity.this, LoginActivity.NO_INTERNET_MESSAGE, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(SignUpActivity.this, getString(R.string.NO_INTERNET_MESSAGE), Toast.LENGTH_SHORT).show();
                         return;
                     }
                 }
@@ -83,7 +83,7 @@ public class SignUpActivity extends AppCompatActivity {
             public void done(ParseException e) {
                 if (e != null) {
                     ProgressIndicator.hideMessage(SignUpActivity.this);
-                    Toast.makeText(SignUpActivity.this, RegistrationActivity.USERNAME_TAKEN, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(SignUpActivity.this, getString(R.string.USERNAME_TAKEN), Toast.LENGTH_SHORT).show();
                     return;
                 }
                 goMainActivity();

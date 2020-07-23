@@ -2,7 +2,6 @@ package com.example.supportq.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
-import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
@@ -125,7 +124,7 @@ public class QuestionDetailsActivity extends AppCompatActivity {
             @Override
             public void done(List<Reply> replies, ParseException e) {
                 if(e != null){
-                    Toast.makeText(QuestionDetailsActivity.this, LoginActivity.TOAST_ERROR_MESSAGE, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(QuestionDetailsActivity.this, getString(R.string.TOAST_ERROR_MESSAGE), Toast.LENGTH_SHORT).show();
                     return;
                 }
                 question.setReplies(replies);
@@ -146,7 +145,7 @@ public class QuestionDetailsActivity extends AppCompatActivity {
     }
 
     public void bind() throws Exception {
-        question = Parcels.unwrap(getIntent().getParcelableExtra(HomeFragment.HOME_FRAGMENT_KEY));
+        question = Parcels.unwrap(getIntent().getParcelableExtra(String.valueOf(R.string.HOME_FRAGMENT_KEY)));
         tvTimeStamp.setText(question.getCreatedTimeAgo());
         tvUsername.setText("@" + question.getUser().getUsername());
         tvFullname.setText(User.getFullName(question.getUser()));

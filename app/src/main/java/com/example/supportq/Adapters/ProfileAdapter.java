@@ -27,8 +27,6 @@ import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
 
 public class ProfileAdapter extends RecyclerView.Adapter<ProfileAdapter.ViewHolder> {
     public static final String TAG = "ProfileAdapter";
-    public static final int RADIUS=40;
-    public static final int MARGIN=10;
     private List<Question> allQuestions;
     private Context context;
 
@@ -147,7 +145,7 @@ public class ProfileAdapter extends RecyclerView.Adapter<ProfileAdapter.ViewHold
                 Glide.with(context).load(profilePhoto.getUrl()).transform(new CircleCrop()).into(ivProfilePicture);
             ParseFile mediaImage = question.getImage();
             if(mediaImage != null)
-                Glide.with(context).load(mediaImage.getUrl()).transform(new RoundedCornersTransformation(RADIUS, MARGIN)).into(ivMedia);
+                Glide.with(context).load(mediaImage.getUrl()).transform(new RoundedCornersTransformation(R.dimen.RADIUS, R.dimen.MARGIN)).into(ivMedia);
             setButton(ivLike, question.isLiked(), R.drawable.ic_vector_heart_stroke, R.drawable.ic_vector_heart, R.color.likedRed);
             setLikeText(question, tvLikeCount);
         }

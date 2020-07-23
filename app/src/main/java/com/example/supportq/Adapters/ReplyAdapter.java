@@ -1,6 +1,7 @@
 package com.example.supportq.Adapters;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -129,10 +130,12 @@ public class ReplyAdapter extends RecyclerView.Adapter<ReplyAdapter.ViewHolder> 
 
         //shows delete icon for current user's replies
         public void deleteIconVisibility(Reply reply){
-            if (reply.getUser().getObjectId().equals(currentUser.getObjectId()))
+            if (reply.getUser().getObjectId().equals(currentUser.getObjectId())){
                 ivDelete.setVisibility(View.VISIBLE);
-            else
+            }
+            else{
                 ivDelete.setVisibility(View.INVISIBLE);
+            }
         }
 
         //method for approving a response by an instructor
@@ -161,6 +164,7 @@ public class ReplyAdapter extends RecyclerView.Adapter<ReplyAdapter.ViewHolder> 
                     try {
                         removeAt(allReplies.get(position), position);
                     } catch (ParseException e) {
+                        Log.e("TAG", "erro", e);
                     }
                 }
             });
