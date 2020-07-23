@@ -23,8 +23,6 @@ import com.parse.ParseUser;
 import java.util.List;
 
 public class ReplyAdapter extends RecyclerView.Adapter<ReplyAdapter.ViewHolder> {
-    public static final String INSTRUCTOR_ID = "70yDSapTvf";
-    public static final String TA_ID = "axB9wBpruP";
     private List<Reply> allReplies;
     private Context context;
     private ParseUser currentUser;
@@ -115,7 +113,7 @@ public class ReplyAdapter extends RecyclerView.Adapter<ReplyAdapter.ViewHolder> 
             ParseFile profilePhoto = reply.getUser().getParseFile(User.KEY_PROFILE_PICTURE);
             if (profilePhoto != null)
                 Glide.with(context).load(profilePhoto.getUrl()).transform(new CircleCrop()).into(ivProfilePicture);
-            if(currentUser.getObjectId().equals(INSTRUCTOR_ID) || currentUser.getObjectId().equals(TA_ID))
+            if(User.getIsInstructor(currentUser))
                 ivVerify.setVisibility(View.VISIBLE);
         }
 
@@ -144,7 +142,7 @@ public class ReplyAdapter extends RecyclerView.Adapter<ReplyAdapter.ViewHolder> 
                 public void onClick(View view) {
                     int position = getAdapterPosition();
                     Reply reply = allReplies.get(position);
-                    if (currentUser.getObjectId().equals(INSTRUCTOR_ID) || currentUser.getObjectId().equals(TA_ID)) {
+                    if (User.getIsInstructor(currentUser)) {
                         reply.setIsApproved(!reply.getIsApproved());
                         reply.saveInBackground();
                         setVerificationButton(ivVerify, reply.getIsApproved(), R.drawable.very_inactive, R.drawable.verify_activie, R.color.green);
