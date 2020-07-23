@@ -2,14 +2,13 @@ package com.example.supportq.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Context;
 import android.content.Intent;
-import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.example.supportq.Models.InternetConnection;
 import com.example.supportq.Models.ProgressIndicator;
 import com.example.supportq.R;
 import com.example.supportq.Validator;
@@ -61,7 +60,7 @@ public class LoginActivity extends AppCompatActivity {
                 String username = username_input_text.getEditText().getText().toString();
                 String password = password_input_text.getEditText().getText().toString();
                 if (Validator.validateUser(password_input_text, username_input_text, password, username)) {
-                    if (isNetworkConnected()) {
+                    if (InternetConnection.isNetworkConnected(LoginActivity.this)) {
                         ProgressIndicator.showMessage(LoginActivity.this);
                         signInExistingUser(username, password);
                     } else {
@@ -74,13 +73,8 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
-    private boolean isNetworkConnected() {
-        ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-        return cm.getActiveNetworkInfo() != null && cm.getActiveNetworkInfo().isConnected();
-    }
-
     //error message to display on textInput
-    public void errorMessageOnEditText(String usernameError, String passwordError){
+    public void errorMessageOnEditText(String usernameError, String passwordError) {
         username_input_text.setError(usernameError);
         password_input_text.setError(passwordError);
     }

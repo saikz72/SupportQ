@@ -27,7 +27,7 @@ import org.json.JSONObject;
 import java.util.List;
 
 public class RegistrationActivity extends AppCompatActivity {
-    public static final String REGISTRATION_ERROR= "Registration error";
+    public static final String REGISTRATION_ERROR = "Registration error";
     public static final String USERNAME_TAKEN = "Username is already taken";
     private static final String name = "name";
     private TextInputLayout etUsername;

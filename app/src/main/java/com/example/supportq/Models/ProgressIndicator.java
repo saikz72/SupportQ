@@ -17,7 +17,8 @@ public class ProgressIndicator {
 
     //hides progress bar
     public static void hideMessage(Context context) {
-        progressDialog.dismiss();
+        if (progressDialog != null)
+            progressDialog.dismiss();
     }
 
 }
