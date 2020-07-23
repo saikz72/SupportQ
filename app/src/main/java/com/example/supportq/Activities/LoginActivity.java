@@ -2,7 +2,9 @@ package com.example.supportq.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -21,6 +23,7 @@ public class LoginActivity extends AppCompatActivity {
     public static final String INCORRECT_USERNAME = "incorrect username";
     public static final String INCORRECT_PASSWORD = "incorrect password";
     public static final String TOAST_ERROR_MESSAGE = "something went wrong";
+    public static final String NO_INTERNET_MESSAGE = "No Internet Connection";
     private Button btnLogin;
     private Button btnSignUp;
     private Button btnSignIn;
@@ -58,11 +61,47 @@ public class LoginActivity extends AppCompatActivity {
                 String username = username_input_text.getEditText().getText().toString();
                 String password = password_input_text.getEditText().getText().toString();
                 if (Validator.validateUser(password_input_text, username_input_text, password, username)) {
-                    ProgressIndicator.showMessage(LoginActivity.this);
-                    signInExistingUser(username, password);
+                    if (isNetworkConnected()) {
+                        ProgressIndicator.showMessage(LoginActivity.this);
+                        signInExistingUser(username, password);
+                    } else {
+                        errorMessageOnEditText(null, null);
+                        Toast.makeText(LoginActivity.this, NO_INTERNET_MESSAGE, Toast.LENGTH_SHORT).show();
+                        return;
+                    }
                 }
             }
         });
+    }
+
+    private boolean isNetworkConnected() {
+        ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        return cm.getActiveNetworkInfo() != null && cm.getActiveNetworkInfo().isConnected();
+    }
+
+    //error message to display on textInput
+    public void errorMessageOnEditText(String usernameError, String passwordError){
+        username_input_text.setError(usernameError);
+        password_input_text.setError(passwordError);
+    }
+
+    //message to send user when there is no internent
+    public void internetAvailable(ParseException e) {
+        //connection fail
+        if (e.getCode() == e.CONNECTION_FAILED || e.getCode() == e.OTHER_CAUSE) {
+            errorMessageOnEditText(null, null);
+            Toast.makeText(LoginActivity.this, NO_INTERNET_MESSAGE, Toast.LENGTH_SHORT).show();
+            ProgressIndicator.hideMessage(LoginActivity.this);
+        }
+    }
+
+    //message to send user when the credentials are invalid
+    public void validateLoginCredentials(ParseException e) {
+        //user doesn't exist
+        if (e.getCode() == e.OBJECT_NOT_FOUND) {
+            ProgressIndicator.hideMessage(LoginActivity.this);
+            errorMessageOnEditText(INCORRECT_USERNAME, INCORRECT_PASSWORD);
+        }
     }
 
     //existing user
@@ -71,9 +110,8 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void done(ParseUser user, ParseException e) {
                 if (e != null) {
-                    ProgressIndicator.hideMessage(LoginActivity.this);
-                    username_input_text.setError(INCORRECT_USERNAME);
-                    password_input_text.setError(INCORRECT_PASSWORD);
+                    internetAvailable(e);
+                    validateLoginCredentials(e);
                     return;
                 }
                 goToMainActivity();
@@ -90,7 +128,9 @@ public class LoginActivity extends AppCompatActivity {
                     @Override
                     public void done(ParseUser user, ParseException e) {
                         if (e != null) {
-                            Toast.makeText(LoginActivity.this, TOAST_ERROR_MESSAGE, Toast.LENGTH_SHORT).show();
+                            internetAvailable(e);
+                            validateLoginCredentials(e);
+                            return;
                         }
                         logUser(user);
                     }
