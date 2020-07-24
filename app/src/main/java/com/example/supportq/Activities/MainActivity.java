@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -21,7 +22,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 public class MainActivity extends AppCompatActivity {
     public final static int MAX_NUMBER_POST = 10;
     private BottomNavigationView bottomNavigationView;
-    public   final FragmentManager fragmentManager = getSupportFragmentManager();
+    public final FragmentManager fragmentManager = getSupportFragmentManager();
     private Toolbar toolbar;
 
     @Override
@@ -68,5 +69,10 @@ public class MainActivity extends AppCompatActivity {
     public void setViews() {
         bottomNavigationView = findViewById(R.id.bottomNavigation);
         toolbar = findViewById(R.id.toolbar);
+    }
+
+    @Override
+    public void onBackPressed() {
+        moveTaskToBack(true);
     }
 }
