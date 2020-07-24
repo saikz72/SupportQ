@@ -62,7 +62,7 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHo
                 }
                 question.saveInBackground();
                 setButton(holder.ivLike, !isLiked,
-                        R.drawable.ufi_heart, R.drawable.ufi_heart_active, R.color.likedRed);
+                        R.drawable.ic_vector_heart_stroke, R.drawable.ic_vector_heart, R.color.likedRed);
                 setLikeText(question, holder.tvLikeCount);
 
             }
@@ -138,7 +138,6 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHo
         private TextView tvLikeCount;
         private ImageView ivReply;
         private TextView tvUsername;
-        private ImageView ivDelete;
         private ImageView ivMedia;
         private ImageView ivProfilePicture;
         private TextView tvReplyCount;
@@ -151,7 +150,6 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHo
             tvTimeStamp = itemView.findViewById(R.id.tvTimeStamp);
             tvLikeCount = itemView.findViewById(R.id.tvLikeCount);
             tvUsername = itemView.findViewById(R.id.tvUsername);
-            ivDelete = itemView.findViewById(R.id.ivDelete);
             ivMedia = itemView.findViewById(R.id.ivMedia);
             ivProfilePicture = itemView.findViewById(R.id.ivProfilePicture);
             tvReplyCount = itemView.findViewById(R.id.tvReplyCount);
@@ -172,28 +170,7 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHo
             tvTimeStamp.setText(timeAgo);
             setButton(ivLike, question.isLiked(), R.drawable.ic_vector_heart_stroke, R.drawable.ic_vector_heart, R.color.likedRed);
             setLikeText(question, tvLikeCount);
-            if (question.getUser().getObjectId().equals(ParseUser.getCurrentUser().getObjectId())) {
-                ivDelete.setVisibility(View.VISIBLE);
-                deleteButtonClicked(question);
-            } else {
-                ivDelete.setVisibility(View.INVISIBLE); //invisble to keep the space even
-            }
             setReplyText(question, tvReplyCount);
-        }
-
-        //listener for delete button
-        public void deleteButtonClicked(final Question question) {
-            ivDelete.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    int position = getAdapterPosition();
-                    try {
-                        removeAt(question, position);
-                    } catch (ParseException e) {
-                        Log.e(TAG, "onClick: ", e);
-                    }
-                }
-            });
         }
 
         @Override

@@ -84,4 +84,5 @@
     <!--Snackbar -->
     <string name="snackbar_text">Your question is deleted</string>
     <string name="snackbar_action">Undo</string>
+    <string name="likes">likes</string>
 </resources>

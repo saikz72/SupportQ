@@ -17,7 +17,6 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.CircleCrop;
 import com.example.supportq.Adapters.ReplyAdapter;
-import com.example.supportq.Fragments.HomeFragment;
 import com.example.supportq.Models.Question;
 import com.example.supportq.Models.Reply;
 import com.example.supportq.Models.User;
@@ -42,7 +41,6 @@ public class QuestionDetailsActivity extends AppCompatActivity {
     private TextView tvTimeStamp;
     private ImageView ivReply;
     private ImageView ivLike;
-    private ImageView ivDelete;
     private ImageView ivProfilePicture;
     private SwipeRefreshLayout swipeContainer;
     private EditText etReply;
@@ -69,7 +67,7 @@ public class QuestionDetailsActivity extends AppCompatActivity {
         } catch (Exception e) {
         }
         setButton(ivLike, question.isLiked(),
-                R.drawable.ufi_heart, R.drawable.ufi_heart_active, R.color.likedRed);
+                R.drawable.ic_vector_heart_stroke, R.drawable.ic_vector_heart, R.color.likedRed);
         setLikeText(question, tvLikeCount);
         likeIconClicked();
         replyListener();
@@ -92,7 +90,6 @@ public class QuestionDetailsActivity extends AppCompatActivity {
         tvLikeCount = findViewById(R.id.tvLikeCount);
         tvReplyCount = findViewById(R.id.tvReplyCount);
         tvTimeStamp = findViewById(R.id.tvTimeStamp);
-        ivDelete = findViewById(R.id.ivDelete);
         ivLike = findViewById(R.id.ivLike);
         ivProfilePicture = findViewById(R.id.ivProfilePicture);
         ivReply = findViewById(R.id.ivReply);

@@ -42,7 +42,7 @@ public class Question extends ParseObject {
         put(KEY_USER, user);
     }
 
-    public ParseUser getUser() throws Exception {
+    public ParseUser getUser() {
         return getParseUser(KEY_USER);
     }
 

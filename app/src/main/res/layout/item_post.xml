@@ -80,13 +80,26 @@
         app:layout_constraintTop_toTopOf="@+id/tvUsername" />
 
     <ImageView
+        android:id="@+id/ivDelete"
+        android:layout_width="@dimen/item_delete_width"
+        android:layout_height="@dimen/item_delete_height"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:visibility="gone"
+        android:src="@drawable/ic_baseline_delete_24"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ivMedia"
+        app:layout_constraintVertical_bias="0.181" />
+
+    <ImageView
         android:id="@+id/ivLike"
         android:layout_width="32dp"
         android:layout_height="29dp"
-        android:layout_marginStart="100dp"
         android:layout_marginTop="8dp"
         android:src="@drawable/ic_vector_heart_stroke"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/ivDelete"
         app:layout_constraintStart_toEndOf="@+id/ivReply"
         app:layout_constraintTop_toBottomOf="@+id/ivMedia"
         app:layout_constraintVertical_bias="0.0" />
@@ -95,11 +108,16 @@
         android:id="@+id/ivReply"
         android:layout_width="@dimen/item_comment_width"
         android:layout_height="@dimen/item_comment_height"
-        android:layout_marginStart="124dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:src="@drawable/ufi_comment"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/ivLike"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/ivProfilePicture"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ivMedia" />
+        app:layout_constraintTop_toBottomOf="@+id/ivMedia"
+        app:layout_constraintVertical_bias="0.0" />
 
     <View
         android:id="@+id/view"

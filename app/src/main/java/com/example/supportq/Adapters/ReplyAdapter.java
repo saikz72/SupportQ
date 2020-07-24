@@ -39,6 +39,8 @@ public class ReplyAdapter extends RecyclerView.Adapter<ReplyAdapter.ViewHolder> 
         View view = LayoutInflater.from(context).inflate(R.layout.item_reply, parent, false);
         currentUser = ParseUser.getCurrentUser();
         final ReplyAdapter.ViewHolder holder = new ReplyAdapter.ViewHolder(view);
+        holder.ivDelete.setVisibility(View.VISIBLE);
+
         holder.verifyReply();
         holder.deleteResponse();
         return holder;
@@ -81,7 +83,7 @@ public class ReplyAdapter extends RecyclerView.Adapter<ReplyAdapter.ViewHolder> 
         reply.saveInBackground();
     }
 
-    class ViewHolder extends RecyclerView.ViewHolder {
+    public class ViewHolder extends RecyclerView.ViewHolder {
         private TextView tvUsername;
         private TextView tvTimeStamp;
         private TextView tvReply;
