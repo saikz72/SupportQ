@@ -85,4 +85,16 @@
     <string name="snackbar_text">Your question is deleted</string>
     <string name="snackbar_action">Undo</string>
     <string name="likes">likes</string>
+
+    <!--plural handling for number of likes -->
+    <plurals name="numberOfLikes">
+        <item quantity="one">%d Like</item>
+        <item quantity="other">%d Likes</item>
+    </plurals>
+
+    <!--plural handling for number of replies -->
+    <plurals name="numberOfReplies">
+        <item quantity="one">%d Reply</item>
+        <item quantity="other">%d Replies</item>
+    </plurals>
 </resources>

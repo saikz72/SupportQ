@@ -40,7 +40,6 @@ public class ReplyAdapter extends RecyclerView.Adapter<ReplyAdapter.ViewHolder> 
         currentUser = ParseUser.getCurrentUser();
         final ReplyAdapter.ViewHolder holder = new ReplyAdapter.ViewHolder(view);
         holder.ivDelete.setVisibility(View.VISIBLE);
-
         holder.verifyReply();
         holder.deleteResponse();
         return holder;

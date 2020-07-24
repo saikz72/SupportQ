@@ -53,10 +53,8 @@ public class ProfileAdapter extends RecyclerView.Adapter<ProfileAdapter.ViewHold
                     question.unlikePost(ParseUser.getCurrentUser());
                 }
                 question.saveInBackground();
-                setButton(holder.ivLike, !isLiked,
-                        R.drawable.ufi_heart, R.drawable.ufi_heart_active, R.color.likedRed);
+                setButton(holder.ivLike, !isLiked, R.drawable.ufi_heart, R.drawable.ufi_heart_active, R.color.likedRed);
                 setLikeText(question, holder.tvLikeCount);
-
             }
         });
         return holder;
@@ -83,10 +81,10 @@ public class ProfileAdapter extends RecyclerView.Adapter<ProfileAdapter.ViewHold
         iv.setColorFilter(ContextCompat.getColor(context, isActive ? activeColor : R.color.medium_gray));
     }
 
-    private void setLikeText(Question post, TextView view) {
-        int likeCount = post.getLikeCount();
-        if (likeCount == 1) view.setText(String.format("%d", post.getLikeCount()));
-        else view.setText(String.format("%d", post.getLikeCount()));
+    private void setLikeText(Question question, TextView view) {
+        int likeCount = question.getLikeCount();
+        String itemsFound = context.getResources().getQuantityString(R.plurals.numberOfLikes, likeCount, likeCount);
+        view.setText(itemsFound);
     }
 
     // Clean all elements of the recycler
@@ -107,6 +105,13 @@ public class ProfileAdapter extends RecyclerView.Adapter<ProfileAdapter.ViewHold
         notifyItemRemoved(position);
         question.delete();
         question.saveInBackground();
+    }
+
+    //sets the comment count on the post
+    private void setReplyText(Question question, TextView view) {
+        int replyCount = question.getRepliesCount();
+        String itemsFound = context.getResources().getQuantityString(R.plurals.numberOfReplies, replyCount, replyCount);
+        view.setText(itemsFound);
     }
 
     protected class ViewHolder extends RecyclerView.ViewHolder {
@@ -138,11 +143,13 @@ public class ProfileAdapter extends RecyclerView.Adapter<ProfileAdapter.ViewHold
             tvTimeStamp.setText(timeAgo);
             tvUsername.setText(username);
             ParseFile profilePhoto = question.getUser().getParseFile(User.KEY_PROFILE_PICTURE);
-            if (profilePhoto != null)
+            if (profilePhoto != null) {
                 Glide.with(context).load(profilePhoto.getUrl()).transform(new CircleCrop()).into(ivProfilePicture);
+            }
             ParseFile mediaImage = question.getImage();
-            if(mediaImage != null)
+            if (mediaImage != null) {
                 Glide.with(context).load(mediaImage.getUrl()).transform(new RoundedCornersTransformation(R.dimen.RADIUS, R.dimen.MARGIN)).into(ivMedia);
+            }
             setButton(ivLike, question.isLiked(), R.drawable.ic_vector_heart_stroke, R.drawable.ic_vector_heart, R.color.likedRed);
             setLikeText(question, tvLikeCount);
         }

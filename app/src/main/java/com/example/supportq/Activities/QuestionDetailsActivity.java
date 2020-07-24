@@ -86,7 +86,7 @@ public class QuestionDetailsActivity extends AppCompatActivity {
     }
 
     public void setViews() {
-        rvQuestions =findViewById(R.id.rvQuestions);
+        rvQuestions = findViewById(R.id.rvQuestions);
         tvUsername = findViewById(R.id.tvUsername);
         tvDescription = findViewById(R.id.tvDescription);
         tvFullname = findViewById(R.id.tvFullname);
@@ -101,7 +101,7 @@ public class QuestionDetailsActivity extends AppCompatActivity {
         swipeContainer = findViewById(R.id.swipeContainer);
     }
 
-    public void replyListener(){
+    public void replyListener() {
         ivSendReply.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -123,7 +123,7 @@ public class QuestionDetailsActivity extends AppCompatActivity {
         query.findInBackground(new FindCallback<Reply>() {
             @Override
             public void done(List<Reply> replies, ParseException e) {
-                if(e != null){
+                if (e != null) {
                     Toast.makeText(QuestionDetailsActivity.this, getString(R.string.TOAST_ERROR_MESSAGE), Toast.LENGTH_SHORT).show();
                     return;
                 }
@@ -150,10 +150,10 @@ public class QuestionDetailsActivity extends AppCompatActivity {
         tvUsername.setText("@" + question.getUser().getUsername());
         tvFullname.setText(User.getFullName(question.getUser()));
         ParseFile profileImage = question.getUser().getParseFile(User.KEY_PROFILE_PICTURE);
-        if (profileImage != null)
+        if (profileImage != null) {
             Glide.with(this).load(profileImage.getUrl()).transform(new CircleCrop()).into(ivProfilePicture);
+        }
         tvDescription.setText(question.getDescription());
-
     }
 
     //listener for like button
@@ -162,10 +162,11 @@ public class QuestionDetailsActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 boolean isLiked = question.isLiked();
-                if (!isLiked)
+                if (!isLiked) {
                     question.likePost(currentUser);
-                else
+                } else {
                     question.unlikePost(currentUser);
+                }
                 question.saveInBackground();
                 setButton(ivLike, !isLiked, R.drawable.ic_vector_heart_stroke, R.drawable.ic_vector_heart, R.color.likedRed);
                 setLikeText(question, tvLikeCount);
@@ -179,19 +180,16 @@ public class QuestionDetailsActivity extends AppCompatActivity {
         iv.setColorFilter(ContextCompat.getColor(this, isActive ? activeColor : R.color.medium_gray));
     }
 
-    private void setLikeText(Question post, TextView view) {
-        int likeCount = post.getLikeCount();
-        if (likeCount == 1) view.setText(String.format("%d like", post.getLikeCount()));
-        else view.setText(String.format("%d Likes", post.getLikeCount()));
+    //sets the like count on the post
+    private void setLikeText(Question question, TextView view) {
+        int likeCount = question.getLikeCount();
+        String itemsFound = getResources().getQuantityString(R.plurals.numberOfLikes, likeCount, likeCount);
+        view.setText(itemsFound);
     }
-
     //sets the comment count on the post
-    private void setReplyText(Question question, TextView view){
+    private void setReplyText(Question question, TextView view) {
         int replyCount = question.getRepliesCount();
-        if(replyCount == 1)
-            view.setText(String.format("%d reply", replyCount));
-        else
-            view.setText(String.format("%d replies", replyCount));
+        String itemsFound = getResources().getQuantityString(R.plurals.numberOfReplies, replyCount, replyCount);
+        view.setText(itemsFound);
     }
-
 }

@@ -87,8 +87,9 @@ public class ProfileFragment extends Fragment {
         } catch (ParseException e) {
             Log.e("TAG", " error", e);
         }
-        if (profilePicture != null)
+        if (profilePicture != null) {
             Glide.with(getContext()).load(profilePicture.getUrl()).transform(new CircleCrop()).into(ivProfilePicture);
+        }
         editProfileButtonClicked();
         logoutButtonClicked();
         queryPost();

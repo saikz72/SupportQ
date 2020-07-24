@@ -92,23 +92,17 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHo
         iv.setColorFilter(ContextCompat.getColor(context, isActive ? activeColor : R.color.medium_gray));
     }
 
-    private void setLikeText(Question post, TextView view) {
-        int likeCount = post.getLikeCount();
-        if (likeCount == 1) {
-            view.setText(String.format("%d like", likeCount));
-        } else {
-            view.setText(String.format("%d likes", likeCount));
-        }
+    private void setLikeText(Question question, TextView view) {
+        int likeCount = question.getLikeCount();
+        String itemsFound = context.getResources().getQuantityString(R.plurals.numberOfLikes, likeCount, likeCount);
+        view.setText(itemsFound);
     }
 
     //sets the comment count on the post
     private void setReplyText(Question question, TextView view) {
         int replyCount = question.getRepliesCount();
-        if (replyCount == 1) {
-            view.setText(String.format("%d reply", replyCount));
-        } else {
-            view.setText(String.format("%d replies", replyCount));
-        }
+        String itemsFound = context.getResources().getQuantityString(R.plurals.numberOfReplies, replyCount, replyCount);
+        view.setText(itemsFound);
     }
 
     // Clean all elements of the recycler
