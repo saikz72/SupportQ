@@ -2,6 +2,7 @@ package com.example.supportq.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
@@ -62,6 +63,8 @@ public class QuestionDetailsActivity extends AppCompatActivity {
         rvQuestions.setAdapter(replyAdapter);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         rvQuestions.setLayoutManager(linearLayoutManager);
+        RecyclerView.ItemDecoration divider = new DividerItemDecoration(this, linearLayoutManager.getOrientation());
+        rvQuestions.addItemDecoration(divider);
         try {
             bind();
         } catch (Exception e) {

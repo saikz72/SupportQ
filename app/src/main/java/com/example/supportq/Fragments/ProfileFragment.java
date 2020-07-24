@@ -8,6 +8,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -77,6 +78,8 @@ public class ProfileFragment extends Fragment {
         rvQuestion.setHasFixedSize(true);
         //set the layout manager on the recycler view
         rvQuestion.setLayoutManager(linearLayoutManager);
+        RecyclerView.ItemDecoration divider = new DividerItemDecoration(getContext(), linearLayoutManager.getOrientation());
+        rvQuestion.addItemDecoration(divider);
         tvUsername.setText("@" + User.getUserName(currentUser));
         tvFullname.setText(User.getFullName(currentUser));
         try {
