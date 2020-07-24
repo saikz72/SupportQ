@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="10dp">
+    android:padding="10dp">
 
     <TextView
         android:id="@+id/tvLikeCount"
@@ -22,14 +22,14 @@
         android:layout_width="@dimen/home_profile_width"
         android:layout_height="@dimen/home_profile_height"
         android:layout_marginTop="8dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/com_facebook_profile_picture_blank_portrait"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/view"
-        app:layout_constraintVertical_bias="0.0"
-        android:scaleType="centerCrop"
-        android:src="@drawable/com_facebook_profile_picture_blank_portrait"/>
+        app:layout_constraintVertical_bias="0.0" />
 
 
     <TextView
@@ -48,7 +48,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/ivProfilePicture"
         app:layout_constraintTop_toBottomOf="@+id/view"
-        app:layout_constraintVertical_bias="0.015" />
+        app:layout_constraintVertical_bias="0.026" />
 
     <TextView
         android:id="@+id/tvDescription"
@@ -56,18 +56,15 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
         android:autoLink="all"
         android:linksClickable="true"
         android:text="@string/description"
         android:textColor="@color/description_color"
         android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/ivProfilePicture"
-        app:layout_constraintTop_toBottomOf="@+id/tvUsername"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toBottomOf="@+id/tvUsername" />
 
     <TextView
         android:id="@+id/tvTimeStamp"
@@ -85,8 +82,8 @@
         android:layout_height="@dimen/item_delete_height"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
-        android:visibility="gone"
         android:src="@drawable/ic_baseline_delete_24"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ivMedia"
@@ -94,8 +91,8 @@
 
     <ImageView
         android:id="@+id/ivLike"
-        android:layout_width="32dp"
-        android:layout_height="29dp"
+        android:layout_width="@dimen/item_like_width"
+        android:layout_height="@dimen/item_like_height"
         android:layout_marginTop="8dp"
         android:src="@drawable/ic_vector_heart_stroke"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -136,18 +133,14 @@
     <ImageView
         android:id="@+id/ivMedia"
         android:layout_width="@dimen/home_media_width"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
+        android:layout_height="@dimen/home_media_height"
+        android:layout_marginTop="10dp"
         android:adjustViewBounds="true"
-        android:tint="#03FFFFFF"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:scaleType="centerCrop"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/ivProfilePicture"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvDescription"
-        app:layout_constraintVertical_bias="0.0" />
+        tools:srcCompat="@tools:sample/avatars" />
 
     <TextView
         android:id="@+id/tvReplyCount"

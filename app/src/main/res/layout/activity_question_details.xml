@@ -28,7 +28,6 @@
                     android:layout_height="@dimen/profile_image_height"
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="8dp"
-                    android:layout_marginBottom="8dp"
                     app:srcCompat="@drawable/com_facebook_profile_picture_blank_portrait" />
 
                 <LinearLayout
@@ -68,7 +67,6 @@
                 android:layout_marginHorizontal="10dp"
                 android:autoLink="all"
                 android:linksClickable="true"
-                android:paddingHorizontal="10dp"
                 android:text="@string/description"
                 android:textColor="#000000"
                 android:textColorLink="@color/blue"
@@ -77,11 +75,9 @@
             <ImageView
                 android:id="@+id/ivMedia"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginBottom="8dp"
+                android:layout_height="@dimen/home_media_height"
+                android:layout_marginHorizontal="10dp"
+                android:scaleType="centerCrop"
                 android:tint="#03FFFFFF" />
 
             <TextView

@@ -8,8 +8,8 @@
     <dimen name="home_profile_width">50dp</dimen>
     <dimen name="home_profile_height">50dp</dimen>
     <dimen name="home_description">0dp</dimen>
-    <dimen name="home_media_width">330dp</dimen>
-    <dimen name="home_media_height">30dp</dimen>
+    <dimen name="home_media_width">350dp</dimen>
+    <dimen name="home_media_height">300dp</dimen>
 
     <!--fragment_profile dimensions.-->
     <dimen name="profile_image_height">100dp</dimen>
@@ -19,6 +19,12 @@
 
     <!--compose_activity dimensions.-->
     <dimen name="compose_button_submit">37dp</dimen>
+    <dimen name="compose_image_width">306dp</dimen>
+    <dimen name="compose_image_height">320dp</dimen>
+    <dimen name="compose_edittext_width">311dp</dimen>
+    <dimen name="compose_edittext_height">211dp</dimen>
+    <dimen name="compose_capture_width">69dp</dimen>
+    <dimen name="compose_capture_height">46dp</dimen>
 
     <!--edit_profile dimensions.-->
     <dimen name="edit_username_width">175dp</dimen>
@@ -46,8 +52,8 @@
     <!--item_post dimensions.-->
     <dimen name="item_description_height">45dp</dimen>
     <dimen name="item_description_width">374dp</dimen>
-    <dimen name="item_like_height">27dp</dimen>
-    <dimen name="item_like_width">23dp</dimen>
+    <dimen name="item_like_height">29dp</dimen>
+    <dimen name="item_like_width">32dp</dimen>
     <dimen name="item_timestamp_height">17dp</dimen>
     <dimen name="item_comment_height">25dp</dimen>
     <dimen name="item_comment_width">30dp</dimen>

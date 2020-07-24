@@ -33,6 +33,8 @@ import org.parceler.Parcels;
 import java.util.ArrayList;
 import java.util.List;
 
+import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
+
 public class QuestionDetailsActivity extends AppCompatActivity {
     private TextView tvUsername;
     private TextView tvFullname;
@@ -47,6 +49,7 @@ public class QuestionDetailsActivity extends AppCompatActivity {
     private EditText etReply;
     private RecyclerView rvQuestions;
     private ImageView ivSendReply;
+    private ImageView ivMedia;
     private ReplyAdapter replyAdapter;
     private Question question;
     private ParseUser currentUser;
@@ -99,6 +102,7 @@ public class QuestionDetailsActivity extends AppCompatActivity {
         ivSendReply = findViewById(R.id.ivSendReply);
         etReply = findViewById(R.id.etReply);
         swipeContainer = findViewById(R.id.swipeContainer);
+        ivMedia = findViewById(R.id.ivMedia);
     }
 
     public void replyListener() {
@@ -152,6 +156,12 @@ public class QuestionDetailsActivity extends AppCompatActivity {
         ParseFile profileImage = question.getUser().getParseFile(User.KEY_PROFILE_PICTURE);
         if (profileImage != null) {
             Glide.with(this).load(profileImage.getUrl()).transform(new CircleCrop()).into(ivProfilePicture);
+        }
+        ParseFile mediaImage = question.getImage();
+        if (mediaImage != null) {
+            Glide.with(this).load(mediaImage.getUrl()).transform(new RoundedCornersTransformation(R.dimen.RADIUS, R.dimen.MARGIN)).into(ivMedia);
+        }else{
+            ivMedia.setVisibility(View.GONE);
         }
         tvDescription.setText(question.getDescription());
     }

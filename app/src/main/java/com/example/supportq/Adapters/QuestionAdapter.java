@@ -61,8 +61,7 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHo
                     question.unlikePost(ParseUser.getCurrentUser());
                 }
                 question.saveInBackground();
-                setButton(holder.ivLike, !isLiked,
-                        R.drawable.ic_vector_heart_stroke, R.drawable.ic_vector_heart, R.color.likedRed);
+                setButton(holder.ivLike, !isLiked, R.drawable.ic_vector_heart_stroke, R.drawable.ic_vector_heart, R.color.likedRed);
                 setLikeText(question, holder.tvLikeCount);
 
             }
@@ -154,11 +153,15 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHo
             String username = question.getUser().getUsername();
             tvDescription.setText(question.getDescription());
             ParseFile profilePhoto = question.getUser().getParseFile(User.KEY_PROFILE_PICTURE);
-            if (profilePhoto != null)
+            if (profilePhoto != null) {
                 Glide.with(context).load(profilePhoto.getUrl()).transform(new CircleCrop()).into(ivProfilePicture);
+            }
             ParseFile mediaImage = question.getImage();
-            if (mediaImage != null)
+            if (mediaImage != null) {
                 Glide.with(context).load(mediaImage.getUrl()).transform(new RoundedCornersTransformation(R.dimen.RADIUS, R.dimen.MARGIN)).into(ivMedia);
+            }else{
+                ivMedia.setVisibility(View.GONE);
+            }
             tvUsername.setText(username);
             String timeAgo = question.getCreatedTimeAgo();
             tvTimeStamp.setText(timeAgo);
