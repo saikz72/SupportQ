@@ -16,6 +16,7 @@ import com.example.supportq.Fragments.ComposeFragment;
 import com.example.supportq.Fragments.HomeFragment;
 import com.example.supportq.Fragments.InboxFragment;
 import com.example.supportq.Fragments.ProfileFragment;
+import com.example.supportq.Models.ProgressIndicator;
 import com.example.supportq.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -29,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        ProgressIndicator.hideMessage(this);
         setViews();
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override

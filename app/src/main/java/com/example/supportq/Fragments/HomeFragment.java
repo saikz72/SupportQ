@@ -21,6 +21,8 @@ import com.example.supportq.R;
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseQuery;
+import com.parse.ParseUser;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,8 +30,8 @@ public class HomeFragment extends Fragment {
     private RecyclerView rvQuestion;
     private QuestionAdapter questionAdapter;
     private List<Question> allQuestions;
-    private ProgressBar progressBar;
     private SwipeRefreshLayout swipeContainer;
+    private ParseUser currentUser;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -45,8 +47,8 @@ public class HomeFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         rvQuestion = view.findViewById(R.id.rvQuestions);
-        progressBar = view.findViewById(R.id.pbLoading);
         swipeContainer = view.findViewById(R.id.swipeContainer);
+        currentUser = ParseUser.getCurrentUser();
         allQuestions = new ArrayList<>();
         questionAdapter = new QuestionAdapter(allQuestions, getContext(), getActivity());
         //set the adapter to the rv
@@ -77,12 +79,10 @@ public class HomeFragment extends Fragment {
                     Toast.makeText(getContext(), getString(R.string.FETCHING_POST_ERROR), Toast.LENGTH_SHORT).show();
                     return;
                 }
-                progressBar.setVisibility(ProgressBar.GONE);
                 questionAdapter.clear();
                 questionAdapter.addAll(questions);
                 swipeContainer.setRefreshing(false);
             }
         });
     }
-
 }

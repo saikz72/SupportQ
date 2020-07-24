@@ -87,7 +87,6 @@ public class SignUpActivity extends AppCompatActivity {
                     return;
                 }
                 goMainActivity();
-                ProgressIndicator.hideMessage(SignUpActivity.this);
             }
         });
     }

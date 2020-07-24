@@ -108,7 +108,6 @@ public class LoginActivity extends AppCompatActivity {
                     return;
                 }
                 goToMainActivity();
-                ProgressIndicator.hideMessage(LoginActivity.this);
             }
         });
     }

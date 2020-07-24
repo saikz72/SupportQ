@@ -97,7 +97,6 @@ public class InstructorSignUpActivity extends AppCompatActivity {
                     return;
                 }
                 goMainActivity();
-                ProgressIndicator.hideMessage(InstructorSignUpActivity.this);
             }
         });
     }
