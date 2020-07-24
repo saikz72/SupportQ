@@ -97,4 +97,10 @@
         <item quantity="one">%d Reply</item>
         <item quantity="other">%d Replies</item>
     </plurals>
+
+    <!--MyAlertDialogFragment-->
+    <string name="internet_message">You are not connected to the internet. Make sure Wi-Fi is on, Airplane Mode is off and try again</string>
+    <string name="OK">OK</string>
+    <string name="title">title</string>
+    <string name="fragment_tag">fragment_alert</string>
 </resources>

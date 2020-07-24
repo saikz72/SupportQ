@@ -1,6 +1,7 @@
 package com.example.supportq.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.example.supportq.Fragments.MyAlertDialogFragment;
 import com.example.supportq.Models.InternetConnection;
 import com.example.supportq.Models.ProgressIndicator;
 import com.example.supportq.R;
@@ -64,14 +66,19 @@ public class LoginActivity extends AppCompatActivity {
                         signInExistingUser(username, password);
                     } else {
                         errorMessageOnEditText(null, null);
-                        Toast.makeText(LoginActivity.this, getString(R.string.NO_INTERNET_MESSAGE), Toast.LENGTH_SHORT).show();
+                        showAlertDialog();
                         return;
                     }
                 }
             }
         });
     }
-
+    //no internet alertdialog
+    private void showAlertDialog() {
+        FragmentManager fm = getSupportFragmentManager();
+        MyAlertDialogFragment alertDialog = MyAlertDialogFragment.newInstance(getString(R.string.NO_INTERNET_MESSAGE));
+        alertDialog.show(fm, getString(R.string.fragment_tag));
+    }
     //error message to display on textInput
     private void errorMessageOnEditText(String usernameError, String passwordError) {
         username_input_text.setError(usernameError);
@@ -83,7 +90,6 @@ public class LoginActivity extends AppCompatActivity {
         //connection fail
         if (e.getCode() == e.CONNECTION_FAILED || e.getCode() == e.OTHER_CAUSE) {
             errorMessageOnEditText(null, null);
-            Toast.makeText(LoginActivity.this, getString(R.string.NO_INTERNET_MESSAGE), Toast.LENGTH_SHORT).show();
             ProgressIndicator.hideMessage(LoginActivity.this);
         }
     }
@@ -122,6 +128,7 @@ public class LoginActivity extends AppCompatActivity {
                         if (e != null) {
                             internetAvailable(e);
                             validateLoginCredentials(e);
+                            showAlertDialog();
                             return;
                         }
                         logUser(user);

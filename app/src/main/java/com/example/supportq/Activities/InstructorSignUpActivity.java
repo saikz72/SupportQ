@@ -1,6 +1,7 @@
 package com.example.supportq.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,6 +10,7 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.example.supportq.BuildConfig;
+import com.example.supportq.Fragments.MyAlertDialogFragment;
 import com.example.supportq.Models.InternetConnection;
 import com.example.supportq.Models.ProgressIndicator;
 import com.example.supportq.Models.User;
@@ -72,12 +74,19 @@ public class InstructorSignUpActivity extends AppCompatActivity {
                         signUp(username, password, user);
                     } else {
                         errorMessageOnEditText(null, null, null);
-                        Toast.makeText(InstructorSignUpActivity.this, getString(R.string.NO_INTERNET_MESSAGE), Toast.LENGTH_SHORT).show();
+                        showAlertDialog();
                         return;
                     }
                 }
             }
         });
+    }
+
+    //no internet alertdialog
+    private void showAlertDialog() {
+        FragmentManager fm = getSupportFragmentManager();
+        MyAlertDialogFragment alertDialog = MyAlertDialogFragment.newInstance(getString(R.string.NO_INTERNET_MESSAGE));
+        alertDialog.show(fm, getString(R.string.fragment_tag));
     }
 
     //error message to display on textInput
