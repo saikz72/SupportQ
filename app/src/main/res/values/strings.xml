@@ -78,4 +78,10 @@
     <string name="USERNAME_LENGTH_ERROR">username should be more than 5 characters</string>
     <string name="FULL_NAME_ERROR">full name should be more than 5 characters</string>
 
+    <!--ProfileFragment-->
+    <string name="ParseException">Object does not exist</string>
+
+    <!--Snackbar -->
+    <string name="snackbar_text">Your question is deleted</string>
+    <string name="snackbar_action">Undo</string>
 </resources>

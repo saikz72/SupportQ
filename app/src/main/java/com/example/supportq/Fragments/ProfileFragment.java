@@ -1,11 +1,14 @@
 package com.example.supportq.Fragments;
 
 import android.content.Intent;
+import android.graphics.Canvas;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -35,6 +38,8 @@ import com.parse.ParseUser;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import it.xabaras.android.recyclerview.swipedecorator.RecyclerViewSwipeDecorator;
 
 public class ProfileFragment extends Fragment {
     private ImageView ivProfilePicture;
@@ -84,6 +89,8 @@ public class ProfileFragment extends Fragment {
         editProfileButtonClicked();
         logoutButtonClicked();
         queryPost();
+        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(simpleCallback);
+        itemTouchHelper.attachToRecyclerView(rvQuestion);
     }
 
     public void setViews(View view) {
@@ -139,4 +146,34 @@ public class ProfileFragment extends Fragment {
         });
     }
 
+    ItemTouchHelper.SimpleCallback simpleCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
+        @Override
+        public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
+            return false;
+        }
+
+        @Override
+        public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
+            final int position = viewHolder.getAdapterPosition();
+            final Question question = allQuestions.get(position);
+            allQuestions.remove(position);
+            profileAdapter.notifyItemRemoved(position);
+            try {
+                question.delete();
+            } catch (ParseException e) {
+                Toast.makeText(getContext(), getString(R.string.ParseException), Toast.LENGTH_SHORT).show();
+            }
+            question.saveInBackground();
+        }
+
+        @Override
+        public void onChildDraw(@NonNull Canvas c, @NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, float dX, float dY, int actionState, boolean isCurrentlyActive) {
+            new RecyclerViewSwipeDecorator.Builder(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive)
+                    .addBackgroundColor(ContextCompat.getColor(getContext(), R.color.floating_buttor_color))
+                    .addActionIcon(R.drawable.ic_baseline_delete_24)
+                    .create()
+                    .decorate();
+            super.onChildDraw(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive);
+        }
+    };
 }

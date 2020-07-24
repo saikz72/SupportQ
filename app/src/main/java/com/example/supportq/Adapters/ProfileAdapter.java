@@ -116,7 +116,6 @@ public class ProfileAdapter extends RecyclerView.Adapter<ProfileAdapter.ViewHold
         private TextView tvLikeCount;
         private ImageView ivReply;
         private TextView tvUsername;
-        private ImageView ivDelete;
         private ImageView ivProfilePicture;
         private ImageView ivMedia;
 
@@ -128,7 +127,6 @@ public class ProfileAdapter extends RecyclerView.Adapter<ProfileAdapter.ViewHold
             tvTimeStamp = itemView.findViewById(R.id.tvTimeStamp);
             tvLikeCount = itemView.findViewById(R.id.tvLikeCount);
             tvUsername = itemView.findViewById(R.id.tvUsername);
-            ivDelete = itemView.findViewById(R.id.ivDelete);
             ivProfilePicture = itemView.findViewById(R.id.ivProfilePicture);
             ivMedia = itemView.findViewById(R.id.ivMedia);
         }
@@ -136,7 +134,6 @@ public class ProfileAdapter extends RecyclerView.Adapter<ProfileAdapter.ViewHold
         public void bind(Question question) throws Exception {
             String username = question.getUser().fetch().getUsername();
             tvDescription.setText(question.getDescription());
-            deleteButtonClicked(question);
             String timeAgo = question.getCreatedTimeAgo();
             tvTimeStamp.setText(timeAgo);
             tvUsername.setText(username);
@@ -159,21 +156,5 @@ public class ProfileAdapter extends RecyclerView.Adapter<ProfileAdapter.ViewHold
                 }
             });
         }
-
-        //listener for delete button
-        public void deleteButtonClicked(final Question question) {
-            ivDelete.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    int position = getAdapterPosition();
-                    try {
-                        removeAt(question, position);
-                    } catch (ParseException e) {
-                        e.printStackTrace();
-                    }
-                }
-            });
-        }
-
     }
 }
