@@ -20,6 +20,7 @@ import com.bumptech.glide.load.resource.bitmap.CircleCrop;
 import com.example.supportq.Adapters.ReplyAdapter;
 import com.example.supportq.Models.Question;
 import com.example.supportq.Models.Reply;
+import com.example.supportq.Models.TextViewAnimationOnClick;
 import com.example.supportq.Models.User;
 import com.example.supportq.R;
 import com.parse.FindCallback;
@@ -34,13 +35,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
+import ru.embersoft.expandabletextview.ExpandableTextView;
 
 public class QuestionDetailsActivity extends AppCompatActivity {
     private TextView tvUsername;
     private TextView tvFullname;
     private TextView tvReplyCount;
     private TextView tvLikeCount;
-    private TextView tvDescription;
+    private ExpandableTextView tvDescription;
     private TextView tvTimeStamp;
     private ImageView ivReply;
     private ImageView ivLike;
@@ -68,10 +70,7 @@ public class QuestionDetailsActivity extends AppCompatActivity {
         rvQuestions.setLayoutManager(linearLayoutManager);
         RecyclerView.ItemDecoration divider = new DividerItemDecoration(this, linearLayoutManager.getOrientation());
         rvQuestions.addItemDecoration(divider);
-        try {
-            bind();
-        } catch (Exception e) {
-        }
+        bind();
         setButton(ivLike, question.isLiked(),
                 R.drawable.ic_vector_heart_stroke, R.drawable.ic_vector_heart, R.color.likedRed);
         setLikeText(question, tvLikeCount);
@@ -148,7 +147,7 @@ public class QuestionDetailsActivity extends AppCompatActivity {
         finish();
     }
 
-    public void bind() throws Exception {
+    public void bind() {
         question = Parcels.unwrap(getIntent().getParcelableExtra(String.valueOf(R.string.HOME_FRAGMENT_KEY)));
         tvTimeStamp.setText(question.getCreatedTimeAgo());
         tvUsername.setText("@" + question.getUser().getUsername());
@@ -164,6 +163,8 @@ public class QuestionDetailsActivity extends AppCompatActivity {
             ivMedia.setVisibility(View.GONE);
         }
         tvDescription.setText(question.getDescription());
+        TextViewAnimationOnClick.onQuestionClickedInDetailScreen(tvDescription, question);
+        tvDescription.resetState(question.isShrink());
     }
 
     //listener for like button

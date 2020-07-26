@@ -11,14 +11,14 @@
         android:layout_width="@dimen/home_profile_width"
         android:layout_height="@dimen/home_profile_height"
         android:layout_marginTop="8dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/com_facebook_profile_picture_blank_portrait"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/view"
-        app:layout_constraintVertical_bias="0.0"
-        android:scaleType="centerCrop"
-        android:src="@drawable/com_facebook_profile_picture_blank_portrait"/>
+        app:layout_constraintVertical_bias="0.0" />
 
 
     <TextView
@@ -39,7 +39,7 @@
         app:layout_constraintTop_toBottomOf="@+id/view"
         app:layout_constraintVertical_bias="0.015" />
 
-    <TextView
+    <ru.embersoft.expandabletextview.ExpandableTextView
         android:id="@+id/tvReply"
         android:layout_width="@dimen/home_description"
         android:layout_height="wrap_content"
@@ -47,10 +47,13 @@
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
         android:autoLink="all"
-        android:linksClickable="true"
-        android:text="@string/reply"
-        android:textColor="@color/description_color"
-        android:textSize="16sp"
+        android:textColorLink="@color/blue"
+        app:etv_showLine="false"
+        app:etv_textContentColor="@color/description_color"
+        app:etv_textContentSize="16sp"
+        app:etv_textExpand="@string/show_more"
+        app:etv_textShrink="@string/show_less"
+        app:etv_textStateColor="@color/description_color"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"

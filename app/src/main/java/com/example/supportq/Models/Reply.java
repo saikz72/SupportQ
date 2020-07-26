@@ -10,12 +10,13 @@ import java.text.SimpleDateFormat;
 import java.util.Locale;
 
 @ParseClassName("Reply")
-public class Reply extends ParseObject {
+public class Reply extends ParseObject implements Shrinkable {
     public static final String KEY_USER = "user";
     public static final String KEY_APPROVED = "isApproved";
     public static final String KEY_QUESTION_ID = "questionID";
     public static final String KEY_CREATED_AT = "createdAt";
     public static final String KEY_REPLY_TEXT = "replyText";
+    private boolean isShrink = true;
 
     public void setUser(ParseUser user) {
         put(KEY_USER, user);
@@ -62,5 +63,15 @@ public class Reply extends ParseObject {
                 System.currentTimeMillis(), DateUtils.SECOND_IN_MILLIS).toString();
 
         return relativeDate;
+    }
+
+    @Override
+    public boolean isShrink(){
+        return isShrink;
+    }
+
+    @Override
+    public void setShrink(boolean isShrink){
+        this.isShrink = isShrink;
     }
 }

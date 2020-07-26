@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.CircleCrop;
 import com.example.supportq.Models.Reply;
+import com.example.supportq.Models.TextViewAnimationOnClick;
 import com.example.supportq.Models.User;
 import com.example.supportq.R;
 import com.parse.ParseException;
@@ -22,6 +23,8 @@ import com.parse.ParseFile;
 import com.parse.ParseUser;
 
 import java.util.List;
+
+import ru.embersoft.expandabletextview.ExpandableTextView;
 
 public class ReplyAdapter extends RecyclerView.Adapter<ReplyAdapter.ViewHolder> {
     private List<Reply> allReplies;
@@ -85,7 +88,7 @@ public class ReplyAdapter extends RecyclerView.Adapter<ReplyAdapter.ViewHolder> 
     public class ViewHolder extends RecyclerView.ViewHolder {
         private TextView tvUsername;
         private TextView tvTimeStamp;
-        private TextView tvReply;
+        private ExpandableTextView tvReply;
         private ImageView ivProfilePicture;
         private ImageView ivVerify;
         private ImageView ivDelete;
@@ -113,28 +116,30 @@ public class ReplyAdapter extends RecyclerView.Adapter<ReplyAdapter.ViewHolder> 
             } catch (ParseException e) {
             }
             ParseFile profilePhoto = reply.getUser().getParseFile(User.KEY_PROFILE_PICTURE);
-            if (profilePhoto != null)
+            if (profilePhoto != null) {
                 Glide.with(context).load(profilePhoto.getUrl()).transform(new CircleCrop()).into(ivProfilePicture);
-            if(User.getIsInstructor(currentUser))
+            }
+            if (User.getIsInstructor(currentUser)) {
                 ivVerify.setVisibility(View.VISIBLE);
+            }
+            TextViewAnimationOnClick.onReplyClickAnimation(tvReply, allReplies, getAdapterPosition());
+            tvReply.resetState(reply.isShrink());
         }
 
         //checks whether response is verified by instructor
         public void verificationStatus(Reply reply) {
-            if (reply.getIsApproved()){
+            if (reply.getIsApproved()) {
                 tvApproveNote.setVisibility(View.VISIBLE);
                 ivVerify.setVisibility(View.VISIBLE);
-            }
-            else if(!reply.getIsApproved())
+            } else if (!reply.getIsApproved())
                 tvApproveNote.setVisibility(View.INVISIBLE);
         }
 
         //shows delete icon for current user's replies
-        public void deleteIconVisibility(Reply reply){
-            if (reply.getUser().getObjectId().equals(currentUser.getObjectId())){
+        public void deleteIconVisibility(Reply reply) {
+            if (reply.getUser().getObjectId().equals(currentUser.getObjectId())) {
                 ivDelete.setVisibility(View.VISIBLE);
-            }
-            else{
+            } else {
                 ivDelete.setVisibility(View.INVISIBLE);
             }
         }

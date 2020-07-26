@@ -6,7 +6,6 @@
 
     <androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/login_background_color"
@@ -60,23 +59,26 @@
                 </LinearLayout>
             </LinearLayout>
 
-            <TextView
+            <ru.embersoft.expandabletextview.ExpandableTextView
                 android:id="@+id/tvDescription"
+                style="@style/TextAppearance.AppCompat.Body1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="10dp"
                 android:autoLink="all"
                 android:linksClickable="true"
-                android:text="@string/description"
-                android:textColor="#000000"
                 android:textColorLink="@color/blue"
-                android:textSize="22sp" />
+                app:etv_showLine="false"
+                app:etv_textContentColor="@color/description_color"
+                app:etv_textContentSize="16sp"
+                app:etv_textExpand="@string/show_more"
+                app:etv_textShrink="@string/show_less"
+                app:etv_textStateColor="@color/description_color" />
 
             <ImageView
                 android:id="@+id/ivMedia"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/home_media_height"
-                android:layout_marginHorizontal="10dp"
                 android:scaleType="centerCrop"
                 android:tint="#03FFFFFF" />
 
@@ -130,7 +132,6 @@
                     android:text="@string/likes"
                     android:textColor="#000000"
                     android:textSize="14sp" />
-
             </LinearLayout>
 
             <View
