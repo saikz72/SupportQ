@@ -18,6 +18,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.CircleCrop;
 import com.example.supportq.Models.OnDoubleTapListener;
 import com.example.supportq.Models.Question;
+import com.example.supportq.Models.TextViewAnimationOnClick;
 import com.example.supportq.Models.User;
 import com.example.supportq.R;
 import com.parse.ParseException;
@@ -27,6 +28,7 @@ import com.parse.ParseUser;
 import java.util.List;
 
 import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
+import ru.embersoft.expandabletextview.ExpandableTextView;
 
 public class ProfileAdapter extends RecyclerView.Adapter<ProfileAdapter.ViewHolder> {
     public interface OnEditIconClicked {
@@ -50,23 +52,7 @@ public class ProfileAdapter extends RecyclerView.Adapter<ProfileAdapter.ViewHold
         View view = LayoutInflater.from(context).inflate(R.layout.personal_post, parent, false);
         final ViewHolder holder = new ViewHolder(view);
         holder.onImageDoubleTap();
-        //listener for like button
-        holder.ivLike.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                int position = holder.getAdapterPosition();
-                Question question = allQuestions.get(position);
-                boolean isLiked = question.isLiked();
-                if (!isLiked) {
-                    question.likePost(ParseUser.getCurrentUser());
-                } else {
-                    question.unlikePost(ParseUser.getCurrentUser());
-                }
-                question.saveInBackground();
-                setButton(holder.ivLike, !isLiked, R.drawable.ic_vector_heart_stroke, R.drawable.ic_vector_heart, R.color.likedRed);
-                setLikeText(question, holder.tvLikeCount);
-            }
-        });
+        holder.heartIconClicked();
         return holder;
     }
 
@@ -118,7 +104,7 @@ public class ProfileAdapter extends RecyclerView.Adapter<ProfileAdapter.ViewHold
     }
 
     protected class ViewHolder extends RecyclerView.ViewHolder {
-        private TextView tvDescription;
+        private ExpandableTextView tvDescription;
         private ImageView ivLike;
         private TextView tvTimeStamp;
         private TextView tvLikeCount;
@@ -158,6 +144,8 @@ public class ProfileAdapter extends RecyclerView.Adapter<ProfileAdapter.ViewHold
             setButton(ivLike, question.isLiked(), R.drawable.ic_vector_heart_stroke, R.drawable.ic_vector_heart, R.color.likedRed);
             setLikeText(question, tvLikeCount);
             editIconClicked();
+            TextViewAnimationOnClick.onQuestionClickAnimation(tvDescription, allQuestions, getAdapterPosition());
+            tvDescription.resetState(question.isShrink());
         }
 
         //listener for edit icon
@@ -176,6 +164,26 @@ public class ProfileAdapter extends RecyclerView.Adapter<ProfileAdapter.ViewHold
             ivMedia.setOnTouchListener(new OnDoubleTapListener(context) {
                 @Override
                 public void onDoubleTap(MotionEvent e) {
+                    int position = getAdapterPosition();
+                    Question question = allQuestions.get(position);
+                    boolean isLiked = question.isLiked();
+                    if (!isLiked) {
+                        question.likePost(ParseUser.getCurrentUser());
+                    } else {
+                        question.unlikePost(ParseUser.getCurrentUser());
+                    }
+                    question.saveInBackground();
+                    setButton(ivLike, !isLiked, R.drawable.ic_vector_heart_stroke, R.drawable.ic_vector_heart, R.color.likedRed);
+                    setLikeText(question, tvLikeCount);
+                }
+            });
+        }
+
+        //heart icon single tap to like handler
+        public void heartIconClicked() {
+            ivLike.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
                     int position = getAdapterPosition();
                     Question question = allQuestions.get(position);
                     boolean isLiked = question.isLiked();
