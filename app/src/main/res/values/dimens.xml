@@ -54,6 +54,7 @@
     <dimen name="item_description_width">374dp</dimen>
     <dimen name="item_like_height">29dp</dimen>
     <dimen name="item_like_width">32dp</dimen>
+    <dimen name="item_save_height">30dp</dimen>
     <dimen name="item_timestamp_height">17dp</dimen>
     <dimen name="item_comment_height">25dp</dimen>
     <dimen name="item_comment_width">30dp</dimen>
@@ -75,4 +76,6 @@
     <!--profileAdatper-->
     <dimen name="RADIUS">40dp</dimen>
     <dimen name="MARGIN">10dp</dimen>
+    <dimen name="edit_icon_width">28dp</dimen>
+    <dimen name="edit_icon_height">32dp</dimen>
 </resources>
