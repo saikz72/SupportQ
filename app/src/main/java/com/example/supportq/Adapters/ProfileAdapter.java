@@ -63,7 +63,7 @@ public class ProfileAdapter extends RecyclerView.Adapter<ProfileAdapter.ViewHold
                     question.unlikePost(ParseUser.getCurrentUser());
                 }
                 question.saveInBackground();
-                setButton(holder.ivLike, !isLiked, R.drawable.ufi_heart, R.drawable.ufi_heart_active, R.color.likedRed);
+                setButton(holder.ivLike, !isLiked, R.drawable.ic_vector_heart_stroke, R.drawable.ic_vector_heart, R.color.likedRed);
                 setLikeText(question, holder.tvLikeCount);
             }
         });
