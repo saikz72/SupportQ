@@ -46,17 +46,24 @@
         app:layout_constraintTop_toBottomOf="@+id/view"
         app:layout_constraintVertical_bias="0.431" />
 
-    <TextView
+    <ru.embersoft.expandabletextview.ExpandableTextView
         android:id="@+id/tvDescription"
+        style="@style/TextAppearance.AppCompat.Body1"
         android:layout_width="@dimen/home_description"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="10dp"
         android:layout_marginTop="10dp"
         android:autoLink="all"
         android:linksClickable="true"
-        android:text="@string/description"
         android:textColor="@color/description_color"
-        android:textSize="16sp"
+        app:etv_animationTime="20"
+        app:etv_expandLines="3"
+        app:etv_showLine="false"
+        app:etv_textContentColor="@color/description_color"
+        app:etv_textContentSize="14sp"
+        app:etv_textExpand="@string/show_more"
+        app:etv_textShrink="@string/show_less"
+        app:etv_textStateColor="@color/description_color"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ivProfilePicture" />

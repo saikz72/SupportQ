@@ -21,9 +21,9 @@ import com.bumptech.glide.load.resource.bitmap.CircleCrop;
 import com.example.supportq.Activities.QuestionDetailsActivity;
 import com.example.supportq.Models.OnDoubleTapListener;
 import com.example.supportq.Models.Question;
+import com.example.supportq.Models.TextViewAnimationOnClick;
 import com.example.supportq.Models.User;
 import com.example.supportq.R;
-import com.parse.ParseException;
 import com.parse.ParseFile;
 import com.parse.ParseUser;
 
@@ -32,6 +32,7 @@ import org.parceler.Parcels;
 import java.util.List;
 
 import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
+import ru.embersoft.expandabletextview.ExpandableTextView;
 
 public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHolder> {
     public static final String TAG = "QuestionAdapter";
@@ -52,20 +53,14 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHo
         View view = LayoutInflater.from(context).inflate(R.layout.item_post, parent, false);
         final ViewHolder holder = new ViewHolder(view);
         holder.onImageDoubleTap();
-        //listener for like button
         holder.heartIconClicked();
         return holder;
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
         Question question = allQuestions.get(position);
-        try {
-            holder.bind(question);
-        } catch (Exception e) {
-            Log.e(TAG, "error", e);
-            return;
-        }
+        holder.bind(question);
     }
 
     @Override
@@ -104,16 +99,8 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHo
         notifyDataSetChanged();
     }
 
-    // Removes question at this position
-    public void removeAt(Question question, int position) throws ParseException {
-        allQuestions.remove(position);
-        notifyItemRemoved(position);
-        question.delete();
-        question.saveInBackground();
-    }
-
     protected class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        private TextView tvDescription;
+        private ExpandableTextView tvDescription;
         private ImageView ivLike;
         private TextView tvTimeStamp;
         private TextView tvLikeCount;
@@ -122,7 +109,6 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHo
         private ImageView ivMedia;
         private ImageView ivProfilePicture;
         private TextView tvReplyCount;
-        private ImageView ivEditIcon;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -135,14 +121,12 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHo
             ivMedia = itemView.findViewById(R.id.ivMedia);
             ivProfilePicture = itemView.findViewById(R.id.ivProfilePicture);
             tvReplyCount = itemView.findViewById(R.id.tvReplyCount);
-            ivEditIcon = itemView.findViewById(R.id.ivEditIcon);
             itemView.setOnClickListener(this);
             ivReply.setOnClickListener(this);
         }
 
         public void bind(Question question) {
             String username = question.getUser().getUsername();
-            tvDescription.setText(question.getDescription());
             ParseFile profilePhoto = question.getUser().getParseFile(User.KEY_PROFILE_PICTURE);
             if (profilePhoto != null) {
                 Glide.with(context).load(profilePhoto.getUrl()).transform(new CircleCrop()).into(ivProfilePicture);
@@ -159,7 +143,9 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHo
             setButton(ivLike, question.isLiked(), R.drawable.ic_vector_heart_stroke, R.drawable.ic_vector_heart, R.color.likedRed);
             setLikeText(question, tvLikeCount);
             setReplyText(question, tvReplyCount);
-            ivEditIcon.setVisibility(View.GONE);
+            TextViewAnimationOnClick.onQuestionClickAnimation(tvDescription, allQuestions, getAdapterPosition());
+            tvDescription.setText(question.getDescription());
+            tvDescription.resetState(question.isShrink());
         }
 
         //imageview double tap to like handler

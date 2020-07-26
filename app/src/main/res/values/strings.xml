@@ -109,4 +109,6 @@
     <string name="edit_item_key">item</string>
     <string name="edit_item_position">position</string>
     <string name="question_edit_message">Question cannot be empty</string>
+    <string name="show_more">...Show more</string>
+    <string name="show_less">...Show less</string>
 </resources>

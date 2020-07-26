@@ -59,5 +59,6 @@ dependencies {
     // If you want to use the GPU Filters
     implementation 'jp.co.cyberagent.android:gpuimage:2.0.4'
     implementation 'it.xabaras.android:recyclerview-swipedecorator:1.2.3'
-
+    //expandable textview
+    implementation 'com.github.gifffert:ExpandableTextView:0.1.6'
 }

@@ -19,13 +19,14 @@ import java.util.Locale;
 
 @ParseClassName("Question")
 @Parcel(analyze = Question.class)
-public class Question extends ParseObject {
+public class Question extends ParseObject implements Shrinkable {
     public static final String KEY_DESCRIPTION = "description";
     public static final String KEY_USER = "user";
     public static final String KEY_CREATED_AT = "createdAt";
     public static final String KEY_LIKES = "likes";
     public static final String KEY_IMAGE = "image";     //image of a question
     public static final String KEY_REPLIES = "replies";
+    private boolean isShrink = true;
 
     //sets the description of the question
     public void setDescription(String description) {
@@ -92,6 +93,16 @@ public class Question extends ParseObject {
 
     public String getCreatedTimeAgo() {
         return getRelativeTimeAgo(this.getCreatedAt().getTime());
+    }
+
+    @Override
+    public boolean isShrink() {
+        return isShrink;
+    }
+
+    @Override
+    public void setShrink(boolean isShrink) {
+        this.isShrink = isShrink;
     }
 
     // Returns the array of users who liked this post.
