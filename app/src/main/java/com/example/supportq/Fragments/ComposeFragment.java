@@ -1,5 +1,6 @@
 package com.example.supportq.Fragments;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -18,6 +19,7 @@ import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -42,6 +44,7 @@ public class ComposeFragment extends Fragment {
     private ImageView btnCaptureImage;
     private ImageView ivMedia;
     private File photoFile;
+
     public ComposeFragment() {
         // Required empty public constructor
     }
@@ -61,6 +64,19 @@ public class ComposeFragment extends Fragment {
         ivMedia = view.findViewById(R.id.ivMedia);
         submitButtonClicked();
         takePhotoButtonClicked();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        etCompose.post(new Runnable() {
+            @Override
+            public void run() {
+                etCompose.requestFocus();
+                InputMethodManager imgr = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+                imgr.showSoftInput(etCompose, InputMethodManager.SHOW_IMPLICIT);
+            }
+        });
     }
 
     public void submitButtonClicked() {
@@ -99,7 +115,9 @@ public class ComposeFragment extends Fragment {
         Question question = new Question();
         question.setDescription(description);
         question.setUser(currentUser);
-        question.setImage(new ParseFile(photoFile));
+        if (photoFile != null) {
+            question.setImage(new ParseFile(photoFile));
+        }
         question.saveInBackground(new SaveCallback() {
             @Override
             public void done(ParseException e) {
