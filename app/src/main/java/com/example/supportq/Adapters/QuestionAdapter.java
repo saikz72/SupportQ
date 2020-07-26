@@ -134,6 +134,7 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHo
         private ImageView ivMedia;
         private ImageView ivProfilePicture;
         private TextView tvReplyCount;
+        private ImageView ivEditIcon;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -146,10 +147,12 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHo
             ivMedia = itemView.findViewById(R.id.ivMedia);
             ivProfilePicture = itemView.findViewById(R.id.ivProfilePicture);
             tvReplyCount = itemView.findViewById(R.id.tvReplyCount);
+            ivEditIcon = itemView.findViewById(R.id.ivEditIcon);
             itemView.setOnClickListener(this);
+            ivReply.setOnClickListener(this);
         }
 
-        public void bind(Question question) throws Exception {
+        public void bind(Question question){
             String username = question.getUser().getUsername();
             tvDescription.setText(question.getDescription());
             ParseFile profilePhoto = question.getUser().getParseFile(User.KEY_PROFILE_PICTURE);
@@ -168,6 +171,7 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHo
             setButton(ivLike, question.isLiked(), R.drawable.ic_vector_heart_stroke, R.drawable.ic_vector_heart, R.color.likedRed);
             setLikeText(question, tvLikeCount);
             setReplyText(question, tvReplyCount);
+            ivEditIcon.setVisibility(View.GONE);
         }
 
         @Override

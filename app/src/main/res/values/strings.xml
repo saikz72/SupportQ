@@ -103,4 +103,10 @@
     <string name="OK">OK</string>
     <string name="title">title</string>
     <string name="fragment_tag">fragment_alert</string>
+    <string name="edit">edit</string>
+
+    <!--Edit Question-->
+    <string name="edit_item_key">item</string>
+    <string name="edit_item_position">position</string>
+    <string name="question_edit_message">Question cannot be empty</string>
 </resources>

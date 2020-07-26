@@ -15,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.example.supportq.Activities.MainActivity;
 import com.example.supportq.Adapters.QuestionAdapter;
 import com.example.supportq.Models.Question;
 import com.example.supportq.R;
@@ -72,8 +73,9 @@ public class HomeFragment extends Fragment {
 
     private void queryPost() {
         ParseQuery<Question> query = ParseQuery.getQuery(Question.class);
-        query.addDescendingOrder(Question.KEY_CREATED_AT);  //TODO : update how the questions are ordered
         query.include(Question.KEY_USER);
+        query.addDescendingOrder(Question.KEY_CREATED_AT);  //TODO : update how the questions are ordered
+        query.setLimit(MainActivity.MAX_NUMBER_POST); //limit the return post
         query.findInBackground(new FindCallback<Question>() {
             @Override
             public void done(List<Question> questions, ParseException e) {

@@ -26,7 +26,9 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.CircleCrop;
 import com.example.supportq.Activities.EditProfileActivity;
+import com.example.supportq.Activities.EditQuestionActivity;
 import com.example.supportq.Activities.LoginActivity;
+
 import com.example.supportq.Adapters.ProfileAdapter;
 import com.example.supportq.Models.Question;
 import com.example.supportq.Models.User;
@@ -42,6 +44,8 @@ import java.util.List;
 
 import it.xabaras.android.recyclerview.swipedecorator.RecyclerViewSwipeDecorator;
 
+import static android.app.Activity.RESULT_OK;
+
 public class ProfileFragment extends Fragment {
     private ImageView ivProfilePicture;
     private TextView tvUsername;
@@ -54,6 +58,8 @@ public class ProfileFragment extends Fragment {
     private RecyclerView rvQuestion;
     private ParseFile profilePicture;
     private ParseUser currentUser;
+    public static final int EDIT_TEXT_CODE = 20;
+
 
     public ProfileFragment() {
         // Required empty public constructor
@@ -71,7 +77,18 @@ public class ProfileFragment extends Fragment {
         setViews(view);
         allQuestions = new ArrayList<>();
         currentUser = ParseUser.getCurrentUser();
-        profileAdapter = new ProfileAdapter(allQuestions, getContext());
+        ProfileAdapter.OnEditIconClicked onEditIconClicked = new ProfileAdapter.OnEditIconClicked() {
+            @Override
+            public void onQuestionClicked(int position) {
+                Intent intent = new Intent(getContext(), EditQuestionActivity.class);
+                Question question = allQuestions.get(position);
+                intent.putExtra(getString(R.string.edit_item_key), question.getDescription());
+                intent.putExtra(getString(R.string.edit_item_position), position);
+
+                startActivityForResult(intent, EDIT_TEXT_CODE);
+            }
+        };
+        profileAdapter = new ProfileAdapter(allQuestions, getContext(), onEditIconClicked);
         //set the adapter to the rv
         rvQuestion.setAdapter(profileAdapter);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
@@ -95,6 +112,23 @@ public class ProfileFragment extends Fragment {
         queryPost();
         ItemTouchHelper itemTouchHelper = new ItemTouchHelper(simpleCallback);
         itemTouchHelper.attachToRecyclerView(rvQuestion);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK && requestCode == EDIT_TEXT_CODE) {
+            //retrieve the updated text value
+            String itemText = data.getStringExtra(getString(R.string.edit_item_key));
+            //extract the original position of the edited item from the position key
+            int position = data.getExtras().getInt((getString(R.string.edit_item_position)));
+            //update the model at the right position with new item text
+            Question question = allQuestions.get(position);
+            question.setDescription(itemText);
+            //notify the adapter
+            profileAdapter.notifyDataSetChanged();
+            question.saveInBackground();
+        }
     }
 
     public void setViews(View view) {
@@ -162,6 +196,7 @@ public class ProfileFragment extends Fragment {
             final Question question = allQuestions.get(position);
             allQuestions.remove(position);
             profileAdapter.notifyItemRemoved(position);
+            //TODO --> FIX
             try {
                 question.delete();
             } catch (ParseException e) {

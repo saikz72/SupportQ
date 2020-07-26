@@ -26,19 +26,25 @@ import java.util.List;
 import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
 
 public class ProfileAdapter extends RecyclerView.Adapter<ProfileAdapter.ViewHolder> {
+    public interface OnEditIconClicked{
+        void onQuestionClicked(int position);
+    }
+
     public static final String TAG = "ProfileAdapter";
     private List<Question> allQuestions;
     private Context context;
+    private OnEditIconClicked onEditIconClicked;
 
-    public ProfileAdapter(List<Question> allQuestions, Context context) {
+    public ProfileAdapter(List<Question> allQuestions, Context context, OnEditIconClicked onEditIconClicked) {
         this.allQuestions = allQuestions;
         this.context = context;
+        this.onEditIconClicked = onEditIconClicked;
     }
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.item_post, parent, false);
+        View view = LayoutInflater.from(context).inflate(R.layout.personal_post, parent, false);
         final ViewHolder holder = new ViewHolder(view);
         //listener for like button
         holder.ivLike.setOnClickListener(new View.OnClickListener() {
@@ -107,33 +113,26 @@ public class ProfileAdapter extends RecyclerView.Adapter<ProfileAdapter.ViewHold
         question.saveInBackground();
     }
 
-    //sets the comment count on the post
-    private void setReplyText(Question question, TextView view) {
-        int replyCount = question.getRepliesCount();
-        String itemsFound = context.getResources().getQuantityString(R.plurals.numberOfReplies, replyCount, replyCount);
-        view.setText(itemsFound);
-    }
-
     protected class ViewHolder extends RecyclerView.ViewHolder {
         private TextView tvDescription;
         private ImageView ivLike;
         private TextView tvTimeStamp;
         private TextView tvLikeCount;
-        private ImageView ivReply;
         private TextView tvUsername;
         private ImageView ivProfilePicture;
         private ImageView ivMedia;
+        private ImageView ivEditIcon;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             tvDescription = itemView.findViewById(R.id.tvDescription);
             ivLike = itemView.findViewById(R.id.ivLike);
-            ivReply = itemView.findViewById(R.id.ivReply);
             tvTimeStamp = itemView.findViewById(R.id.tvTimeStamp);
             tvLikeCount = itemView.findViewById(R.id.tvLikeCount);
             tvUsername = itemView.findViewById(R.id.tvUsername);
             ivProfilePicture = itemView.findViewById(R.id.ivProfilePicture);
             ivMedia = itemView.findViewById(R.id.ivMedia);
+            ivEditIcon = itemView.findViewById(R.id.ivEditIcon);
         }
 
         public void bind(Question question) throws Exception {
@@ -154,14 +153,15 @@ public class ProfileAdapter extends RecyclerView.Adapter<ProfileAdapter.ViewHold
             }
             setButton(ivLike, question.isLiked(), R.drawable.ic_vector_heart_stroke, R.drawable.ic_vector_heart, R.color.likedRed);
             setLikeText(question, tvLikeCount);
+            editIconClicked();
         }
 
-        //listener for reply button
-        public void replyButtonClicked() {
-            ivReply.setOnClickListener(new View.OnClickListener() {
+        //listener for edit icon
+        public void editIconClicked(){
+            ivEditIcon.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    //TODO --> enable reply
+                    onEditIconClicked.onQuestionClicked(getAdapterPosition());
                 }
             });
         }
