@@ -1,10 +1,12 @@
 package com.example.supportq.Adapters;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -17,6 +19,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.CircleCrop;
 import com.example.supportq.Activities.QuestionDetailsActivity;
+import com.example.supportq.Models.OnDoubleTapListener;
 import com.example.supportq.Models.Question;
 import com.example.supportq.Models.User;
 import com.example.supportq.R;
@@ -48,24 +51,9 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHo
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(context).inflate(R.layout.item_post, parent, false);
         final ViewHolder holder = new ViewHolder(view);
+        holder.onImageDoubleTap();
         //listener for like button
-        holder.ivLike.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                int position = holder.getAdapterPosition();
-                Question question = allQuestions.get(position);
-                boolean isLiked = question.isLiked();
-                if (!isLiked) {
-                    question.likePost(ParseUser.getCurrentUser());
-                } else {
-                    question.unlikePost(ParseUser.getCurrentUser());
-                }
-                question.saveInBackground();
-                setButton(holder.ivLike, !isLiked, R.drawable.ic_vector_heart_stroke, R.drawable.ic_vector_heart, R.color.likedRed);
-                setLikeText(question, holder.tvLikeCount);
-
-            }
-        });
+        holder.heartIconClicked();
         return holder;
     }
 
@@ -152,7 +140,7 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHo
             ivReply.setOnClickListener(this);
         }
 
-        public void bind(Question question){
+        public void bind(Question question) {
             String username = question.getUser().getUsername();
             tvDescription.setText(question.getDescription());
             ParseFile profilePhoto = question.getUser().getParseFile(User.KEY_PROFILE_PICTURE);
@@ -162,7 +150,7 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHo
             ParseFile mediaImage = question.getImage();
             if (mediaImage != null) {
                 Glide.with(context).load(mediaImage.getUrl()).transform(new RoundedCornersTransformation(R.dimen.RADIUS, R.dimen.MARGIN)).into(ivMedia);
-            }else{
+            } else {
                 ivMedia.setVisibility(View.GONE);
             }
             tvUsername.setText(username);
@@ -174,6 +162,27 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHo
             ivEditIcon.setVisibility(View.GONE);
         }
 
+        //imageview double tap to like handler
+        @SuppressLint("ClickableViewAccessibility")
+        public void onImageDoubleTap() {
+            ivMedia.setOnTouchListener(new OnDoubleTapListener(context) {
+                @Override
+                public void onDoubleTap(MotionEvent e) {
+                    int position = getAdapterPosition();
+                    Question question = allQuestions.get(position);
+                    boolean isLiked = question.isLiked();
+                    if (!isLiked) {
+                        question.likePost(ParseUser.getCurrentUser());
+                    } else {
+                        question.unlikePost(ParseUser.getCurrentUser());
+                    }
+                    question.saveInBackground();
+                    setButton(ivLike, !isLiked, R.drawable.ic_vector_heart_stroke, R.drawable.ic_vector_heart, R.color.likedRed);
+                    setLikeText(question, tvLikeCount);
+                }
+            });
+        }
+
         @Override
         public void onClick(View view) {
             Intent intent = new Intent(context, QuestionDetailsActivity.class);
@@ -182,6 +191,26 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHo
                 intent.putExtra(String.valueOf(R.string.HOME_FRAGMENT_KEY), Parcels.wrap(question));
                 activity.startActivityForResult(intent, REQUEST_CODE);
             }
+        }
+
+        //heart icon single tap to like handler
+        public void heartIconClicked() {
+            ivLike.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    int position = getAdapterPosition();
+                    Question question = allQuestions.get(position);
+                    boolean isLiked = question.isLiked();
+                    if (!isLiked) {
+                        question.likePost(ParseUser.getCurrentUser());
+                    } else {
+                        question.unlikePost(ParseUser.getCurrentUser());
+                    }
+                    question.saveInBackground();
+                    setButton(ivLike, !isLiked, R.drawable.ic_vector_heart_stroke, R.drawable.ic_vector_heart, R.color.likedRed);
+                    setLikeText(question, tvLikeCount);
+                }
+            });
         }
     }
 }

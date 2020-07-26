@@ -1,8 +1,10 @@
 package com.example.supportq.Adapters;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -14,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.CircleCrop;
+import com.example.supportq.Models.OnDoubleTapListener;
 import com.example.supportq.Models.Question;
 import com.example.supportq.Models.User;
 import com.example.supportq.R;
@@ -26,7 +29,7 @@ import java.util.List;
 import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
 
 public class ProfileAdapter extends RecyclerView.Adapter<ProfileAdapter.ViewHolder> {
-    public interface OnEditIconClicked{
+    public interface OnEditIconClicked {
         void onQuestionClicked(int position);
     }
 
@@ -46,6 +49,7 @@ public class ProfileAdapter extends RecyclerView.Adapter<ProfileAdapter.ViewHold
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(context).inflate(R.layout.personal_post, parent, false);
         final ViewHolder holder = new ViewHolder(view);
+        holder.onImageDoubleTap();
         //listener for like button
         holder.ivLike.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -148,7 +152,7 @@ public class ProfileAdapter extends RecyclerView.Adapter<ProfileAdapter.ViewHold
             ParseFile mediaImage = question.getImage();
             if (mediaImage != null) {
                 Glide.with(context).load(mediaImage.getUrl()).transform(new RoundedCornersTransformation(R.dimen.RADIUS, R.dimen.MARGIN)).into(ivMedia);
-            }else {
+            } else {
                 ivMedia.setVisibility(View.GONE);
             }
             setButton(ivLike, question.isLiked(), R.drawable.ic_vector_heart_stroke, R.drawable.ic_vector_heart, R.color.likedRed);
@@ -157,11 +161,32 @@ public class ProfileAdapter extends RecyclerView.Adapter<ProfileAdapter.ViewHold
         }
 
         //listener for edit icon
-        public void editIconClicked(){
+        public void editIconClicked() {
             ivEditIcon.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     onEditIconClicked.onQuestionClicked(getAdapterPosition());
+                }
+            });
+        }
+
+        //imageview double tap to like handler
+        @SuppressLint("ClickableViewAccessibility")
+        public void onImageDoubleTap() {
+            ivMedia.setOnTouchListener(new OnDoubleTapListener(context) {
+                @Override
+                public void onDoubleTap(MotionEvent e) {
+                    int position = getAdapterPosition();
+                    Question question = allQuestions.get(position);
+                    boolean isLiked = question.isLiked();
+                    if (!isLiked) {
+                        question.likePost(ParseUser.getCurrentUser());
+                    } else {
+                        question.unlikePost(ParseUser.getCurrentUser());
+                    }
+                    question.saveInBackground();
+                    setButton(ivLike, !isLiked, R.drawable.ic_vector_heart_stroke, R.drawable.ic_vector_heart, R.color.likedRed);
+                    setLikeText(question, tvLikeCount);
                 }
             });
         }
