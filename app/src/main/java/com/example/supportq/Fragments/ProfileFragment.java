@@ -33,6 +33,7 @@ import com.example.supportq.Adapters.ProfileAdapter;
 import com.example.supportq.Models.Question;
 import com.example.supportq.Models.User;
 import com.example.supportq.R;
+import com.google.android.material.snackbar.Snackbar;
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseFile;
@@ -84,19 +85,23 @@ public class ProfileFragment extends Fragment {
                 Question question = allQuestions.get(position);
                 intent.putExtra(getString(R.string.edit_item_key), question.getDescription());
                 intent.putExtra(getString(R.string.edit_item_position), position);
-
                 startActivityForResult(intent, EDIT_TEXT_CODE);
             }
         };
+        bindViews();
         profileAdapter = new ProfileAdapter(allQuestions, getContext(), onEditIconClicked);
-        //set the adapter to the rv
         rvQuestion.setAdapter(profileAdapter);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         rvQuestion.setHasFixedSize(true);
-        //set the layout manager on the recycler view
         rvQuestion.setLayoutManager(linearLayoutManager);
         RecyclerView.ItemDecoration divider = new DividerItemDecoration(getContext(), linearLayoutManager.getOrientation());
         rvQuestion.addItemDecoration(divider);
+        editProfileButtonClicked();
+        logoutButtonClicked();
+        queryPost();
+    }
+
+    private void bindViews() {
         tvUsername.setText("@" + User.getUserName(currentUser));
         tvFullname.setText(User.getFullName(currentUser));
         try {
@@ -107,9 +112,6 @@ public class ProfileFragment extends Fragment {
         if (profilePicture != null) {
             Glide.with(getContext()).load(profilePicture.getUrl()).transform(new CircleCrop()).into(ivProfilePicture);
         }
-        editProfileButtonClicked();
-        logoutButtonClicked();
-        queryPost();
         ItemTouchHelper itemTouchHelper = new ItemTouchHelper(simpleCallback);
         itemTouchHelper.attachToRecyclerView(rvQuestion);
     }
@@ -194,15 +196,24 @@ public class ProfileFragment extends Fragment {
         public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
             final int position = viewHolder.getAdapterPosition();
             final Question question = allQuestions.get(position);
+            View.OnClickListener myOnClickListener = new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    question.setIsDeleted(false);
+                    question.saveInBackground();
+                    allQuestions.add(position, question);
+                    profileAdapter.notifyItemInserted(position);
+                }
+            };
+            Snackbar.make(rvQuestion, R.string.snackbar_text, Snackbar.LENGTH_LONG).setAction(R.string.snackbar_action, myOnClickListener).show();
+            Snackbar.make(rvQuestion, R.string.snackbar_text, Snackbar.LENGTH_LONG)
+                    .setAction(R.string.snackbar_action, myOnClickListener)
+                    .setActionTextColor(getResources().getColor(R.color.green))
+                    .setDuration(3000).show();
+            question.setIsDeleted(true);
+            question.saveInBackground();
             allQuestions.remove(position);
             profileAdapter.notifyItemRemoved(position);
-            //TODO --> FIX
-            try {
-                question.delete();
-            } catch (ParseException e) {
-                Toast.makeText(getContext(), getString(R.string.ParseException), Toast.LENGTH_SHORT).show();
-            }
-            question.saveInBackground();
         }
 
         @Override

@@ -26,7 +26,16 @@ public class Question extends ParseObject implements Shrinkable {
     public static final String KEY_LIKES = "likes";
     public static final String KEY_IMAGE = "image";     //image of a question
     public static final String KEY_REPLIES = "replies";
+    public static final String KEY_IS_DELETED = "isDeleted";
     private boolean isShrink = true;
+
+    public void setIsDeleted(boolean isDeleted) {
+        put(KEY_IS_DELETED, isDeleted);
+    }
+
+    public boolean getIsDeleted() {
+        return getBoolean(KEY_IS_DELETED);
+    }
 
     //sets the description of the question
     public void setDescription(String description) {

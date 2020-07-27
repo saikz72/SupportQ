@@ -90,8 +90,12 @@ public class ProfileAdapter extends RecyclerView.Adapter<ProfileAdapter.ViewHold
     }
 
     // Add a list of post -- change to type used
-    public void addAll(List<Question> list) {
-        allQuestions.addAll(list);
+    public void addAll(List<Question> questions) {
+        for (int i = 0; i < questions.size(); i++) {
+            if (!questions.get(i).getIsDeleted()) {
+                allQuestions.add(questions.get(i));
+            }
+        }
         notifyDataSetChanged();
     }
 
@@ -134,10 +138,13 @@ public class ProfileAdapter extends RecyclerView.Adapter<ProfileAdapter.ViewHold
             ParseFile profilePhoto = question.getUser().getParseFile(User.KEY_PROFILE_PICTURE);
             if (profilePhoto != null) {
                 Glide.with(context).load(profilePhoto.getUrl()).transform(new CircleCrop()).into(ivProfilePicture);
+            } else {
+                ivProfilePicture.setImageResource(R.drawable.com_facebook_profile_picture_blank_portrait);
             }
             ParseFile mediaImage = question.getImage();
             if (mediaImage != null) {
-                Glide.with(context).load(mediaImage.getUrl()).transform(new RoundedCornersTransformation(R.dimen.RADIUS, R.dimen.MARGIN)).into(ivMedia);
+                ivMedia.setVisibility(View.VISIBLE);
+                Glide.with(context).load(mediaImage.getUrl()).placeholder(R.drawable.placeholder).into(ivMedia);
             } else {
                 ivMedia.setVisibility(View.GONE);
             }

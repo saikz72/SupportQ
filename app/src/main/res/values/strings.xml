@@ -111,4 +111,5 @@
     <string name="question_edit_message">Question cannot be empty</string>
     <string name="show_more">...Show more</string>
     <string name="show_less">...Show less</string>
+    <string name="search">Search</string>
 </resources>
