@@ -110,7 +110,7 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHo
         //mergeSort(questions);
         List<Question> unDeletedQuestions = new ArrayList<>();
         for (int i = 0; i < questions.size(); i++) {
-            if (!questions.get(i).getIsDeleted()) {
+            if (!questions.get(i).getIsDeleted() && !questions.get(i).didUserHideQuestion()) {
                 unDeletedQuestions.add(questions.get(i));
             }
         }

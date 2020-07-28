@@ -21,7 +21,6 @@ import com.example.supportq.Models.Question;
 import com.example.supportq.Models.TextViewAnimationOnClick;
 import com.example.supportq.Models.User;
 import com.example.supportq.R;
-import com.parse.ParseException;
 import com.parse.ParseFile;
 import com.parse.ParseUser;
 
@@ -91,19 +90,11 @@ public class ProfileAdapter extends RecyclerView.Adapter<ProfileAdapter.ViewHold
     // Add a list of post -- change to type used
     public void addAll(List<Question> questions) {
         for (int i = 0; i < questions.size(); i++) {
-            if (!questions.get(i).getIsDeleted() && !questions.get(i).getIsHidden()) {
+            if (!questions.get(i).getIsDeleted() && !questions.get(i).didUserHideQuestion()) {
                 allQuestions.add(questions.get(i));
             }
         }
         notifyDataSetChanged();
-    }
-
-    // Removes question at this position
-    public void removeAt(Question question, int position) throws ParseException {
-        allQuestions.remove(position);
-        notifyItemRemoved(position);
-        question.delete();
-        question.saveInBackground();
     }
 
     protected class ViewHolder extends RecyclerView.ViewHolder {

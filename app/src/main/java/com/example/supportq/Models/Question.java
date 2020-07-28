@@ -1,6 +1,7 @@
 package com.example.supportq.Models;
 
 import android.text.format.DateUtils;
+import android.util.Log;
 
 import com.parse.ParseClassName;
 import com.parse.ParseFile;
@@ -27,8 +28,32 @@ public class Question extends ParseObject implements Shrinkable, Comparable<Ques
     public static final String KEY_IMAGE = "image";     //image of a question
     public static final String KEY_REPLIES = "replies";
     public static final String KEY_IS_DELETED = "isDeleted";
-    public static final String KEY_IS_HIDDEN = "isHidden";
+    public static final String KEY_HIDDEN_BY_USERS = "hiddenByUsers";
     private boolean isShrink = true;
+
+    public void setQuestionToHidden(ParseUser user) {
+        add(KEY_HIDDEN_BY_USERS, user);
+    }
+
+    public JSONArray getHiddenQuestion() {
+        return getJSONArray(KEY_HIDDEN_BY_USERS);
+    }
+
+    public boolean didUserHideQuestion() {
+        JSONArray jsonArray = getHiddenQuestion();
+        if (jsonArray != null) {
+            for (int i = 0; i < jsonArray.length(); i++) {
+                try {
+                    if (jsonArray.getJSONObject(i).getString("objectId").equals(ParseUser.getCurrentUser().getObjectId())) {
+                        return true;
+                    }
+                } catch (JSONException e) {
+                    Log.e("Question", "didUserHideQuestion", e);
+                }
+            }
+        }
+        return false;
+    }
 
     public void setIsDeleted(boolean isDeleted) {
         put(KEY_IS_DELETED, isDeleted);
@@ -36,14 +61,6 @@ public class Question extends ParseObject implements Shrinkable, Comparable<Ques
 
     public boolean getIsDeleted() {
         return getBoolean(KEY_IS_DELETED);
-    }
-
-    public void setIsHidden(boolean isHidden) {
-        put(KEY_IS_HIDDEN, isHidden);
-    }
-
-    public boolean getIsHidden() {
-        return getBoolean(KEY_IS_HIDDEN);
     }
 
     //sets the description of the question

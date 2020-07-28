@@ -77,7 +77,7 @@ public class HomeFragment extends Fragment {
             public void hidePostFromTimeline(int position) {
                 Question question = allQuestions.remove(position);
                 questionAdapter.notifyDataSetChanged();
-                question.setIsHidden(true);
+                question.setQuestionToHidden(currentUser);
                 question.saveInBackground();
             }
         };
@@ -91,7 +91,7 @@ public class HomeFragment extends Fragment {
     }
 
     private void queryPost() {
-        ParseQuery<Question> query = ParseQuery.getQuery(Question.class);
+        final ParseQuery<Question> query = ParseQuery.getQuery(Question.class);
         query.include(Question.KEY_USER);
         query.findInBackground(new FindCallback<Question>() {
             @Override
@@ -102,7 +102,7 @@ public class HomeFragment extends Fragment {
                 }
                 questionAdapter.clear();
                 for (int i = 0; i < questions.size(); i++) {
-                    if (!questions.get(i).getIsDeleted() && !questions.get(i).getIsHidden()) {
+                    if (!questions.get(i).getIsDeleted() && !questions.get(i).didUserHideQuestion()) {
                         allQuestions.add(questions.get(i));
                     }
                 }
@@ -152,7 +152,7 @@ public class HomeFragment extends Fragment {
                 }
                 questionAdapter.clear();
                 for (int i = 0; i < questions.size(); i++) {
-                    if (!questions.get(i).getIsDeleted()) {
+                    if (!questions.get(i).getIsDeleted() && !questions.get(i).didUserHideQuestion()) {
                         allQuestions.add(questions.get(i));
                     }
                 }
