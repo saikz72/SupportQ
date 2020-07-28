@@ -103,8 +103,8 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHo
     public void addAll(List<Question> questions) {
         //mergeSort(questions);
         List<Question> unDeletedQuestions = new ArrayList<>();
-        for(int i = 0; i < questions.size(); i++){
-            if(!questions.get(i).getIsDeleted()){
+        for (int i = 0; i < questions.size(); i++) {
+            if (!questions.get(i).getIsDeleted()) {
                 unDeletedQuestions.add(questions.get(i));
             }
         }
@@ -120,10 +120,10 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHo
         int midPoint = (questions.size() - 1) / 2;
         List<Question> partition1 = new ArrayList<>();
         List<Question> partition2 = new ArrayList<>();
-        for(int i = 0; i <= midPoint; i++){
+        for (int i = 0; i <= midPoint; i++) {
             partition1.add(questions.get(i));
         }
-        for (int i = midPoint + 1; i < questions.size(); i++){
+        for (int i = midPoint + 1; i < questions.size(); i++) {
             partition2.add(questions.get(i));
         }
         partition1 = mergeSort(partition1);
@@ -133,21 +133,22 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHo
 
     private List<Question> merge(List<Question> partition1, List<Question> partition2) {
         List<Question> questions = new ArrayList<>();
-        while (!partition1.isEmpty() && !partition2.isEmpty()){
-            if(partition1.get(0).compareTo(partition2.get(0)) < 0){       //second one bigger
+        while (!partition1.isEmpty() && !partition2.isEmpty()) {
+            if (partition1.get(0).compareTo(partition2.get(0)) < 0) {       //second one bigger
                 questions.add(partition2.remove(0));
-            }else if(partition1.get(0).compareTo(partition2.get(0)) > 0) {  //first one bigger
+            } else if (partition1.get(0).compareTo(partition2.get(0)) > 0) {  //first one bigger
                 questions.add(partition1.remove(0));
             }
         }
-        while (!partition1.isEmpty()){
+        while (!partition1.isEmpty()) {
             questions.add(partition1.remove(0));
         }
-        while (!partition2.isEmpty()){
+        while (!partition2.isEmpty()) {
             questions.add(partition2.remove(0));
         }
         return questions;
     }
+
     protected class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private ExpandableTextView tvDescription;
         private ImageView ivLike;
@@ -186,22 +187,7 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHo
             }
             ParseFile mediaImage = question.getImage();
             if (mediaImage != null) {
-                pbLoading.setVisibility(View.VISIBLE);
-                ivMedia.setVisibility(View.VISIBLE);
-                Glide.with(context).load(mediaImage.getUrl()).placeholder(R.drawable.placeholder).
-                listener(new RequestListener<Drawable>() {
-                    @Override
-                    public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
-                        pbLoading.setVisibility(View.GONE);
-                        return false;
-                    }
-
-                    @Override
-                    public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
-                        pbLoading.setVisibility(View.GONE);
-                        return false;
-                    }
-                }).into(ivMedia);
+                setImageOfPost(mediaImage);
             } else {
                 ivMedia.setVisibility(View.GONE);
             }
@@ -214,6 +200,26 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHo
             TextViewAnimationOnClick.onQuestionClickAnimation(tvDescription, allQuestions, getAdapterPosition());
             tvDescription.setText(question.getDescription());
             tvDescription.resetState(question.isShrink());
+        }
+
+        // sets the imageview of post
+        public void setImageOfPost(ParseFile mediaImage) {
+            pbLoading.setVisibility(View.VISIBLE);
+            ivMedia.setVisibility(View.VISIBLE);
+            Glide.with(context).load(mediaImage.getUrl()).placeholder(R.drawable.placeholder).
+                    listener(new RequestListener<Drawable>() {
+                        @Override
+                        public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
+                            pbLoading.setVisibility(View.GONE);
+                            return false;
+                        }
+
+                        @Override
+                        public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
+                            pbLoading.setVisibility(View.GONE);
+                            return false;
+                        }
+                    }).into(ivMedia);
         }
 
         //imageview double tap to like handler

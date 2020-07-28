@@ -17,16 +17,6 @@
         app:menu="@menu/menu_main"
         app:titleTextColor="@android:color/white">
 
-        <View
-            android:layout_width="160dp"
-            android:layout_height="20dp" />
-
-        <ImageView
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:contentDescription="@string/app_name"
-            android:scaleType="centerCrop"
-            android:src="@drawable/logo" />
     </androidx.appcompat.widget.Toolbar>
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout

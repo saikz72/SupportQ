@@ -82,7 +82,7 @@
     <string name="ParseException">Object does not exist</string>
 
     <!--Snackbar -->
-    <string name="snackbar_text">Your question is deleted</string>
+    <string name="snackbar_text">Your question has been deleted</string>
     <string name="snackbar_action">Undo</string>
     <string name="likes">likes</string>
 
@@ -111,5 +111,10 @@
     <string name="question_edit_message">Question cannot be empty</string>
     <string name="show_more">...Show more</string>
     <string name="show_less">...Show less</string>
+
+    <!--Menu Main-->
     <string name="search">Search</string>
+    <string name="like_sort">Like</string>
+    <string name="date_sort">Date</string>
+    <string name="trending">Trending</string>
 </resources>

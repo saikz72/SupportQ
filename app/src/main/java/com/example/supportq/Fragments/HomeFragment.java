@@ -4,7 +4,6 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DividerItemDecoration;
@@ -85,7 +84,6 @@ public class HomeFragment extends Fragment {
     private void queryPost() {
         ParseQuery<Question> query = ParseQuery.getQuery(Question.class);
         query.include(Question.KEY_USER);
-        query.addDescendingOrder(Question.KEY_CREATED_AT);  //TODO : update how the questions are ordered
         query.findInBackground(new FindCallback<Question>() {
             @Override
             public void done(List<Question> questions, ParseException e) {
@@ -94,7 +92,12 @@ public class HomeFragment extends Fragment {
                     return;
                 }
                 questionAdapter.clear();
-                questionAdapter.addAll(questions);
+                for (int i = 0; i < questions.size(); i++) {
+                    if (!questions.get(i).getIsDeleted()) {
+                        allQuestions.add(questions.get(i));
+                    }
+                }
+                questionAdapter.notifyDataSetChanged();
                 swipeContainer.setRefreshing(false);
             }
         });
@@ -109,10 +112,60 @@ public class HomeFragment extends Fragment {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
-        if (id == R.id.action_search) {
-            Toast.makeText(getContext(), "this", Toast.LENGTH_SHORT).show();
-            return true;
+        switch (id) {
+            case R.id.action_sort_like:
+                likeSort();
+                return true;
+            case R.id.action_sort_date:
+                dateSort();
+                return true;
+            case R.id.action_sort_trending:
+                trendingSort();
+                return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private void trendingSort() {
+        //TODO --> figure out how to sort base on trending/hot issues
+    }
+
+    private void dateSort() {
+        final ParseQuery<Question> query = ParseQuery.getQuery(Question.class);
+        query.include(Question.KEY_USER);
+        query.addDescendingOrder(Question.KEY_CREATED_AT);
+        query.findInBackground(new FindCallback<Question>() {
+            @Override
+            public void done(List<Question> questions, ParseException e) {
+                if (e != null) {
+                    Toast.makeText(getContext(), getString(R.string.FETCHING_POST_ERROR), Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                questionAdapter.clear();
+                for (int i = 0; i < questions.size(); i++) {
+                    if (!questions.get(i).getIsDeleted()) {
+                        allQuestions.add(questions.get(i));
+                    }
+                }
+                questionAdapter.notifyDataSetChanged();
+            }
+        });
+    }
+
+    private void likeSort() {
+        ParseQuery<Question> query = ParseQuery.getQuery(Question.class);
+        query.include(Question.KEY_USER);
+        query.findInBackground(new FindCallback<Question>() {
+            @Override
+            public void done(List<Question> questions, ParseException e) {
+                if (e != null) {
+                    Toast.makeText(getContext(), getString(R.string.FETCHING_POST_ERROR), Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                questionAdapter.clear();
+                questionAdapter.addAll(questions);
+                swipeContainer.setRefreshing(false);
+            }
+        });
     }
 }

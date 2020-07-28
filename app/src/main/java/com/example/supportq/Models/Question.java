@@ -157,9 +157,9 @@ public class Question extends ParseObject implements Shrinkable, Comparable<Ques
 
     @Override
     public int compareTo(Question question) {
-        Integer verifiedCountOnThis = this.getLikeCount();
-        Integer verifiedCountOnQuestion = question.getLikeCount();
-        int priority = verifiedCountOnThis.compareTo(verifiedCountOnQuestion);      //if priority == +ve, this ^priority && if priority == -ve, question ^priority
+        Integer likeCountOnThis = this.getLikeCount();
+        Integer likeCountOnQuestion = question.getLikeCount();
+        int priority = likeCountOnThis.compareTo(likeCountOnQuestion);      //if priority == +ve, this ^priority && if priority == -ve, question ^priority
         if (priority != 0) {
             return priority;
         } else {
