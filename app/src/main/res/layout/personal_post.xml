@@ -127,7 +127,7 @@
         android:id="@+id/ivEditIcon"
         android:layout_width="@dimen/edit_icon_width"
         android:layout_height="@dimen/edit_icon_height"
-        android:layout_marginStart="116dp"
+        android:layout_marginStart="140dp"
         android:layout_marginTop="8dp"
         android:src="@drawable/ic_twotone_edit_24"
         app:layout_constraintStart_toEndOf="@+id/ivLike"

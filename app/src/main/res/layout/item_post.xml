@@ -37,14 +37,14 @@
         android:layout_marginStart="4dp"
         android:text="@string/Username"
         android:textColor="@color/description_color"
-        android:textSize="18sp"
+        android:textSize="14sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/tvDescription"
         app:layout_constraintEnd_toStartOf="@+id/tvTimeStamp"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/ivProfilePicture"
-        app:layout_constraintTop_toBottomOf="@+id/view"
-        app:layout_constraintVertical_bias="0.431" />
+        app:layout_constraintTop_toTopOf="@+id/ivProfilePicture"
+        app:layout_constraintVertical_bias="0.195" />
 
     <ru.embersoft.expandabletextview.ExpandableTextView
         android:id="@+id/tvDescription"
@@ -72,11 +72,12 @@
         android:id="@+id/tvTimeStamp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
         android:text="@string/timeStamp"
-        app:layout_constraintBottom_toBottomOf="@+id/tvUsername"
+        android:textSize="10dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/tvUsername" />
+        app:layout_constraintHorizontal_bias="0.015"
+        app:layout_constraintStart_toEndOf="@+id/ivProfilePicture"
+        app:layout_constraintTop_toBottomOf="@+id/tvUsername" />
 
     <ProgressBar
         android:id="@+id/pbLoading"
@@ -107,7 +108,7 @@
         android:layout_width="@dimen/item_like_width"
         android:layout_height="@dimen/item_like_height"
         android:layout_marginTop="8dp"
-        android:layout_marginEnd="76dp"
+        android:layout_marginEnd="56dp"
         android:src="@drawable/ic_vector_heart_stroke"
         app:layout_constraintEnd_toStartOf="@+id/ivBookmark"
         app:layout_constraintTop_toBottomOf="@+id/ivMedia" />
@@ -168,13 +169,33 @@
         app:layout_constraintStart_toStartOf="@+id/ivBookmark"
         app:layout_constraintTop_toBottomOf="@+id/ivBookmark" />
 
+    <TextView
+        android:id="@+id/tvHide"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/hide"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="@+id/ivHide"
+        app:layout_constraintStart_toStartOf="@+id/ivHide"
+        app:layout_constraintTop_toBottomOf="@+id/ivHide" />
+
     <ImageView
         android:id="@+id/ivBookmark"
         android:layout_width="@dimen/item_like_width"
         android:layout_height="@dimen/item_save_height"
         android:layout_marginTop="8dp"
-        android:layout_marginEnd="72dp"
+        android:layout_marginEnd="40dp"
         android:src="@drawable/ic_baseline_bookmark_border_24"
+        app:layout_constraintEnd_toStartOf="@+id/ivHide"
+        app:layout_constraintTop_toBottomOf="@+id/ivMedia" />
+
+    <ImageView
+        android:id="@+id/ivHide"
+        android:layout_width="@dimen/more_icon_width"
+        android:layout_height="@dimen/more_icon_height"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="48dp"
+        android:src="@drawable/ic_outline_remove_red_eye_24"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ivMedia" />
 

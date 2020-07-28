@@ -27,6 +27,7 @@ public class Question extends ParseObject implements Shrinkable, Comparable<Ques
     public static final String KEY_IMAGE = "image";     //image of a question
     public static final String KEY_REPLIES = "replies";
     public static final String KEY_IS_DELETED = "isDeleted";
+    public static final String KEY_IS_HIDDEN = "isHidden";
     private boolean isShrink = true;
 
     public void setIsDeleted(boolean isDeleted) {
@@ -35,6 +36,14 @@ public class Question extends ParseObject implements Shrinkable, Comparable<Ques
 
     public boolean getIsDeleted() {
         return getBoolean(KEY_IS_DELETED);
+    }
+
+    public void setIsHidden(boolean isHidden) {
+        put(KEY_IS_HIDDEN, isHidden);
+    }
+
+    public boolean getIsHidden() {
+        return getBoolean(KEY_IS_HIDDEN);
     }
 
     //sets the description of the question

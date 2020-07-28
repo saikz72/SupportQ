@@ -3,13 +3,13 @@
     <color name="colorPrimary">#262626</color>
     <color name="colorPrimaryDark">#4336D3</color>
     <color name="colorAccent">#2d08d3</color>
-    <color name="bottom_nav">#dce0e5</color>
+    <color name="bottom_nav">#ffffff</color>
     <color name="likedRed">#f90707</color>
     <color name="login_button_textcolor">#FFFFFF</color>
     <color name="login_button_color">#4336D3</color>
     <color name="login_background_color">#dce0e5</color>
     <color name="compose_backgroung_color">#eaad75</color>
-    <color name="toolbar_color">#dce0e5</color>
+    <color name="toolbar_color">#ffffff</color>
     <color name="floating_buttor_color">#4336D3</color>
     <color name="medium_gray">#070707</color>
     <color name="description_color">#000000</color>

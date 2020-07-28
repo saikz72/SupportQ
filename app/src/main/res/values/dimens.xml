@@ -78,4 +78,6 @@
     <dimen name="MARGIN">10dp</dimen>
     <dimen name="edit_icon_width">28dp</dimen>
     <dimen name="edit_icon_height">32dp</dimen>
+    <dimen name="more_icon_width">60dp</dimen>
+    <dimen name="more_icon_height">30dp</dimen>
 </resources>

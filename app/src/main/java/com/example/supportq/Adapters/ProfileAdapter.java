@@ -27,7 +27,6 @@ import com.parse.ParseUser;
 
 import java.util.List;
 
-import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
 import ru.embersoft.expandabletextview.ExpandableTextView;
 
 public class ProfileAdapter extends RecyclerView.Adapter<ProfileAdapter.ViewHolder> {
@@ -92,7 +91,7 @@ public class ProfileAdapter extends RecyclerView.Adapter<ProfileAdapter.ViewHold
     // Add a list of post -- change to type used
     public void addAll(List<Question> questions) {
         for (int i = 0; i < questions.size(); i++) {
-            if (!questions.get(i).getIsDeleted()) {
+            if (!questions.get(i).getIsDeleted() && !questions.get(i).getIsHidden()) {
                 allQuestions.add(questions.get(i));
             }
         }

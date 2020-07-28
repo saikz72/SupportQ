@@ -72,7 +72,16 @@ public class HomeFragment extends Fragment {
         swipeContainer = view.findViewById(R.id.swipeContainer);
         currentUser = ParseUser.getCurrentUser();
         allQuestions = new ArrayList<>();
-        questionAdapter = new QuestionAdapter(allQuestions, getContext(), getActivity());
+        QuestionAdapter.OnHideIconClicked onHideIconClicked = new QuestionAdapter.OnHideIconClicked() {
+            @Override
+            public void hidePostFromTimeline(int position) {
+                Question question = allQuestions.remove(position);
+                questionAdapter.notifyDataSetChanged();
+                question.setIsHidden(true);
+                question.saveInBackground();
+            }
+        };
+        questionAdapter = new QuestionAdapter(allQuestions, getContext(), getActivity(), onHideIconClicked);
         rvQuestion.setAdapter(questionAdapter);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         rvQuestion.setLayoutManager(linearLayoutManager);
@@ -93,7 +102,7 @@ public class HomeFragment extends Fragment {
                 }
                 questionAdapter.clear();
                 for (int i = 0; i < questions.size(); i++) {
-                    if (!questions.get(i).getIsDeleted()) {
+                    if (!questions.get(i).getIsDeleted() && !questions.get(i).getIsHidden()) {
                         allQuestions.add(questions.get(i));
                     }
                 }

@@ -41,16 +41,22 @@ import java.util.List;
 import ru.embersoft.expandabletextview.ExpandableTextView;
 
 public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHolder> {
+    public interface OnHideIconClicked{
+        void hidePostFromTimeline(int position);
+    }
+
     public static final String TAG = "QuestionAdapter";
     public static final int REQUEST_CODE = 200;
     private List<Question> allQuestions;
     private Context context;
     private Activity activity;
+    private OnHideIconClicked onHideIconClicked;
 
-    public QuestionAdapter(List<Question> allQuestions, Context context, Activity activity) {
+    public QuestionAdapter(List<Question> allQuestions, Context context, Activity activity, OnHideIconClicked onHideIconClicked) {
         this.allQuestions = allQuestions;
         this.context = context;
         this.activity = activity;
+        this.onHideIconClicked = onHideIconClicked;
     }
 
     @NonNull
@@ -160,6 +166,7 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHo
         private ImageView ivProfilePicture;
         private TextView tvReplyCount;
         private ProgressBar pbLoading;
+        private ImageView ivHide;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -173,6 +180,7 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHo
             ivProfilePicture = itemView.findViewById(R.id.ivProfilePicture);
             tvReplyCount = itemView.findViewById(R.id.tvReplyCount);
             pbLoading = itemView.findViewById(R.id.pbLoading);
+            ivHide = itemView.findViewById(R.id.ivHide);
             itemView.setOnClickListener(this);
             ivReply.setOnClickListener(this);
         }
@@ -200,6 +208,7 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHo
             TextViewAnimationOnClick.onQuestionClickAnimation(tvDescription, allQuestions, getAdapterPosition());
             tvDescription.setText(question.getDescription());
             tvDescription.resetState(question.isShrink());
+            hideIconClicked();
         }
 
         // sets the imageview of post
@@ -269,6 +278,16 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHo
                     question.saveInBackground();
                     setButton(ivLike, !isLiked, R.drawable.ic_vector_heart_stroke, R.drawable.ic_vector_heart, R.color.likedRed);
                     setLikeText(question, tvLikeCount);
+                }
+            });
+        }
+
+        //hide icon handler
+        public void hideIconClicked(){
+            ivHide.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                   onHideIconClicked.hidePostFromTimeline(getAdapterPosition());
                 }
             });
         }
