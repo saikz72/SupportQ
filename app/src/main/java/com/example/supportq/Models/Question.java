@@ -19,7 +19,7 @@ import java.util.Locale;
 
 @ParseClassName("Question")
 @Parcel(analyze = Question.class)
-public class Question extends ParseObject implements Shrinkable {
+public class Question extends ParseObject implements Shrinkable, Comparable<Question> {
     public static final String KEY_DESCRIPTION = "description";
     public static final String KEY_USER = "user";
     public static final String KEY_CREATED_AT = "createdAt";
@@ -153,5 +153,19 @@ public class Question extends ParseObject implements Shrinkable {
             }
         }
         return false;
+    }
+
+    @Override
+    public int compareTo(Question question) {
+        Integer verifiedCountOnThis = this.getLikeCount();
+        Integer verifiedCountOnQuestion = question.getLikeCount();
+        int priority = verifiedCountOnThis.compareTo(verifiedCountOnQuestion);      //if priority == +ve, this ^priority && if priority == -ve, question ^priority
+        if (priority != 0) {
+            return priority;
+        } else {
+            Date dateOnThis = this.getDate();
+            Date dateOnQuestion = question.getDate();
+            return dateOnThis.compareTo(dateOnQuestion);
+        }
     }
 }

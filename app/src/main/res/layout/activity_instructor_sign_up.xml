@@ -33,13 +33,14 @@
             android:layout_height="80dp"
             android:hint="@string/key"
             app:errorEnabled="true"
+            app:passwordToggleEnabled="true"
             app:startIconDrawable="@drawable/ic_vector_compose">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:imeOptions="actionNext"
-                android:inputType="text" />
+                android:inputType="textPassword" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout

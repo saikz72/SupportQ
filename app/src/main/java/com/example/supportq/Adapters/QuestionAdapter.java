@@ -4,20 +4,26 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
+import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.DataSource;
+import com.bumptech.glide.load.engine.GlideException;
 import com.bumptech.glide.load.resource.bitmap.CircleCrop;
+import com.bumptech.glide.request.RequestListener;
+import com.bumptech.glide.request.target.Target;
 import com.example.supportq.Activities.QuestionDetailsActivity;
 import com.example.supportq.Models.OnDoubleTapListener;
 import com.example.supportq.Models.Question;
@@ -29,9 +35,9 @@ import com.parse.ParseUser;
 
 import org.parceler.Parcels;
 
+import java.util.ArrayList;
 import java.util.List;
 
-import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
 import ru.embersoft.expandabletextview.ExpandableTextView;
 
 public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHolder> {
@@ -94,11 +100,54 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHo
     }
 
     // Add a list of post -- change to type used
-    public void addAll(List<Question> list) {
-        allQuestions.addAll(list);
+    public void addAll(List<Question> questions) {
+        //mergeSort(questions);
+        List<Question> unDeletedQuestions = new ArrayList<>();
+        for(int i = 0; i < questions.size(); i++){
+            if(!questions.get(i).getIsDeleted()){
+                unDeletedQuestions.add(questions.get(i));
+            }
+        }
+        allQuestions.addAll(mergeSort(unDeletedQuestions));
         notifyDataSetChanged();
     }
 
+    //mergesort
+    public List<Question> mergeSort(List<Question> questions) {
+        if (questions.size() == 1) {
+            return questions;
+        }
+        int midPoint = (questions.size() - 1) / 2;
+        List<Question> partition1 = new ArrayList<>();
+        List<Question> partition2 = new ArrayList<>();
+        for(int i = 0; i <= midPoint; i++){
+            partition1.add(questions.get(i));
+        }
+        for (int i = midPoint + 1; i < questions.size(); i++){
+            partition2.add(questions.get(i));
+        }
+        partition1 = mergeSort(partition1);
+        partition2 = mergeSort(partition2);
+        return merge(partition1, partition2);
+    }
+
+    private List<Question> merge(List<Question> partition1, List<Question> partition2) {
+        List<Question> questions = new ArrayList<>();
+        while (!partition1.isEmpty() && !partition2.isEmpty()){
+            if(partition1.get(0).compareTo(partition2.get(0)) < 0){       //second one bigger
+                questions.add(partition2.remove(0));
+            }else if(partition1.get(0).compareTo(partition2.get(0)) > 0) {  //first one bigger
+                questions.add(partition1.remove(0));
+            }
+        }
+        while (!partition1.isEmpty()){
+            questions.add(partition1.remove(0));
+        }
+        while (!partition2.isEmpty()){
+            questions.add(partition2.remove(0));
+        }
+        return questions;
+    }
     protected class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private ExpandableTextView tvDescription;
         private ImageView ivLike;
@@ -109,6 +158,7 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHo
         private ImageView ivMedia;
         private ImageView ivProfilePicture;
         private TextView tvReplyCount;
+        private ProgressBar pbLoading;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -121,6 +171,7 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHo
             ivMedia = itemView.findViewById(R.id.ivMedia);
             ivProfilePicture = itemView.findViewById(R.id.ivProfilePicture);
             tvReplyCount = itemView.findViewById(R.id.tvReplyCount);
+            pbLoading = itemView.findViewById(R.id.pbLoading);
             itemView.setOnClickListener(this);
             ivReply.setOnClickListener(this);
         }
@@ -130,10 +181,27 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHo
             ParseFile profilePhoto = question.getUser().getParseFile(User.KEY_PROFILE_PICTURE);
             if (profilePhoto != null) {
                 Glide.with(context).load(profilePhoto.getUrl()).transform(new CircleCrop()).into(ivProfilePicture);
+            } else {
+                ivProfilePicture.setImageResource(R.drawable.com_facebook_profile_picture_blank_portrait);
             }
             ParseFile mediaImage = question.getImage();
             if (mediaImage != null) {
-                Glide.with(context).load(mediaImage.getUrl()).transform(new RoundedCornersTransformation(R.dimen.RADIUS, R.dimen.MARGIN)).into(ivMedia);
+                pbLoading.setVisibility(View.VISIBLE);
+                ivMedia.setVisibility(View.VISIBLE);
+                Glide.with(context).load(mediaImage.getUrl()).placeholder(R.drawable.placeholder).
+                listener(new RequestListener<Drawable>() {
+                    @Override
+                    public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
+                        pbLoading.setVisibility(View.GONE);
+                        return false;
+                    }
+
+                    @Override
+                    public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
+                        pbLoading.setVisibility(View.GONE);
+                        return false;
+                    }
+                }).into(ivMedia);
             } else {
                 ivMedia.setVisibility(View.GONE);
             }

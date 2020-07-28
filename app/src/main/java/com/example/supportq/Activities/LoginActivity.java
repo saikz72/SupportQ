@@ -86,7 +86,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     //message to send user when there is no internent
-    private void internetAvailable(ParseException e) {
+    private void internetAvailable(ParseException e) {  //TODO --> rename method - showErrorMessageIfInternetNotAvailable
         //connection fail
         if (e.getCode() == e.CONNECTION_FAILED || e.getCode() == e.OTHER_CAUSE) {
             errorMessageOnEditText(null, null);
