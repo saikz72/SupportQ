@@ -9,6 +9,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.FileProvider;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
@@ -17,15 +18,21 @@ import androidx.fragment.app.FragmentTransaction;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.bitmap.CircleCrop;
+import com.example.supportq.Activities.MainActivity;
 import com.example.supportq.Models.Question;
+import com.example.supportq.Models.User;
 import com.example.supportq.R;
 import com.parse.ParseException;
 import com.parse.ParseFile;
@@ -39,11 +46,11 @@ import static android.app.Activity.RESULT_OK;
 public class ComposeFragment extends Fragment {
     public static final int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 100;
     public static final String TAG = "ComposeFragment";
-    private Button btnCompose;
     private EditText etCompose;
-    private ImageView btnCaptureImage;
     private ImageView ivMedia;
+    private ImageView ivProfilePicture;
     private File photoFile;
+    private Toolbar toolbar;
 
     public ComposeFragment() {
         // Required empty public constructor
@@ -52,18 +59,29 @@ public class ComposeFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+        setHasOptionsMenu(true);
         return inflater.inflate(R.layout.fragment_compose, container, false);
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        btnCompose = view.findViewById(R.id.btnCompose);
         etCompose = view.findViewById(R.id.etCompose);
-        btnCaptureImage = view.findViewById(R.id.btnCaptureImage);
         ivMedia = view.findViewById(R.id.ivMedia);
-        submitButtonClicked();
-        takePhotoButtonClicked();
+        toolbar = view.findViewById(R.id.toolbar);
+        ivProfilePicture = view.findViewById(R.id.ivProfilePicture);
+        setUpProfileImage();
+        ((MainActivity) getActivity()).setSupportActionBar(toolbar);
+        ((MainActivity) getActivity()).getSupportActionBar().setTitle("");
+    }
+
+    public void setUpProfileImage(){
+        ParseFile profilePicture = ParseUser.getCurrentUser().getParseFile(User.KEY_PROFILE_PICTURE);
+        if(profilePicture != null){
+            Glide.with(getContext()).load(profilePicture.getUrl()).transform(new CircleCrop()).placeholder(R.drawable.placeholder).into(ivProfilePicture);
+        }else{
+            ivProfilePicture.setImageResource(R.drawable.com_facebook_profile_picture_blank_portrait);
+        }
     }
 
     @Override
@@ -80,21 +98,16 @@ public class ComposeFragment extends Fragment {
     }
 
     public void submitButtonClicked() {
-        btnCompose.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String description = etCompose.getText().toString();
-                if (validatePost(description)) {
-                    ParseUser currentUser = ParseUser.getCurrentUser();
-                    saveQuestion(description, currentUser);
-                    FragmentTransaction fragmentTransaction = ((FragmentActivity) getContext()).getSupportFragmentManager().beginTransaction();
-                    Fragment homeFragment = new HomeFragment();
-                    fragmentTransaction.replace(R.id.flContainer, homeFragment);
-                    fragmentTransaction.commit();
-                    Toast.makeText(getContext(), getString(R.string.QUESTION_POSTED_TOAST), Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
+        String description = etCompose.getText().toString();
+        if (validatePost(description)) {
+            ParseUser currentUser = ParseUser.getCurrentUser();
+            saveQuestion(description, currentUser);
+            FragmentTransaction fragmentTransaction = ((FragmentActivity) getContext()).getSupportFragmentManager().beginTransaction();
+            Fragment homeFragment = new HomeFragment();
+            fragmentTransaction.replace(R.id.flContainer, homeFragment);
+            fragmentTransaction.commit();
+            Toast.makeText(getContext(), getString(R.string.QUESTION_POSTED_TOAST), Toast.LENGTH_SHORT).show();
+        }
     }
 
     private boolean validatePost(String description) {
@@ -131,16 +144,6 @@ public class ComposeFragment extends Fragment {
         });
     }
 
-    //capture image
-    public void takePhotoButtonClicked() {
-        btnCaptureImage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                launchCamera();
-            }
-        });
-    }
-
     public void launchCamera() {
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         photoFile = getPhotoFileUri(getString(R.string.PHOTO_FILENAME));
@@ -171,5 +174,24 @@ public class ComposeFragment extends Fragment {
                 Toast.makeText(getContext(), getString(R.string.PICTURE_NOT_TAKEN), Toast.LENGTH_SHORT).show();
             }
         }
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        menu.clear();
+        inflater.inflate(R.menu.compose_menu, menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        switch (id) {
+            case R.id.action_take_picture:
+                launchCamera();
+                return true;
+            case R.id.action_submit:
+                submitButtonClicked();
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

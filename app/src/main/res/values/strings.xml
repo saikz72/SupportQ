@@ -118,4 +118,5 @@
     <string name="date_sort">Date</string>
     <string name="trending">Trending</string>
     <string name="hide">Hide</string>
+    <string name="submit">Post</string>
 </resources>

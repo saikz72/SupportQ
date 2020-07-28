@@ -21,7 +21,7 @@
     <dimen name="compose_button_submit">37dp</dimen>
     <dimen name="compose_image_width">306dp</dimen>
     <dimen name="compose_image_height">320dp</dimen>
-    <dimen name="compose_edittext_width">311dp</dimen>
+    <dimen name="compose_edittext_width">222dp</dimen>
     <dimen name="compose_edittext_height">211dp</dimen>
     <dimen name="compose_capture_width">69dp</dimen>
     <dimen name="compose_capture_height">46dp</dimen>

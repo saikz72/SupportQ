@@ -4,68 +4,63 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/login_background_color"
-    android:paddingHorizontal="20dp">
+    android:background="@color/white_backgroud">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/toolbar_color"
+        android:minHeight="?attr/actionBarSize"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:menu="@menu/compose_menu"
+        app:titleTextColor="@android:color/white">
+
+    </androidx.appcompat.widget.Toolbar>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/login_background_color"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
     <ImageView
         android:id="@+id/ivProfilePicture"
         android:layout_width="@dimen/home_profile_width"
         android:layout_height="@dimen/home_profile_height"
-        android:layout_marginStart="4dp"
+        android:layout_marginTop="4dp"
         android:src="@drawable/com_facebook_profile_picture_blank_portrait"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/etCompose" />
-
-    <ImageView
-        android:id="@+id/btnCaptureImage"
-        android:layout_width="@dimen/compose_capture_width"
-        android:layout_height="@dimen/compose_capture_height"
-        android:layout_marginTop="264dp"
-        android:src="@drawable/ic_baseline_photo_camera_24"
-        app:layout_constraintEnd_toEndOf="@+id/ivProfilePicture"
-        app:layout_constraintHorizontal_bias="0.421"
-        app:layout_constraintStart_toStartOf="@+id/ivProfilePicture"
-        app:layout_constraintTop_toBottomOf="@+id/ivProfilePicture" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/etCompose"
-        android:layout_width="@dimen/compose_edittext_width"
-        android:layout_height="@dimen/compose_edittext_height"
-        android:layout_marginTop="8dp"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/compose_edittext_width"
         android:ems="10"
         android:gravity="top|left"
         android:hint="@string/question_hint"
         android:imeOptions="actionDone"
         android:inputType="textMultiLine"
+        android:textSize="14dp"
         android:maxLines="20"
         android:minLines="5"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/ivProfilePicture"
-        app:layout_constraintTop_toBottomOf="@+id/btnCompose" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
     <ImageView
         android:id="@+id/ivMedia"
-        android:layout_width="@dimen/compose_image_width"
+        android:layout_width="match_parent"
         android:layout_height="@dimen/compose_image_width"
-        android:tint="#03FFFFFF"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.9913"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/etCompose" />
-
-    <Button
-        android:id="@+id/btnCompose"
-        android:layout_width="wrap_content"
-        android:layout_height="@dimen/compose_button_submit"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="16dp"
-        android:background="@drawable/custom_button"
-        android:text="@string/post_question"
-        android:textColor="@color/login_button_textcolor"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.95"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
