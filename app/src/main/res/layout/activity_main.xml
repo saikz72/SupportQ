@@ -23,5 +23,9 @@
         app:itemTextColor="@color/selector"
         app:itemIconTint="@color/selector"
         app:menu="@menu/menu_bottom_navigation" />
+    <View
+        android:id="@+id/snackbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
 </RelativeLayout>

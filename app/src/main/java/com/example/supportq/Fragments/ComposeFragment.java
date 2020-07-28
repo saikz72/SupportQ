@@ -26,6 +26,7 @@ import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
@@ -34,6 +35,7 @@ import com.example.supportq.Activities.MainActivity;
 import com.example.supportq.Models.Question;
 import com.example.supportq.Models.User;
 import com.example.supportq.R;
+import com.google.android.material.snackbar.Snackbar;
 import com.parse.ParseException;
 import com.parse.ParseFile;
 import com.parse.ParseUser;
@@ -51,6 +53,7 @@ public class ComposeFragment extends Fragment {
     private ImageView ivProfilePicture;
     private File photoFile;
     private Toolbar toolbar;
+    private ProgressBar pbLoading;
 
     public ComposeFragment() {
         // Required empty public constructor
@@ -69,6 +72,7 @@ public class ComposeFragment extends Fragment {
         etCompose = view.findViewById(R.id.etCompose);
         ivMedia = view.findViewById(R.id.ivMedia);
         toolbar = view.findViewById(R.id.toolbar);
+        pbLoading = view.findViewById(R.id.pbLoading);
         ivProfilePicture = view.findViewById(R.id.ivProfilePicture);
         setUpProfileImage();
         ((MainActivity) getActivity()).setSupportActionBar(toolbar);
@@ -100,13 +104,14 @@ public class ComposeFragment extends Fragment {
     public void submitButtonClicked() {
         String description = etCompose.getText().toString();
         if (validatePost(description)) {
+            pbLoading.setVisibility(View.VISIBLE);
             ParseUser currentUser = ParseUser.getCurrentUser();
             saveQuestion(description, currentUser);
             FragmentTransaction fragmentTransaction = ((FragmentActivity) getContext()).getSupportFragmentManager().beginTransaction();
             Fragment homeFragment = new HomeFragment();
             fragmentTransaction.replace(R.id.flContainer, homeFragment);
             fragmentTransaction.commit();
-            Toast.makeText(getContext(), getString(R.string.QUESTION_POSTED_TOAST), Toast.LENGTH_SHORT).show();
+            Snackbar.make(MainActivity.snackbar, R.string.home_snackbar, Snackbar.LENGTH_SHORT).show();
         }
     }
 

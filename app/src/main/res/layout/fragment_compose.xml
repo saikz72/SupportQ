@@ -17,6 +17,16 @@
         app:layout_constraintTop_toTopOf="parent"
         app:menu="@menu/compose_menu"
         app:titleTextColor="@android:color/white">
+        <View
+            android:layout_width="175dp"
+            android:layout_height="1dp"
+            android:visibility="invisible"/>
+        <ProgressBar
+            android:id="@+id/pbLoading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="invisible"
+            app:layout_constraintVertical_bias="0.144" />
 
     </androidx.appcompat.widget.Toolbar>
 

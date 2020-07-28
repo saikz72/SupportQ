@@ -205,8 +205,7 @@ public class ProfileFragment extends Fragment {
                     profileAdapter.notifyItemInserted(position);
                 }
             };
-            Snackbar.make(rvQuestion, R.string.snackbar_text, Snackbar.LENGTH_LONG).setAction(R.string.snackbar_action, myOnClickListener).show();
-            Snackbar.make(rvQuestion, R.string.snackbar_text, Snackbar.LENGTH_LONG)
+            Snackbar.make(rvQuestion, R.string.snackbar_text, Snackbar.LENGTH_SHORT)
                     .setAction(R.string.snackbar_action, myOnClickListener)
                     .setActionTextColor(getResources().getColor(R.color.green))
                     .setDuration(3000).show();

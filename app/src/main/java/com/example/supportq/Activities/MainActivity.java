@@ -7,8 +7,8 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import android.os.Bundle;
-import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.example.supportq.Fragments.ComposeFragment;
 import com.example.supportq.Fragments.HomeFragment;
@@ -24,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
     private BottomNavigationView bottomNavigationView;
     public final FragmentManager fragmentManager = getSupportFragmentManager();
     private Toolbar toolbar;
+    public static View snackbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,6 +64,7 @@ public class MainActivity extends AppCompatActivity {
     public void setViews() {
         bottomNavigationView = findViewById(R.id.bottomNavigation);
         toolbar = findViewById(R.id.toolbar);
+        snackbar = findViewById(R.id.snackbar);
     }
 
     @Override
