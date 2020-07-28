@@ -114,7 +114,7 @@ public class ReplyAdapter extends RecyclerView.Adapter<ReplyAdapter.ViewHolder> 
             try {
                 tvUsername.setText(reply.getUser().fetchIfNeeded().getUsername());
             } catch (ParseException e) {
-            }
+            }       //TODO --> FIX LAG
             ParseFile profilePhoto = reply.getUser().getParseFile(User.KEY_PROFILE_PICTURE);
             if (profilePhoto != null) {
                 Glide.with(context).load(profilePhoto.getUrl()).transform(new CircleCrop()).into(ivProfilePicture);

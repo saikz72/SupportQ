@@ -96,17 +96,18 @@ public class ProfileFragment extends Fragment {
         rvQuestion.setLayoutManager(linearLayoutManager);
         RecyclerView.ItemDecoration divider = new DividerItemDecoration(getContext(), linearLayoutManager.getOrientation());
         rvQuestion.addItemDecoration(divider);
-        editProfileButtonClicked();
+        editProfileButtonClicked();     //TODO --> setUpEditProfileButtonClicked    //TODO --> setUp
         logoutButtonClicked();
         queryPost();
     }
 
     private void bindViews() {
-        tvUsername.setText("@" + User.getUserName(currentUser));
+        tvUsername.setText("@" + User.getUserName(currentUser));        //TODO--> use string resource(and concat)
         tvFullname.setText(User.getFullName(currentUser));
         try {
             profilePicture = ParseUser.getCurrentUser().fetch().getParseFile((User.KEY_PROFILE_PICTURE));
         } catch (ParseException e) {
+            // no internet, user null .....     //TODO -> display error message on screen
             Log.e("TAG", " error", e);
         }
         if (profilePicture != null) {

@@ -1,5 +1,6 @@
 package com.example.supportq.Fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -38,6 +39,7 @@ public class HomeFragment extends Fragment {
     private SwipeRefreshLayout swipeContainer;
     private ParseUser currentUser;
     private Toolbar toolbar;
+    public static final int EDIT_TEXT_CODE = 20;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -173,8 +175,12 @@ public class HomeFragment extends Fragment {
                 }
                 questionAdapter.clear();
                 questionAdapter.addAll(questions);
-                swipeContainer.setRefreshing(false);
             }
         });
+    }
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        queryPost();
     }
 }
