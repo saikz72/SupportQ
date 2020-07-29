@@ -120,4 +120,5 @@
     <string name="hide">Hide</string>
     <string name="submit">Post</string>
     <string name="home_snackbar">Your question has been posted successfully</string>
+    <string name="image_name">\"random.png\"</string>
 </resources>
