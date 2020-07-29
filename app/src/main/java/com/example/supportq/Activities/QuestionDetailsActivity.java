@@ -109,12 +109,16 @@ public class QuestionDetailsActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Reply reply = new Reply();
-                reply.setReply(etReply.getText().toString());
-                reply.setUser(currentUser);
-                reply.setQuestionId(question);
-                reply.saveInBackground();
-                etReply.setText("");
-                queryReply();
+                if (!etReply.getText().toString().isEmpty() && etReply.getText().toString().trim().length() > 0) {
+                    reply.setReply(etReply.getText().toString());
+                    reply.setUser(currentUser);
+                    reply.setQuestionId(question);
+                    reply.saveInBackground();
+                    etReply.setText("");
+                    queryReply();
+                } else {
+                    etReply.setError(getString(R.string.reply_error));
+                }
             }
         });
     }
@@ -159,7 +163,7 @@ public class QuestionDetailsActivity extends AppCompatActivity {
         ParseFile mediaImage = question.getImage();
         if (mediaImage != null) {
             Glide.with(this).load(mediaImage.getUrl()).transform(new RoundedCornersTransformation(R.dimen.RADIUS, R.dimen.MARGIN)).into(ivMedia);
-        }else{
+        } else {
             ivMedia.setVisibility(View.GONE);
         }
         tvDescription.setText(question.getDescription());
@@ -197,6 +201,7 @@ public class QuestionDetailsActivity extends AppCompatActivity {
         String itemsFound = getResources().getQuantityString(R.plurals.numberOfLikes, likeCount, likeCount);
         view.setText(itemsFound);
     }
+
     //sets the comment count on the post
     private void setReplyText(Question question, TextView view) {
         int replyCount = question.getRepliesCount();

@@ -3,8 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_margin="10dp">
+    android:layout_height="wrap_content">
 
     <ImageView
         android:id="@+id/ivProfilePicture"
@@ -26,75 +25,68 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="5dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginTop="10dp"
         android:text="@string/Username"
-        android:textColor="#000000"
+        android:textColor="@color/black"
         android:textSize="18sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/tvTimeStamp"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/ivProfilePicture"
-        app:layout_constraintTop_toBottomOf="@+id/view"
-        app:layout_constraintVertical_bias="0.015" />
+        app:layout_constraintTop_toBottomOf="@+id/view" />
 
     <ru.embersoft.expandabletextview.ExpandableTextView
         android:id="@+id/tvReply"
         android:layout_width="@dimen/home_description"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
         android:autoLink="all"
         android:textColorLink="@color/blue"
         app:etv_showLine="false"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginTop="4dp"
         app:etv_textContentColor="@color/description_color"
         app:etv_textContentSize="16sp"
         app:etv_textExpand="@string/show_more"
         app:etv_textShrink="@string/show_less"
         app:etv_textStateColor="@color/description_color"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/ivProfilePicture"
-        app:layout_constraintTop_toBottomOf="@+id/tvUsername"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ivProfilePicture" />
 
     <TextView
         android:id="@+id/tvTimeStamp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
+        android:textSize="10dp"
         android:text="@string/timeStamp"
-        app:layout_constraintBottom_toBottomOf="@+id/tvUsername"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/tvUsername" />
+        app:layout_constraintHorizontal_bias="0.034"
+        app:layout_constraintStart_toEndOf="@+id/ivProfilePicture"
+        app:layout_constraintTop_toBottomOf="@+id/tvUsername" />
 
     <ImageView
         android:id="@+id/ivDelete"
         android:layout_width="@dimen/item_delete_width"
         android:layout_height="@dimen/item_delete_height"
-        android:layout_marginEnd="24dp"
+        android:layout_marginEnd="8dp"
         android:src="@drawable/ic_baseline_delete_24"
         android:visibility="visible"
-        app:layout_constraintBottom_toBottomOf="@+id/tvApproveNote"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/tvApproveNote" />
+        app:layout_constraintTop_toBottomOf="@+id/tvReply"
+        app:layout_constraintVertical_bias="0.666" />
 
     <ImageView
         android:id="@+id/ivVerify"
         android:layout_width="@dimen/item_comment_width"
         android:layout_height="@dimen/item_comment_height"
-        android:layout_marginStart="16dp"
         android:src="@drawable/very_inactive"
+        android:layout_marginStart="75dp"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="@+id/tvApproveNote"
-        app:layout_constraintEnd_toStartOf="@+id/tvApproveNote"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/tvApproveNote"
-        app:layout_constraintVertical_bias="0.555" />
+        app:layout_constraintTop_toTopOf="@+id/tvApproveNote" />
 
     <View
         android:id="@+id/view"
@@ -111,24 +103,8 @@
         app:layout_constraintVertical_bias="0.0" />
 
     <ImageView
-        android:id="@+id/ivMedia"
-        android:layout_width="@dimen/home_media_width"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        android:adjustViewBounds="true"
-        android:tint="#03FFFFFF"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/ivProfilePicture"
-        app:layout_constraintTop_toBottomOf="@+id/tvReply"
-        app:layout_constraintVertical_bias="0.0" />
-
-    <ImageView
         android:id="@+id/ivMedia2"
-        android:layout_width="500dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
@@ -142,12 +118,13 @@
         android:id="@+id/tvApproveNote"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="88dp"
         android:fontFamily="@font/amiri_italic"
         android:text="@string/approved_message"
         android:textColor="@color/description_color"
         android:visibility="gone"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ivMedia" />
+        app:layout_constraintEnd_toStartOf="@+id/ivDelete"
+        app:layout_constraintHorizontal_bias="0.017"
+        app:layout_constraintStart_toEndOf="@+id/ivVerify"
+        app:layout_constraintTop_toBottomOf="@+id/tvReply" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

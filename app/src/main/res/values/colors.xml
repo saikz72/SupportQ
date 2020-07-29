@@ -18,4 +18,5 @@
     <color name="gray">#3e4449</color>
     <color name="green">#289647</color>
     <color name="verify_color">#4AE209</color>
+    <color name="black">#000000</color>
 </resources>

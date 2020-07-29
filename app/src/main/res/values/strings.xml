@@ -121,4 +121,7 @@
     <string name="submit">Post</string>
     <string name="home_snackbar">Your question has been posted successfully</string>
     <string name="image_name">\"random.png\"</string>
+    <string name="reply_error">\"reply cannot be empty\"</string>
+    <string name="all_replies">all replies</string>
+    <string name="verified_replies">verified replies</string>
 </resources>

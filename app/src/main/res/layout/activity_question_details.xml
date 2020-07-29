@@ -1,63 +1,88 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.swiperefreshlayout.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/swipeContainer"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/white_backgroud"
         android:fillViewport="true">
 
-        <LinearLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:padding="5dp">
 
-            <LinearLayout
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:background="@color/toolbar_color"
+                android:minHeight="?attr/actionBarSize"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:titleTextColor="@android:color/white">
 
-                <ImageView
-                    android:id="@+id/ivProfilePicture"
-                    android:layout_width="@dimen/details_profile_width"
-                    android:layout_height="@dimen/profile_image_height"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="8dp"
-                    app:srcCompat="@drawable/com_facebook_profile_picture_blank_portrait" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
+                <Switch
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:orientation="vertical">
+                    android:textOff="@string/all_replies"
+                    android:textOn="@string/verified_replies" />
+            </androidx.appcompat.widget.Toolbar>
 
-                    <TextView
-                        android:id="@+id/tvFullname"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="8dp"
-                        android:layout_marginTop="8dp"
-                        android:layout_marginEnd="8dp"
-                        android:text="@string/name"
-                        android:textColor="@color/description_color"
-                        android:textSize="20sp"
-                        android:textStyle="bold" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="2dp"
+                android:background="@color/login_background_color"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/etReply" />
 
-                    <TextView
-                        android:id="@+id/tvUsername"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="8dp"
-                        android:layout_marginEnd="8dp"
-                        android:layout_marginBottom="8dp"
-                        android:text="Screen Name"
-                        android:textSize="18dp" />
-                </LinearLayout>
-            </LinearLayout>
+            <View
+                android:id="@+id/view3"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/login_background_color"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+
+
+            <ImageView
+                android:id="@+id/ivProfilePicture"
+                android:layout_width="@dimen/details_profile_width"
+                android:layout_height="@dimen/profile_image_height"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/toolbar"
+                app:srcCompat="@drawable/com_facebook_profile_picture_blank_portrait" />
+
+            <TextView
+                android:id="@+id/tvFullname"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/name"
+                android:textColor="@color/description_color"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@+id/ivProfilePicture"
+                app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+
+            <TextView
+                android:id="@+id/tvUsername"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/Username"
+                android:textSize="18dp"
+                app:layout_constraintStart_toEndOf="@+id/ivProfilePicture"
+                app:layout_constraintTop_toBottomOf="@+id/tvFullname" />
 
             <ru.embersoft.expandabletextview.ExpandableTextView
                 android:id="@+id/tvDescription"
@@ -73,155 +98,109 @@
                 app:etv_textContentSize="16sp"
                 app:etv_textExpand="@string/show_more"
                 app:etv_textShrink="@string/show_less"
-                app:etv_textStateColor="@color/description_color" />
+                app:etv_textStateColor="@color/description_color"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/ivProfilePicture">
+
+            </ru.embersoft.expandabletextview.ExpandableTextView>
+
+            <TextView
+                android:id="@+id/tvTimeStamp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/timeStamp"
+                android:textSize="10dp"
+                app:layout_constraintStart_toEndOf="@+id/ivProfilePicture"
+                app:layout_constraintTop_toBottomOf="@+id/tvUsername" />
+
+            <TextView
+                android:id="@+id/tvReplyCount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingHorizontal="10dp"
+                android:text="@string/reply"
+                android:textColor="@color/black"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toEndOf="@+id/ivReply"
+                app:layout_constraintStart_toStartOf="@+id/ivReply"
+                app:layout_constraintTop_toBottomOf="@+id/ivReply" />
+
+            <TextView
+                android:id="@+id/tvLikeCount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/likes"
+                android:textColor="@color/black"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toEndOf="@+id/ivLike"
+                app:layout_constraintStart_toStartOf="@+id/ivLike"
+                app:layout_constraintTop_toBottomOf="@+id/ivLike" />
+
+
+            <ImageView
+                android:id="@+id/ivReply"
+                android:layout_width="@dimen/details_im_width"
+                android:layout_height="@dimen/details_im_height"
+                android:layout_marginEnd="128dp"
+                android:scaleType="centerCrop"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/ivMedia"
+                app:srcCompat="@drawable/ufi_comment" />
+
+            <ImageView
+                android:id="@+id/ivLike"
+                android:layout_width="@dimen/details_like_width"
+                android:layout_height="@dimen/details_like_height"
+                app:layout_constraintEnd_toStartOf="@+id/ivReply"
+                app:layout_constraintHorizontal_bias="0.528"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/ivMedia"
+                app:srcCompat="@drawable/ic_vector_heart_stroke" />
+
+            <EditText
+                android:id="@+id/etReply"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/rounded_edit_text"
+                android:ems="10"
+                android:hint="@string/respond"
+                android:imeOptions="actionDone"
+                android:inputType="textMultiLine"
+                android:maxLines="10"
+                android:minLines="3"
+                android:textAlignment="center"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvLikeCount" />
+
+            <ImageView
+                android:id="@+id/ivSendReply"
+                android:layout_width="@dimen/details_send_reply_width"
+                android:layout_height="@dimen/details_send_reply_height"
+                android:layout_marginTop="10dp"
+                android:src="@drawable/ufi_new_direct"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.973"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvQuestions"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/etReply" />
 
             <ImageView
                 android:id="@+id/ivMedia"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/home_media_height"
                 android:scaleType="centerCrop"
-                android:tint="#03FFFFFF" />
-
-            <TextView
-                android:id="@+id/tvTimeStamp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="10dp"
-                android:layout_marginBottom="8dp"
-                android:paddingHorizontal="10dp"
-                android:text="@string/timeStamp" />
-
-            <View
-                android:id="@+id/view4"
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginEnd="8dp"
-                android:background="#939299" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:paddingHorizontal="40dp">
-
-                <TextView
-                    android:id="@+id/tvReplyCount"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="60dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginEnd="8dp"
-                    android:layout_marginBottom="8dp"
-                    android:paddingHorizontal="10dp"
-                    android:text="replies"
-                    android:textColor="#000000"
-                    android:textSize="14sp" />
-
-                <TextView
-                    android:id="@+id/tvLikeCount"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="40dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginEnd="8dp"
-                    android:layout_marginBottom="8dp"
-                    android:text="@string/likes"
-                    android:textColor="#000000"
-                    android:textSize="14sp" />
-            </LinearLayout>
-
-            <View
-                android:id="@+id/view3"
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="8dp"
-                android:background="#626166" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:paddingHorizontal="40dp">
-
-                <ImageView
-                    android:id="@+id/ivReply"
-                    android:layout_width="@dimen/details_im_width"
-                    android:layout_height="@dimen/details_im_height"
-                    android:layout_marginStart="80dp"
-                    android:layout_marginTop="6dp"
-                    android:scaleType="centerCrop"
-                    app:srcCompat="@drawable/ufi_comment" />
-
-                <ImageView
-                    android:id="@+id/ivLike"
-                    android:layout_width="@dimen/details_like_width"
-                    android:layout_height="@dimen/details_like_height"
-                    android:layout_marginStart="80dp"
-                    android:layout_marginTop="8dp"
-                    app:srcCompat="@drawable/ic_vector_heart_stroke" />
-
-                <ImageView
-                    android:id="@+id/ivDelete"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="80dp"
-                    android:layout_marginTop="8dp"
-                    android:visibility="gone"
-                    app:srcCompat="@drawable/ic_baseline_delete_24" />
-            </LinearLayout>
-
-            <View
-                android:id="@+id/view2"
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="8dp"
-                android:background="#939299" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <EditText
-                    android:id="@+id/etReply"
-                    android:layout_width="@dimen/details_reply_width"
-                    android:layout_height="@dimen/details_reply_heigth"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginTop="8dp"
-                    android:background="@drawable/rounded_edit_text"
-                    android:ems="10"
-                    android:hint="@string/respond"
-                    android:imeOptions="actionDone"
-                    android:inputType="textMultiLine"
-                    android:minLines="5"
-                    android:textAlignment="center" />
-
-                <ImageView
-                    android:id="@+id/ivSendReply"
-                    android:layout_width="@dimen/details_send_reply_width"
-                    android:layout_height="@dimen/details_send_reply_height"
-                    android:layout_marginTop="15dp"
-                    android:src="@drawable/ufi_new_direct" />
-            </LinearLayout>
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:descendantFocusability="blocksDescendants">
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rvQuestions"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
-            </RelativeLayout>
-        </LinearLayout>
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvDescription" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
 </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
