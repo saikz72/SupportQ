@@ -79,11 +79,11 @@ public class ComposeFragment extends Fragment {
         ((MainActivity) getActivity()).getSupportActionBar().setTitle("");
     }
 
-    public void setUpProfileImage(){
+    public void setUpProfileImage() {
         ParseFile profilePicture = ParseUser.getCurrentUser().getParseFile(User.KEY_PROFILE_PICTURE);
-        if(profilePicture != null){
+        if (profilePicture != null) {
             Glide.with(getContext()).load(profilePicture.getUrl()).transform(new CircleCrop()).placeholder(R.drawable.placeholder).into(ivProfilePicture);
-        }else{
+        } else {
             ivProfilePicture.setImageResource(R.drawable.com_facebook_profile_picture_blank_portrait);
         }
     }
@@ -111,7 +111,13 @@ public class ComposeFragment extends Fragment {
             Fragment homeFragment = new HomeFragment();
             fragmentTransaction.replace(R.id.flContainer, homeFragment);
             fragmentTransaction.commit();
-            Snackbar.make(MainActivity.snackbar, R.string.home_snackbar, Snackbar.LENGTH_SHORT).show();
+            final Snackbar snackbar = Snackbar.make(MainActivity.snackbar, R.string.home_snackbar, Snackbar.LENGTH_SHORT);
+            snackbar.setAction("Dismiss", new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    snackbar.dismiss();
+                }
+            }).setActionTextColor(getResources().getColor(R.color.green)).setDuration(3000).show();
         }
     }
 
