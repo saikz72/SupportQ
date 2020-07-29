@@ -6,6 +6,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DividerItemDecoration;
@@ -57,6 +58,7 @@ public class ProfileFragment extends Fragment {
     private ProfileAdapter profileAdapter;
     private List<Question> allQuestions;
     private RecyclerView rvQuestion;
+    private CoordinatorLayout viewSnackbar;
     private ParseFile profilePicture;
     private ParseUser currentUser;
     public static final int EDIT_TEXT_CODE = 20;
@@ -142,6 +144,7 @@ public class ProfileFragment extends Fragment {
         btnLogOut = view.findViewById(R.id.btnLogOut);
         progressBar = view.findViewById(R.id.pbLoading);
         tvFullname = view.findViewById(R.id.tvFullname);
+        viewSnackbar = view.findViewById(R.id.viewSnackbar);
     }
 
     //edit profile
@@ -206,7 +209,7 @@ public class ProfileFragment extends Fragment {
                     profileAdapter.notifyItemInserted(position);
                 }
             };
-            Snackbar.make(rvQuestion, R.string.snackbar_text, Snackbar.LENGTH_SHORT)
+            Snackbar.make(viewSnackbar, R.string.snackbar_text, Snackbar.LENGTH_SHORT)
                     .setAction(R.string.snackbar_action, myOnClickListener)
                     .setActionTextColor(getResources().getColor(R.color.green))
                     .setDuration(3000).show();
