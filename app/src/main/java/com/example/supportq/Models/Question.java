@@ -118,11 +118,8 @@ public class Question extends ParseObject implements Shrinkable, Comparable<Ques
     public String getRelativeTimeAgo(long dateMillis) {
         SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.ENGLISH);
         sf.setLenient(true);
-
         String relativeDate = "";
-        relativeDate = DateUtils.getRelativeTimeSpanString(dateMillis,
-                System.currentTimeMillis(), DateUtils.SECOND_IN_MILLIS).toString();
-
+        relativeDate = DateUtils.getRelativeTimeSpanString(dateMillis, System.currentTimeMillis(), DateUtils.SECOND_IN_MILLIS).toString();
         return relativeDate;
     }
 

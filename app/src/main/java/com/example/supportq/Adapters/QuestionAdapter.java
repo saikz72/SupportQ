@@ -35,13 +35,17 @@ import com.parse.ParseUser;
 
 import org.parceler.Parcels;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import ru.embersoft.expandabletextview.ExpandableTextView;
 
 public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHolder> {
-    public interface OnHideIconClicked{
+
+    public interface OnHideIconClicked {
         void hidePostFromTimeline(int position);
     }
 
@@ -103,6 +107,50 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHo
     public void clear() {
         allQuestions.clear();
         notifyDataSetChanged();
+    }
+
+    //add trending post to the adapter if they exist
+    public boolean addTrendingPost(List<Question> questions) {
+        List<Question> list = addQuestionsOverPastDay(questions);
+        for (int i = 0; i < list.size(); i++) {
+            if (list.get(i).getLikeCount() > 1 && list.get(i).getRepliesCount() > 1) {
+                allQuestions.add(list.get(i));
+            }
+        }
+        notifyDataSetChanged();
+        if (allQuestions.size() > 0) {
+            return true;
+        }
+        return false;
+    }
+
+    //add post within 24 hours -- TODO --> CHANGE TIME FRAME
+    public List<Question> addQuestionsOverPastDay(List<Question> questions) {
+        Date currentDate = Calendar.getInstance().getTime();
+        List<Question> list = new ArrayList<>();
+        int day = 24;
+        for (int i = 0; i < questions.size(); i++) {
+            Date dateOfPost = questions.get(i).getDate();
+            if (timeDifference(dateOfPost, currentDate) < day) {
+                list.add(questions.get(i));
+            }
+        }
+        return list;
+    }
+
+    public long timeDifference(Date startDate, Date endDate) {
+        SimpleDateFormat df = new SimpleDateFormat("dd/M/yyyy hh:mm:ss");
+        try {
+            startDate = df.parse(startDate.toString());
+            endDate = df.parse(endDate.toString());
+        } catch (java.text.ParseException e) {
+        }
+        long different = endDate.getTime() - startDate.getTime();
+        long secondsInMilli = 1000;
+        long minutesInMilli = secondsInMilli * 60;
+        long hoursInMilli = minutesInMilli * 60;
+        long elapsedHours = different / hoursInMilli;
+        return elapsedHours;
     }
 
     // Add a list of post -- change to type used
@@ -283,11 +331,11 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHo
         }
 
         //hide icon handler
-        public void hideIconClicked(){
+        public void hideIconClicked() {
             ivHide.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                   onHideIconClicked.hidePostFromTimeline(getAdapterPosition());
+                    onHideIconClicked.hidePostFromTimeline(getAdapterPosition());
                 }
             });
         }

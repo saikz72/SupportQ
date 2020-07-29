@@ -18,6 +18,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.supportq.Activities.MainActivity;
@@ -37,9 +38,9 @@ public class HomeFragment extends Fragment {
     private QuestionAdapter questionAdapter;
     private List<Question> allQuestions;
     private SwipeRefreshLayout swipeContainer;
+    private TextView tvTrendingMessage;
     private ParseUser currentUser;
     private Toolbar toolbar;
-    public static final int EDIT_TEXT_CODE = 20;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -72,6 +73,7 @@ public class HomeFragment extends Fragment {
     private void setUpRecyclerView(View view) {
         rvQuestion = view.findViewById(R.id.rvQuestions);
         swipeContainer = view.findViewById(R.id.swipeContainer);
+        tvTrendingMessage = view.findViewById(R.id.tvTrendingMessage);
         currentUser = ParseUser.getCurrentUser();
         allQuestions = new ArrayList<>();
         QuestionAdapter.OnHideIconClicked onHideIconClicked = new QuestionAdapter.OnHideIconClicked() {
@@ -138,10 +140,29 @@ public class HomeFragment extends Fragment {
     }
 
     private void trendingSort() {
-        //TODO --> figure out how to sort base on trending/hot issues
+        final ParseQuery<Question> query = ParseQuery.getQuery(Question.class);
+        query.include(Question.KEY_USER);
+        query.findInBackground(new FindCallback<Question>() {
+            @Override
+            public void done(List<Question> questions, ParseException e) {
+                if (e != null) {
+                    Toast.makeText(getContext(), getString(R.string.FETCHING_POST_ERROR), Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                questionAdapter.clear();
+                boolean arePostTrending = questionAdapter.addTrendingPost(questions);
+                if (!arePostTrending) {
+                    rvQuestion.setVisibility(View.GONE);
+                    tvTrendingMessage.setVisibility(View.VISIBLE);
+                }
+            }
+
+        });
     }
 
     private void dateSort() {
+        tvTrendingMessage.setVisibility(View.GONE);
+        rvQuestion.setVisibility(View.VISIBLE);
         final ParseQuery<Question> query = ParseQuery.getQuery(Question.class);
         query.include(Question.KEY_USER);
         query.addDescendingOrder(Question.KEY_CREATED_AT);
@@ -164,6 +185,9 @@ public class HomeFragment extends Fragment {
     }
 
     private void likeSort() {
+        tvTrendingMessage.setVisibility(View.GONE);
+        rvQuestion.setVisibility(View.VISIBLE);
+        rvQuestion.setVisibility(View.VISIBLE);
         ParseQuery<Question> query = ParseQuery.getQuery(Question.class);
         query.include(Question.KEY_USER);
         query.findInBackground(new FindCallback<Question>() {
@@ -178,6 +202,7 @@ public class HomeFragment extends Fragment {
             }
         });
     }
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
