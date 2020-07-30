@@ -124,4 +124,5 @@
     <string name="reply_error">\"reply cannot be empty\"</string>
     <string name="all_replies">all</string>
     <string name="verified_replies">verified</string>
+    <string name="user_post">posts</string>
 </resources>
