@@ -4,26 +4,22 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.AnimatedVectorDrawable;
 import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.vectordrawable.graphics.drawable.AnimatedVectorDrawableCompat;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.DataSource;
-import com.bumptech.glide.load.engine.GlideException;
 import com.bumptech.glide.load.resource.bitmap.CircleCrop;
-import com.bumptech.glide.request.RequestListener;
-import com.bumptech.glide.request.target.Target;
 import com.example.supportq.Activities.QuestionDetailsActivity;
 import com.example.supportq.Models.OnDoubleTapListener;
 import com.example.supportq.Models.Question;
@@ -213,8 +209,10 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHo
         private ImageView ivMedia;
         private ImageView ivProfilePicture;
         private TextView tvReplyCount;
-        private ProgressBar pbLoading;
         private ImageView ivHide;
+        private ImageView ivHeart;
+        AnimatedVectorDrawable avd2;
+        AnimatedVectorDrawableCompat avd;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -227,8 +225,8 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHo
             ivMedia = itemView.findViewById(R.id.ivMedia);
             ivProfilePicture = itemView.findViewById(R.id.ivProfilePicture);
             tvReplyCount = itemView.findViewById(R.id.tvReplyCount);
-            pbLoading = itemView.findViewById(R.id.pbLoading);
             ivHide = itemView.findViewById(R.id.ivHide);
+            ivHeart = itemView.findViewById(R.id.ivHeart);
             itemView.setOnClickListener(this);
             ivReply.setOnClickListener(this);
         }
@@ -261,22 +259,8 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHo
 
         // sets the imageview of post
         public void setImageOfPost(ParseFile mediaImage) {
-            pbLoading.setVisibility(View.VISIBLE);
             ivMedia.setVisibility(View.VISIBLE);
-            Glide.with(context).load(mediaImage.getUrl()).placeholder(R.drawable.placeholder).
-                    listener(new RequestListener<Drawable>() {
-                        @Override
-                        public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
-                            pbLoading.setVisibility(View.GONE);
-                            return false;
-                        }
-
-                        @Override
-                        public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
-                            pbLoading.setVisibility(View.GONE);
-                            return false;
-                        }
-                    }).into(ivMedia);
+            Glide.with(context).load(mediaImage.getUrl()).placeholder(R.drawable.placeholder).into(ivMedia);
         }
 
         //imageview double tap to like handler
@@ -285,6 +269,7 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHo
             ivMedia.setOnTouchListener(new OnDoubleTapListener(context) {
                 @Override
                 public void onDoubleTap(MotionEvent e) {
+                    showHeartAnimation();
                     int position = getAdapterPosition();
                     Question question = allQuestions.get(position);
                     boolean isLiked = question.isLiked();
@@ -298,6 +283,20 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHo
                     setLikeText(question, tvLikeCount);
                 }
             });
+        }
+
+        //animate heart on double tap
+        public void showHeartAnimation() {
+            ivHeart.setVisibility(View.VISIBLE);
+            final Drawable drawable = ivHeart.getDrawable();
+            ivHeart.setAlpha(0.90f);
+            if (drawable instanceof AnimatedVectorDrawableCompat) {
+                avd = (AnimatedVectorDrawableCompat) drawable;
+                avd.start();
+            } else if (drawable instanceof AnimatedVectorDrawable) {
+                avd2 = (AnimatedVectorDrawable) drawable;
+                avd2.start();
+            }
         }
 
         @Override

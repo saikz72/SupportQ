@@ -80,4 +80,6 @@
     <dimen name="edit_icon_height">32dp</dimen>
     <dimen name="more_icon_width">60dp</dimen>
     <dimen name="more_icon_height">30dp</dimen>
+    <dimen name="width_heart">305dp</dimen>
+    <dimen name="heigh_heart">192dp</dimen>
 </resources>

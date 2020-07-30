@@ -1,204 +1,222 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:layout_margin="2dp">
 
-    <TextView
-        android:id="@+id/tvLikeCount"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/favs"
-        android:textSize="12sp"
-        app:layout_constraintEnd_toEndOf="@+id/ivLike"
-        app:layout_constraintStart_toStartOf="@+id/ivLike"
-        app:layout_constraintTop_toBottomOf="@+id/ivLike" />
-
-    <ImageView
-        android:id="@+id/ivProfilePicture"
-        android:layout_width="@dimen/home_profile_width"
-        android:layout_height="@dimen/home_profile_height"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="8dp"
-        android:scaleType="centerCrop"
-        android:src="@drawable/com_facebook_profile_picture_blank_portrait"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/view"
-        app:layout_constraintVertical_bias="0.0" />
-
-    <TextView
-        android:id="@+id/tvUsername"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
-        android:text="@string/Username"
-        android:textColor="@color/description_color"
-        android:textSize="14sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/tvDescription"
-        app:layout_constraintEnd_toStartOf="@+id/tvTimeStamp"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/ivProfilePicture"
-        app:layout_constraintTop_toTopOf="@+id/ivProfilePicture"
-        app:layout_constraintVertical_bias="0.195" />
-
-    <ru.embersoft.expandabletextview.ExpandableTextView
-        android:id="@+id/tvDescription"
-        style="@style/TextAppearance.AppCompat.Body1"
-        android:layout_width="@dimen/home_description"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="10dp"
-        android:layout_marginTop="10dp"
-        android:autoLink="all"
-        android:linksClickable="true"
-        android:textColor="@color/description_color"
-        app:etv_animationTime="20"
-        app:etv_expandLines="3"
-        app:etv_showLine="false"
-        app:etv_textContentColor="@color/description_color"
-        app:etv_textContentSize="14sp"
-        app:etv_textExpand="@string/show_more"
-        app:etv_textShrink="@string/show_less"
-        app:etv_textStateColor="@color/description_color"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ivProfilePicture" />
-
-    <TextView
-        android:id="@+id/tvTimeStamp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/timeStamp"
-        android:textSize="10dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.015"
-        app:layout_constraintStart_toEndOf="@+id/ivProfilePicture"
-        app:layout_constraintTop_toBottomOf="@+id/tvUsername" />
-
-    <ProgressBar
-        android:id="@+id/pbLoading"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:visibility="invisible"
-        app:layout_constraintBottom_toTopOf="@+id/ivLike"
-        app:layout_constraintEnd_toEndOf="@+id/ivMedia"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="@+id/ivMedia"
-        app:layout_constraintTop_toBottomOf="@+id/tvDescription"
-        app:layout_constraintVertical_bias="0.137" />
-
-    <ImageView
-        android:id="@+id/ivDelete"
-        android:layout_width="@dimen/item_delete_width"
-        android:layout_height="@dimen/item_delete_height"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="16dp"
-        android:src="@drawable/ic_baseline_delete_24"
-        android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ivMedia"
-        app:layout_constraintVertical_bias="0.181" />
-
-    <ImageView
-        android:id="@+id/ivLike"
-        android:layout_width="@dimen/item_like_width"
-        android:layout_height="@dimen/item_like_height"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="56dp"
-        android:src="@drawable/ic_vector_heart_stroke"
-        app:layout_constraintEnd_toStartOf="@+id/ivBookmark"
-        app:layout_constraintTop_toBottomOf="@+id/ivMedia" />
-
-    <ImageView
-        android:id="@+id/ivReply"
-        android:layout_width="@dimen/item_comment_width"
-        android:layout_height="@dimen/item_comment_height"
-        android:layout_marginStart="4dp"
-        android:layout_marginTop="8dp"
-        android:src="@drawable/ufi_comment"
-        app:layout_constraintEnd_toStartOf="@+id/ivLike"
-        app:layout_constraintStart_toEndOf="@+id/ivProfilePicture"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ivMedia" />
-
-    <View
-        android:id="@+id/view"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:background="@color/description_color"
-        android:visibility="gone"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_height="wrap_content">
 
-    <ImageView
-        android:id="@+id/ivMedia"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/home_media_height"
-        android:layout_marginTop="8dp"
-        android:scaleType="centerCrop"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvDescription"
-        tools:srcCompat="@tools:sample/avatars" />
+        <TextView
+            android:id="@+id/tvLikeCount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/favs"
+            android:textSize="12sp"
+            app:layout_constraintEnd_toEndOf="@+id/ivLike"
+            app:layout_constraintStart_toStartOf="@+id/ivLike"
+            app:layout_constraintTop_toBottomOf="@+id/ivLike" />
 
-    <TextView
-        android:id="@+id/tvReplyCount"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:text="@string/reply"
-        android:textSize="12sp"
-        app:layout_constraintEnd_toEndOf="@+id/ivReply"
-        app:layout_constraintStart_toStartOf="@+id/ivReply"
-        app:layout_constraintTop_toBottomOf="@+id/ivReply" />
+        <ImageView
+            android:id="@+id/ivProfilePicture"
+            android:layout_width="@dimen/home_profile_width"
+            android:layout_height="@dimen/home_profile_height"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="8dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/com_facebook_profile_picture_blank_portrait"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/view"
+            app:layout_constraintVertical_bias="0.0" />
 
-    <TextView
-        android:id="@+id/tvSave"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/save"
-        android:textSize="12sp"
-        app:layout_constraintEnd_toEndOf="@+id/ivBookmark"
-        app:layout_constraintStart_toStartOf="@+id/ivBookmark"
-        app:layout_constraintTop_toBottomOf="@+id/ivBookmark" />
+        <TextView
+            android:id="@+id/tvUsername"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:text="@string/Username"
+            android:textColor="@color/description_color"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/tvDescription"
+            app:layout_constraintEnd_toStartOf="@+id/tvTimeStamp"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/ivProfilePicture"
+            app:layout_constraintTop_toTopOf="@+id/ivProfilePicture"
+            app:layout_constraintVertical_bias="0.195" />
 
-    <TextView
-        android:id="@+id/tvHide"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/hide"
-        android:textSize="12sp"
-        app:layout_constraintEnd_toEndOf="@+id/ivHide"
-        app:layout_constraintStart_toStartOf="@+id/ivHide"
-        app:layout_constraintTop_toBottomOf="@+id/ivHide" />
+        <ru.embersoft.expandabletextview.ExpandableTextView
+            android:id="@+id/tvDescription"
+            style="@style/TextAppearance.AppCompat.Body1"
+            android:layout_width="@dimen/home_description"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="10dp"
+            android:layout_marginTop="10dp"
+            android:autoLink="all"
+            android:linksClickable="true"
+            android:textColor="@color/description_color"
+            app:etv_animationTime="20"
+            app:etv_expandLines="3"
+            app:etv_showLine="false"
+            app:etv_textContentColor="@color/description_color"
+            app:etv_textContentSize="14sp"
+            app:etv_textExpand="@string/show_more"
+            app:etv_textShrink="@string/show_less"
+            app:etv_textStateColor="@color/description_color"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ivProfilePicture" />
 
-    <ImageView
-        android:id="@+id/ivBookmark"
-        android:layout_width="@dimen/item_like_width"
-        android:layout_height="@dimen/item_save_height"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="40dp"
-        android:src="@drawable/ic_baseline_bookmark_border_24"
-        app:layout_constraintEnd_toStartOf="@+id/ivHide"
-        app:layout_constraintTop_toBottomOf="@+id/ivMedia" />
+        <TextView
+            android:id="@+id/tvTimeStamp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/timeStamp"
+            android:textSize="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.015"
+            app:layout_constraintStart_toEndOf="@+id/ivProfilePicture"
+            app:layout_constraintTop_toBottomOf="@+id/tvUsername" />
 
-    <ImageView
-        android:id="@+id/ivHide"
-        android:layout_width="@dimen/more_icon_width"
-        android:layout_height="@dimen/more_icon_height"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="48dp"
-        android:src="@drawable/ic_outline_remove_red_eye_24"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ivMedia" />
+        <ProgressBar
+            android:id="@+id/pbLoading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toTopOf="@+id/ivLike"
+            app:layout_constraintEnd_toEndOf="@+id/ivMedia"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="@+id/ivMedia"
+            app:layout_constraintTop_toBottomOf="@+id/tvDescription"
+            app:layout_constraintVertical_bias="0.137" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <ImageView
+            android:id="@+id/ivDelete"
+            android:layout_width="@dimen/item_delete_width"
+            android:layout_height="@dimen/item_delete_height"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            android:src="@drawable/ic_baseline_delete_24"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ivMedia"
+            app:layout_constraintVertical_bias="0.181" />
+
+        <ImageView
+            android:id="@+id/ivLike"
+            android:layout_width="@dimen/item_like_width"
+            android:layout_height="@dimen/item_like_height"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="56dp"
+            android:src="@drawable/ic_vector_heart_stroke"
+            app:layout_constraintEnd_toStartOf="@+id/ivBookmark"
+            app:layout_constraintTop_toBottomOf="@+id/ivMedia" />
+
+        <ImageView
+            android:id="@+id/ivReply"
+            android:layout_width="@dimen/item_comment_width"
+            android:layout_height="@dimen/item_comment_height"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="8dp"
+            android:src="@drawable/ufi_comment"
+            app:layout_constraintEnd_toStartOf="@+id/ivLike"
+            app:layout_constraintStart_toEndOf="@+id/ivProfilePicture"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ivMedia" />
+
+        <View
+            android:id="@+id/view"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:background="@color/description_color"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/ivMedia"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/home_media_height"
+            android:layout_marginTop="4dp"
+            android:scaleType="centerCrop"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvDescription"
+            tools:srcCompat="@tools:sample/avatars" />
+
+        <TextView
+            android:id="@+id/tvReplyCount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="@string/reply"
+            android:textSize="12sp"
+            app:layout_constraintEnd_toEndOf="@+id/ivReply"
+            app:layout_constraintStart_toStartOf="@+id/ivReply"
+            app:layout_constraintTop_toBottomOf="@+id/ivReply" />
+
+        <TextView
+            android:id="@+id/tvSave"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/save"
+            android:textSize="12sp"
+            app:layout_constraintEnd_toEndOf="@+id/ivBookmark"
+            app:layout_constraintStart_toStartOf="@+id/ivBookmark"
+            app:layout_constraintTop_toBottomOf="@+id/ivBookmark" />
+
+        <TextView
+            android:id="@+id/tvHide"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/hide"
+            android:textSize="12sp"
+            app:layout_constraintEnd_toEndOf="@+id/ivHide"
+            app:layout_constraintStart_toStartOf="@+id/ivHide"
+            app:layout_constraintTop_toBottomOf="@+id/ivHide" />
+
+        <ImageView
+            android:id="@+id/ivBookmark"
+            android:layout_width="@dimen/item_like_width"
+            android:layout_height="@dimen/item_save_height"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="40dp"
+            android:src="@drawable/ic_baseline_bookmark_border_24"
+            app:layout_constraintEnd_toStartOf="@+id/ivHide"
+            app:layout_constraintTop_toBottomOf="@+id/ivMedia" />
+
+        <ImageView
+            android:id="@+id/ivHide"
+            android:layout_width="@dimen/more_icon_width"
+            android:layout_height="@dimen/more_icon_height"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="48dp"
+            android:src="@drawable/ic_outline_remove_red_eye_24"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ivMedia" />
+
+        <ImageView
+            android:id="@+id/ivHeart"
+            android:layout_width="@dimen/width_heart"
+            android:layout_height="@dimen/heigh_heart"
+            android:layout_marginTop="4dp"
+            app:layout_constraintBottom_toBottomOf="@+id/ivMedia"
+            app:layout_constraintEnd_toEndOf="@+id/ivMedia"
+            app:layout_constraintStart_toStartOf="@+id/ivMedia"
+            android:visibility="invisible"
+            app:layout_constraintTop_toBottomOf="@+id/tvDescription"
+            app:srcCompat="@drawable/avd_like" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>

@@ -16,6 +16,7 @@ android {
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         buildConfigField("String", "TOKEN", apikeyProperties['TOKEN'])
+        vectorDrawables.useSupportLibrary = true
     }
 
     buildTypes {
