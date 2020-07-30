@@ -1,6 +1,7 @@
 package com.example.supportq.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SwitchCompat;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -10,6 +11,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -52,10 +54,12 @@ public class QuestionDetailsActivity extends AppCompatActivity {
     private RecyclerView rvQuestions;
     private ImageView ivSendReply;
     private ImageView ivMedia;
+    private SwitchCompat switchCompat;
     private ReplyAdapter replyAdapter;
     private Question question;
     private ParseUser currentUser;
     private List<Reply> allReplies;
+    private boolean isToggleEnable;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,8 +75,7 @@ public class QuestionDetailsActivity extends AppCompatActivity {
         RecyclerView.ItemDecoration divider = new DividerItemDecoration(this, linearLayoutManager.getOrientation());
         rvQuestions.addItemDecoration(divider);
         bind();
-        setButton(ivLike, question.isLiked(),
-                R.drawable.ic_vector_heart_stroke, R.drawable.ic_vector_heart, R.color.likedRed);
+        setButton(ivLike, question.isLiked(), R.drawable.ic_vector_heart_stroke, R.drawable.ic_vector_heart, R.color.likedRed);
         setLikeText(question, tvLikeCount);
         likeIconClicked();
         replyListener();
@@ -80,11 +83,16 @@ public class QuestionDetailsActivity extends AppCompatActivity {
         swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                queryReply();
+                if (isToggleEnable) {
+                    queryOnlyVerifiedResponse();
+                } else {
+                    queryReply();
+                }
             }
         });
         // Configure the refreshing colors
         swipeContainer.setColorSchemeResources(android.R.color.holo_blue_bright, android.R.color.holo_green_light, android.R.color.holo_orange_light, android.R.color.holo_red_light);
+        setUpForVerifiedResponses();
     }
 
     public void setViews() {
@@ -102,6 +110,7 @@ public class QuestionDetailsActivity extends AppCompatActivity {
         etReply = findViewById(R.id.etReply);
         swipeContainer = findViewById(R.id.swipeContainer);
         ivMedia = findViewById(R.id.ivMedia);
+        switchCompat = findViewById(R.id.switchCompat);
     }
 
     public void replyListener() {
@@ -125,7 +134,7 @@ public class QuestionDetailsActivity extends AppCompatActivity {
 
     private void queryReply() {
         final ParseQuery<Reply> query = ParseQuery.getQuery(Reply.class);
-        query.addDescendingOrder(Reply.KEY_CREATED_AT); //TODO --> complex sorting algorithm
+        query.addDescendingOrder(Reply.KEY_CREATED_AT);
         query.whereEqualTo(Reply.KEY_QUESTION_ID, question);
         query.findInBackground(new FindCallback<Reply>() {
             @Override
@@ -207,5 +216,38 @@ public class QuestionDetailsActivity extends AppCompatActivity {
         int replyCount = question.getRepliesCount();
         String itemsFound = getResources().getQuantityString(R.plurals.numberOfReplies, replyCount, replyCount);
         view.setText(itemsFound);
+    }
+
+    public void setUpForVerifiedResponses() {
+        switchCompat.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
+                if (isChecked) {
+                    isToggleEnable = true;
+                    queryOnlyVerifiedResponse();
+                } else {
+                    isToggleEnable = false;
+                    queryReply();
+                }
+            }
+        });
+    }
+
+    public void queryOnlyVerifiedResponse() {
+        final ParseQuery<Reply> query = ParseQuery.getQuery(Reply.class);
+        query.addDescendingOrder(Reply.KEY_CREATED_AT);
+        query.whereEqualTo(Reply.KEY_QUESTION_ID, question);
+        query.findInBackground(new FindCallback<Reply>() {
+            @Override
+            public void done(List<Reply> replies, ParseException e) {
+                if (e != null) {
+                    Toast.makeText(QuestionDetailsActivity.this, getString(R.string.TOAST_ERROR_MESSAGE), Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                replyAdapter.clear();
+                replyAdapter.addOnlyVerifiedResponse(replies);
+                swipeContainer.setRefreshing(false);
+            }
+        });
     }
 }

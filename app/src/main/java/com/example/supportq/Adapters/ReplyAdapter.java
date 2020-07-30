@@ -85,6 +85,15 @@ public class ReplyAdapter extends RecyclerView.Adapter<ReplyAdapter.ViewHolder> 
         reply.saveInBackground();
     }
 
+    //adds only verified responses to the list
+    public void addOnlyVerifiedResponse(List<Reply> replies) {
+        for (int i = 0; i < replies.size(); i++) {
+            if (replies.get(i).getIsApproved()) {
+                allReplies.add(replies.get(i));
+            }
+        }
+    }
+
     public class ViewHolder extends RecyclerView.ViewHolder {
         private TextView tvUsername;
         private TextView tvTimeStamp;
@@ -114,10 +123,12 @@ public class ReplyAdapter extends RecyclerView.Adapter<ReplyAdapter.ViewHolder> 
             try {
                 tvUsername.setText(reply.getUser().fetchIfNeeded().getUsername());
             } catch (ParseException e) {
-            }       //TODO --> FIX LAG
+            }
             ParseFile profilePhoto = reply.getUser().getParseFile(User.KEY_PROFILE_PICTURE);
             if (profilePhoto != null) {
                 Glide.with(context).load(profilePhoto.getUrl()).transform(new CircleCrop()).into(ivProfilePicture);
+            } else {
+                ivProfilePicture.setImageResource(R.drawable.com_facebook_profile_picture_blank_portrait);
             }
             if (User.getIsInstructor(currentUser)) {
                 ivVerify.setVisibility(View.VISIBLE);
@@ -131,8 +142,10 @@ public class ReplyAdapter extends RecyclerView.Adapter<ReplyAdapter.ViewHolder> 
             if (reply.getIsApproved()) {
                 tvApproveNote.setVisibility(View.VISIBLE);
                 ivVerify.setVisibility(View.VISIBLE);
-            } else if (!reply.getIsApproved())
+            } else if (!reply.getIsApproved()) {
                 tvApproveNote.setVisibility(View.INVISIBLE);
+                ivVerify.setVisibility(View.GONE);
+            }
         }
 
         //shows delete icon for current user's replies
@@ -169,6 +182,7 @@ public class ReplyAdapter extends RecyclerView.Adapter<ReplyAdapter.ViewHolder> 
                     int position = getAdapterPosition();
                     try {
                         removeAt(allReplies.get(position), position);
+
                     } catch (ParseException e) {
                         Log.e("TAG", "erro", e);
                     }
