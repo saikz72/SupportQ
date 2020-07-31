@@ -125,4 +125,5 @@
     <string name="all_replies">all</string>
     <string name="verified_replies">verified</string>
     <string name="user_post">posts</string>
+    <string name="hidden">hidden</string>
 </resources>

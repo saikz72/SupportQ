@@ -55,6 +55,13 @@ public class Question extends ParseObject implements Shrinkable, Comparable<Ques
         return false;
     }
 
+    //remove user from the list of users that hid this question
+    public void setQuestionVisibleToUser(ParseUser user){
+        ArrayList<ParseUser> list = new ArrayList<>();
+        list.add(user);
+        removeAll(KEY_HIDDEN_BY_USERS, list);
+    }
+
     public void setIsDeleted(boolean isDeleted) {
         put(KEY_IS_DELETED, isDeleted);
     }

@@ -61,6 +61,7 @@ public class ProfileFragment extends Fragment {
 
     private void setUpViewPager(ViewPager viewPager) {
         SectionPagerAdapter adapter = new SectionPagerAdapter(getChildFragmentManager());
+        adapter.addFragment(new HiddenPostFragment(), getString(R.string.hidden));
         adapter.addFragment(new UserPostFragment(), getString(R.string.user_post));
         viewPager.setAdapter(adapter);
     }

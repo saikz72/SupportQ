@@ -40,7 +40,6 @@ import java.util.List;
 import ru.embersoft.expandabletextview.ExpandableTextView;
 
 public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHolder> {
-
     public interface OnHideIconClicked {
         void hidePostFromTimeline(int position);
     }
@@ -162,9 +161,20 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHo
         notifyDataSetChanged();
     }
 
+    public void addHiddenPostByUser(List<Question> questions) {
+        List<Question> hiddenPost = new ArrayList<>();
+        for(int i = 0; i < questions.size(); i++){
+            if(!questions.get(i).getIsDeleted() && questions.get(i).didUserHideQuestion()){
+                hiddenPost.add(questions.get(i));
+            }
+        }
+        allQuestions.addAll(hiddenPost);
+        notifyDataSetChanged();
+    }
+
     //mergesort
     public List<Question> mergeSort(List<Question> questions) {
-        if (questions.size() == 1) {
+        if (questions.size() <= 1) {
             return questions;
         }
         int midPoint = (questions.size() - 1) / 2;
