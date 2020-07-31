@@ -127,4 +127,5 @@
     <string name="user_post">posts</string>
     <string name="hidden">hidden</string>
     <string name="bookmark">bookmarked</string>
+    <string name="unhide">Show</string>
 </resources>

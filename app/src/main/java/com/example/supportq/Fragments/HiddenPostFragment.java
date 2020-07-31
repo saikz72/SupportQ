@@ -20,7 +20,6 @@ import com.example.supportq.R;
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseQuery;
-import com.parse.ParseUser;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,17 +44,7 @@ public class HiddenPostFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         setUpViews(view);
         allQuestions = new ArrayList<>();
-        QuestionAdapter.OnHideIconClicked unHideIconClicked = new QuestionAdapter.OnHideIconClicked() {
-            @Override
-            public void hidePostFromTimeline(int position) {
-                Question question = allQuestions.get(position);
-                question.setQuestionVisibleToUser(ParseUser.getCurrentUser());
-                allQuestions.remove(position);
-                questionAdapter.notifyDataSetChanged();
-                question.saveInBackground();
-            }
-        };
-        questionAdapter = new QuestionAdapter(allQuestions, getContext(), getActivity(), unHideIconClicked);
+        questionAdapter = new QuestionAdapter(allQuestions, getContext(), getActivity());
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         rvQuestions.setLayoutManager(linearLayoutManager);
         rvQuestions.setAdapter(questionAdapter);

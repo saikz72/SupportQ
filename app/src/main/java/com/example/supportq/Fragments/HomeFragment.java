@@ -76,16 +76,7 @@ public class HomeFragment extends Fragment {
         tvTrendingMessage = view.findViewById(R.id.tvTrendingMessage);
         currentUser = ParseUser.getCurrentUser();
         allQuestions = new ArrayList<>();
-        QuestionAdapter.OnHideIconClicked onHideIconClicked = new QuestionAdapter.OnHideIconClicked() {
-            @Override
-            public void hidePostFromTimeline(int position) {
-                Question question = allQuestions.remove(position);
-                questionAdapter.notifyDataSetChanged();
-                question.setQuestionToHidden(currentUser);
-                question.saveInBackground();
-            }
-        };
-        questionAdapter = new QuestionAdapter(allQuestions, getContext(), getActivity(), onHideIconClicked);
+        questionAdapter = new QuestionAdapter(allQuestions, getContext(), getActivity());
         rvQuestion.setAdapter(questionAdapter);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         rvQuestion.setLayoutManager(linearLayoutManager);
@@ -118,7 +109,7 @@ public class HomeFragment extends Fragment {
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        menu.clear();
+        menu.clear();           //TODO --> check workchat
         inflater.inflate(R.menu.menu_main, menu);
     }
 

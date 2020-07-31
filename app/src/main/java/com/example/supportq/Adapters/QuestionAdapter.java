@@ -40,22 +40,16 @@ import java.util.List;
 import ru.embersoft.expandabletextview.ExpandableTextView;
 
 public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHolder> {
-    public interface OnHideIconClicked {
-        void hidePostFromTimeline(int position);
-    }
-
     public static final String TAG = "QuestionAdapter";
     public static final int REQUEST_CODE = 200;
     private List<Question> allQuestions;
     private Context context;
     private Activity activity;
-    private OnHideIconClicked onHideIconClicked;
 
-    public QuestionAdapter(List<Question> allQuestions, Context context, Activity activity, OnHideIconClicked onHideIconClicked) {
+    public QuestionAdapter(List<Question> allQuestions, Context context, Activity activity) {
         this.allQuestions = allQuestions;
         this.context = context;
         this.activity = activity;
-        this.onHideIconClicked = onHideIconClicked;
     }
 
     @NonNull
@@ -86,9 +80,22 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHo
         iv.setColorFilter(ContextCompat.getColor(context, isActive ? activeColor : R.color.medium_gray));
     }
 
-    private void setBookMarkButtonColor(ImageView iv, boolean isActive, int strokeResId, int fillResId, int activeColor){
+    private void setBookMarkButtonColor(ImageView iv, boolean isActive, int strokeResId, int fillResId, int activeColor) {
         iv.setImageResource(isActive ? fillResId : strokeResId);
         iv.setColorFilter(ContextCompat.getColor(context, isActive ? activeColor : R.color.black));
+    }
+
+    private void setSahpeOfHiddenIcon(ImageView iv, boolean isActive, int strokeResId, int fillResId) {
+        iv.setImageResource(isActive ? fillResId : strokeResId);
+    }
+
+    private void setTextOfHideIcon(Question question, TextView view) {
+        boolean isHidden = question.didUserHideQuestion();
+        if (isHidden) {
+            view.setText(context.getString(R.string.unhide));
+        } else {
+            view.setText(context.getString(R.string.hide));
+        }
     }
 
     private void setLikeText(Question question, TextView view) {
@@ -180,8 +187,8 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHo
 
     public void addBookMarkedQuestions(List<Question> questions) {
         List<Question> bookmarkedPost = new ArrayList<>();
-        for(int i = 0; i < questions.size(); i++){
-            if(!questions.get(i).getIsDeleted() && questions.get(i).isBookMarked()){
+        for (int i = 0; i < questions.size(); i++) {
+            if (!questions.get(i).getIsDeleted() && questions.get(i).isBookMarked()) {
                 bookmarkedPost.add(questions.get(i));
             }
         }
@@ -239,6 +246,7 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHo
         private ImageView ivHide;
         private ImageView ivHeart;
         private ImageView ivBookMark;
+        private TextView tvHide;
         private AnimatedVectorDrawable avd2;
         private AnimatedVectorDrawableCompat avd;
 
@@ -256,6 +264,7 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHo
             ivHide = itemView.findViewById(R.id.ivHide);
             ivHeart = itemView.findViewById(R.id.ivHeart);
             ivBookMark = itemView.findViewById(R.id.ivBookmark);
+            tvHide = itemView.findViewById(R.id.tvHide);
             itemView.setOnClickListener(this);
             ivReply.setOnClickListener(this);
         }
@@ -277,10 +286,12 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHo
             setButton(ivLike, question.isLiked(), R.drawable.ic_vector_heart_stroke, R.drawable.ic_vector_heart, R.color.likedRed);
             setBookMarkButtonColor(ivBookMark, question.isBookMarked(), R.drawable.ic_baseline_bookmark_border_24, R.drawable.ic_baseline_bookmark_24, R.color.black);
             hideIconClicked();
+            setSahpeOfHiddenIcon(ivHide, question.didUserHideQuestion(), R.drawable.ic_outline_remove_red_eye_24, R.drawable.ic_outline_visibility_off_24);
+            setTextOfHideIcon(question, tvHide);
         }
 
         //binding text with textviews
-        public void bindTextViews(Question question){
+        public void bindTextViews(Question question) {
             String username = question.getUser().getUsername();
             tvUsername.setText(username);
             String timeAgo = question.getCreatedTimeAgo();
@@ -369,22 +380,33 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHo
             ivHide.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    onHideIconClicked.hidePostFromTimeline(getAdapterPosition());
+                    Question question = allQuestions.get(getAdapterPosition());
+                    boolean isHidden = question.didUserHideQuestion();
+                    if (isHidden) {
+                        question.setQuestionVisibleToUser(ParseUser.getCurrentUser());
+                        notifyDataSetChanged();
+                    } else {
+                        question.setQuestionToHidden(ParseUser.getCurrentUser());
+                    }
+                    allQuestions.remove(question);
+                    notifyDataSetChanged();
+                    question.saveInBackground();
+                    setSahpeOfHiddenIcon(ivHide, !isHidden, R.drawable.ic_outline_remove_red_eye_24, R.drawable.ic_outline_visibility_off_24);
                 }
             });
         }
 
         //bookmark icon handler
-        public void bookMarkQuestion(){
+        public void bookMarkQuestion() {
             ivBookMark.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     int position = getAdapterPosition();
                     Question question = allQuestions.get(position);
                     boolean isBookMarked = question.isBookMarked();
-                    if(!isBookMarked){
+                    if (!isBookMarked) {
                         question.bookMarkQuestion(ParseUser.getCurrentUser());
-                    }else{
+                    } else {
                         question.unBookMarkQuestion(ParseUser.getCurrentUser());
                     }
                     question.saveInBackground();

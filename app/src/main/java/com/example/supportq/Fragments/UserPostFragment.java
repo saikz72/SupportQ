@@ -29,8 +29,6 @@ import com.parse.ParseException;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
 
-import org.parceler.Parcels;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -69,8 +67,6 @@ public class UserPostFragment extends Fragment {
             question.setDescription(itemText);
             profileAdapter.notifyDataSetChanged();
             question.saveInBackground();
-        } else if (resultCode == RESULT_OK && requestCode == 1) {
-            currentUser = Parcels.unwrap(getActivity().getIntent().getParcelableExtra("user"));
         }
     }
 
