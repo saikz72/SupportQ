@@ -178,6 +178,17 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHo
         notifyDataSetChanged();
     }
 
+    public void addBookMarkedQuestions(List<Question> questions) {
+        List<Question> bookmarkedPost = new ArrayList<>();
+        for(int i = 0; i < questions.size(); i++){
+            if(!questions.get(i).getIsDeleted() && questions.get(i).isBookMarked()){
+                bookmarkedPost.add(questions.get(i));
+            }
+        }
+        allQuestions.addAll(bookmarkedPost);
+        notifyDataSetChanged();
+    }
+
     //mergesort
     public List<Question> mergeSort(List<Question> questions) {
         if (questions.size() <= 1) {

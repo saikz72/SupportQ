@@ -58,6 +58,7 @@ public class UserPostFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_user_post, container, false);
 
     }
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -99,7 +100,7 @@ public class UserPostFragment extends Fragment {
         queryPost();
     }
 
-    public void setViews(View view){
+    public void setViews(View view) {
         rvQuestion = view.findViewById(R.id.rvQuestions);
         progressBar = view.findViewById(R.id.pbLoading);
         allQuestions = new ArrayList<>();
@@ -148,7 +149,7 @@ public class UserPostFragment extends Fragment {
 
     private void queryPost() {
         progressBar.setVisibility(View.VISIBLE);
-        ParseQuery<Question> query = ParseQuery.getQuery(Question.class);
+        final ParseQuery<Question> query = ParseQuery.getQuery(Question.class);
         query.addDescendingOrder(Question.KEY_CREATED_AT);  //TODO : update how the questions are ordered
         query.whereEqualTo(Question.KEY_USER, ParseUser.getCurrentUser());
         query.findInBackground(new FindCallback<Question>() {
@@ -158,7 +159,11 @@ public class UserPostFragment extends Fragment {
                     Toast.makeText(getContext(), getString(R.string.FETCHING_POST_ERROR), Toast.LENGTH_SHORT).show();
                     return;
                 }
-                allQuestions.addAll(questions);
+                for (int i = 0; i < questions.size(); i++) {
+                    if (!questions.get(i).getIsDeleted()) {
+                        allQuestions.addAll(questions);
+                    }
+                }
                 profileAdapter.notifyDataSetChanged();
                 progressBar.setVisibility(View.GONE);
             }

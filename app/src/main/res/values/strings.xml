@@ -126,4 +126,5 @@
     <string name="verified_replies">verified</string>
     <string name="user_post">posts</string>
     <string name="hidden">hidden</string>
+    <string name="bookmark">bookmarked</string>
 </resources>
