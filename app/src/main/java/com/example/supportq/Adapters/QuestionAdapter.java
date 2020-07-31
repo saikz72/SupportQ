@@ -65,6 +65,7 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHo
         final ViewHolder holder = new ViewHolder(view);
         holder.onImageDoubleTap();
         holder.heartIconClicked();
+        holder.bookMarkQuestion();
         return holder;
     }
 
@@ -83,6 +84,11 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHo
     private void setButton(ImageView iv, boolean isActive, int strokeResId, int fillResId, int activeColor) {
         iv.setImageResource(isActive ? fillResId : strokeResId);
         iv.setColorFilter(ContextCompat.getColor(context, isActive ? activeColor : R.color.medium_gray));
+    }
+
+    private void setBookMarkButtonColor(ImageView iv, boolean isActive, int strokeResId, int fillResId, int activeColor){
+        iv.setImageResource(isActive ? fillResId : strokeResId);
+        iv.setColorFilter(ContextCompat.getColor(context, isActive ? activeColor : R.color.black));
     }
 
     private void setLikeText(Question question, TextView view) {
@@ -163,8 +169,8 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHo
 
     public void addHiddenPostByUser(List<Question> questions) {
         List<Question> hiddenPost = new ArrayList<>();
-        for(int i = 0; i < questions.size(); i++){
-            if(!questions.get(i).getIsDeleted() && questions.get(i).didUserHideQuestion()){
+        for (int i = 0; i < questions.size(); i++) {
+            if (!questions.get(i).getIsDeleted() && questions.get(i).didUserHideQuestion()) {
                 hiddenPost.add(questions.get(i));
             }
         }
@@ -221,8 +227,9 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHo
         private TextView tvReplyCount;
         private ImageView ivHide;
         private ImageView ivHeart;
-        AnimatedVectorDrawable avd2;
-        AnimatedVectorDrawableCompat avd;
+        private ImageView ivBookMark;
+        private AnimatedVectorDrawable avd2;
+        private AnimatedVectorDrawableCompat avd;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -237,12 +244,13 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHo
             tvReplyCount = itemView.findViewById(R.id.tvReplyCount);
             ivHide = itemView.findViewById(R.id.ivHide);
             ivHeart = itemView.findViewById(R.id.ivHeart);
+            ivBookMark = itemView.findViewById(R.id.ivBookmark);
             itemView.setOnClickListener(this);
             ivReply.setOnClickListener(this);
         }
 
         public void bind(Question question) {
-            String username = question.getUser().getUsername();
+            bindTextViews(question);
             ParseFile profilePhoto = question.getUser().getParseFile(User.KEY_PROFILE_PICTURE);
             if (profilePhoto != null) {
                 Glide.with(context).load(profilePhoto.getUrl()).transform(new CircleCrop()).into(ivProfilePicture);
@@ -255,16 +263,22 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHo
             } else {
                 ivMedia.setVisibility(View.GONE);
             }
+            setButton(ivLike, question.isLiked(), R.drawable.ic_vector_heart_stroke, R.drawable.ic_vector_heart, R.color.likedRed);
+            setBookMarkButtonColor(ivBookMark, question.isBookMarked(), R.drawable.ic_baseline_bookmark_border_24, R.drawable.ic_baseline_bookmark_24, R.color.black);
+            hideIconClicked();
+        }
+
+        //binding text with textviews
+        public void bindTextViews(Question question){
+            String username = question.getUser().getUsername();
             tvUsername.setText(username);
             String timeAgo = question.getCreatedTimeAgo();
             tvTimeStamp.setText(timeAgo);
-            setButton(ivLike, question.isLiked(), R.drawable.ic_vector_heart_stroke, R.drawable.ic_vector_heart, R.color.likedRed);
             setLikeText(question, tvLikeCount);
             setReplyText(question, tvReplyCount);
             TextViewAnimationOnClick.onQuestionClickAnimation(tvDescription, allQuestions, getAdapterPosition());
             tvDescription.setText(question.getDescription());
             tvDescription.resetState(question.isShrink());
-            hideIconClicked();
         }
 
         // sets the imageview of post
@@ -345,6 +359,25 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHo
                 @Override
                 public void onClick(View view) {
                     onHideIconClicked.hidePostFromTimeline(getAdapterPosition());
+                }
+            });
+        }
+
+        //bookmark icon handler
+        public void bookMarkQuestion(){
+            ivBookMark.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    int position = getAdapterPosition();
+                    Question question = allQuestions.get(position);
+                    boolean isBookMarked = question.isBookMarked();
+                    if(!isBookMarked){
+                        question.bookMarkQuestion(ParseUser.getCurrentUser());
+                    }else{
+                        question.unBookMarkQuestion(ParseUser.getCurrentUser());
+                    }
+                    question.saveInBackground();
+                    setBookMarkButtonColor(ivBookMark, !isBookMarked, R.drawable.ic_baseline_bookmark_border_24, R.drawable.ic_baseline_bookmark_24, R.color.black);
                 }
             });
         }

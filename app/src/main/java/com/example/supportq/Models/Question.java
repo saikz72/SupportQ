@@ -29,7 +29,39 @@ public class Question extends ParseObject implements Shrinkable, Comparable<Ques
     public static final String KEY_REPLIES = "replies";
     public static final String KEY_IS_DELETED = "isDeleted";
     public static final String KEY_HIDDEN_BY_USERS = "hiddenByUsers";
+    public static final String KEY_BOOKMARKS = "bookmarks";
     private boolean isShrink = true;
+
+    public void bookMarkQuestion(ParseUser user) {
+        add(KEY_BOOKMARKS, user);
+    }
+
+    public JSONArray getBookMarkedQuestions() {
+        return getJSONArray(KEY_BOOKMARKS);
+    }
+
+    public void unBookMarkQuestion(ParseUser user) {
+        ArrayList<ParseUser> list = new ArrayList<>();
+        list.add(user);
+        removeAll(KEY_BOOKMARKS, list);
+    }
+
+    // Check if this post has been liked.
+    public boolean isBookMarked() {
+        JSONArray a = getBookMarkedQuestions();
+        if (a != null) {
+            for (int i = 0; i < a.length(); i++) {
+                try {
+                    if (a.getJSONObject(i).getString("objectId").equals(ParseUser.getCurrentUser().getObjectId())) {
+                        return true;
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return false;
+    }
 
     public void setQuestionToHidden(ParseUser user) {
         add(KEY_HIDDEN_BY_USERS, user);
@@ -56,7 +88,7 @@ public class Question extends ParseObject implements Shrinkable, Comparable<Ques
     }
 
     //remove user from the list of users that hid this question
-    public void setQuestionVisibleToUser(ParseUser user){
+    public void setQuestionVisibleToUser(ParseUser user) {
         ArrayList<ParseUser> list = new ArrayList<>();
         list.add(user);
         removeAll(KEY_HIDDEN_BY_USERS, list);

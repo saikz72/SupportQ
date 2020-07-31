@@ -144,7 +144,6 @@ public class ReplyAdapter extends RecyclerView.Adapter<ReplyAdapter.ViewHolder> 
                 ivVerify.setVisibility(View.VISIBLE);
             } else if (!reply.getIsApproved()) {
                 tvApproveNote.setVisibility(View.INVISIBLE);
-                ivVerify.setVisibility(View.GONE);
             }
         }
 

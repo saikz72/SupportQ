@@ -10,6 +10,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.EditText;
@@ -74,7 +75,11 @@ public class QuestionDetailsActivity extends AppCompatActivity {
         rvQuestions.setLayoutManager(linearLayoutManager);
         RecyclerView.ItemDecoration divider = new DividerItemDecoration(this, linearLayoutManager.getOrientation());
         rvQuestions.addItemDecoration(divider);
-        bind();
+        try {
+            bind();
+        } catch (ParseException e) {
+            Log.e("TAG", "ParseException", e);
+        }
         setButton(ivLike, question.isLiked(), R.drawable.ic_vector_heart_stroke, R.drawable.ic_vector_heart, R.color.likedRed);
         setLikeText(question, tvLikeCount);
         likeIconClicked();
@@ -160,10 +165,11 @@ public class QuestionDetailsActivity extends AppCompatActivity {
         finish();
     }
 
-    public void bind() {
+    public void bind() throws ParseException {
         question = Parcels.unwrap(getIntent().getParcelableExtra(String.valueOf(R.string.HOME_FRAGMENT_KEY)));
+        Log.d("TAG", "bind: " +  question.getDescription());
         tvTimeStamp.setText(question.getCreatedTimeAgo());
-        tvUsername.setText("@" + question.getUser().getUsername());
+        tvUsername.setText("@" + question.getUser().fetchIfNeeded().getUsername());
         tvFullname.setText(User.getFullName(question.getUser()));
         ParseFile profileImage = question.getUser().getParseFile(User.KEY_PROFILE_PICTURE);
         if (profileImage != null) {
