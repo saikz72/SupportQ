@@ -21,9 +21,11 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.supportq.Activities.MainActivity;
+import com.example.supportq.Activities.Instructor.InstructorMainActivity;
+import com.example.supportq.Activities.Student.MainActivity;
 import com.example.supportq.Adapters.QuestionAdapter;
 import com.example.supportq.Models.Question;
+import com.example.supportq.Models.User;
 import com.example.supportq.R;
 import com.parse.FindCallback;
 import com.parse.ParseException;
@@ -57,9 +59,15 @@ public class HomeFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         setUpRecyclerView(view);
+        currentUser = ParseUser.getCurrentUser();
         toolbar = view.findViewById(R.id.toolbar);
-        ((MainActivity) getActivity()).setSupportActionBar(toolbar);
-        ((MainActivity) getActivity()).getSupportActionBar().setTitle("");
+        if (User.getIsInstructor(currentUser)) {
+            ((InstructorMainActivity) getActivity()).setSupportActionBar(toolbar);
+            ((InstructorMainActivity) getActivity()).getSupportActionBar().setTitle("");
+        } else {
+            ((MainActivity) getActivity()).setSupportActionBar(toolbar);
+            ((MainActivity) getActivity()).getSupportActionBar().setTitle("");
+        }
         queryPost();
         swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -74,7 +82,6 @@ public class HomeFragment extends Fragment {
         rvQuestion = view.findViewById(R.id.rvQuestions);
         swipeContainer = view.findViewById(R.id.swipeContainer);
         tvTrendingMessage = view.findViewById(R.id.tvTrendingMessage);
-        currentUser = ParseUser.getCurrentUser();
         allQuestions = new ArrayList<>();
         questionAdapter = new QuestionAdapter(allQuestions, getContext(), getActivity());
         rvQuestion.setAdapter(questionAdapter);

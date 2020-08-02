@@ -1,4 +1,4 @@
-package com.example.supportq.Activities;
+package com.example.supportq.Activities.Student;
 
 import androidx.appcompat.app.AppCompatActivity;
 

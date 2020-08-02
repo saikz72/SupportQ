@@ -1,7 +1,4 @@
-package com.example.supportq.Activities;
-
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.FragmentManager;
+package com.example.supportq.Activities.Student;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,7 +6,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
-import com.example.supportq.BuildConfig;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
+
 import com.example.supportq.Fragments.MyAlertDialogFragment;
 import com.example.supportq.Models.InternetConnection;
 import com.example.supportq.Models.ProgressIndicator;
@@ -21,56 +20,47 @@ import com.parse.ParseException;
 import com.parse.ParseUser;
 import com.parse.SignUpCallback;
 
-public class InstructorSignUpActivity extends AppCompatActivity {
+public class SignUpActivity extends AppCompatActivity {
     private TextInputLayout etPassword;
     private TextInputLayout etUsername;
     private TextInputLayout etFullname;
-    private TextInputLayout etToken;
     private Button btnSignUp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_instructor_sign_up);
+        setContentView(R.layout.activity_sign_up);
         setViews();
         signUpButtonClicked();
     }
 
-    private void setViews() {
+    public void setViews() {
         etPassword = findViewById(R.id.etPassword);
         etUsername = findViewById(R.id.etUsername);
         btnSignUp = findViewById(R.id.btnSignUp);
         etFullname = findViewById(R.id.etFullname);
-        etToken = findViewById(R.id.etToken);
     }
 
     //listerner for sign up button
-    private void signUpButtonClicked() {
+    public void signUpButtonClicked() {
         btnSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 String username = etUsername.getEditText().getText().toString();
                 String password = etPassword.getEditText().getText().toString();
                 String fullName = etFullname.getEditText().getText().toString();
-                String secretToken = etToken.getEditText().getText().toString();
-                if(!secretToken.equals(BuildConfig.TOKEN)){
-                    etToken.setError(getString(R.string.SECRET_KEY));
-                    return;
-                }
-                etToken.setError(null);
                 if (fullName.isEmpty() || fullName.length() < 4) {
-                    etFullname.setError(String.valueOf(R.string.FULL_NAME_ERROR));
+                    etFullname.setError(getString(R.string.FULL_NAME_ERROR));
                     return;
                 }
                 etFullname.setError(null);
-                if (Validator.validateUser(InstructorSignUpActivity.this, etPassword, etUsername, password, username)) {
+                if (Validator.validateUser(SignUpActivity.this, etPassword, etUsername, password, username)) {
                     ParseUser user = new ParseUser();
                     user.setPassword(password);
                     user.setUsername(username);
                     User.setFullName(fullName, user);
-                    User.setIsInstructor(user);
-                    if (InternetConnection.isNetworkConnected(InstructorSignUpActivity.this)) {
-                        ProgressIndicator.showMessage(InstructorSignUpActivity.this);
+                    if (InternetConnection.isNetworkConnected(SignUpActivity.this)) {
+                        ProgressIndicator.showMessage(SignUpActivity.this);
                         signUp(username, password, user);
                     } else {
                         errorMessageOnEditText(null, null, null);
@@ -90,7 +80,7 @@ public class InstructorSignUpActivity extends AppCompatActivity {
     }
 
     //error message to display on textInput
-    private void errorMessageOnEditText(String fullname, String username, String password) {
+    public void errorMessageOnEditText(String fullname, String username, String password) {
         etFullname.setError(fullname);
         etUsername.setError(username);
         etPassword.setError(password);
@@ -101,8 +91,8 @@ public class InstructorSignUpActivity extends AppCompatActivity {
             @Override
             public void done(ParseException e) {
                 if (e != null) {
-                    ProgressIndicator.hideMessage(InstructorSignUpActivity.this);
-                    Toast.makeText(InstructorSignUpActivity.this, getString(R.string.USERNAME_TAKEN), Toast.LENGTH_SHORT).show();
+                    ProgressIndicator.hideMessage(SignUpActivity.this);
+                    Toast.makeText(SignUpActivity.this, getString(R.string.USERNAME_TAKEN), Toast.LENGTH_SHORT).show();
                     return;
                 }
                 goMainActivity();
@@ -110,8 +100,8 @@ public class InstructorSignUpActivity extends AppCompatActivity {
         });
     }
 
-    private void goMainActivity() {
-        Intent intent = new Intent(InstructorSignUpActivity.this, MainActivity.class);
+    public void goMainActivity() {
+        Intent intent = new Intent(SignUpActivity.this, MainActivity.class);
         startActivity(intent);
         finish();
     }

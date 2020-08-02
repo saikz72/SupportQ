@@ -19,7 +19,7 @@ import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
-import com.example.supportq.Activities.EditQuestionActivity;
+import com.example.supportq.Activities.Student.EditQuestionActivity;
 import com.example.supportq.Adapters.ProfileAdapter;
 import com.example.supportq.Models.Question;
 import com.example.supportq.R;

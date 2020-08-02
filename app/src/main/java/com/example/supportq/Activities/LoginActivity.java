@@ -7,11 +7,15 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
 
+import com.example.supportq.Activities.Instructor.InstructorMainActivity;
+import com.example.supportq.Activities.Instructor.InstructorSignUpActivity;
+import com.example.supportq.Activities.Student.MainActivity;
+import com.example.supportq.Activities.Student.SignUpActivity;
 import com.example.supportq.Fragments.MyAlertDialogFragment;
 import com.example.supportq.Models.InternetConnection;
 import com.example.supportq.Models.ProgressIndicator;
+import com.example.supportq.Models.User;
 import com.example.supportq.R;
 import com.example.supportq.Validator;
 import com.google.android.material.textfield.TextInputLayout;
@@ -34,8 +38,10 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         //allows for persistence
         ParseUser currentUser = ParseUser.getCurrentUser();
-        if (currentUser != null) {
+        if (currentUser != null && !User.getIsInstructor(currentUser)) {
             goToMainActivity();
+        }else if(currentUser != null && User.getIsInstructor(currentUser)){
+            goToInstructorMainActivity();
         }
         setViews();
         faceBookLogin();
@@ -73,12 +79,14 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
     }
+
     //no internet alertdialog
     private void showAlertDialog() {
         FragmentManager fm = getSupportFragmentManager();
         MyAlertDialogFragment alertDialog = MyAlertDialogFragment.newInstance(getString(R.string.NO_INTERNET_MESSAGE));
         alertDialog.show(fm, getString(R.string.fragment_tag));
     }
+
     //error message to display on textInput
     private void errorMessageOnEditText(String usernameError, String passwordError) {
         username_input_text.setError(usernameError);
@@ -113,7 +121,11 @@ public class LoginActivity extends AppCompatActivity {
                     validateLoginCredentials(e);
                     return;
                 }
-                goToMainActivity();
+                if (User.getIsInstructor(user)) {
+                    goToInstructorMainActivity();
+                } else {
+                    goToMainActivity();
+                }
             }
         });
     }
@@ -184,4 +196,9 @@ public class LoginActivity extends AppCompatActivity {
         finish();
     }
 
+    private void goToInstructorMainActivity() {
+        Intent intent = new Intent(this, InstructorMainActivity.class);
+        startActivity(intent);
+        finish();
+    }
 }

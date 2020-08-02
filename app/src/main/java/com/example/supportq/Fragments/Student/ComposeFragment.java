@@ -1,4 +1,4 @@
-package com.example.supportq.Fragments;
+package com.example.supportq.Fragments.Student;
 
 import android.content.Context;
 import android.content.Intent;
@@ -31,7 +31,8 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.CircleCrop;
-import com.example.supportq.Activities.MainActivity;
+import com.example.supportq.Activities.Student.MainActivity;
+import com.example.supportq.Fragments.HomeFragment;
 import com.example.supportq.Models.Question;
 import com.example.supportq.Models.User;
 import com.example.supportq.R;
