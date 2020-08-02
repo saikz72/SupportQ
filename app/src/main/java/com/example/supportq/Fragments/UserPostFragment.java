@@ -146,7 +146,7 @@ public class UserPostFragment extends Fragment {
     private void queryPost() {
         progressBar.setVisibility(View.VISIBLE);
         final ParseQuery<Question> query = ParseQuery.getQuery(Question.class);
-        query.addDescendingOrder(Question.KEY_CREATED_AT);  //TODO : update how the questions are ordered
+        query.addDescendingOrder(Question.KEY_CREATED_AT);
         query.whereEqualTo(Question.KEY_USER, ParseUser.getCurrentUser());
         query.findInBackground(new FindCallback<Question>() {
             @Override
@@ -157,7 +157,7 @@ public class UserPostFragment extends Fragment {
                 }
                 for (int i = 0; i < questions.size(); i++) {
                     if (!questions.get(i).getIsDeleted()) {
-                        allQuestions.addAll(questions);
+                        allQuestions.add(questions.get(i));
                     }
                 }
                 profileAdapter.notifyDataSetChanged();

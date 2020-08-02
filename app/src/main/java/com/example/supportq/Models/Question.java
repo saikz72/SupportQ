@@ -143,10 +143,10 @@ public class Question extends ParseObject implements Shrinkable, Comparable<Ques
 
     //Returns the number of replies on this post
     public int getRepliesCount() {
+        int count = 0;
         JSONArray jsonArray = getReplies();
         if (jsonArray == null)
             return 0;
-        int count = 0;
         for (int i = 0; i < jsonArray.length(); i++) {
             count++;
         }

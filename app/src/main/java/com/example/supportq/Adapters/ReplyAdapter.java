@@ -1,7 +1,6 @@
 package com.example.supportq.Adapters;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,13 +26,19 @@ import java.util.List;
 import ru.embersoft.expandabletextview.ExpandableTextView;
 
 public class ReplyAdapter extends RecyclerView.Adapter<ReplyAdapter.ViewHolder> {
+    public interface OnDeleteIconListener {
+        void deleteReply(int position);
+    }
+
     private List<Reply> allReplies;
     private Context context;
     private ParseUser currentUser;
+    private OnDeleteIconListener onDeleteIconListener;
 
-    public ReplyAdapter(List<Reply> allReplies, Context context) {
+    public ReplyAdapter(List<Reply> allReplies, Context context, OnDeleteIconListener onDeleteIconListener) {
         this.allReplies = allReplies;
         this.context = context;
+        this.onDeleteIconListener = onDeleteIconListener;
     }
 
     @NonNull
@@ -75,14 +80,6 @@ public class ReplyAdapter extends RecyclerView.Adapter<ReplyAdapter.ViewHolder> 
     private void setVerificationButton(ImageView iv, boolean isActive, int strokeResId, int fillResId, int activeColor) {
         iv.setImageResource(isActive ? fillResId : strokeResId);
         iv.setColorFilter(ContextCompat.getColor(context, isActive ? activeColor : R.color.medium_gray));
-    }
-
-    // Removes reply at this position
-    public void removeAt(Reply reply, int position) throws ParseException {
-        allReplies.remove(position);
-        notifyItemRemoved(position);
-        reply.delete();
-        reply.saveInBackground();
     }
 
     //adds only verified responses to the list
@@ -178,13 +175,7 @@ public class ReplyAdapter extends RecyclerView.Adapter<ReplyAdapter.ViewHolder> 
             ivDelete.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    int position = getAdapterPosition();
-                    try {
-                        removeAt(allReplies.get(position), position);
-
-                    } catch (ParseException e) {
-                        Log.e("TAG", "erro", e);
-                    }
+                    onDeleteIconListener.deleteReply(getAdapterPosition());
                 }
             });
         }

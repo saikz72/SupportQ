@@ -68,13 +68,7 @@ public class QuestionDetailsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_question_details);
         setViews();
         currentUser = ParseUser.getCurrentUser();
-        allReplies = new ArrayList<>();
-        replyAdapter = new ReplyAdapter(allReplies, this);
-        rvQuestions.setAdapter(replyAdapter);
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
-        rvQuestions.setLayoutManager(linearLayoutManager);
-        RecyclerView.ItemDecoration divider = new DividerItemDecoration(this, linearLayoutManager.getOrientation());
-        rvQuestions.addItemDecoration(divider);
+        setUpRecyclerView();
         try {
             bind();
         } catch (ParseException e) {
@@ -98,6 +92,32 @@ public class QuestionDetailsActivity extends AppCompatActivity {
         // Configure the refreshing colors
         swipeContainer.setColorSchemeResources(android.R.color.holo_blue_bright, android.R.color.holo_green_light, android.R.color.holo_orange_light, android.R.color.holo_red_light);
         setUpForVerifiedResponses();
+    }
+
+    public void setUpRecyclerView() {
+        allReplies = new ArrayList<>();
+        ReplyAdapter.OnDeleteIconListener onDeleteIconListener = new ReplyAdapter.OnDeleteIconListener() {
+            @Override
+            public void deleteReply(int position) {
+                Reply reply = allReplies.get(position);
+                replyAdapter.notifyDataSetChanged();
+                allReplies.remove(position);
+                try {
+                    reply.delete();
+                } catch (ParseException e) {
+                    Log.e("TAG", "ParseException", e);
+                }
+                reply.saveInBackground();
+                queryReply();
+                setReplyText(question, tvReplyCount);
+            }
+        };
+        replyAdapter = new ReplyAdapter(allReplies, this, onDeleteIconListener);
+        rvQuestions.setAdapter(replyAdapter);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+        rvQuestions.setLayoutManager(linearLayoutManager);
+        RecyclerView.ItemDecoration divider = new DividerItemDecoration(this, linearLayoutManager.getOrientation());
+        rvQuestions.addItemDecoration(divider);
     }
 
     public void setViews() {
@@ -167,7 +187,6 @@ public class QuestionDetailsActivity extends AppCompatActivity {
 
     public void bind() throws ParseException {
         question = Parcels.unwrap(getIntent().getParcelableExtra(String.valueOf(R.string.HOME_FRAGMENT_KEY)));
-        Log.d("TAG", "bind: " +  question.getDescription());
         tvTimeStamp.setText(question.getCreatedTimeAgo());
         tvUsername.setText("@" + question.getUser().fetchIfNeeded().getUsername());
         tvFullname.setText(User.getFullName(question.getUser()));

@@ -50,7 +50,6 @@
             app:layout_constraintStart_toEndOf="@+id/ivProfilePicture"
             app:layout_constraintTop_toTopOf="@+id/ivProfilePicture"
             app:layout_constraintVertical_bias="0.195" />
-
         <ru.embersoft.expandabletextview.ExpandableTextView
             android:id="@+id/tvDescription"
             style="@style/TextAppearance.AppCompat.Body1"
