@@ -12,6 +12,11 @@
         android:title="Create"
         app:showAsAction="always" />
     <item
+        android:id="@+id/action_inbox"
+        android:icon="@drawable/ic_baseline_mail_24"
+        android:title="Inbox"
+        app:showAsAction="always" />
+    <item
         android:id="@+id/action_profile"
         android:icon="@drawable/instagram_user_filled_24"
         android:title="Profile"

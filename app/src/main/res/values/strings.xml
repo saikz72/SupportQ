@@ -128,4 +128,10 @@
     <string name="hidden">hidden</string>
     <string name="bookmark">bookmarked</string>
     <string name="unhide">Show</string>
+    <string name="workshop">Workshop</string>
+    <string name="office_hour">Office Hour</string>
+    <string name="extra_info">Additional Information</string>
+    <string name="sent">Submit</string>
+    <string name="pick_date">Date</string>
+    <string name="time">Time</string>
 </resources>

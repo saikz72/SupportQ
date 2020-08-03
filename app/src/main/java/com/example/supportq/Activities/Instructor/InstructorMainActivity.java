@@ -13,6 +13,7 @@ import android.view.View;
 import com.example.supportq.Fragments.HomeFragment;
 import com.example.supportq.Fragments.Instructor.EventFragment;
 import com.example.supportq.Fragments.ProfileFragment;
+import com.example.supportq.Fragments.Student.InboxFragment;
 import com.example.supportq.Models.ProgressIndicator;
 import com.example.supportq.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -38,11 +39,14 @@ public class InstructorMainActivity extends AppCompatActivity {
                     case R.id.action_home:
                         fragment = new HomeFragment();
                         break;
-                    case R.id.action_compose:
-                        fragment = new EventFragment();
-                        break;
                     case R.id.action_profile:
                         fragment = new ProfileFragment();
+                        break;
+                    case R.id.action_inbox:
+                        fragment = new InboxFragment();
+                        break;
+                    case R.id.action_compose:
+                        fragment = new EventFragment();
                         break;
                     default:
                         fragment = new HomeFragment();
