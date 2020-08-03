@@ -1,6 +1,7 @@
 package com.example.supportq.Fragments.Instructor;
 
 import android.app.DatePickerDialog;
+import android.app.TimePickerDialog;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -14,6 +15,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.TextView;
+import android.widget.TimePicker;
 
 import com.example.supportq.R;
 
@@ -21,8 +23,13 @@ import java.text.DateFormat;
 import java.util.Calendar;
 
 public class EventFragment extends Fragment {
-    Button btnDatePicker;
-    TextView tvDate;
+    private Button btnDatePicker;
+    private Button btnStartTime;
+    private Button btnEndTime;
+    private TextView tvEndTime;
+    private TextView tvStartTime;
+    private TextView tvDate;
+    private DialogFragment timePicker;
 
     public EventFragment() {
         // Required empty public constructor
@@ -55,10 +62,43 @@ public class EventFragment extends Fragment {
                 datePicker.show(getFragmentManager(), "date picker");
             }
         });
+
+        final TimePickerDialog.OnTimeSetListener onTimeSetListener = new TimePickerDialog.OnTimeSetListener() {
+            @Override
+            public void onTimeSet(TimePicker timePicker, int hour, int minute) {
+                    tvStartTime.setText(hour + ":" + minute);
+            }
+        };
+
+       final TimePickerDialog.OnTimeSetListener onEndTimeSetListener = new TimePickerDialog.OnTimeSetListener() {
+           @Override
+           public void onTimeSet(TimePicker timePicker, int hour, int minute) {
+               tvEndTime.setText(hour + ":" + minute);
+           }
+       };
+        btnStartTime.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                timePicker = new TimePickerFragment(onTimeSetListener);
+                timePicker.show(getFragmentManager(), "time picker");
+            }
+        });
+
+        btnEndTime.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                timePicker = new TimePickerFragment(onEndTimeSetListener);
+                timePicker.show(getFragmentManager(), "time picker");
+            }
+        });
     }
 
     public void setViews(View views) {
         btnDatePicker = views.findViewById(R.id.btnDatePicker);
+        btnEndTime = views.findViewById(R.id.btnEndTime);
         tvDate = views.findViewById(R.id.tvDate);
+        tvStartTime = views.findViewById(R.id.tvStartTime);
+        tvEndTime = views.findViewById(R.id.tvEndTime);
+        btnStartTime = views.findViewById(R.id.btnStartTime);
     }
 }

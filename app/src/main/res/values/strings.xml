@@ -134,4 +134,5 @@
     <string name="sent">Submit</string>
     <string name="pick_date">Date</string>
     <string name="time">Time</string>
+    <string name="to">TO</string>
 </resources>

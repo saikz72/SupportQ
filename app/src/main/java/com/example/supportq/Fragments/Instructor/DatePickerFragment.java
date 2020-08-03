@@ -13,7 +13,6 @@ import java.util.Calendar;
 public class DatePickerFragment extends DialogFragment {
     private DatePickerDialog.OnDateSetListener mDateSetListener;
 
-
     public DatePickerFragment(DatePickerDialog.OnDateSetListener callback) {
         mDateSetListener = callback;
     }
