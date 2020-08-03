@@ -140,4 +140,8 @@
     <string name="end_error">You need to pick an end time</string>
     <string name="success_message">Your event has been created</string>
     <string name="event_type_error">You need to select either workshop of office hour</string>
+    <string name="date">Date:</string>
+    <string name="start_time">Start Time:</string>
+    <string name="end_time">End Time:</string>
+    <string name="body">body</string>
 </resources>
