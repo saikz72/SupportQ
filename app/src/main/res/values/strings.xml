@@ -135,4 +135,9 @@
     <string name="pick_date">Date</string>
     <string name="time">Time</string>
     <string name="to">TO</string>
+    <string name="date_error">You need to select a date</string>
+    <string name="start_error">You need to pick a start time</string>
+    <string name="end_error">You need to pick an end time</string>
+    <string name="success_message">Your event has been created</string>
+    <string name="event_type_error">You need to select either workshop of office hour</string>
 </resources>

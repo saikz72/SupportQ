@@ -2,6 +2,7 @@ package com.example.supportq;
 
 import android.app.Application;
 
+import com.example.supportq.Models.Event;
 import com.example.supportq.Models.Question;
 import com.example.supportq.Models.Reply;
 import com.parse.Parse;
@@ -16,6 +17,7 @@ public class ParseApplication extends Application {
         //Register parse models
         ParseObject.registerSubclass(Question.class);
         ParseObject.registerSubclass(Reply.class);
+        ParseObject.registerSubclass(Event.class);
 
         Parse.initialize(new Parse.Configuration.Builder(this)
                 .applicationId("support-q") // should correspond to APP_ID env variable

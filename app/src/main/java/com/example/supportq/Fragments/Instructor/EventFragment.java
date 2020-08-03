@@ -14,10 +14,17 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
+import com.example.supportq.Models.Event;
 import com.example.supportq.R;
+import com.parse.ParseFile;
+import com.parse.ParseUser;
 
 import java.text.DateFormat;
 import java.util.Calendar;
@@ -26,10 +33,14 @@ public class EventFragment extends Fragment {
     private Button btnDatePicker;
     private Button btnStartTime;
     private Button btnEndTime;
+    private Button btnSubmit;
     private TextView tvEndTime;
     private TextView tvStartTime;
     private TextView tvDate;
     private DialogFragment timePicker;
+    private EditText etAddionalInfo;
+    private Event event;
+    private String eventType;
 
     public EventFragment() {
         // Required empty public constructor
@@ -37,7 +48,9 @@ public class EventFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_event, container, false);
+        View view = inflater.inflate(R.layout.fragment_event, container, false);
+        radioButtonListener(view);
+        return view;
     }
 
     @Override
@@ -66,16 +79,16 @@ public class EventFragment extends Fragment {
         final TimePickerDialog.OnTimeSetListener onTimeSetListener = new TimePickerDialog.OnTimeSetListener() {
             @Override
             public void onTimeSet(TimePicker timePicker, int hour, int minute) {
-                    tvStartTime.setText(hour + ":" + minute);
+                tvStartTime.setText(hour + ":" + minute);
             }
         };
 
-       final TimePickerDialog.OnTimeSetListener onEndTimeSetListener = new TimePickerDialog.OnTimeSetListener() {
-           @Override
-           public void onTimeSet(TimePicker timePicker, int hour, int minute) {
-               tvEndTime.setText(hour + ":" + minute);
-           }
-       };
+        final TimePickerDialog.OnTimeSetListener onEndTimeSetListener = new TimePickerDialog.OnTimeSetListener() {
+            @Override
+            public void onTimeSet(TimePicker timePicker, int hour, int minute) {
+                tvEndTime.setText(hour + ":" + minute);
+            }
+        };
         btnStartTime.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -91,6 +104,25 @@ public class EventFragment extends Fragment {
                 timePicker.show(getFragmentManager(), "time picker");
             }
         });
+
+        setUpSubmitButtonForWhenClicked();
+    }
+
+    public void radioButtonListener(View view){
+        RadioGroup radioGroup = view.findViewById(R.id.radioGroup);
+        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup radioGroup, int i) {
+                switch (i){
+                    case R.id.workshop:
+                        eventType = getString(R.string.workshop);
+                        break;
+                    case R.id.office_hour:
+                        eventType = getString(R.string.office_hour);
+                        break;
+                }
+            }
+        });
     }
 
     public void setViews(View views) {
@@ -100,5 +132,50 @@ public class EventFragment extends Fragment {
         tvStartTime = views.findViewById(R.id.tvStartTime);
         tvEndTime = views.findViewById(R.id.tvEndTime);
         btnStartTime = views.findViewById(R.id.btnStartTime);
+        btnSubmit = views.findViewById(R.id.btnSubmit);
+        etAddionalInfo = views.findViewById(R.id.etAdditionalInfo);
+    }
+
+    public void setUpSubmitButtonForWhenClicked() {
+        btnSubmit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                saveEvent();
+            }
+        });
+    }
+
+    //TODO -->
+    private void saveEvent() {
+        event = new Event();
+        verifyInput();
+        event.setStartDate(tvDate.getText().toString());
+        event.setEndTime(tvEndTime.getText().toString());
+        event.setStartTime(tvStartTime.getText().toString());
+        event.setUser(ParseUser.getCurrentUser());
+        if (!etAddionalInfo.getText().toString().isEmpty()) {
+            event.setAdditionalInfo(etAddionalInfo.getText().toString());
+        }
+        ParseFile parseFile = ParseUser.getCurrentUser().getParseFile("profilePicture");
+        if (parseFile != null) {
+            event.setImage(parseFile);
+        }
+        event.setEvent(eventType);
+        event.saveInBackground();
+    }
+
+    public void verifyInput() {
+        if(eventType.isEmpty()){
+            Toast.makeText(getContext(), getContext().getString(R.string.event_type_error), Toast.LENGTH_SHORT).show();
+        }
+        else if (tvDate.getText().toString().isEmpty()) {
+            Toast.makeText(getContext(), getContext().getString(R.string.date_error), Toast.LENGTH_SHORT).show();
+        } else if (tvStartTime.getText().toString().isEmpty()) {
+            Toast.makeText(getContext(), getContext().getString(R.string.start_error), Toast.LENGTH_SHORT).show();
+        } else if (tvEndTime.getText().toString().isEmpty()) {
+            Toast.makeText(getContext(), getContext().getString(R.string.end_error), Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(getContext(), getContext().getString(R.string.success_message), Toast.LENGTH_SHORT).show();
+        }
     }
 }
