@@ -147,4 +147,7 @@
     <string name="hosting">is hosting</string>
     <string name="all_response">All responses</string>
     <string name="verified_responses">Verified responses</string>
+    <string name="sorted_date">Sorted by date</string>
+    <string name="trend_sort">Sorted by Trends</string>
+    <string name="sorted_like">Sorted by likes</string>
 </resources>

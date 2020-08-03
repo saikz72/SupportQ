@@ -43,6 +43,8 @@ public class HomeFragment extends Fragment {
     private TextView tvTrendingMessage;
     private ParseUser currentUser;
     private Toolbar toolbar;
+    private TextView tvSortType;
+    private int mode = 0;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -61,6 +63,7 @@ public class HomeFragment extends Fragment {
         setUpRecyclerView(view);
         currentUser = ParseUser.getCurrentUser();
         toolbar = view.findViewById(R.id.toolbar);
+        tvSortType = view.findViewById(R.id.tvSortType);
         if (User.getIsInstructor(currentUser)) {
             ((InstructorMainActivity) getActivity()).setSupportActionBar(toolbar);
             ((InstructorMainActivity) getActivity()).getSupportActionBar().setTitle("");
@@ -72,7 +75,19 @@ public class HomeFragment extends Fragment {
         swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                queryPost();
+                switch (mode) {
+                    case 1:
+                        likeSort();
+                        break;
+                    case 2:
+                        trendingSort();
+                        break;
+                    case 3:
+                        dateSort();
+                        break;
+                    default:
+                        dateSort();
+                }
             }
         });
         swipeContainer.setColorSchemeResources(android.R.color.holo_blue_bright, android.R.color.holo_green_light, android.R.color.holo_orange_light, android.R.color.holo_red_light);
@@ -95,6 +110,7 @@ public class HomeFragment extends Fragment {
     private void queryPost() {
         final ParseQuery<Question> query = ParseQuery.getQuery(Question.class);
         query.include(Question.KEY_USER);
+        query.addDescendingOrder(Question.KEY_CREATED_AT);
         query.findInBackground(new FindCallback<Question>() {
             @Override
             public void done(List<Question> questions, ParseException e) {
@@ -137,7 +153,31 @@ public class HomeFragment extends Fragment {
         return super.onOptionsItemSelected(item);
     }
 
+    private void likeSort() {
+        mode = 1;
+        tvSortType.setText(getString(R.string.sorted_like));
+        tvTrendingMessage.setVisibility(View.GONE);
+        rvQuestion.setVisibility(View.VISIBLE);
+        rvQuestion.setVisibility(View.VISIBLE);
+        ParseQuery<Question> query = ParseQuery.getQuery(Question.class);
+        query.include(Question.KEY_USER);
+        query.findInBackground(new FindCallback<Question>() {
+            @Override
+            public void done(List<Question> questions, ParseException e) {
+                if (e != null) {
+                    Toast.makeText(getContext(), getString(R.string.FETCHING_POST_ERROR), Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                questionAdapter.clear();
+                questionAdapter.addAll(questions);
+                swipeContainer.setRefreshing(false);
+            }
+        });
+    }
+
     private void trendingSort() {
+        mode = 2;
+        tvSortType.setText(getString(R.string.trend_sort));
         final ParseQuery<Question> query = ParseQuery.getQuery(Question.class);
         query.include(Question.KEY_USER);
         query.findInBackground(new FindCallback<Question>() {
@@ -153,12 +193,15 @@ public class HomeFragment extends Fragment {
                     rvQuestion.setVisibility(View.GONE);
                     tvTrendingMessage.setVisibility(View.VISIBLE);
                 }
+                swipeContainer.setRefreshing(false);
             }
 
         });
     }
 
     private void dateSort() {
+        mode = 3;
+        tvSortType.setText(getString(R.string.sorted_date));
         tvTrendingMessage.setVisibility(View.GONE);
         rvQuestion.setVisibility(View.VISIBLE);
         final ParseQuery<Question> query = ParseQuery.getQuery(Question.class);
@@ -178,25 +221,7 @@ public class HomeFragment extends Fragment {
                     }
                 }
                 questionAdapter.notifyDataSetChanged();
-            }
-        });
-    }
-
-    private void likeSort() {
-        tvTrendingMessage.setVisibility(View.GONE);
-        rvQuestion.setVisibility(View.VISIBLE);
-        rvQuestion.setVisibility(View.VISIBLE);
-        ParseQuery<Question> query = ParseQuery.getQuery(Question.class);
-        query.include(Question.KEY_USER);
-        query.findInBackground(new FindCallback<Question>() {
-            @Override
-            public void done(List<Question> questions, ParseException e) {
-                if (e != null) {
-                    Toast.makeText(getContext(), getString(R.string.FETCHING_POST_ERROR), Toast.LENGTH_SHORT).show();
-                    return;
-                }
-                questionAdapter.clear();
-                questionAdapter.addAll(questions);
+                swipeContainer.setRefreshing(false);
             }
         });
     }

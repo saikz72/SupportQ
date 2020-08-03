@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="@color/bottom_nav"
+    android:orientation="vertical"
     tools:context=".Fragments.HomeFragment">
 
     <androidx.appcompat.widget.Toolbar
@@ -16,31 +16,40 @@
         android:minHeight="?attr/actionBarSize"
         app:menu="@menu/menu_main"
         app:titleTextColor="@android:color/white">
+        <TextView
+            android:id="@+id/tvSortType"
+            android:layout_gravity="right"
+            android:text="@string/sorted_date"
+            android:textSize="12sp"
+            android:textColor="@color/description_color"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
 
     </androidx.appcompat.widget.Toolbar>
+
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="@color/login_background_color"/>
+        android:background="@color/login_background_color" />
+
     <TextView
         android:id="@+id/tvTrendingMessage"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:text="No trending post"
-        android:visibility="gone"
-        android:textSize="24dp"/>
+        android:textSize="24dp"
+        android:visibility="gone" />
+
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/swipeContainer"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/blue">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvQuestions"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-       />
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvQuestions"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
 </LinearLayout>
