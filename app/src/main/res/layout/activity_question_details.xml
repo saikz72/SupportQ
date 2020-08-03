@@ -18,26 +18,8 @@
             android:orientation="vertical"
             android:padding="5dp">
 
-            <androidx.appcompat.widget.Toolbar
-                android:id="@+id/toolbar"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/toolbar_color"
-                android:minHeight="?attr/actionBarSize"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:titleTextColor="@android:color/white">
-
-                <androidx.appcompat.widget.SwitchCompat
-                    android:id="@+id/switchCompat"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textOff="@string/all_replies"
-                    android:textOn="@string/verified_replies" />
-            </androidx.appcompat.widget.Toolbar>
-
             <View
+                android:id="@+id/view4"
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_marginTop="2dp"
@@ -68,13 +50,13 @@
                 android:id="@+id/tvFullname"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="20dp"
                 android:text="@string/name"
                 android:textColor="@color/description_color"
                 android:textSize="20sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toEndOf="@+id/ivProfilePicture"
-                app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+                app:layout_constraintTop_toTopOf="@+id/ivProfilePicture" />
 
             <TextView
                 android:id="@+id/tvUsername"
@@ -85,12 +67,24 @@
                 app:layout_constraintStart_toEndOf="@+id/ivProfilePicture"
                 app:layout_constraintTop_toBottomOf="@+id/tvFullname" />
 
+            <androidx.appcompat.widget.SwitchCompat
+                android:id="@+id/switchCompat"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:textOff="@string/all_replies"
+                android:textOn="@string/verified_replies"
+                app:layout_constraintEnd_toStartOf="@+id/tvVerifiedResponse"
+                app:layout_constraintHorizontal_bias="0.541"
+                app:layout_constraintStart_toEndOf="@+id/tvAllResponse"
+                app:layout_constraintTop_toBottomOf="@+id/etReply" />
+
             <ru.embersoft.expandabletextview.ExpandableTextView
                 android:id="@+id/tvDescription"
                 style="@style/TextAppearance.AppCompat.Body1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="10dp"
+                android:layout_marginHorizontal="5dp"
                 android:autoLink="all"
                 android:linksClickable="true"
                 android:textColorLink="@color/blue"
@@ -111,9 +105,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/timeStamp"
-                android:textSize="10dp"
-                app:layout_constraintStart_toEndOf="@+id/ivProfilePicture"
-                app:layout_constraintTop_toBottomOf="@+id/tvUsername" />
+                android:textSize="12dp"
+                android:layout_marginEnd="5dp"
+                app:layout_constraintBottom_toBottomOf="@+id/tvFullname"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/tvFullname"
+                app:layout_constraintVertical_bias="0.0" />
 
             <TextView
                 android:id="@+id/tvReplyCount"
@@ -164,6 +161,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/rounded_edit_text"
+                android:layout_marginEnd="50dp"
                 android:ems="10"
                 android:hint="@string/respond"
                 android:imeOptions="actionDone"
@@ -171,7 +169,6 @@
                 android:maxLines="10"
                 android:minLines="3"
                 android:textAlignment="center"
-                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tvLikeCount" />
 
@@ -179,12 +176,12 @@
                 android:id="@+id/ivSendReply"
                 android:layout_width="@dimen/details_send_reply_width"
                 android:layout_height="@dimen/details_send_reply_height"
-                android:layout_marginTop="10dp"
-                android:src="@drawable/ufi_new_direct"
+                android:layout_marginStart="4dp"
+                android:src="@drawable/ic_baseline_send_24"
+                app:layout_constraintBottom_toTopOf="@+id/view4"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.973"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintStart_toEndOf="@+id/etReply"
+                app:layout_constraintTop_toBottomOf="@+id/tvReplyCount" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvQuestions"
@@ -192,7 +189,7 @@
                 android:layout_height="wrap_content"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/etReply" />
+                app:layout_constraintTop_toBottomOf="@+id/view5" />
 
             <ImageView
                 android:id="@+id/ivMedia"
@@ -202,6 +199,40 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tvDescription" />
+
+            <TextView
+                android:id="@+id/tvAllResponse"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="76dp"
+                android:text="@string/all_response"
+                android:textAllCaps="false"
+                app:layout_constraintBottom_toBottomOf="@+id/switchCompat"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/switchCompat"
+                />
+
+            <TextView
+                android:id="@+id/tvVerifiedResponse"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="60dp"
+                android:textAllCaps="false"
+                android:text="@string/verified_responses"
+                app:layout_constraintBottom_toBottomOf="@+id/switchCompat"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/switchCompat"
+                />
+
+            <View
+                android:id="@+id/view5"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="10dp"
+                android:background="@color/login_background_color"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/switchCompat" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
 </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>

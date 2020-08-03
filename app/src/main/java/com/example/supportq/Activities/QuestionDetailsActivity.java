@@ -76,8 +76,8 @@ public class QuestionDetailsActivity extends AppCompatActivity {
         }
         setButton(ivLike, question.isLiked(), R.drawable.ic_vector_heart_stroke, R.drawable.ic_vector_heart, R.color.likedRed);
         setLikeText(question, tvLikeCount);
-        likeIconClicked();
-        replyListener();
+        setUpListenerForLikeIcon();
+        setUpListenerForReplyIcon();
         queryReply();
         swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -138,7 +138,7 @@ public class QuestionDetailsActivity extends AppCompatActivity {
         switchCompat = findViewById(R.id.switchCompat);
     }
 
-    public void replyListener() {
+    public void setUpListenerForReplyIcon() {
         ivSendReply.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -206,7 +206,7 @@ public class QuestionDetailsActivity extends AppCompatActivity {
     }
 
     //listener for like button
-    public void likeIconClicked() {
+    public void setUpListenerForLikeIcon() {
         ivLike.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

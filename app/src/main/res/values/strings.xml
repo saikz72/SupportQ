@@ -145,4 +145,6 @@
     <string name="end_time">End Time:</string>
     <string name="body">body</string>
     <string name="hosting">is hosting</string>
+    <string name="all_response">All responses</string>
+    <string name="verified_responses">Verified responses</string>
 </resources>
