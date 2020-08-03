@@ -43,6 +43,7 @@ public class ProfileFragment extends Fragment {
     private ViewPager viewPager;
     private TabLayout tabLayout;
     private static final int EDIT_CODE = 1;
+    public static final String TAG = "ProfileFragment";
 
     public ProfileFragment() {
         // Required empty public constructor
@@ -60,13 +61,9 @@ public class ProfileFragment extends Fragment {
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if(requestCode == EDIT_CODE && resultCode == RESULT_OK){
-            currentUser = data.getParcelableExtra("s");
-            Log.d("P", "onActivityResult: " + currentUser.getUsername());
-            profilePicture = currentUser.getParseFile((User.KEY_PROFILE_PICTURE));
+            currentUser = data.getParcelableExtra(getString(R.string.CODE));
             tvUsername.setText("@" + User.getUserName(currentUser));
             tvFullname.setText(User.getFullName(currentUser));
-        }else{
-            Log.d("P", "onActivityResult: failed" );
         }
     }
 

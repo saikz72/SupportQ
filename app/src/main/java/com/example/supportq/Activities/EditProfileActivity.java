@@ -15,6 +15,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -29,7 +30,6 @@ import com.google.android.material.textfield.TextInputLayout;
 import com.parse.ParseException;
 import com.parse.ParseFile;
 import com.parse.ParseUser;
-import com.parse.SaveCallback;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -83,7 +83,7 @@ public class EditProfileActivity extends AppCompatActivity {
         ParseFile profilePicture = ParseUser.getCurrentUser().fetch().getParseFile((User.KEY_PROFILE_PICTURE));
         if (profilePicture != null) {
             Glide.with(this).load(profilePicture.getUrl()).transform(new CircleCrop()).into(ivProfilePicture);   //user's current profile picture
-        }else{
+        } else {
             ivProfilePicture.setImageResource(R.drawable.profile_image_default);
         }
     }
@@ -225,6 +225,7 @@ public class EditProfileActivity extends AppCompatActivity {
         btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Log.d(TAG, "onClick: ");
                 String username = etUsername.getEditText().getText().toString();
                 String fullname = etFullname.getEditText().getText().toString();
                 if (isUsernameChangeValid(username) && isFullNameValid(fullname)) {
@@ -252,26 +253,16 @@ public class EditProfileActivity extends AppCompatActivity {
 
     public void saveChanges(final ParseUser currentUser, File pic, String username, String fullName) {
         //breaks if profile picutre is not taken
-        currentUser.put(User.KEY_USERNAME, username);
-        currentUser.put(User.KEY_FULL_NAME, fullName);
-        if (pic == null) {
-            finish();
-            return;
-        }
+        currentUser.setUsername(username);
+        currentUser.put(getString(R.string.fullName), fullName);
         if (camera) {
             ParseFile parseFile = new ParseFile(pic);
             currentUser.put(User.KEY_PROFILE_PICTURE, parseFile);
-        } else {
-            currentUser.put(User.KEY_PROFILE_PICTURE, file);
         }
-        currentUser.saveInBackground(new SaveCallback() {
-            @Override
-            public void done(ParseException e) {
-                final Intent intent = new Intent();
-                intent.putExtra("s", currentUser);
-                setResult(RESULT_OK, intent);
-                finish();
-            }
-        });
+        Intent intent = new Intent();
+        intent.putExtra(getString(R.string.CODE), currentUser);
+        currentUser.saveInBackground();
+        setResult(RESULT_OK, intent);
+        finish();
     }
 }

@@ -150,4 +150,6 @@
     <string name="sorted_date">Sorted by date</string>
     <string name="trend_sort">Sorted by Trends</string>
     <string name="sorted_like">Sorted by likes</string>
+    <string name="CODE">code</string>
+    <string name="fullName">fullName</string>
 </resources>
