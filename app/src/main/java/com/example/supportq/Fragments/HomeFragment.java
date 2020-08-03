@@ -116,7 +116,7 @@ public class HomeFragment extends Fragment {
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        menu.clear();           //TODO --> check workchat
+        menu.clear();
         inflater.inflate(R.menu.menu_main, menu);
     }
 

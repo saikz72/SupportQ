@@ -1,24 +1,32 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-    <item
-        android:id="@+id/action_sort_like"
-        android:icon="@drawable/ic_vector_heart_stroke"
-        android:title="@string/like_sort"
-        app:showAsAction="never">
+   <item
+       android:id="@+id/overflow"
+       android:icon="@drawable/sort_icon"
+       android:title="sort"
+       app:showAsAction="always">
+       <menu>
+           <item
+               android:id="@+id/action_sort_like"
+               android:icon="@drawable/ic_vector_heart_stroke"
+               android:title="@string/like_sort"
+               app:showAsAction="withText">
 
-    </item>
-    <item
-        android:id="@+id/action_sort_date"
-        android:icon="@drawable/ic_baseline_date_range_24"
-        android:title="@string/date_sort"
-        app:showAsAction="never">
+           </item>
+           <item
+               android:id="@+id/action_sort_date"
+               android:icon="@drawable/ic_baseline_date_range_24"
+               android:title="@string/date_sort"
+               app:showAsAction="withText">
 
-    </item>
-    <item
-        android:id="@+id/action_sort_trending"
-        android:icon="@drawable/ic_baseline_trending_up_24"
-        android:title="@string/trending"
-        app:showAsAction="never">
+           </item>
+           <item
+               android:id="@+id/action_sort_trending"
+               android:icon="@drawable/ic_baseline_trending_up_24"
+               android:title="@string/trending"
+               app:showAsAction="withText">
 
-    </item>
+           </item>
+       </menu>
+   </item>
 </menu>
