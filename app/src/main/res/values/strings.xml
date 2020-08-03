@@ -144,4 +144,5 @@
     <string name="start_time">Start Time:</string>
     <string name="end_time">End Time:</string>
     <string name="body">body</string>
+    <string name="hosting">is hosting</string>
 </resources>

@@ -1,9 +1,14 @@
 package com.example.supportq.Models;
 
+import android.text.format.DateUtils;
+
 import com.parse.ParseClassName;
 import com.parse.ParseFile;
 import com.parse.ParseObject;
 import com.parse.ParseUser;
+
+import java.text.SimpleDateFormat;
+import java.util.Locale;
 
 @ParseClassName("Event")
 public class Event extends ParseObject {
@@ -14,6 +19,20 @@ public class Event extends ParseObject {
     public static final String KEY_DATE = "startDate";
     public static final String KEY_START_TIME = "startTime";
     public static final String KEY_END_TIME = "endTime";
+    public static final String KEY_CREATED_AT = "createdAt";
+
+    public String getCreatedTimeAgo() {
+        return getRelativeTimeAgo(this.getCreatedAt().getTime());
+    }
+
+    // getRelativeTimeAgo("Mon Apr 01 21:16:23 +0000 2014");
+    public String getRelativeTimeAgo(long dateMillis) {
+        SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.ENGLISH);
+        sf.setLenient(true);
+        String relativeDate = "";
+        relativeDate = DateUtils.getRelativeTimeSpanString(dateMillis, System.currentTimeMillis(), DateUtils.SECOND_IN_MILLIS).toString();
+        return relativeDate;
+    }
 
     public void setUser(ParseUser user) {
         put(KEY_USER, user);
