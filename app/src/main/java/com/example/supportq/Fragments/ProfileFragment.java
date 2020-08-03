@@ -28,6 +28,9 @@ import com.google.android.material.tabs.TabLayout;
 import com.parse.ParseException;
 import com.parse.ParseFile;
 import com.parse.ParseUser;
+
+import static android.app.Activity.RESULT_OK;
+
 public class ProfileFragment extends Fragment {
     private ImageView ivProfilePicture;
     private TextView tvUsername;
@@ -39,6 +42,7 @@ public class ProfileFragment extends Fragment {
     private View myFragment;
     private ViewPager viewPager;
     private TabLayout tabLayout;
+    private static final int EDIT_CODE = 1;
 
     public ProfileFragment() {
         // Required empty public constructor
@@ -50,6 +54,20 @@ public class ProfileFragment extends Fragment {
         viewPager = myFragment.findViewById(R.id.viewPager);
         tabLayout = myFragment.findViewById(R.id.tabLayout);
         return myFragment;
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == EDIT_CODE && resultCode == RESULT_OK){
+            currentUser = data.getParcelableExtra("s");
+            Log.d("P", "onActivityResult: " + currentUser.getUsername());
+            profilePicture = currentUser.getParseFile((User.KEY_PROFILE_PICTURE));
+            tvUsername.setText("@" + User.getUserName(currentUser));
+            tvFullname.setText(User.getFullName(currentUser));
+        }else{
+            Log.d("P", "onActivityResult: failed" );
+        }
     }
 
     @Override
@@ -107,7 +125,7 @@ public class ProfileFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getContext(), EditProfileActivity.class);
-                getActivity().startActivityForResult(intent, 1);
+                startActivityForResult(intent, EDIT_CODE);
             }
         });
     }

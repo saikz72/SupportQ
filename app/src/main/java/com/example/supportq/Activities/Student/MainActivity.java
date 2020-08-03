@@ -13,7 +13,7 @@ import android.view.View;
 
 import com.example.supportq.Fragments.Student.ComposeFragment;
 import com.example.supportq.Fragments.HomeFragment;
-import com.example.supportq.Fragments.Student.InboxFragment;
+import com.example.supportq.Fragments.InboxFragment;
 import com.example.supportq.Fragments.ProfileFragment;
 import com.example.supportq.Models.ProgressIndicator;
 import com.example.supportq.R;

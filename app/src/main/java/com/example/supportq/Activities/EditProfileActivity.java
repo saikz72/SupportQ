@@ -29,8 +29,7 @@ import com.google.android.material.textfield.TextInputLayout;
 import com.parse.ParseException;
 import com.parse.ParseFile;
 import com.parse.ParseUser;
-
-import org.parceler.Parcels;
+import com.parse.SaveCallback;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -248,7 +247,7 @@ public class EditProfileActivity extends AppCompatActivity {
         return true;
     }
 
-    public void saveChanges(ParseUser currentUser, File pic, String username, String fullName) {
+    public void saveChanges(final ParseUser currentUser, File pic, String username, String fullName) {
         //breaks if profile picutre is not taken
         currentUser.put(User.KEY_USERNAME, username);
         currentUser.put(User.KEY_FULL_NAME, fullName);
@@ -262,7 +261,14 @@ public class EditProfileActivity extends AppCompatActivity {
         } else {
             currentUser.put(User.KEY_PROFILE_PICTURE, file);
         }
-        currentUser.saveInBackground();
-        finish();
+        currentUser.saveInBackground(new SaveCallback() {
+            @Override
+            public void done(ParseException e) {
+                final Intent intent = new Intent();
+                intent.putExtra("s", currentUser);
+                setResult(RESULT_OK, intent);
+                finish();
+            }
+        });
     }
 }

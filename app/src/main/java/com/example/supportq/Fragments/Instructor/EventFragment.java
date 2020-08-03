@@ -15,7 +15,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.TimePicker;
@@ -108,12 +107,12 @@ public class EventFragment extends Fragment {
         setUpSubmitButtonForWhenClicked();
     }
 
-    public void radioButtonListener(View view){
+    public void radioButtonListener(View view) {
         RadioGroup radioGroup = view.findViewById(R.id.radioGroup);
         radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
-                switch (i){
+                switch (i) {
                     case R.id.workshop:
                         eventType = getString(R.string.workshop);
                         break;
@@ -145,7 +144,6 @@ public class EventFragment extends Fragment {
         });
     }
 
-    //TODO -->
     private void saveEvent() {
         event = new Event();
         verifyInput();
@@ -160,22 +158,26 @@ public class EventFragment extends Fragment {
         if (parseFile != null) {
             event.setImage(parseFile);
         }
-        event.setEvent(eventType);
-        event.saveInBackground();
+        if (eventType != null) {
+            event.setEvent(eventType);
+            event.saveInBackground();
+            Toast.makeText(getContext(), getContext().getString(R.string.success_message), Toast.LENGTH_SHORT).show();
+        }
     }
 
     public void verifyInput() {
-        if(eventType.isEmpty()){
-            Toast.makeText(getContext(), getContext().getString(R.string.event_type_error), Toast.LENGTH_SHORT).show();
-        }
-        else if (tvDate.getText().toString().isEmpty()) {
+        if (tvDate.getText().toString().isEmpty()) {
             Toast.makeText(getContext(), getContext().getString(R.string.date_error), Toast.LENGTH_SHORT).show();
+            return;
         } else if (tvStartTime.getText().toString().isEmpty()) {
             Toast.makeText(getContext(), getContext().getString(R.string.start_error), Toast.LENGTH_SHORT).show();
+            return;
         } else if (tvEndTime.getText().toString().isEmpty()) {
             Toast.makeText(getContext(), getContext().getString(R.string.end_error), Toast.LENGTH_SHORT).show();
-        } else {
-            Toast.makeText(getContext(), getContext().getString(R.string.success_message), Toast.LENGTH_SHORT).show();
+            return;
+        } else if (eventType == null) {
+            Toast.makeText(getContext(), getContext().getString(R.string.event_type_error), Toast.LENGTH_SHORT).show();
+            return;
         }
     }
 }
