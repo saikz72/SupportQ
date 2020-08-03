@@ -81,8 +81,11 @@ public class EditProfileActivity extends AppCompatActivity {
         etUsername.getEditText().setText(currentUser.getUsername());      //user's current name;
         etFullname.getEditText().setText(User.getFullName(currentUser));
         ParseFile profilePicture = ParseUser.getCurrentUser().fetch().getParseFile((User.KEY_PROFILE_PICTURE));
-        if (profilePicture != null)
+        if (profilePicture != null) {
             Glide.with(this).load(profilePicture.getUrl()).transform(new CircleCrop()).into(ivProfilePicture);   //user's current profile picture
+        }else{
+            ivProfilePicture.setImageResource(R.drawable.profile_image_default);
+        }
     }
 
     //capture image
@@ -232,7 +235,7 @@ public class EditProfileActivity extends AppCompatActivity {
     }
 
     private boolean isFullNameValid(String fullname) {
-        if(!Validator.isUsernameLongEnough(fullname)){
+        if (!Validator.isUsernameLongEnough(fullname)) {
             etFullname.setError(getString(R.string.FULL_NAME_ERROR));
             return false;
         }

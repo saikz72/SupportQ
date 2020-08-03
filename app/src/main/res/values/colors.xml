@@ -19,4 +19,5 @@
     <color name="green">#289647</color>
     <color name="verify_color">#4AE209</color>
     <color name="black">#000000</color>
+    <color name="card_background_white">#F7F7F7</color>
 </resources>

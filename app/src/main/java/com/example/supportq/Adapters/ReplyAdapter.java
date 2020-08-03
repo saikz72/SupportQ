@@ -125,7 +125,7 @@ public class ReplyAdapter extends RecyclerView.Adapter<ReplyAdapter.ViewHolder> 
             if (profilePhoto != null) {
                 Glide.with(context).load(profilePhoto.getUrl()).transform(new CircleCrop()).into(ivProfilePicture);
             } else {
-                ivProfilePicture.setImageResource(R.drawable.com_facebook_profile_picture_blank_portrait);
+                ivProfilePicture.setImageResource(R.drawable.profile_image_default);
             }
             if (User.getIsInstructor(currentUser)) {
                 ivVerify.setVisibility(View.VISIBLE);

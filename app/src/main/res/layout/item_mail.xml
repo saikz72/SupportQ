@@ -17,7 +17,7 @@
             android:id="@+id/ivProfilePicture"
             android:layout_width="@dimen/home_profile_width"
             android:layout_height="@dimen/home_profile_height"
-            android:src="@drawable/com_facebook_profile_picture_blank_square"
+            android:src="@drawable/profile_image_default"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 

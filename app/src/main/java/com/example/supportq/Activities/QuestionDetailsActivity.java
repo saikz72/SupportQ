@@ -193,6 +193,8 @@ public class QuestionDetailsActivity extends AppCompatActivity {
         ParseFile profileImage = question.getUser().getParseFile(User.KEY_PROFILE_PICTURE);
         if (profileImage != null) {
             Glide.with(this).load(profileImage.getUrl()).transform(new CircleCrop()).into(ivProfilePicture);
+        }else{
+            ivProfilePicture.setImageResource(R.drawable.profile_image_default);
         }
         ParseFile mediaImage = question.getImage();
         if (mediaImage != null) {

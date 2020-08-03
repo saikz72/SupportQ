@@ -54,7 +54,7 @@
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="10dp"
                 android:scaleType="centerCrop"
-                android:src="@drawable/com_facebook_profile_picture_blank_portrait" />
+                android:src="@drawable/profile_image_default" />
 
             <View
                 android:layout_width="1dp"

@@ -107,7 +107,7 @@ public class ProfileFragment extends Fragment {
         if (profilePicture != null) {
             Glide.with(getContext()).load(profilePicture.getUrl()).transform(new CircleCrop()).into(ivProfilePicture);
         }else{
-            ivProfilePicture.setImageResource(R.drawable.com_facebook_profile_picture_blank_portrait);
+            ivProfilePicture.setImageResource(R.drawable.profile_image_default);
         }
     }
 

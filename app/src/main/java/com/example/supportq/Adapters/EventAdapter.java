@@ -77,7 +77,7 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> 
             if (parseFile != null) {
                 Glide.with(context).load(parseFile.getUrl()).transform(new CircleCrop()).into(ivProfilePicture);
             } else {
-                ivProfilePicture.setImageResource(R.drawable.com_facebook_profile_picture_blank_portrait);
+                ivProfilePicture.setImageResource(R.drawable.profile_image_default);
             }
             tvTimeStamp.setText(event.getCreatedTimeAgo());
             tvBody.setText(username + " " + context.getString(R.string.hosting) + " " + eventType);

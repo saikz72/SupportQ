@@ -6,14 +6,14 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="10dp"
-    tools:context=".Activities.EditProfileActivity">
+    >
 
     <ImageView
         android:id="@+id/ivProfilePicture"
         android:layout_width="@dimen/profile_image_width"
         android:layout_height="@dimen/profile_image_height"
         android:layout_gravity="center"
-        android:src="@drawable/com_facebook_profile_picture_blank_portrait"
+        android:src="@drawable/profile_image_default"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
