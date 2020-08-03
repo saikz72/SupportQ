@@ -30,6 +30,8 @@ import com.parse.ParseException;
 import com.parse.ParseFile;
 import com.parse.ParseUser;
 
+import org.parceler.Parcels;
+
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
@@ -44,6 +46,7 @@ public class EditProfileActivity extends AppCompatActivity {
     private Button btnCaptureImage;
     private Button btnChoosePhoto;
     private TextInputLayout etUsername;
+    private TextInputLayout etFullname;
     private ImageView ivProfilePicture;
     private File photoFile;
     private ParseFile file;
@@ -71,11 +74,13 @@ public class EditProfileActivity extends AppCompatActivity {
         btnSubmit = findViewById(R.id.btnSubmit);
         etUsername = findViewById(R.id.etUsername);
         ivProfilePicture = findViewById(R.id.ivProfilePicture);
+        etFullname = findViewById(R.id.etFullname);
     }
 
     public void bindViews() throws ParseException {
-        ParseUser currentUser = ParseUser.getCurrentUser();
+        currentUser = ParseUser.getCurrentUser();
         etUsername.getEditText().setText(currentUser.getUsername());      //user's current name;
+        etFullname.getEditText().setText(User.getFullName(currentUser));
         ParseFile profilePicture = ParseUser.getCurrentUser().fetch().getParseFile((User.KEY_PROFILE_PICTURE));
         if (profilePicture != null)
             Glide.with(this).load(profilePicture.getUrl()).transform(new CircleCrop()).into(ivProfilePicture);   //user's current profile picture
@@ -219,11 +224,20 @@ public class EditProfileActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 String username = etUsername.getEditText().getText().toString();
-                if (isUsernameChangeValid(username)) {
-                    saveChanges(currentUser, photoFile, username);
+                String fullname = etFullname.getEditText().getText().toString();
+                if (isUsernameChangeValid(username) && isFullNameValid(fullname)) {
+                    saveChanges(currentUser, photoFile, username, fullname);
                 }
             }
         });
+    }
+
+    private boolean isFullNameValid(String fullname) {
+        if(!Validator.isUsernameLongEnough(fullname)){
+            etFullname.setError(getString(R.string.FULL_NAME_ERROR));
+            return false;
+        }
+        return true;
     }
 
     public boolean isUsernameChangeValid(String username) {
@@ -234,9 +248,10 @@ public class EditProfileActivity extends AppCompatActivity {
         return true;
     }
 
-    public void saveChanges(ParseUser currentUser, File pic, String username) {
+    public void saveChanges(ParseUser currentUser, File pic, String username, String fullName) {
         //breaks if profile picutre is not taken
         currentUser.put(User.KEY_USERNAME, username);
+        currentUser.put(User.KEY_FULL_NAME, fullName);
         if (pic == null) {
             finish();
             return;

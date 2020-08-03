@@ -25,9 +25,9 @@
         <Button
             android:id="@+id/btnCaptureImage"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/edit_profile_height"
             android:layout_gravity="center"
-            android:layout_marginStart="100dp"
+            android:layout_marginStart="50dp"
             android:background="@drawable/custom_button"
             android:text="take a photo"
             android:textAllCaps="false"
@@ -36,7 +36,9 @@
         <Button
             android:id="@+id/btnChoosePhoto"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/edit_profile_height"
+            android:layout_marginStart="100dp"
+            android:layout_marginEnd="50dp"
             android:layout_gravity="center"
             android:background="@drawable/custom_button"
             android:text="choose an image"

@@ -73,8 +73,8 @@ public class ProfileFragment extends Fragment {
         currentUser = ParseUser.getCurrentUser();
         setViews(view);
         bindViews();
-        editProfileButtonClicked();     //TODO --> setUpEditProfileButtonClicked    //TODO --> setUp
-        logoutButtonClicked();
+        setUpEditProfileButtonListener();
+        setUpLogOutButtonListener();
     }
 
     private void bindViews() {
@@ -83,7 +83,7 @@ public class ProfileFragment extends Fragment {
         try {
             profilePicture = ParseUser.getCurrentUser().fetch().getParseFile((User.KEY_PROFILE_PICTURE));
         } catch (ParseException e) {
-            // no internet, user null .....     //TODO -> display error message on screen
+            // no internet, user null .....
             Log.e("TAG", " error", e);
         }
         if (profilePicture != null) {
@@ -102,7 +102,7 @@ public class ProfileFragment extends Fragment {
     }
 
     //edit profile
-    public void editProfileButtonClicked() {
+    public void setUpEditProfileButtonListener() {
         btnEditProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -113,7 +113,7 @@ public class ProfileFragment extends Fragment {
     }
 
     //logout
-    public void logoutButtonClicked() {
+    public void setUpLogOutButtonListener() {
         btnLogOut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
