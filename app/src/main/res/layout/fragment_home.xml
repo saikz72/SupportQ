@@ -16,14 +16,35 @@
         android:minHeight="?attr/actionBarSize"
         app:menu="@menu/menu_main"
         app:titleTextColor="@android:color/white">
+
+        <ImageView
+            android:id="@+id/logo_image"
+            android:layout_width="@dimen/logo_width"
+            android:layout_height="@dimen/logo_width"
+            android:layout_centerInParent="true"
+            android:background="@drawable/circle"
+            android:src="@drawable/logo" />
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/yeseva_one"
+            android:text="@string/application_name"
+            android:textColor="@color/description_color"
+            android:textSize="20dp"
+            android:textStyle="bold" />
+
         <TextView
             android:id="@+id/tvSortType"
-            android:layout_gravity="right"
-            android:text="@string/sorted_date"
-            android:textSize="12sp"
-            android:textColor="@color/description_color"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:fontFamily="@font/gabriela"
+            android:text="@string/sorted_date"
+            android:textColor="@color/description_color"
+            android:textSize="12sp"
+            android:textStyle="bold" />
 
     </androidx.appcompat.widget.Toolbar>
 

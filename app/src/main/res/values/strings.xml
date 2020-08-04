@@ -155,4 +155,5 @@
     <string name="take_photo">Take a photo</string>
     <string name="gallery">Choose an image</string>
     <string name="CODE_FULLNAME">FULLNAME</string>
+    <string name="application_name">SUPPORT-Q</string>
 </resources>

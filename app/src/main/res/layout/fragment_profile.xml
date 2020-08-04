@@ -22,6 +22,23 @@
             app:layout_constraintTop_toTopOf="parent"
             app:menu="@menu/profile_menu"
             app:titleTextColor="@android:color/white">
+            <ImageView
+                android:id="@+id/logo_image"
+                android:layout_width="@dimen/logo_width"
+                android:layout_height="@dimen/logo_width"
+                android:layout_centerInParent="true"
+                android:background="@drawable/circle"
+                android:src="@drawable/logo" />
+
+            <TextView
+                android:id="@+id/textView4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/yeseva_one"
+                android:textStyle="bold"
+                android:textColor="@color/description_color"
+                android:text="SUPPORT-Q"
+                android:textSize="20dp" />
 
             <Button
                 android:id="@+id/btnLogOut"
