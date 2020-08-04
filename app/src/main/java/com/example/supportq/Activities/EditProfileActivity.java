@@ -258,9 +258,12 @@ public class EditProfileActivity extends AppCompatActivity {
         if (camera) {
             ParseFile parseFile = new ParseFile(pic);
             currentUser.put(User.KEY_PROFILE_PICTURE, parseFile);
+        }else {
+            currentUser.put(User.KEY_PROFILE_PICTURE, file);
         }
         Intent intent = new Intent();
-        intent.putExtra(getString(R.string.CODE), currentUser);
+        intent.putExtra(getString(R.string.CODE), currentUser.getUsername());
+        intent.putExtra(getString(R.string.CODE_FULLNAME), User.getFullName(currentUser));
         currentUser.saveInBackground();
         setResult(RESULT_OK, intent);
         finish();

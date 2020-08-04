@@ -5,8 +5,54 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="10dp"
-    >
+    android:padding="10dp">
+
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/toolbar_color"
+        android:minHeight="?attr/actionBarSize"
+        app:titleTextColor="@android:color/white">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btnCaptureImage"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/edit_profile_height"
+                android:background="@drawable/circle"
+                android:drawableLeft="@drawable/ic_baseline_camera_enhance_24"
+                android:text="@string/take_photo"
+                android:textAllCaps="false" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_weight="1" />
+
+            <Button
+                android:id="@+id/btnChoosePhoto"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/edit_profile_height"
+                android:layout_marginEnd="20dp"
+                android:background="@drawable/circle"
+                android:drawableLeft="@drawable/ic_baseline_photo_library_24"
+                android:text="@string/gallery"
+                android:textAllCaps="false" />
+        </LinearLayout>
+    </androidx.appcompat.widget.Toolbar>
+
+
+    <View
+        android:id="@+id/view4"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/login_background_color" />
 
     <ImageView
         android:id="@+id/ivProfilePicture"
@@ -17,34 +63,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <Button
-            android:id="@+id/btnCaptureImage"
-            android:layout_width="wrap_content"
-            android:layout_height="@dimen/edit_profile_height"
-            android:layout_gravity="center"
-            android:layout_marginStart="50dp"
-            android:background="@drawable/custom_button"
-            android:text="take a photo"
-            android:textAllCaps="false"
-            android:textColor="@color/login_button_textcolor" />
-
-        <Button
-            android:id="@+id/btnChoosePhoto"
-            android:layout_width="wrap_content"
-            android:layout_height="@dimen/edit_profile_height"
-            android:layout_marginStart="100dp"
-            android:layout_marginEnd="50dp"
-            android:layout_gravity="center"
-            android:background="@drawable/custom_button"
-            android:text="choose an image"
-            android:textAllCaps="false"
-            android:textColor="@color/login_button_textcolor" />
-    </LinearLayout>
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/etFullname"

@@ -152,4 +152,7 @@
     <string name="sorted_like">Sorted by likes</string>
     <string name="CODE">code</string>
     <string name="fullName">fullName</string>
+    <string name="take_photo">Take a photo</string>
+    <string name="gallery">Choose an image</string>
+    <string name="CODE_FULLNAME">FULLNAME</string>
 </resources>

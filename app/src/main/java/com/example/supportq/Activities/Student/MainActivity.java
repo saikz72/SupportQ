@@ -17,7 +17,6 @@ import com.example.supportq.Fragments.InboxFragment;
 import com.example.supportq.Fragments.ProfileFragment;
 import com.example.supportq.Models.ProgressIndicator;
 import com.example.supportq.R;
-import com.google.android.material.badge.BadgeDrawable;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 
@@ -36,9 +35,6 @@ public class MainActivity extends AppCompatActivity {
         ProgressIndicator.hideMessage(this);
         setViews();
         setSupportActionBar(toolbar);
-        BadgeDrawable badge = bottomNavigationView.getOrCreateBadge(R.id.action_inbox);
-        badge.setVisible(true);
-        badge.setNumber(99);
             bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
                 @Override
                 public boolean onNavigationItemSelected(@NonNull MenuItem item) {

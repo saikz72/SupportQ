@@ -61,9 +61,10 @@ public class ProfileFragment extends Fragment {
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if(requestCode == EDIT_CODE && resultCode == RESULT_OK){
-            currentUser = data.getParcelableExtra(getString(R.string.CODE));
-            tvUsername.setText("@" + User.getUserName(currentUser));
-            tvFullname.setText(User.getFullName(currentUser));
+            String username = data.getStringExtra(getString(R.string.CODE));
+            String fullName = data.getStringExtra(getString(R.string.CODE_FULLNAME));
+            tvUsername.setText("@" + username);
+            tvFullname.setText(fullName);
         }
     }
 
