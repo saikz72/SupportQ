@@ -8,7 +8,7 @@
        <menu>
            <item
                android:id="@+id/action_sort_like"
-               android:icon="@drawable/ic_vector_heart_stroke"
+               android:icon="@drawable/like_sort_icon"
                android:title="@string/like_sort"
                app:showAsAction="withText">
 

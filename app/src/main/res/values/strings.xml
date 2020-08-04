@@ -114,9 +114,9 @@
 
     <!--Menu Main-->
     <string name="search">Search</string>
-    <string name="like_sort">Like</string>
-    <string name="date_sort">Date</string>
-    <string name="trending">Trending</string>
+    <string name="like_sort">Like Sort</string>
+    <string name="date_sort">Date Sort</string>
+    <string name="trending">Trending Sort</string>
     <string name="hide">Hide</string>
     <string name="submit">Post</string>
     <string name="home_snackbar">Your question has been posted successfully</string>

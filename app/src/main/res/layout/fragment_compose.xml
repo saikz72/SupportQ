@@ -13,14 +13,17 @@
         android:background="@color/toolbar_color"
         android:minHeight="?attr/actionBarSize"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:menu="@menu/compose_menu"
         app:titleTextColor="@android:color/white">
+
         <View
             android:layout_width="175dp"
             android:layout_height="1dp"
-            android:visibility="invisible"/>
+            android:visibility="invisible" />
+
         <ProgressBar
             android:id="@+id/pbLoading"
             android:layout_width="wrap_content"
