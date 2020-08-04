@@ -247,6 +247,7 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHo
         private ImageView ivHeart;
         private ImageView ivBookMark;
         private TextView tvHide;
+        private ImageView ivQuestionMark;
         private AnimatedVectorDrawable avd2;
         private AnimatedVectorDrawableCompat avd;
 
@@ -265,6 +266,7 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHo
             ivHeart = itemView.findViewById(R.id.ivHeart);
             ivBookMark = itemView.findViewById(R.id.ivBookmark);
             tvHide = itemView.findViewById(R.id.tvHide);
+            ivQuestionMark = itemView.findViewById(R.id.ivQuestionMark);
             itemView.setOnClickListener(this);
             ivReply.setOnClickListener(this);
         }
@@ -282,6 +284,11 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHo
                 setImageOfPost(mediaImage);
             } else {
                 ivMedia.setVisibility(View.GONE);
+            }
+            if(question.getRepliesCount() > 0){
+                ivQuestionMark.setImageResource(R.drawable.question_answered);
+            }else{
+                ivQuestionMark.setImageResource(R.drawable.question_mark);
             }
             setButton(ivLike, question.isLiked(), R.drawable.ic_vector_heart_stroke, R.drawable.ic_vector_heart, R.color.likedRed);
             setBookMarkButtonColor(ivBookMark, question.isBookMarked(), R.drawable.ic_baseline_bookmark_border_24, R.drawable.ic_baseline_bookmark_24, R.color.black);

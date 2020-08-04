@@ -53,6 +53,7 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> 
         private TextView tvEndTime;
         private ImageView ivProfilePicture;
         private TextView tvTimeStamp;
+        private ImageView ivEventIcon;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -63,6 +64,7 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> 
             tvBody = itemView.findViewById(R.id.tvBody);
             ivProfilePicture = itemView.findViewById(R.id.ivProfilePicture);
             tvTimeStamp = itemView.findViewById(R.id.tvTimeStamp);
+            ivEventIcon = itemView.findViewById(R.id.ivEventIcon);
         }
 
         public void bind(int position) {
@@ -78,6 +80,11 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> 
                 Glide.with(context).load(parseFile.getUrl()).transform(new CircleCrop()).into(ivProfilePicture);
             } else {
                 ivProfilePicture.setImageResource(R.drawable.profile_image_default);
+            }
+            if(eventType.equals("Workshop")){
+                ivEventIcon.setImageResource(R.drawable.workshop_icon);
+            }else{
+                ivEventIcon.setImageResource(R.drawable.office_hour_icon);
             }
             tvTimeStamp.setText(event.getCreatedTimeAgo());
             tvBody.setText(username + " " + context.getString(R.string.hosting) + " " + eventType);

@@ -42,11 +42,13 @@
 
             <Button
                 android:id="@+id/btnLogOut"
-                android:layout_width="wrap_content"
+                android:layout_width="100dp"
                 android:layout_height="40dp"
                 android:layout_gravity="right"
                 android:layout_marginEnd="10dp"
+                android:gravity="center"
                 android:background="@drawable/custom_button"
+                android:drawableRight="@drawable/logout_drawable"
                 android:text="@string/logout"
                 android:textAllCaps="false"
                 android:textColor="@color/login_button_textcolor" />
@@ -80,12 +82,14 @@
 
             <Button
                 android:id="@+id/btnEditProfile"
-                android:layout_width="wrap_content"
+                android:layout_width="100dp"
                 android:layout_height="40dp"
                 android:layout_gravity="bottom"
                 android:layout_marginEnd="10dp"
                 android:background="@drawable/custom_button"
                 android:text="@string/edit_profile_details"
+                android:gravity="center"
+                android:drawableRight="@drawable/pencil"
                 android:textAllCaps="false"
                 android:textColor="@color/login_button_textcolor" />
         </LinearLayout>
@@ -95,7 +99,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
-            android:text="Full Name"
+            android:text="@string/fullname"
+            android:fontFamily="@font/gabriela"
             android:textAlignment="center"
             android:textColor="#000000"
             android:textSize="18sp"
@@ -107,6 +112,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
             android:text="@string/Username"
+            android:fontFamily="@font/gabriela"
             android:textAlignment="center"
             android:textColor="@color/description_color" />
 

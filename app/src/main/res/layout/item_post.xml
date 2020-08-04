@@ -11,12 +11,24 @@
         android:layout_height="wrap_content"
         android:background="@color/card_background_white">
 
+        <ImageView
+            android:id="@+id/ivQuestionMark"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="204dp"
+            android:src="@drawable/question_mark"
+            app:layout_constraintBottom_toTopOf="@+id/tvDescription"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/tvTimeStamp"
+            app:layout_constraintTop_toTopOf="parent" />
+
         <TextView
             android:id="@+id/tvLikeCount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/favs"
             android:textSize="12sp"
+            android:textColor="@color/black"
             app:layout_constraintEnd_toEndOf="@+id/ivLike"
             app:layout_constraintStart_toStartOf="@+id/ivLike"
             app:layout_constraintTop_toBottomOf="@+id/ivLike" />
@@ -42,6 +54,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="4dp"
             android:text="@string/Username"
+            android:fontFamily="@font/gabriela"
             android:textColor="@color/description_color"
             android:textSize="14sp"
             android:textStyle="bold"
@@ -78,6 +91,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/timeStamp"
+            android:fontFamily="@font/gabriela"
             android:textSize="10dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.015"
@@ -162,6 +176,8 @@
             android:layout_marginTop="4dp"
             android:text="@string/reply"
             android:textSize="12sp"
+            android:textColor="@color/black"
+            android:fontFamily="@font/gabriela"
             app:layout_constraintEnd_toEndOf="@+id/ivReply"
             app:layout_constraintStart_toStartOf="@+id/ivReply"
             app:layout_constraintTop_toBottomOf="@+id/ivReply" />
@@ -172,6 +188,8 @@
             android:layout_height="wrap_content"
             android:text="@string/save"
             android:textSize="12sp"
+            android:textColor="@color/black"
+            android:fontFamily="@font/gabriela"
             app:layout_constraintEnd_toEndOf="@+id/ivBookmark"
             app:layout_constraintStart_toStartOf="@+id/ivBookmark"
             app:layout_constraintTop_toBottomOf="@+id/ivBookmark" />
@@ -181,7 +199,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/hide"
+            android:fontFamily="@font/gabriela"
             android:textSize="12sp"
+            android:textColor="@color/black"
             app:layout_constraintEnd_toEndOf="@+id/ivHide"
             app:layout_constraintStart_toStartOf="@+id/ivHide"
             app:layout_constraintTop_toBottomOf="@+id/ivHide" />

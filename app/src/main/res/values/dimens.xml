@@ -85,4 +85,6 @@
     <dimen name="edit_profile_height">40dp</dimen>
     <dimen name="sort_type_height">30dp</dimen>
     <dimen name="logo_width">50dp</dimen>
+    <dimen name="event_width">89dp</dimen>
+    <dimen name="event_heigth">48dp</dimen>
 </resources>

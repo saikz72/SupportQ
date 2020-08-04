@@ -19,7 +19,7 @@
     <string name="welcome_message">Hello there, Welcome Back</string>
     <string name="set_up_username">Set up your username</string>
     <string name="edit_profile_details">Edit profile</string>
-    <string name="logout">Log out</string>
+    <string name="logout">Sign out</string>
     <string name="favs">Favs</string>
     <string name="description">Question details</string>
     <string name="timeStamp">Relative timestamp</string>
@@ -29,7 +29,7 @@
     <string name="reply">replies</string>
     <string name="respond">Compose your reply</string>
     <string name="approved_message">The instructor approved this answer</string>
-    <string name="save">Save</string>
+    <string name="save">BookMark</string>
     <string name="instructor_login">Instructor</string>
     <string name="register_prompt">Register as a</string>
     <string name="key">Secret Key</string>
@@ -156,4 +156,5 @@
     <string name="gallery">Choose an image</string>
     <string name="CODE_FULLNAME">FULLNAME</string>
     <string name="application_name">SUPPORT-Q</string>
+    <string name="send">Save</string>
 </resources>

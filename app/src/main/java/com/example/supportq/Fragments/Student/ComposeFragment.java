@@ -73,14 +73,19 @@ public class ComposeFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        setViews(view);
+        ivMedia.setImageResource(R.drawable.placeholder);
+        setUpProfileImage();
+        ((MainActivity) getActivity()).setSupportActionBar(toolbar);
+        ((MainActivity) getActivity()).getSupportActionBar().setTitle("");
+    }
+
+    public void setViews(View view){
         etCompose = view.findViewById(R.id.etCompose);
         ivMedia = view.findViewById(R.id.ivMedia);
         toolbar = view.findViewById(R.id.toolbar);
         pbLoading = view.findViewById(R.id.pbLoading);
         ivProfilePicture = view.findViewById(R.id.ivProfilePicture);
-        setUpProfileImage();
-        ((MainActivity) getActivity()).setSupportActionBar(toolbar);
-        ((MainActivity) getActivity()).getSupportActionBar().setTitle("");
     }
 
     public void setUpProfileImage() {
