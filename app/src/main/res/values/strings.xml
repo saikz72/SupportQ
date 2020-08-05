@@ -29,7 +29,7 @@
     <string name="reply">replies</string>
     <string name="respond">Compose your reply</string>
     <string name="approved_message">The instructor approved this answer</string>
-    <string name="save">BookMark</string>
+    <string name="save">Bookmark</string>
     <string name="instructor_login">Instructor</string>
     <string name="register_prompt">Register as a</string>
     <string name="key">Secret Key</string>
@@ -114,9 +114,9 @@
 
     <!--Menu Main-->
     <string name="search">Search</string>
-    <string name="like_sort">Like Sort</string>
-    <string name="date_sort">Date Sort</string>
-    <string name="trending">Trending Sort</string>
+    <string name="like_sort">Sort by likes</string>
+    <string name="date_sort">Sort by date</string>
+    <string name="trending">Sort by trending</string>
     <string name="hide">Hide</string>
     <string name="submit">Post</string>
     <string name="home_snackbar">Your question has been posted successfully</string>
@@ -133,8 +133,8 @@
     <string name="extra_info">Additional Information</string>
     <string name="sent">Submit</string>
     <string name="pick_date">Date</string>
-    <string name="time">Time</string>
-    <string name="to">TO</string>
+    <string name="time">From</string>
+    <string name="to">To</string>
     <string name="date_error">You need to select a date</string>
     <string name="start_error">You need to pick a start time</string>
     <string name="end_error">You need to pick an end time</string>
@@ -157,4 +157,9 @@
     <string name="CODE_FULLNAME">FULLNAME</string>
     <string name="application_name">SUPPORT-Q</string>
     <string name="send">Save</string>
+    <string name="create_event">Additional information</string>
+    <string name="choose_date">Pick a date</string>
+    <string name="choose_time">Pick a time</string>
+    <string name="no_trending_post">No trending posts</string>
+    <string name="event">Create an event</string>
 </resources>

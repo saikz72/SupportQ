@@ -18,7 +18,7 @@
     <dimen name="profile_recycler_height">501dp</dimen>
 
     <!--compose_activity dimensions.-->
-    <dimen name="compose_button_submit">37dp</dimen>
+    <dimen name="compose_button_submit">40dp</dimen>
     <dimen name="compose_image_width">306dp</dimen>
     <dimen name="compose_image_height">320dp</dimen>
     <dimen name="compose_edittext_width">222dp</dimen>
@@ -87,4 +87,7 @@
     <dimen name="logo_width">50dp</dimen>
     <dimen name="event_width">89dp</dimen>
     <dimen name="event_heigth">48dp</dimen>
+    <dimen name="create_logo_width">40dp</dimen>
+    <dimen name="create_logo_height">30dp</dimen>
+    <dimen name="create_btn_height">30dp</dimen>
 </resources>

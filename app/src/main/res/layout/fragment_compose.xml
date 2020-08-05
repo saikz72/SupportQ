@@ -61,6 +61,8 @@
         android:hint="@string/question_hint"
         android:imeOptions="actionDone"
         android:inputType="textMultiLine"
+        android:fontFamily="@font/gabriela"
+        android:textColor="@color/black"
         android:textSize="14dp"
         android:maxLines="20"
         android:minLines="5"

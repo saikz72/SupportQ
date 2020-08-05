@@ -15,16 +15,12 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.resource.bitmap.CircleCrop;
 import com.example.supportq.Models.Event;
-import com.example.supportq.Models.User;
 import com.example.supportq.R;
 import com.parse.ParseFile;
 import com.parse.ParseUser;
@@ -40,9 +36,8 @@ public class EventFragment extends Fragment {
     private TextView tvEndTime;
     private TextView tvStartTime;
     private TextView tvDate;
-    private ImageView ivProfilePicture;
     private DialogFragment timePicker;
-    private EditText etAddionalInfo;
+    private EditText etAdditionalInfo;
     private Event event;
     private String eventType;
 
@@ -61,7 +56,6 @@ public class EventFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         setViews(view);
-        setUpProfilePicture();
         final DatePickerDialog.OnDateSetListener mDateSetListener = new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker datePicker, int year, int month, int dayOfMonth) {
@@ -138,17 +132,7 @@ public class EventFragment extends Fragment {
         tvEndTime = views.findViewById(R.id.tvEndTime);
         btnStartTime = views.findViewById(R.id.btnStartTime);
         btnSubmit = views.findViewById(R.id.btnSubmit);
-        etAddionalInfo = views.findViewById(R.id.etAdditionalInfo);
-        ivProfilePicture = views.findViewById(R.id.ivProfilePicture);
-    }
-
-    public void setUpProfilePicture(){
-        ParseFile profilePicture = ParseUser.getCurrentUser().getParseFile(User.KEY_PROFILE_PICTURE);
-        if(profilePicture != null){
-            Glide.with(getContext()).load(profilePicture.getUrl()).transform(new CircleCrop()).into(ivProfilePicture);
-        }else{
-            ivProfilePicture.setImageResource(R.drawable.profile_image_default);
-        }
+        etAdditionalInfo = views.findViewById(R.id.etAdditionalInfo);
     }
 
     public void setUpSubmitButtonForWhenClicked() {
@@ -167,8 +151,8 @@ public class EventFragment extends Fragment {
         event.setEndTime(tvEndTime.getText().toString());
         event.setStartTime(tvStartTime.getText().toString());
         event.setUser(ParseUser.getCurrentUser());
-        if (!etAddionalInfo.getText().toString().isEmpty()) {
-            event.setAdditionalInfo(etAddionalInfo.getText().toString());
+        if (!etAdditionalInfo.getText().toString().isEmpty()) {
+            event.setAdditionalInfo(etAdditionalInfo.getText().toString());
         }
         ParseFile parseFile = ParseUser.getCurrentUser().getParseFile("profilePicture");
         if (parseFile != null) {

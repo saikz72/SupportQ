@@ -74,7 +74,7 @@ public class ComposeFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         setViews(view);
-        ivMedia.setImageResource(R.drawable.placeholder);
+        ivMedia.setImageResource(R.drawable.ic_baseline_image_24);
         setUpProfileImage();
         ((MainActivity) getActivity()).setSupportActionBar(toolbar);
         ((MainActivity) getActivity()).getSupportActionBar().setTitle("");

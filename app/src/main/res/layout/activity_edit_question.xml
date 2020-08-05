@@ -20,5 +20,5 @@
         android:layout_height="wrap_content"
         android:background="@drawable/custom_button"
         android:textColor="@color/login_button_textcolor"
-        android:text="@string/save" />
+        android:text="@string/send" />
 </LinearLayout>
