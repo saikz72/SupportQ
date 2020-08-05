@@ -26,6 +26,7 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/gabriela"
         android:text="@string/event"
+        android:textAllCaps="true"
         android:textColor="@color/description_color"
         app:layout_constraintBottom_toBottomOf="@+id/toolbar"
         app:layout_constraintEnd_toEndOf="@+id/toolbar"

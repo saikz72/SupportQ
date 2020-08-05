@@ -166,4 +166,5 @@
     <string name="hosting_office_hour">"is hosting an "</string>
     <string name="register_now">Register</string>
     <string name="instructor_prompt">Enter your secret key below if you\'re an instructor</string>
+    <string name="edit_profile">Edit Profile</string>
 </resources>

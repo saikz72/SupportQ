@@ -16,7 +16,8 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Edit Profile"
+            android:text="@string/edit_profile"
+            android:textAllCaps="true"
             android:fontFamily="@font/gabriela"
             android:textColor="@color/black"
             android:gravity="center_horizontal"
