@@ -22,6 +22,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:menu="@menu/profile_menu"
             app:titleTextColor="@android:color/white">
+
             <ImageView
                 android:id="@+id/logo_image"
                 android:layout_width="@dimen/logo_width"
@@ -35,23 +36,20 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/yeseva_one"
-                android:textStyle="bold"
-                android:textColor="@color/description_color"
                 android:text="SUPPORT-Q"
-                android:textSize="20dp" />
+                android:textColor="@color/description_color"
+                android:textSize="20dp"
+                android:textStyle="bold" />
 
             <Button
                 android:id="@+id/btnLogOut"
-                android:layout_width="100dp"
-                android:layout_height="40dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_gravity="right"
-                android:layout_marginEnd="10dp"
-                android:gravity="center"
-                android:background="@drawable/custom_button"
-                android:drawableRight="@drawable/logout_drawable"
+                android:background="@android:color/transparent"
                 android:text="@string/logout"
                 android:textAllCaps="false"
-                android:textColor="@color/login_button_textcolor" />
+                android:textColor="@color/blue" />
 
         </androidx.appcompat.widget.Toolbar>
 
@@ -77,21 +75,20 @@
 
             <View
                 android:layout_width="1dp"
-                android:layout_height="1dp"
+                android:layout_height="match_parent"
                 android:layout_weight="1" />
 
             <Button
                 android:id="@+id/btnEditProfile"
-                android:layout_width="100dp"
-                android:layout_height="40dp"
-                android:layout_gravity="bottom"
-                android:layout_marginEnd="10dp"
-                android:background="@drawable/custom_button"
+                android:layout_width="@dimen/btn_width"
+                android:layout_height="@dimen/btn_height"
+                android:layout_gravity="right|center"
+                android:layout_marginEnd="12dp"
+                android:background="@drawable/outline_circle"
                 android:text="@string/edit_profile_details"
-                android:gravity="center"
-                android:drawableRight="@drawable/pencil"
                 android:textAllCaps="false"
-                android:textColor="@color/login_button_textcolor" />
+                android:textColor="@color/white_backgroud" />
+
         </LinearLayout>
 
         <TextView
@@ -99,8 +96,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
-            android:text="@string/fullname"
             android:fontFamily="@font/gabriela"
+            android:text="@string/fullname"
             android:textAlignment="center"
             android:textColor="#000000"
             android:textSize="18sp"
@@ -111,8 +108,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
-            android:text="@string/Username"
             android:fontFamily="@font/gabriela"
+            android:text="@string/Username"
             android:textAlignment="center"
             android:textColor="@color/description_color" />
 

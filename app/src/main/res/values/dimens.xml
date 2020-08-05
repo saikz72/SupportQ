@@ -90,4 +90,7 @@
     <dimen name="create_logo_width">40dp</dimen>
     <dimen name="create_logo_height">30dp</dimen>
     <dimen name="create_btn_height">30dp</dimen>
+    <dimen name="take_photo">150dp</dimen>
+    <dimen name="btn_width">150dp</dimen>
+    <dimen name="btn_height">30dp</dimen>
 </resources>
