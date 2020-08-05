@@ -1,132 +1,137 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="2dp">
 
-    <ImageView
-        android:id="@+id/ivProfilePicture"
-        android:layout_width="@dimen/home_profile_width"
-        android:layout_height="@dimen/home_profile_height"
-        android:layout_marginTop="8dp"
-        android:scaleType="centerCrop"
-        android:src="@drawable/profile_image_default"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/view"
-        app:layout_constraintVertical_bias="0.0" />
-
-
-    <TextView
-        android:id="@+id/tvUsername"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="10dp"
-        android:text="@string/Username"
-        android:textColor="@color/black"
-        android:fontFamily="@font/gabriela"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toStartOf="@+id/tvTimeStamp"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/ivProfilePicture"
-        app:layout_constraintTop_toBottomOf="@+id/view" />
-
-    <ru.embersoft.expandabletextview.ExpandableTextView
-        android:id="@+id/tvReply"
-        android:layout_width="@dimen/home_description"
-        android:layout_height="wrap_content"
-        android:autoLink="all"
-        android:textColorLink="@color/blue"
-        app:etv_showLine="false"
-        android:layout_marginHorizontal="10dp"
-        android:layout_marginTop="4dp"
-        app:etv_textContentColor="@color/description_color"
-        app:etv_textContentSize="16sp"
-        app:etv_textExpand="@string/show_more"
-        app:etv_textShrink="@string/show_less"
-        app:etv_textStateColor="@color/description_color"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ivProfilePicture" />
-
-    <TextView
-        android:id="@+id/tvTimeStamp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:textSize="10dp"
-        android:fontFamily="@font/gabriela"
-        android:text="@string/timeStamp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.034"
-        app:layout_constraintStart_toEndOf="@+id/ivProfilePicture"
-        app:layout_constraintTop_toBottomOf="@+id/tvUsername" />
-
-    <ImageView
-        android:id="@+id/ivDelete"
-        android:layout_width="@dimen/item_delete_width"
-        android:layout_height="@dimen/item_delete_height"
-        android:layout_marginEnd="8dp"
-        android:src="@drawable/ic_baseline_delete_24"
-        android:visibility="visible"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvReply"
-        app:layout_constraintVertical_bias="0.666" />
-
-    <ImageView
-        android:id="@+id/ivVerify"
-        android:layout_width="@dimen/item_comment_width"
-        android:layout_height="@dimen/item_comment_height"
-        android:src="@drawable/very_inactive"
-        android:layout_marginStart="75dp"
-        android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="@+id/tvApproveNote"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/tvApproveNote" />
-
-    <View
-        android:id="@+id/view"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:background="#8c8989"
-        android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+        android:layout_height="match_parent">
 
-    <ImageView
-        android:id="@+id/ivMedia2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:adjustViewBounds="true"
-        android:tint="#03FFFFFF"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/ivProfilePicture"
-        app:layout_constraintTop_toBottomOf="@+id/ivReply" />
+        <ImageView
+            android:id="@+id/ivProfilePicture"
+            android:layout_width="@dimen/home_profile_width"
+            android:layout_height="@dimen/home_profile_height"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="8dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/profile_image_default"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/view" />
 
-    <TextView
-        android:id="@+id/tvApproveNote"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/amiri_italic"
-        android:text="@string/approved_message"
-        android:textColor="@color/description_color"
-        android:visibility="gone"
-        app:layout_constraintEnd_toStartOf="@+id/ivDelete"
-        app:layout_constraintHorizontal_bias="0.017"
-        app:layout_constraintStart_toEndOf="@+id/ivVerify"
-        app:layout_constraintTop_toBottomOf="@+id/tvReply" />
+        <TextView
+            android:id="@+id/tvUsername"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:fontFamily="@font/gabriela"
+            android:text="@string/Username"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toStartOf="@+id/tvTimeStamp"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/ivProfilePicture"
+            app:layout_constraintTop_toBottomOf="@+id/view" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <ru.embersoft.expandabletextview.ExpandableTextView
+            android:id="@+id/tvReply"
+            android:layout_width="@dimen/home_description"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="8dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="8dp"
+            android:autoLink="all"
+            android:textColorLink="@color/blue"
+            app:etv_showLine="false"
+            app:etv_textContentColor="@color/description_color"
+            app:etv_textContentSize="16sp"
+            app:etv_textExpand="@string/show_more"
+            app:etv_textShrink="@string/show_less"
+            app:etv_textStateColor="@color/description_color"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ivProfilePicture" />
+
+        <TextView
+            android:id="@+id/tvTimeStamp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:fontFamily="@font/gabriela"
+            android:text="@string/timeStamp"
+            android:textSize="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.034"
+            app:layout_constraintStart_toEndOf="@+id/ivProfilePicture"
+            app:layout_constraintTop_toBottomOf="@+id/tvUsername" />
+
+        <ImageView
+            android:id="@+id/ivDelete"
+            android:layout_width="@dimen/item_delete_width"
+            android:layout_height="@dimen/item_delete_height"
+            android:layout_marginEnd="16dp"
+            android:src="@drawable/ic_baseline_delete_24"
+            android:visibility="visible"
+            app:layout_constraintBottom_toTopOf="@+id/tvReply"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.484" />
+
+        <ImageView
+            android:id="@+id/ivVerify"
+            android:layout_width="@dimen/item_comment_width"
+            android:layout_height="@dimen/item_comment_height"
+            android:layout_marginStart="75dp"
+            android:src="@drawable/very_inactive"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="@+id/tvApproveNote"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/tvApproveNote" />
+
+        <View
+            android:id="@+id/view"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:background="#8c8989"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <ImageView
+            android:id="@+id/ivMedia2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:adjustViewBounds="true"
+            android:tint="#03FFFFFF"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/ivProfilePicture"
+            app:layout_constraintTop_toBottomOf="@+id/ivReply" />
+
+        <TextView
+            android:id="@+id/tvApproveNote"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/amiri_italic"
+            android:text="@string/approved_message"
+            android:textColor="@color/description_color"
+            android:visibility="gone"
+            app:layout_constraintEnd_toStartOf="@+id/ivDelete"
+            app:layout_constraintHorizontal_bias="0.017"
+            app:layout_constraintStart_toEndOf="@+id/ivVerify"
+            app:layout_constraintTop_toBottomOf="@+id/tvReply" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>

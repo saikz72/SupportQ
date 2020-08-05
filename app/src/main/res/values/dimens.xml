@@ -12,8 +12,8 @@
     <dimen name="home_media_height">300dp</dimen>
 
     <!--fragment_profile dimensions.-->
-    <dimen name="profile_image_height">100dp</dimen>
-    <dimen name="profile_image_width">100dp</dimen>
+    <dimen name="profile_image_height">80dp</dimen>
+    <dimen name="profile_image_width">80dp</dimen>
     <dimen name="profile_recycler_width">411dp</dimen>
     <dimen name="profile_recycler_height">501dp</dimen>
 
