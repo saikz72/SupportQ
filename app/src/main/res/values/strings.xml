@@ -162,4 +162,6 @@
     <string name="choose_time">Pick a time</string>
     <string name="no_trending_post">No trending posts</string>
     <string name="event">Create an event</string>
+    <string name="hosting_workshop">is hosting a</string>
+    <string name="hosting_office_hour">"is hosting an "</string>
 </resources>

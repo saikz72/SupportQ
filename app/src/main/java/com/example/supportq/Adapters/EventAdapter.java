@@ -81,13 +81,14 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> 
             } else {
                 ivProfilePicture.setImageResource(R.drawable.profile_image_default);
             }
-            if(eventType.equals("Workshop")){
+            if (eventType.equals(context.getString(R.string.workshop))) {
                 ivEventIcon.setImageResource(R.drawable.workshop_icon);
-            }else{
+                tvBody.setText(username + " " + context.getString(R.string.hosting_workshop) + " " + eventType);
+            } else {
                 ivEventIcon.setImageResource(R.drawable.office_hour_icon);
+                tvBody.setText(username + " " + context.getString(R.string.hosting_office_hour) + " " + eventType);
             }
             tvTimeStamp.setText(event.getCreatedTimeAgo());
-            tvBody.setText(username + " " + context.getString(R.string.hosting) + " " + eventType);
         }
     }
 }

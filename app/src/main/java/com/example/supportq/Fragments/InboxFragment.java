@@ -26,7 +26,6 @@ import com.parse.ParseQuery;
 import java.util.ArrayList;
 import java.util.List;
 
-//TODO
 public class InboxFragment extends Fragment {
     List<Event> allEvents;
     RecyclerView rvEvents;
