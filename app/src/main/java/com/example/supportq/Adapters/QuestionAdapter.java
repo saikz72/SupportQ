@@ -285,9 +285,9 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHo
             } else {
                 ivMedia.setVisibility(View.GONE);
             }
-            if(question.getRepliesCount() > 0){
+            if (question.getRepliesCount() > 0) {
                 ivQuestionMark.setImageResource(R.drawable.question_answered);
-            }else{
+            } else {
                 ivQuestionMark.setImageResource(R.drawable.question_mark);
             }
             setButton(ivLike, question.isLiked(), R.drawable.ic_vector_heart_stroke, R.drawable.ic_vector_heart, R.color.likedRed);

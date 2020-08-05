@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="2dp">
+    android:layout_margin="4dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -17,6 +17,8 @@
             android:layout_marginTop="4dp"
             android:text="@string/favs"
             android:textSize="12sp"
+            android:fontFamily="@font/gabriela"
+            android:textColor="@color/black"
             app:layout_constraintEnd_toEndOf="@+id/ivLike"
             app:layout_constraintStart_toStartOf="@+id/ivLike"
             app:layout_constraintTop_toBottomOf="@+id/ivLike" />
@@ -25,7 +27,7 @@
             android:id="@+id/ivProfilePicture"
             android:layout_width="@dimen/home_profile_width"
             android:layout_height="@dimen/home_profile_height"
-            android:layout_marginStart="10dp"
+            android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:scaleType="centerCrop"
             android:src="@drawable/profile_image_default"
@@ -42,10 +44,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="4dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="24dp"
             android:text="@string/Username"
             android:textColor="@color/description_color"
-            android:textSize="18sp"
+            android:fontFamily="@font/gabriela"
+            android:textSize="16dp"
             android:textStyle="bold"
             app:layout_constraintEnd_toStartOf="@+id/tvTimeStamp"
             app:layout_constraintHorizontal_bias="0.0"
@@ -77,6 +80,8 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
             android:text="@string/timeStamp"
+            android:textSize="10dp"
+            android:fontFamily="@font/gabriela"
             app:layout_constraintBottom_toBottomOf="@+id/tvUsername"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/tvUsername" />
@@ -111,6 +116,7 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/home_media_height"
             android:layout_marginTop="10dp"
+            android:layout_marginHorizontal="8dp"
             android:adjustViewBounds="true"
             android:scaleType="centerCrop"
             app:layout_constraintEnd_toEndOf="parent"
@@ -124,6 +130,8 @@
             android:layout_height="wrap_content"
             android:text="@string/edit"
             android:textSize="12sp"
+            android:fontFamily="@font/gabriela"
+            android:textColor="@color/black"
             app:layout_constraintEnd_toEndOf="@+id/ivEditIcon"
             app:layout_constraintStart_toStartOf="@+id/ivEditIcon"
             app:layout_constraintTop_toBottomOf="@+id/ivEditIcon" />

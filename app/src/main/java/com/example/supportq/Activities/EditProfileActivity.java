@@ -258,7 +258,7 @@ public class EditProfileActivity extends AppCompatActivity {
         if (camera) {
             ParseFile parseFile = new ParseFile(pic);
             currentUser.put(User.KEY_PROFILE_PICTURE, parseFile);
-        }else {
+        } else if (file != null) {
             currentUser.put(User.KEY_PROFILE_PICTURE, file);
         }
         Intent intent = new Intent();

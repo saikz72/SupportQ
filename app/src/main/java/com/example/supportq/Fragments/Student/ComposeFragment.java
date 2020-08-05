@@ -31,12 +31,9 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.resource.bitmap.CircleCrop;
 import com.example.supportq.Activities.Student.MainActivity;
 import com.example.supportq.Fragments.HomeFragment;
 import com.example.supportq.Models.Question;
-import com.example.supportq.Models.User;
 import com.example.supportq.R;
 import com.google.android.material.snackbar.Snackbar;
 import com.parse.ParseException;
@@ -54,7 +51,6 @@ public class ComposeFragment extends Fragment {
     public static final String TAG = "ComposeFragment";
     private EditText etCompose;
     private ImageView ivMedia;
-    private ImageView ivProfilePicture;
     private File photoFile;
     private Toolbar toolbar;
     private ProgressBar pbLoading;
@@ -74,8 +70,6 @@ public class ComposeFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         setViews(view);
-        ivMedia.setImageResource(R.drawable.ic_baseline_image_24);
-        setUpProfileImage();
         ((MainActivity) getActivity()).setSupportActionBar(toolbar);
         ((MainActivity) getActivity()).getSupportActionBar().setTitle("");
     }
@@ -85,16 +79,6 @@ public class ComposeFragment extends Fragment {
         ivMedia = view.findViewById(R.id.ivMedia);
         toolbar = view.findViewById(R.id.toolbar);
         pbLoading = view.findViewById(R.id.pbLoading);
-        ivProfilePicture = view.findViewById(R.id.ivProfilePicture);
-    }
-
-    public void setUpProfileImage() {
-        ParseFile profilePicture = ParseUser.getCurrentUser().getParseFile(User.KEY_PROFILE_PICTURE);
-        if (profilePicture != null) {
-            Glide.with(getContext()).load(profilePicture.getUrl()).transform(new CircleCrop()).placeholder(R.drawable.placeholder).into(ivProfilePicture);
-        } else {
-            ivProfilePicture.setImageResource(R.drawable.profile_image_default);
-        }
     }
 
     @Override
