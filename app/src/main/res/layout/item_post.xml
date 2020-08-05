@@ -4,18 +4,19 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="2dp">
+    android:layout_margin="4dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
+        android:paddingBottom="8dp"
         android:background="@color/card_background_white">
 
         <ImageView
             android:id="@+id/ivQuestionMark"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="204dp"
+            android:layout_marginStart="210dp"
             android:src="@drawable/question_mark"
             app:layout_constraintBottom_toTopOf="@+id/tvDescription"
             app:layout_constraintEnd_toEndOf="parent"
@@ -27,8 +28,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/favs"
-            android:textSize="12sp"
             android:textColor="@color/black"
+            android:textSize="12sp"
             app:layout_constraintEnd_toEndOf="@+id/ivLike"
             app:layout_constraintStart_toStartOf="@+id/ivLike"
             app:layout_constraintTop_toBottomOf="@+id/ivLike" />
@@ -37,24 +38,22 @@
             android:id="@+id/ivProfilePicture"
             android:layout_width="@dimen/home_profile_width"
             android:layout_height="@dimen/home_profile_height"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="8dp"
+            android:padding="4dp"
             android:scaleType="centerCrop"
             android:src="@drawable/profile_image_default"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/view"
-            app:layout_constraintVertical_bias="0.0" />
+            app:layout_constraintTop_toBottomOf="@+id/view" />
 
         <TextView
             android:id="@+id/tvUsername"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="4dp"
-            android:text="@string/Username"
+            android:layout_marginTop="4dp"
             android:fontFamily="@font/gabriela"
+            android:text="@string/Username"
             android:textColor="@color/description_color"
             android:textSize="14sp"
             android:textStyle="bold"
@@ -64,13 +63,14 @@
             app:layout_constraintStart_toEndOf="@+id/ivProfilePicture"
             app:layout_constraintTop_toTopOf="@+id/ivProfilePicture"
             app:layout_constraintVertical_bias="0.195" />
+
         <ru.embersoft.expandabletextview.ExpandableTextView
             android:id="@+id/tvDescription"
             style="@style/TextAppearance.AppCompat.Body1"
             android:layout_width="@dimen/home_description"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="10dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="4dp"
             android:autoLink="all"
             android:linksClickable="true"
             android:textColor="@color/description_color"
@@ -90,25 +90,13 @@
             android:id="@+id/tvTimeStamp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/timeStamp"
             android:fontFamily="@font/gabriela"
+            android:text="@string/timeStamp"
             android:textSize="10dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.015"
             app:layout_constraintStart_toEndOf="@+id/ivProfilePicture"
             app:layout_constraintTop_toBottomOf="@+id/tvUsername" />
-
-        <ProgressBar
-            android:id="@+id/pbLoading"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:visibility="invisible"
-            app:layout_constraintBottom_toTopOf="@+id/ivLike"
-            app:layout_constraintEnd_toEndOf="@+id/ivMedia"
-            app:layout_constraintHorizontal_bias="0.498"
-            app:layout_constraintStart_toStartOf="@+id/ivMedia"
-            app:layout_constraintTop_toBottomOf="@+id/tvDescription"
-            app:layout_constraintVertical_bias="0.137" />
 
         <ImageView
             android:id="@+id/ivDelete"
@@ -145,18 +133,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/ivMedia" />
 
-        <View
-            android:id="@+id/view"
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"
-            android:background="@color/description_color"
-            android:visibility="gone"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
         <ImageView
             android:id="@+id/ivMedia"
             android:layout_width="match_parent"
@@ -174,10 +150,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
-            android:text="@string/reply"
-            android:textSize="12sp"
-            android:textColor="@color/black"
             android:fontFamily="@font/gabriela"
+            android:text="@string/reply"
+            android:textColor="@color/black"
+            android:textSize="12sp"
             app:layout_constraintEnd_toEndOf="@+id/ivReply"
             app:layout_constraintStart_toStartOf="@+id/ivReply"
             app:layout_constraintTop_toBottomOf="@+id/ivReply" />
@@ -186,10 +162,10 @@
             android:id="@+id/tvSave"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/save"
-            android:textSize="12sp"
-            android:textColor="@color/black"
             android:fontFamily="@font/gabriela"
+            android:text="@string/save"
+            android:textColor="@color/black"
+            android:textSize="12sp"
             app:layout_constraintEnd_toEndOf="@+id/ivBookmark"
             app:layout_constraintStart_toStartOf="@+id/ivBookmark"
             app:layout_constraintTop_toBottomOf="@+id/ivBookmark" />
@@ -198,10 +174,10 @@
             android:id="@+id/tvHide"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/hide"
             android:fontFamily="@font/gabriela"
-            android:textSize="12sp"
+            android:text="@string/hide"
             android:textColor="@color/black"
+            android:textSize="12sp"
             app:layout_constraintEnd_toEndOf="@+id/ivHide"
             app:layout_constraintStart_toStartOf="@+id/ivHide"
             app:layout_constraintTop_toBottomOf="@+id/ivHide" />
@@ -230,12 +206,11 @@
             android:id="@+id/ivHeart"
             android:layout_width="@dimen/width_heart"
             android:layout_height="@dimen/heigh_heart"
-            android:layout_marginTop="4dp"
+            android:layout_marginBottom="60dp"
+            android:visibility="invisible"
             app:layout_constraintBottom_toBottomOf="@+id/ivMedia"
             app:layout_constraintEnd_toEndOf="@+id/ivMedia"
             app:layout_constraintStart_toStartOf="@+id/ivMedia"
-            android:visibility="invisible"
-            app:layout_constraintTop_toBottomOf="@+id/tvDescription"
             app:srcCompat="@drawable/avd_like" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
