@@ -8,7 +8,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.example.supportq.Activities.Instructor.InstructorMainActivity;
 import com.example.supportq.Activities.Student.MainActivity;
+import com.example.supportq.BuildConfig;
 import com.example.supportq.Models.User;
 import com.example.supportq.R;
 import com.facebook.AccessToken;
@@ -28,8 +30,10 @@ import java.util.List;
 
 public class RegistrationActivity extends AppCompatActivity {
     private TextInputLayout etUsername;
+    private TextInputLayout etToken;
     private Button btnRegister;
     private String fullName;
+    private boolean isInstructor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,9 +42,17 @@ public class RegistrationActivity extends AppCompatActivity {
         getFacebookInformation();
         etUsername = findViewById(R.id.etUsername);
         btnRegister = findViewById(R.id.btnRegister);
+        etToken = findViewById(R.id.etToken);
         btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                String secretToken = etToken.getEditText().getText().toString();
+                if (!secretToken.isEmpty() && !secretToken.equals(BuildConfig.TOKEN)) {
+                    etToken.setError(getString(R.string.SECRET_KEY));
+                    return;
+                } else if (secretToken.equals(BuildConfig.TOKEN)) {
+                    isInstructor = true;
+                }
                 registerUser();
             }
         });
@@ -65,8 +77,9 @@ public class RegistrationActivity extends AppCompatActivity {
                     Toast.makeText(RegistrationActivity.this, getString(R.string.REGISTRATION_ERROR), Toast.LENGTH_SHORT).show();
                 } else if (objects.size() != 0) {
                     Toast.makeText(RegistrationActivity.this, getString(R.string.USERNAME_TAKEN), Toast.LENGTH_SHORT).show();
-                } else
+                } else {
                     finishRegistration(ParseUser.getCurrentUser(), username);
+                }
             }
         });
     }
@@ -74,6 +87,9 @@ public class RegistrationActivity extends AppCompatActivity {
     private void finishRegistration(ParseUser currentUser, String username) {
         currentUser.setUsername(username);
         User.setFullName(fullName, currentUser);
+        if (isInstructor) {
+            User.setIsInstructor(currentUser);
+        }
         currentUser.saveInBackground(new SaveCallback() {
             @Override
             public void done(ParseException e) {
@@ -81,8 +97,13 @@ public class RegistrationActivity extends AppCompatActivity {
                     Toast.makeText(RegistrationActivity.this, getString(R.string.TOAST_ERROR_MESSAGE), Toast.LENGTH_SHORT).show();
                     return;
                 }
-                Intent intent = new Intent(RegistrationActivity.this, MainActivity.class);
-                startActivity(intent);
+                if (isInstructor) {
+                    Intent intent = new Intent(RegistrationActivity.this, InstructorMainActivity.class);
+                    startActivity(intent);
+                } else {
+                    Intent intent = new Intent(RegistrationActivity.this, MainActivity.class);
+                    startActivity(intent);
+                }
                 finish();
             }
         });

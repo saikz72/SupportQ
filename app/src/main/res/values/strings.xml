@@ -164,4 +164,6 @@
     <string name="event">Create an event</string>
     <string name="hosting_workshop">is hosting a</string>
     <string name="hosting_office_hour">"is hosting an "</string>
+    <string name="register_now">Register</string>
+    <string name="instructor_prompt">Enter your secret key below if you\'re an instructor</string>
 </resources>
