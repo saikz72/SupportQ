@@ -50,7 +50,7 @@ public class ProfileAdapter extends RecyclerView.Adapter<ProfileAdapter.ViewHold
         View view = LayoutInflater.from(context).inflate(R.layout.personal_post, parent, false);
         final ViewHolder holder = new ViewHolder(view);
         holder.onImageDoubleTap();
-        holder.heartIconClicked();
+        holder.heartIconListener();
         return holder;
     }
 
@@ -70,7 +70,7 @@ public class ProfileAdapter extends RecyclerView.Adapter<ProfileAdapter.ViewHold
     }
 
     // sets the color of a button, depending on whether it is active
-    private void setButton(ImageView iv, boolean isActive, int strokeResId, int fillResId, int activeColor) {
+    private void setLikeIconColor(ImageView iv, boolean isActive, int strokeResId, int fillResId, int activeColor) {
         iv.setImageResource(isActive ? fillResId : strokeResId);
         iv.setColorFilter(ContextCompat.getColor(context, isActive ? activeColor : R.color.medium_gray));
     }
@@ -90,7 +90,7 @@ public class ProfileAdapter extends RecyclerView.Adapter<ProfileAdapter.ViewHold
     // Add a list of post -- change to type used
     public void addAll(List<Question> questions) {
         for (int i = 0; i < questions.size(); i++) {
-            if (!questions.get(i).getIsDeleted() && !questions.get(i).didUserHideQuestion()) {
+            if (!questions.get(i).getIsDeleted()) {
                 allQuestions.add(questions.get(i));
             }
         }
@@ -138,7 +138,7 @@ public class ProfileAdapter extends RecyclerView.Adapter<ProfileAdapter.ViewHold
             } else {
                 ivMedia.setVisibility(View.GONE);
             }
-            setButton(ivLike, question.isLiked(), R.drawable.ic_vector_heart_stroke, R.drawable.ic_vector_heart, R.color.likedRed);
+            setLikeIconColor(ivLike, question.isLiked(), R.drawable.ic_vector_heart_stroke, R.drawable.ic_vector_heart, R.color.likedRed);
             setLikeText(question, tvLikeCount);
             editIconClicked();
             TextViewAnimationOnClick.onQuestionClickAnimation(tvDescription, allQuestions, getAdapterPosition());
@@ -170,14 +170,14 @@ public class ProfileAdapter extends RecyclerView.Adapter<ProfileAdapter.ViewHold
                         question.unlikePost(ParseUser.getCurrentUser());
                     }
                     question.saveInBackground();
-                    setButton(ivLike, !isLiked, R.drawable.ic_vector_heart_stroke, R.drawable.ic_vector_heart, R.color.likedRed);
+                    setLikeIconColor(ivLike, !isLiked, R.drawable.ic_vector_heart_stroke, R.drawable.ic_vector_heart, R.color.likedRed);
                     setLikeText(question, tvLikeCount);
                 }
             });
         }
 
         //heart icon single tap to like handler
-        public void heartIconClicked() {
+        public void heartIconListener() {
             ivLike.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -190,7 +190,7 @@ public class ProfileAdapter extends RecyclerView.Adapter<ProfileAdapter.ViewHold
                         question.unlikePost(ParseUser.getCurrentUser());
                     }
                     question.saveInBackground();
-                    setButton(ivLike, !isLiked, R.drawable.ic_vector_heart_stroke, R.drawable.ic_vector_heart, R.color.likedRed);
+                    setLikeIconColor(ivLike, !isLiked, R.drawable.ic_vector_heart_stroke, R.drawable.ic_vector_heart, R.color.likedRed);
                     setLikeText(question, tvLikeCount);
                 }
             });

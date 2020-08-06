@@ -31,10 +31,10 @@ public class SignUpActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
         setViews();
-        signUpButtonClicked();
+        setUpSignUpButtonListener();
     }
 
-    public void setViews() {
+    private void setViews() {
         etPassword = findViewById(R.id.etPassword);
         etUsername = findViewById(R.id.etUsername);
         btnSignUp = findViewById(R.id.btnSignUp);
@@ -42,7 +42,7 @@ public class SignUpActivity extends AppCompatActivity {
     }
 
     //listerner for sign up button
-    public void signUpButtonClicked() {
+    private void setUpSignUpButtonListener() {
         btnSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -80,7 +80,7 @@ public class SignUpActivity extends AppCompatActivity {
     }
 
     //error message to display on textInput
-    public void errorMessageOnEditText(String fullname, String username, String password) {
+    private void errorMessageOnEditText(String fullname, String username, String password) {
         etFullname.setError(fullname);
         etUsername.setError(username);
         etPassword.setError(password);
@@ -100,7 +100,7 @@ public class SignUpActivity extends AppCompatActivity {
         });
     }
 
-    public void goMainActivity() {
+    private void goMainActivity() {
         Intent intent = new Intent(SignUpActivity.this, MainActivity.class);
         startActivity(intent);
         finish();

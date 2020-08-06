@@ -45,9 +45,9 @@ public class LoginActivity extends AppCompatActivity {
         }
         setViews();
         faceBookLogin();
-        signUpAsAStudent();
-        signUpAsAnInstructor();
-        signInButtonClicked();
+        setUpSignUpButtonListenerForStudent();
+        setUpSignButtonListenerForInstructor();
+        setSignInButtonListener();
     }
 
     private void setViews() {
@@ -60,7 +60,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     //listener for user sign in with existing credentials
-    private void signInButtonClicked() {
+    private void setSignInButtonListener() {
         btnSignIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -94,7 +94,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     //message to send user when there is no internent
-    private void internetAvailable(ParseException e) {  //TODO --> rename method - showErrorMessageIfInternetNotAvailable
+    private void showErrorMessageIfInternetMissing(ParseException e) {
         //connection fail
         if (e.getCode() == e.CONNECTION_FAILED || e.getCode() == e.OTHER_CAUSE) {
             errorMessageOnEditText(null, null);
@@ -117,7 +117,7 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void done(ParseUser user, ParseException e) {
                 if (e != null) {
-                    internetAvailable(e);
+                    showErrorMessageIfInternetMissing(e);
                     validateLoginCredentials(e);
                     return;
                 }
@@ -138,7 +138,7 @@ public class LoginActivity extends AppCompatActivity {
                     @Override
                     public void done(ParseUser user, ParseException e) {
                         if (e != null) {
-                            internetAvailable(e);
+                            showErrorMessageIfInternetMissing(e);
                             validateLoginCredentials(e);
                             showAlertDialog();
                             return;
@@ -170,7 +170,7 @@ public class LoginActivity extends AppCompatActivity {
         ParseFacebookUtils.onActivityResult(requestCode, resultCode, data);
     }
 
-    private void signUpAsAStudent() {
+    private void setUpSignUpButtonListenerForStudent() {
         btnSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -180,7 +180,7 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
-    private void signUpAsAnInstructor() {
+    private void setUpSignButtonListenerForInstructor() {
         btnInstructor.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

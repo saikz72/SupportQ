@@ -74,11 +74,16 @@ public class QuestionDetailsActivity extends AppCompatActivity {
         } catch (ParseException e) {
             Log.e("TAG", "ParseException", e);
         }
-        setButton(ivLike, question.isLiked(), R.drawable.ic_vector_heart_stroke, R.drawable.ic_vector_heart, R.color.likedRed);
-        setLikeText(question, tvLikeCount);
         setUpListenerForLikeIcon();
         setUpListenerForReplyIcon();
         queryReply();
+        setUpPullToRefresh();
+        setUpForVerifiedResponses();
+        setLikeIconColor(ivLike, question.isLiked(), R.drawable.ic_vector_heart_stroke, R.drawable.ic_vector_heart, R.color.likedRed);
+        setLikeText(question, tvLikeCount);
+    }
+
+    public void setUpPullToRefresh() {
         swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
@@ -89,9 +94,7 @@ public class QuestionDetailsActivity extends AppCompatActivity {
                 }
             }
         });
-        // Configure the refreshing colors
         swipeContainer.setColorSchemeResources(android.R.color.holo_blue_bright, android.R.color.holo_green_light, android.R.color.holo_orange_light, android.R.color.holo_red_light);
-        setUpForVerifiedResponses();
     }
 
     public void setUpRecyclerView() {
@@ -193,7 +196,7 @@ public class QuestionDetailsActivity extends AppCompatActivity {
         ParseFile profileImage = question.getUser().getParseFile(User.KEY_PROFILE_PICTURE);
         if (profileImage != null) {
             Glide.with(this).load(profileImage.getUrl()).transform(new CircleCrop()).into(ivProfilePicture);
-        }else{
+        } else {
             ivProfilePicture.setImageResource(R.drawable.profile_image_default);
         }
         ParseFile mediaImage = question.getImage();
@@ -219,14 +222,14 @@ public class QuestionDetailsActivity extends AppCompatActivity {
                     question.unlikePost(currentUser);
                 }
                 question.saveInBackground();
-                setButton(ivLike, !isLiked, R.drawable.ic_vector_heart_stroke, R.drawable.ic_vector_heart, R.color.likedRed);
+                setLikeIconColor(ivLike, !isLiked, R.drawable.ic_vector_heart_stroke, R.drawable.ic_vector_heart, R.color.likedRed);
                 setLikeText(question, tvLikeCount);
             }
         });
     }
 
     // sets the color of a button, depending on whether it is active
-    private void setButton(ImageView iv, boolean isActive, int strokeResId, int fillResId, int activeColor) {
+    private void setLikeIconColor(ImageView iv, boolean isActive, int strokeResId, int fillResId, int activeColor) {
         iv.setImageResource(isActive ? fillResId : strokeResId);
         iv.setColorFilter(ContextCompat.getColor(this, isActive ? activeColor : R.color.medium_gray));
     }

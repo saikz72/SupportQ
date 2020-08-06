@@ -9,21 +9,27 @@ import androidx.fragment.app.FragmentManager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.view.View;
 
 import com.example.supportq.Fragments.HomeFragment;
 import com.example.supportq.Fragments.Instructor.EventFragment;
 import com.example.supportq.Fragments.ProfileFragment;
 import com.example.supportq.Fragments.InboxFragment;
+import com.example.supportq.Models.Event;
 import com.example.supportq.Models.ProgressIndicator;
 import com.example.supportq.R;
+import com.google.android.material.badge.BadgeDrawable;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.parse.FindCallback;
+import com.parse.ParseException;
+import com.parse.ParseQuery;
+
+import java.util.List;
 
 public class InstructorMainActivity extends AppCompatActivity {
-    private BottomNavigationView bottomNavigationView;
+    public static BottomNavigationView bottomNavigationView;
     public final FragmentManager fragmentManager = getSupportFragmentManager();
     private Toolbar toolbar;
-    public static View snackbar;
+    private BadgeDrawable badgeDrawable;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,7 +37,7 @@ public class InstructorMainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_instructor_main);
         ProgressIndicator.hideMessage(this);
         setViews();
-        setSupportActionBar(toolbar);
+        queryEvents();
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -60,10 +66,12 @@ public class InstructorMainActivity extends AppCompatActivity {
         bottomNavigationView.setSelectedItemId(R.id.action_home);
     }
 
-    public void setViews() {
+    private void setViews() {
         bottomNavigationView = findViewById(R.id.bottomNavigation);
         toolbar = findViewById(R.id.toolbar);
-        snackbar = findViewById(R.id.snackbar);
+        badgeDrawable = bottomNavigationView.getOrCreateBadge(R.id.action_inbox);
+        badgeDrawable.setVisible(true);
+        setSupportActionBar(toolbar);
     }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -76,5 +84,20 @@ public class InstructorMainActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         moveTaskToBack(true);
+    }
+
+    public void queryEvents() {
+        ParseQuery<Event> query = ParseQuery.getQuery(Event.class);
+        query.include(Event.KEY_USER);
+        query.addDescendingOrder(Event.KEY_CREATED_AT);
+        query.findInBackground(new FindCallback<Event>() {
+            @Override
+            public void done(List<Event> events, ParseException e) {
+                if (e != null) {
+                    return;
+                }
+                badgeDrawable.setNumber(events.size());
+            }
+        });
     }
 }

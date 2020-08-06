@@ -8,6 +8,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,6 +22,9 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import com.example.supportq.Activities.Instructor.InstructorMainActivity;
+import com.example.supportq.Activities.Student.MainActivity;
+import com.example.supportq.Fragments.HomeFragment;
 import com.example.supportq.Models.Event;
 import com.example.supportq.R;
 import com.parse.ParseFile;
@@ -140,6 +145,11 @@ public class EventFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 saveEvent();
+                FragmentTransaction fragmentTransaction = ((FragmentActivity) getContext()).getSupportFragmentManager().beginTransaction();
+                Fragment homeFragment = new HomeFragment();
+                fragmentTransaction.replace(R.id.flContainer, homeFragment);
+                fragmentTransaction.commit();
+                InstructorMainActivity.bottomNavigationView.setSelectedItemId(R.id.action_home);
             }
         });
     }

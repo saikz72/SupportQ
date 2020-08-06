@@ -26,7 +26,7 @@ public class EditQuestionActivity extends AppCompatActivity {
         saveQuestion();
     }
 
-    public void saveQuestion() {
+    private void saveQuestion() {
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

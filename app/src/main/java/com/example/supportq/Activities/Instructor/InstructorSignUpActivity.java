@@ -33,7 +33,7 @@ public class InstructorSignUpActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_instructor_sign_up);
         setViews();
-        signUpButtonClicked();
+        setUpSignUpButtonListener();
     }
 
     private void setViews() {
@@ -45,7 +45,7 @@ public class InstructorSignUpActivity extends AppCompatActivity {
     }
 
     //listerner for sign up button
-    private void signUpButtonClicked() {
+    private void setUpSignUpButtonListener() {
         btnSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

@@ -62,12 +62,12 @@ public class EditProfileActivity extends AppCompatActivity {
             bindViews();
         } catch (ParseException e) {
         }
-        takePhotoButtonClicked();
-        submitButtonClicked();
+        setUpTakePhotoListener();
         setUpImageFromGallery();
+        submitButtonClicked();
     }
 
-    public void setViews() {
+    private void setViews() {
         btnCaptureImage = findViewById(R.id.btnCaptureImage);
         btnChoosePhoto = findViewById(R.id.btnChoosePhoto);
         btnSubmit = findViewById(R.id.btnSubmit);
@@ -76,7 +76,7 @@ public class EditProfileActivity extends AppCompatActivity {
         etFullname = findViewById(R.id.etFullname);
     }
 
-    public void bindViews() throws ParseException {
+    private void bindViews() throws ParseException {
         currentUser = ParseUser.getCurrentUser();
         etUsername.getEditText().setText(currentUser.getUsername());      //user's current name;
         etFullname.getEditText().setText(User.getFullName(currentUser));
@@ -89,7 +89,7 @@ public class EditProfileActivity extends AppCompatActivity {
     }
 
     //capture image
-    public void takePhotoButtonClicked() {
+    private void setUpTakePhotoListener() {
         btnCaptureImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -98,7 +98,7 @@ public class EditProfileActivity extends AppCompatActivity {
         });
     }
 
-    public void launchCamera() {
+    private void launchCamera() {
         //create Intent to take a picture and return control to the calling application
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         // Create a File reference for future access
@@ -154,7 +154,7 @@ public class EditProfileActivity extends AppCompatActivity {
     }
 
     //Listener for choosing an image
-    public void setUpImageFromGallery() {
+    private void setUpImageFromGallery() {
         btnChoosePhoto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -164,7 +164,7 @@ public class EditProfileActivity extends AppCompatActivity {
     }
 
     // Trigger gallery selection for a photo
-    public void onPickPhoto(View view) {
+    private void onPickPhoto(View view) {
         // Create intent for picking a photo from the gallery
         Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
         // If you call startActivityForResult() using an intent that no app can handle, your app will crash.
@@ -175,7 +175,7 @@ public class EditProfileActivity extends AppCompatActivity {
         }
     }
 
-    public Bitmap loadFromUri(Uri photoUri) {
+    private Bitmap loadFromUri(Uri photoUri) {
         Bitmap image = null;
         try {
             // check version of Android on device
@@ -193,7 +193,7 @@ public class EditProfileActivity extends AppCompatActivity {
         return image;
     }
 
-    public Bitmap rotateBitmapOrientation(String photoFilePath) {
+    private Bitmap rotateBitmapOrientation(String photoFilePath) {
         // Create and configure BitmapFactory
         BitmapFactory.Options bounds = new BitmapFactory.Options();
         bounds.inJustDecodeBounds = true;
@@ -221,7 +221,7 @@ public class EditProfileActivity extends AppCompatActivity {
         return rotatedBitmap;
     }
 
-    public void submitButtonClicked() {
+    private void submitButtonClicked() {
         btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -243,7 +243,7 @@ public class EditProfileActivity extends AppCompatActivity {
         return true;
     }
 
-    public boolean isUsernameChangeValid(String username) {
+    private boolean isUsernameChangeValid(String username) {
         if (!Validator.isUsernameLongEnough(username)) {
             etUsername.setError(String.valueOf(R.string.USERNAME_LENGTH_ERROR));
             return false;
@@ -251,7 +251,7 @@ public class EditProfileActivity extends AppCompatActivity {
         return true;
     }
 
-    public void saveChanges(final ParseUser currentUser, File pic, String username, String fullName) {
+    private void saveChanges(final ParseUser currentUser, File pic, String username, String fullName) {
         //breaks if profile picutre is not taken
         currentUser.setUsername(username);
         currentUser.put(getString(R.string.fullName), fullName);

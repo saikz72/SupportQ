@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
@@ -40,7 +41,6 @@ import java.util.List;
 import ru.embersoft.expandabletextview.ExpandableTextView;
 
 public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHolder> {
-    public static final String TAG = "QuestionAdapter";
     public static final int REQUEST_CODE = 200;
     private List<Question> allQuestions;
     private Context context;
@@ -75,7 +75,7 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHo
     }
 
     // sets the color of a button, depending on whether it is active
-    private void setButton(ImageView iv, boolean isActive, int strokeResId, int fillResId, int activeColor) {
+    private void setLikeIconColor(ImageView iv, boolean isActive, int strokeResId, int fillResId, int activeColor) {
         iv.setImageResource(isActive ? fillResId : strokeResId);
         iv.setColorFilter(ContextCompat.getColor(context, isActive ? activeColor : R.color.medium_gray));
     }
@@ -132,7 +132,6 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHo
         return false;
     }
 
-    //add post within 24 hours -- TODO --> CHANGE TIME FRAME
     public List<Question> addQuestionsOverPastDay(List<Question> questions) {
         Date currentDate = Calendar.getInstance().getTime();
         List<Question> list = new ArrayList<>();
@@ -290,7 +289,7 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHo
             } else {
                 ivQuestionMark.setImageResource(R.drawable.question_mark);
             }
-            setButton(ivLike, question.isLiked(), R.drawable.ic_vector_heart_stroke, R.drawable.ic_vector_heart, R.color.likedRed);
+            setLikeIconColor(ivLike, question.isLiked(), R.drawable.ic_vector_heart_stroke, R.drawable.ic_vector_heart, R.color.likedRed);
             setBookMarkButtonColor(ivBookMark, question.isBookMarked(), R.drawable.ic_baseline_bookmark_border_24, R.drawable.ic_baseline_bookmark_24, R.color.black);
             hideIconClicked();
             setSahpeOfHiddenIcon(ivHide, question.didUserHideQuestion(), R.drawable.ic_outline_remove_red_eye_24, R.drawable.ic_outline_visibility_off_24);
@@ -332,7 +331,7 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHo
                         question.unlikePost(ParseUser.getCurrentUser());
                     }
                     question.saveInBackground();
-                    setButton(ivLike, !isLiked, R.drawable.ic_vector_heart_stroke, R.drawable.ic_vector_heart, R.color.likedRed);
+                    setLikeIconColor(ivLike, !isLiked, R.drawable.ic_vector_heart_stroke, R.drawable.ic_vector_heart, R.color.likedRed);
                     setLikeText(question, tvLikeCount);
                 }
             });
@@ -376,7 +375,7 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHo
                         question.unlikePost(ParseUser.getCurrentUser());
                     }
                     question.saveInBackground();
-                    setButton(ivLike, !isLiked, R.drawable.ic_vector_heart_stroke, R.drawable.ic_vector_heart, R.color.likedRed);
+                    setLikeIconColor(ivLike, !isLiked, R.drawable.ic_vector_heart_stroke, R.drawable.ic_vector_heart, R.color.likedRed);
                     setLikeText(question, tvLikeCount);
                 }
             });
@@ -392,8 +391,10 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHo
                     if (isHidden) {
                         question.setQuestionVisibleToUser(ParseUser.getCurrentUser());
                         notifyDataSetChanged();
+                        Toast.makeText(context, context.getString(R.string.show_post), Toast.LENGTH_SHORT).show();
                     } else {
                         question.setQuestionToHidden(ParseUser.getCurrentUser());
+                        Toast.makeText(context, context.getString(R.string.hide_post), Toast.LENGTH_SHORT).show();
                     }
                     allQuestions.remove(question);
                     notifyDataSetChanged();

@@ -39,10 +39,8 @@ public class RegistrationActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registration);
+        setViews();
         getFacebookInformation();
-        etUsername = findViewById(R.id.etUsername);
-        btnRegister = findViewById(R.id.btnRegister);
-        etToken = findViewById(R.id.etToken);
         btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -56,6 +54,12 @@ public class RegistrationActivity extends AppCompatActivity {
                 registerUser();
             }
         });
+    }
+
+    private void setViews(){
+        etUsername = findViewById(R.id.etUsername);
+        btnRegister = findViewById(R.id.btnRegister);
+        etToken = findViewById(R.id.etToken);
     }
 
     private void registerUser() {

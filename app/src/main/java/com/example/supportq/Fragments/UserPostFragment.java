@@ -155,12 +155,8 @@ public class UserPostFragment extends Fragment {
                     Toast.makeText(getContext(), getString(R.string.FETCHING_POST_ERROR), Toast.LENGTH_SHORT).show();
                     return;
                 }
-                for (int i = 0; i < questions.size(); i++) {
-                    if (!questions.get(i).getIsDeleted()) {
-                        allQuestions.add(questions.get(i));
-                    }
-                }
-                profileAdapter.notifyDataSetChanged();
+                profileAdapter.clear();
+                profileAdapter.addAll(questions);
                 progressBar.setVisibility(View.GONE);
             }
         });

@@ -26,7 +26,7 @@
     <string name="fullname">Full Name</string>
     <string name="facebook_sign_in">OR</string>
     <string name="create_account_prompt">Don\'t have an account?</string>
-    <string name="reply">replies</string>
+    <string name="reply">Replies</string>
     <string name="respond">Compose your reply</string>
     <string name="approved_message">The instructor approved this answer</string>
     <string name="save">Bookmark</string>
@@ -41,22 +41,22 @@
     <string name="FAILED_TO_CREATE_DIR">Failed to create directory</string>
 
     <!--InstructorSignUpActivity-->
-    <string name="SECRET_KEY">wrong secret key</string>
+    <string name="SECRET_KEY">Wrong secret key</string>
 
     <!--LoginActivity-->
-    <string name="INCORRECT_USERNAME">incorrect username</string>
-    <string name="INCORRECT_PASSWORD">incorrect password</string>
-    <string name="TOAST_ERROR_MESSAGE">something went wrong</string>
+    <string name="INCORRECT_USERNAME">Incorrect username</string>
+    <string name="INCORRECT_PASSWORD">Incorrect password</string>
+    <string name="TOAST_ERROR_MESSAGE">Something went wrong</string>
     <string name="NO_INTERNET_MESSAGE">No Internet Connection</string>
 
     <!--RegistrationActivity -->
     <string name="REGISTRATION_ERROR">Registration error</string>
     <string name="USERNAME_TAKEN">Username is already taken</string>
-    <string name="name">name</string>
+    <string name="name">Name</string>
 
     <!--ComposeFragment -->
-    <string name="QUESTION_EMPTY_ERROR">question cannot be empty"</string>
-    <string name="QUESTION_LENGTH_ERROR">question should be at least 5 characters long</string>
+    <string name="QUESTION_EMPTY_ERROR">Question cannot be empty"</string>
+    <string name="QUESTION_LENGTH_ERROR">Question should be at least 5 characters long</string>
     <string name="SAVING_ERROR">Error while trying to save question</string>
     <string name="QUESTION_POSTED_TOAST">Your question has been posted successfully</string>
 
@@ -69,14 +69,14 @@
     <string name="Wait">Please wait</string>
 
     <!--Question -->
-    <string name="KEY_DESCRIPTION">description</string>
+    <string name="KEY_DESCRIPTION">Description</string>
 
     <!--Validator-->
-    <string name="PASSWORD_EMPTY_ERROR">password cannot be empty</string>
-    <string name="PASSWORD_LENGTH_ERROR">password should be more than 5 characters</string>
-    <string name="USERNAME_EMPTY_ERROR">username cannot be empty</string>
-    <string name="USERNAME_LENGTH_ERROR">username should be more than 5 characters</string>
-    <string name="FULL_NAME_ERROR">full name should be more than 5 characters</string>
+    <string name="PASSWORD_EMPTY_ERROR">Password cannot be empty</string>
+    <string name="PASSWORD_LENGTH_ERROR">Password should be more than 5 characters</string>
+    <string name="USERNAME_EMPTY_ERROR">Username cannot be empty</string>
+    <string name="USERNAME_LENGTH_ERROR">Username should be more than 5 characters</string>
+    <string name="FULL_NAME_ERROR">Full name should be more than 5 characters</string>
 
     <!--ProfileFragment-->
     <string name="ParseException">Object does not exist</string>
@@ -84,7 +84,7 @@
     <!--Snackbar -->
     <string name="snackbar_text">Your question has been deleted</string>
     <string name="snackbar_action">Undo</string>
-    <string name="likes">likes</string>
+    <string name="likes">Likes</string>
 
     <!--plural handling for number of likes -->
     <plurals name="numberOfLikes">
@@ -101,13 +101,13 @@
     <!--MyAlertDialogFragment-->
     <string name="internet_message">You are not connected to the internet. Make sure Wi-Fi is on, Airplane Mode is off and try again</string>
     <string name="OK">OK</string>
-    <string name="title">title</string>
-    <string name="fragment_tag">fragment_alert</string>
+    <string name="title">Title</string>
+    <string name="fragment_tag">Fragment_alert</string>
     <string name="edit">Edit</string>
 
     <!--Edit Question-->
-    <string name="edit_item_key">item</string>
-    <string name="edit_item_position">position</string>
+    <string name="edit_item_key">Item</string>
+    <string name="edit_item_position">Position</string>
     <string name="question_edit_message">Question cannot be empty</string>
     <string name="show_more">...Show more</string>
     <string name="show_less">...Show less</string>
@@ -122,11 +122,11 @@
     <string name="home_snackbar">Your question has been posted successfully</string>
     <string name="image_name">\"random.png\"</string>
     <string name="reply_error">\"reply cannot be empty\"</string>
-    <string name="all_replies">all</string>
-    <string name="verified_replies">verified</string>
-    <string name="user_post">posts</string>
-    <string name="hidden">hidden</string>
-    <string name="bookmark">bookmarked</string>
+    <string name="all_replies">All</string>
+    <string name="verified_replies">Verified</string>
+    <string name="user_post">Posts</string>
+    <string name="hidden">Hidden</string>
+    <string name="bookmark">Bookmarked</string>
     <string name="unhide">Show</string>
     <string name="workshop">Workshop</string>
     <string name="office_hour">Office Hour</string>
@@ -150,7 +150,7 @@
     <string name="sorted_date">Sorted by date</string>
     <string name="trend_sort">Sorted by Trends</string>
     <string name="sorted_like">Sorted by likes</string>
-    <string name="CODE">code</string>
+    <string name="CODE">Code</string>
     <string name="fullName">fullName</string>
     <string name="take_photo">Take a photo</string>
     <string name="gallery">Choose an image</string>
@@ -167,4 +167,6 @@
     <string name="register_now">Register</string>
     <string name="instructor_prompt">Enter your secret key below if you\'re an instructor</string>
     <string name="edit_profile">Edit Profile</string>
+    <string name="hide_post"><b><i>The question has been hidden</i></b></string>
+    <string name="show_post">The question has been moved to the home feed</string>
 </resources>

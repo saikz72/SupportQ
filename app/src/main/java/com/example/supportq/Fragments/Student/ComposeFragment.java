@@ -94,7 +94,7 @@ public class ComposeFragment extends Fragment {
         });
     }
 
-    public void submitButtonClicked() {
+    public void setUpSubmitButtonListener() {
         String description = etCompose.getText().toString();
         if (validatePost(description)) {
             pbLoading.setVisibility(View.VISIBLE);
@@ -104,6 +104,7 @@ public class ComposeFragment extends Fragment {
             Fragment homeFragment = new HomeFragment();
             fragmentTransaction.replace(R.id.flContainer, homeFragment);
             fragmentTransaction.commit();
+            MainActivity.bottomNavigationView.setSelectedItemId(R.id.action_home);      //move selected icon in bottom nav to home
             final Snackbar snackbar = Snackbar.make(MainActivity.snackbar, R.string.home_snackbar, Snackbar.LENGTH_SHORT);
             snackbar.setAction("Dismiss", new View.OnClickListener() {
                 @Override
@@ -194,7 +195,7 @@ public class ComposeFragment extends Fragment {
                 launchCamera();
                 return true;
             case R.id.action_submit:
-                submitButtonClicked();
+                setUpSubmitButtonListener();
         }
         return super.onOptionsItemSelected(item);
     }

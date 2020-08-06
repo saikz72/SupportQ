@@ -75,6 +75,7 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> 
             tvStartTime.setText(event.getStartTime());
             tvEndTime.setText(event.getEndTime());
             tvDate.setText(event.getStartDate());
+            tvTimeStamp.setText(event.getCreatedTimeAgo());
             ParseFile parseFile = event.getImage();
             if (parseFile != null) {
                 Glide.with(context).load(parseFile.getUrl()).transform(new CircleCrop()).into(ivProfilePicture);
@@ -88,7 +89,6 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> 
                 ivEventIcon.setImageResource(R.drawable.office_hour_icon);
                 tvBody.setText(username + " " + context.getString(R.string.hosting_office_hour) + " " + eventType);
             }
-            tvTimeStamp.setText(event.getCreatedTimeAgo());
         }
     }
 }
