@@ -37,7 +37,6 @@ import org.parceler.Parcels;
 import java.util.ArrayList;
 import java.util.List;
 
-import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
 import ru.embersoft.expandabletextview.ExpandableTextView;
 
 public class QuestionDetailsActivity extends AppCompatActivity {
@@ -201,7 +200,8 @@ public class QuestionDetailsActivity extends AppCompatActivity {
         }
         ParseFile mediaImage = question.getImage();
         if (mediaImage != null) {
-            Glide.with(this).load(mediaImage.getUrl()).transform(new RoundedCornersTransformation(R.dimen.RADIUS, R.dimen.MARGIN)).into(ivMedia);
+            ivMedia.setVisibility(View.VISIBLE);
+            Glide.with(this).load(mediaImage.getUrl()).transform().into(ivMedia);
         } else {
             ivMedia.setVisibility(View.GONE);
         }
