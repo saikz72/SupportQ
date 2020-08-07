@@ -6,6 +6,22 @@
     android:layout_height="match_parent"
     tools:context=".Fragments.HiddenPostFragment">
 
+    <TextView
+        android:id="@+id/tvHidden"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="1dp"
+        android:layout_marginTop="64dp"
+        android:fontFamily="@font/gabriela"
+        android:gravity="center"
+        android:text="@string/no_hidden_post"
+        android:textAlignment="center"
+        android:textColor="@color/white_backgroud"
+        android:textSize="24dp"
+        android:visibility="visible" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvQuestions"
         android:layout_width="match_parent"

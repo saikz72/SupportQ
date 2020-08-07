@@ -31,7 +31,7 @@
     <string name="approved_message">The instructor approved this answer</string>
     <string name="save">Bookmark</string>
     <string name="instructor_login">Instructor</string>
-    <string name="register_prompt">Register as a</string>
+    <string name="register_prompt">Register as a/an</string>
     <string name="key">Secret Key</string>
 
     <!--EditProfileActivity -->
@@ -169,4 +169,8 @@
     <string name="edit_profile">Edit Profile</string>
     <string name="hide_post"><b><i>The question has been hidden</i></b></string>
     <string name="show_post">The question has been moved to the home feed</string>
+    <string name="welcome">Welcome to <b>SupportQ</b>. Get your burning questions answered.</string>
+    <string name="no_bookmarked_post">No bookmarked posts</string>
+    <string name="no_hidden_post">No hidden posts</string>
+    <string name="no_post">No posts</string>
 </resources>

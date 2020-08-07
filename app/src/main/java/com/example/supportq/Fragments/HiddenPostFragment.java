@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.supportq.Adapters.QuestionAdapter;
@@ -29,6 +30,7 @@ public class HiddenPostFragment extends Fragment {
     private QuestionAdapter questionAdapter;
     private RecyclerView rvQuestions;
     private ProgressBar pbLoading;
+    private TextView tvHidden;
 
     public HiddenPostFragment() {
         // Required empty public constructor
@@ -50,11 +52,17 @@ public class HiddenPostFragment extends Fragment {
         rvQuestions.setAdapter(questionAdapter);
         rvQuestions.setHasFixedSize(true);
         queryQuestions();
+        if(allQuestions.size() == 0){
+            tvHidden.setVisibility(View.VISIBLE);
+        }else{
+            tvHidden.setVisibility(View.GONE);
+        }
     }
 
     public void setUpViews(View view) {
         rvQuestions = view.findViewById(R.id.rvQuestions);
         pbLoading = view.findViewById(R.id.pbLoading);
+        tvHidden = view.findViewById(R.id.tvHidden);
     }
 
     public void queryQuestions() {

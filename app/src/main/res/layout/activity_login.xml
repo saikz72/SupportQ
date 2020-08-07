@@ -33,13 +33,24 @@
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
         android:orientation="vertical"
-        android:padding="30dp"
+        android:paddingTop="30dp"
+        android:paddingHorizontal="30dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/relativeLayout">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="8dp"
+            android:fontFamily="@font/gabriela"
+            android:text="@string/welcome"
+            android:textAlignment="center"
+            android:textAllCaps="false"
+            android:textSize="18dp"
+            android:textColor="@color/black" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/username_text_input"
@@ -94,13 +105,11 @@
         android:layout_width="@dimen/sign_in_width"
         android:layout_height="@dimen/sign_in_height"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="8dp"
         android:background="@drawable/custom_button"
         android:text="@string/sign_in"
         android:textAllCaps="false"
         android:textColor="@color/login_button_textcolor"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
 
@@ -115,7 +124,6 @@
         android:textAllCaps="false"
         android:textColor="@color/login_button_textcolor"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
 
@@ -124,6 +132,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
+        android:fontFamily="@font/gabriela"
         android:text="@string/create_account_prompt"
         android:textColor="@color/description_color"
         app:layout_constraintEnd_toEndOf="parent"
@@ -158,9 +167,11 @@
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:fontFamily="@font/gabriela"
         android:text="@string/register_prompt"
         android:textColor="@color/description_color"
         app:layout_constraintEnd_toStartOf="@+id/btnInstructor"
+        app:layout_constraintHorizontal_bias="0.611"
         app:layout_constraintStart_toEndOf="@+id/btnSignUp"
         app:layout_constraintTop_toBottomOf="@+id/textView3" />
 </androidx.constraintlayout.widget.ConstraintLayout>

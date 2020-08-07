@@ -96,7 +96,7 @@
             android:id="@+id/tvFullname"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
+            android:layout_marginLeft="16dp"
             android:fontFamily="@font/gabriela"
             android:text="@string/fullname"
             android:textAlignment="center"
@@ -108,7 +108,7 @@
             android:id="@+id/tvUsername"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
+            android:layout_marginLeft="16dp"
             android:fontFamily="@font/gabriela"
             android:text="@string/Username"
             android:textAlignment="center"
@@ -122,7 +122,8 @@
         <androidx.viewpager.widget.ViewPager
             android:id="@+id/viewPager"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:background="@color/gray">
 
         </androidx.viewpager.widget.ViewPager>
     </LinearLayout>

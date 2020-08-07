@@ -17,6 +17,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.supportq.Activities.Student.EditQuestionActivity;
@@ -42,6 +43,7 @@ public class UserPostFragment extends Fragment {
     private RecyclerView rvQuestion;
     private ParseUser currentUser;
     private ProgressBar progressBar;
+    private TextView tvPosts;
     public static final int EDIT_TEXT_CODE = 20;
 
 
@@ -94,6 +96,11 @@ public class UserPostFragment extends Fragment {
         ItemTouchHelper itemTouchHelper = new ItemTouchHelper(simpleCallback);
         itemTouchHelper.attachToRecyclerView(rvQuestion);
         queryPost();
+        if(allQuestions.size() == 0){
+            tvPosts.setVisibility(View.VISIBLE);
+        }else{
+            tvPosts.setVisibility(View.GONE);
+        }
     }
 
     public void setViews(View view) {
@@ -101,6 +108,7 @@ public class UserPostFragment extends Fragment {
         progressBar = view.findViewById(R.id.pbLoading);
         allQuestions = new ArrayList<>();
         currentUser = ParseUser.getCurrentUser();
+        tvPosts = view.findViewById(R.id.tvPosts);
     }
 
     ItemTouchHelper.SimpleCallback simpleCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {

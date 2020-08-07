@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.supportq.Adapters.QuestionAdapter;
@@ -29,6 +30,7 @@ public class BookMarkFragment extends Fragment {
     private QuestionAdapter questionAdapter;
     private RecyclerView rvQuestions;
     private ProgressBar pbLoading;
+    private TextView tvBookMark;
     public BookMarkFragment() {
         // Required empty public constructor
     }
@@ -49,11 +51,17 @@ public class BookMarkFragment extends Fragment {
         rvQuestions.setAdapter(questionAdapter);
         rvQuestions.setHasFixedSize(true);
         queryQuestions();
+        if(allQuestions.size() == 0){
+            tvBookMark.setVisibility(View.VISIBLE);
+        }else{
+            tvBookMark.setVisibility(View.GONE);
+        }
     }
 
     public void setUpViews(View view) {
         rvQuestions = view.findViewById(R.id.rvQuestions);
         pbLoading = view.findViewById(R.id.pbLoading);
+        tvBookMark = view.findViewById(R.id.tvBookmark);
     }
 
     public void queryQuestions() {
