@@ -8,7 +8,7 @@
 
 ## Overview
 ### Description
-Inspired by the codepath in-class support queue (hence the name), this app lets students enrolled in a particular course to create a supportive learning environment. Students get to ask, answer and discuss anything course-related to ferment their understaning of the course material. Teachers and TA's of the course will be able to answer students questions, approve another students response to a particular question, and provide extra resources if needed. 
+Inspired by the codepath in-class support queue (hence the name), this app lets students enrolled in a particular course to create a supportive learning environment. Students get to ask, answer and discuss anything course-related to cement their understaning of the course material. Teachers and TA's of the course will be able to answer students questions, approve another students response to a particular question, and provide extra resources if needed. 
 ### App Evaluation
 - **Category:** Education 
 - **Mobile:** This app would provide mobile first experience and it would work exactly as expected in a website too. 
